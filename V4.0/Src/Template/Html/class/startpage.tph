@@ -1,0 +1,127 @@
+<META http-equiv=Content-Type content="text/html; charset=%PAGE_CHARSET%">
+%MENU_DISABLE_SCRIPT%
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="MSThemeCompatible" CONTENT="Yes">
+<TITLE>%HTML_TITLE%</TITLE>
+<LINK href="%CSS_FILE%" type=text/css rel=stylesheet>
+<SCRIPT src="%INCLUDE_JSCRIPT%" type=text/javascript></SCRIPT>
+<script type="text/javascript" src="js/load.js" loadClass="%LOAD_JSCRIPT_CLASS%" loadPrototype="%LOAD_JSCRIPT_PROTOTYPE%"></script>
+%EXT_JSCRIPT_FILE%
+</HEAD>
+
+<BODY bgColor=#ffffff leftMargin=0 topMargin=0 marginheight="0" marginwidth="0">
+<TABLE id=table3 cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD><!-- LOGO TABLE -->
+	
+	<TABLE height=52 cellSpacing=0 cellPadding=0 width="100%" background="image/up_bg.jpg" border=0>
+	  <TBODY>
+	  <TR>
+	    <TD width=140><IMG height=52 src="image/logo.gif" width=140></TD>
+	    <TD>&nbsp;</TD>
+	    <TD vAlign=center align=middle width=54>
+	      <TABLE height=24 cellSpacing=0 cellPadding=0 width=24 border=0>
+	        <TBODY>
+	        <TR>
+	          <TD width=24></TD></TR></TBODY>
+		  </TABLE>
+	    </TD>
+	  </TR></TBODY>
+	</TABLE>
+	
+      <!-- END BLUE BANNER TABLE -->
+	  <!-- NAV MENU TABLE -->
+      <TABLE id=table2 cellSpacing=0 cellPadding=0 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD vAlign=top width=140 bgColor=#eaeaea>
+		  <!-- MAIN MENU TABLE -->
+            <TABLE style="FONT-SIZE: 11px; COLOR: #ffffff; FONT-FAMILY: tahoma" 
+            	cellSpacing=0 cellPadding=0 width="100%" bgColor=#ffffff border=0>
+              <TBODY>
+				%LEFT_MENU%
+			  </TBODY>
+			</TABLE>
+		  <!-- END MAIN MENU TABLE -->
+
+			<!-- MENU SPACER TABLE -->
+            <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+              <TBODY>
+              <TR>
+                <TD align=right bgColor=#4a7ac9>
+					<IMG src="image/leftnav_rcorner.gif" height=18 width=19>
+				</TD>
+				<!--TD class=content background="image/menu_content_back.gif" colSpan=3>
+				</TD-->
+			  </TR>
+			  </TBODY>
+			</TABLE>
+			<!-- END MENU SPACER TABLE -->
+			  
+			<!-- SPACER TABLE -->
+            <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+              <TBODY>
+              <TR>
+                <TD align=left bgColor=#eaeaea>
+					<IMG height=1 src="image/spacer.gif" width=1>
+				</TD>
+			  </TR>
+			  </TBODY>
+			</TABLE>
+			<!-- END SPACER TABLE -->
+			
+		  </TD>
+          <!--TD vAlign=top width=10>
+		  	<IMG height=10 src="image/spacer.gif" width=10 border=0>
+		  </TD-->
+		<!-- END HEADER -->
+          <TD vAlign=top>
+            <TABLE id=table1 cellSpacing=0 cellPadding=1 width=100% border=0>
+              <TBODY>
+			  <TR>
+			  	<TD>
+				  <TABLE cellSpacing=0 cellPadding=5 width="100%" border=0>
+					%TABLE_ALL%
+	      		  </TABLE>
+			  	</TD>
+			  </TR>
+              </TBODY>
+			</TABLE>
+		  </TD>
+		<!-- END MAIN BODY -->
+				  
+<!-- START FOOTER -->
+          <TD vAlign=top width=10>
+		  	<IMG height=10 src="image/spacer.gif" width=10 border=0>
+		  </TD>
+
+          <!--/TD-->
+		 </TR>
+		</TBODY>
+	  </TABLE>
+		  
+  <TABLE cellSpacing=0 cellPadding=10 width="100%" bgColor=#4a7ac9 border=0>
+  	<TBODY>
+    <TR>
+      <TD class=white align=middle>
+	  	%COPYRIGHT%
+	  	<SCRIPT language=JavaScript>  
+		<!--
+		document.write(getDateStrWithDOW())  
+		-->
+		</SCRIPT>
+       </TD>
+	 </TR>
+	 </TBODY>
+   </TABLE>
+			 
+ </TR>
+ </TBODY>
+</TABLE>
+  <SCRIPT type="text/javascript">
+  %JSCRIPT_BODY%
+  </SCRIPT>
+</BODY>
+</HTML>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="GB2312"?>
+<?blueui version="2.0"?>
+<plugin
+   id="org.owm.workspace"
+   owmid="160"
+   name="导航树"
+   version="1.0.0"
+   provider-name="Blueant Studio"
+   type="owm"
+   class="IVciOwm"
+   class-version="1.0.0"
+   image="images/logo.gif">
+
+   <description>
+      WorkSpace is a tree dockingbar of project and navigater, eg.
+   </description>
+
+   <copyright>
+      Copyright Blueant, 2000-2006.  All rights reserved.
+   </copyright>
+
+   <license>
+      BLUEANT LICENSE
+   </license>
+
+   <url>
+      <about label="about page" url="html/about.htm"/>
+      <update label="WorkSpace update site" url="http://blueant.vip.nease.net/vci/owm/workspace"/>
+   </url>
+
+   <property>
+      <owm-type doc="false" dockbar="false" menu="true" toolbar="true" option="false"
+	  		oneframe="true" autocreate="false" maxwindow="true" dynload="false" broadcast="false"/>
+   </property>
+
+   <runtime>
+      <library name="workspace.dll">
+         <export name="*"/>
+      </library>
+	  <library-debug name="workspaced.dll">
+         <export name="*"/>
+      </library-debug>
+	  <interface-define></interface-define>
+	  <!-- initial paramater -->
+	  <init></init>
+	  <!-- done paramater -->
+	  <done></done>
+   </runtime>
+   <requires>
+      <import plugin="org.blueui.core.runtime"/>
+   </requires>
+
+   <!-- document extension point -->
+   <doc-extend>
+   </doc-extend>
+
+   <dockingpanes>
+   	  <!--pane name="导航" id="10005" direction="left" icon="navigater.ico"
+	   		type="view" autocreate="false" save="true">
+	  </pane-->
+	  <pane name="文件" id="10006" direction="left" icon="file.ico"
+	   		type="view" autocreate="false" save="true">
+	  </pane>
+   </dockingpanes>
+  
+   <perspectives>
+      <perspective name="workspace" id="perspective.workspace">
+	     <view name="workspace"/>
+		 <dock-view name="dock1"/>
+		 <dock-view name="dock2"/>
+		 <menus>
+		    <menu>html</menu>
+		 </menus>
+		 <toolbar/>
+	  </perspective>
+   </perspectives>
+
+
+   <extension-point id="server" name="%server" schema="schema/server.exsd"/>
+
+</plugin>

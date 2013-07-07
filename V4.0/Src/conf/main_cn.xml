@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!-- Script.NET Preferences File - DO NOT EDIT -->
+<!-- This is config file for resource manager of Script.NET.
+-->
+<platform id="default">
+	<application>
+		<appName>Script.NET</appName>
+		<appMutex>##SCRIPT.NETV4##</appMutex>
+		<RegCompany>Blueant</RegCompany>
+		<RegProfile>Script.NET\4.0</RegProfile>
+		<CopyRight>&amp;copy;蓝蚂蚁工作室版权所有2000-2013，保留所有权利。</CopyRight>
+		<StartPage>tcl:&lt;file&gt;PLAT://\html\start.tcl</StartPage>
+		<HomeURL>http://www.blueantstudio.net</HomeURL>
+		<DownloadURL>http://www.blueantstudio.net/scriptnet/download/download.htm</DownloadURL>
+		<Splash enable="true" time="2000">conf/splash.bmp</Splash>
+		<Process>UI</Process>
+		<LicensePlugin>org.license.blueant</LicensePlugin>
+	</application>
+	<shell>
+		<File Name="Script.NET project file" Extension="snp" Class="snp.Document">
+			<Action Type="command">LoadProject</Action>
+		</File>
+	</shell>
+	<Editor>
+		<Default>org.owm.edit</Default>
+	</Editor>
+	<Theme>
+		<!-- ThemeOfficeXP/ThemeOffice2000/ThemeOffice2003/ThemeOffice2007/ThemeNativeWinXP/
+			 ThemeWhidbey/ThemeRibbon/ThemeCustom -->
+		<CommandBar>ThemeRibbon</CommandBar>
+		<!-- PaneThemeDefault/ThemeOffice/ThemeGrippered/ThemeVisio/ThemeCustom/
+			 ThemeOffice2003/ThemeNativeWinXP/ThemeWhidbey/ThemeShortcutBar2003/ThemeExplorer -->
+		<DockingPane>ThemeOffice2003</DockingPane>
+		<TaskPanel></TaskPanel>
+		<Toolbox></Toolbox>
+		<Popup></Popup>
+	</Theme>
+	<License>
+		BLUEANT LICENSE
+	</License>
+	<document-processer>
+		<!-- 定义缺省的文档处理器 -->
+		<default-editor>org.owm.scite</default-editor>
+		<!-- 注:OWM中可能会定义文档处理器扩展点,用于关联指定的文档,此处定义的是缺省的 -->
+	</document-processer>
+	<autoproject Name="Auto Load Project">
+		<autorun>false</autorun>
+		<project></project>
+	</autoproject>
+	<users>
+		<userlist>
+			<user Name="Admin" id="1" Password="ff80376bbf1918e838583e506b841e71" Role="A"/>
+		</userlist>
+		<rolepermission>
+		</rolepermission>
+		<userpermission>
+		</userpermission>
+	</users>
+	<output>
+		<window Name="运行" ID="0" Type="TEXT" Save="true"></window>
+		<window Name="调试" ID="1" Type="TEXT" Save="true"></window>
+		<window Name="信息" ID="2" Type="TEXT" Save="true"></window>
+	</output>
+	<options>
+		<Language enable="false"></Language>
+		<UIStyle enable="true"></UIStyle>
+		<Font enable="true"></Font>
+		<Associate enable="true"></Associate>
+		<Workspace enable="true"></Workspace>
+	</options>
+	<menus>
+		<!-- 文件菜单下的内容 -->
+		<files>
+			<newfile>
+				<Interp Name="file">org.interp.tcl</Interp>
+				<script>PLAT://\conf\Menu\NewFile.tcl</script>
+			</newfile>
+		</files>
+		<!-- 工程菜单下的内容 -->
+		<project>
+			<newproject>
+				<Interp Name="project">org.interp.tcl</Interp>
+				<script>PLAT://\conf\Menu\NewPrj.tcl</script>
+			</newproject>
+		</project>
+		<!-- 工具菜单下的内容 -->
+		<Tools>
+			<PluginManager>
+				<Interp>org.owm.htmlview</Interp>
+				<script>tcl:&lt;file&gt;PLAT://\html\pluginmanager.tcl</script>
+			</PluginManager>
+			<Extends>
+				<Interp>org.owm.htmlview</Interp>
+				<script>tcl:&lt;file&gt;PLAT://\html\toolmanager.tcl</script>
+			</Extends>
+		</Tools>
+		<!-- 帮助菜单下的内容 -->
+		<Help>
+			<Topic>
+				<Interp>shellfile</Interp>
+				<script>PLAT://\help\ssdn.chm</script>
+			</Topic>
+			<Register>
+				<Interp>org.owm.htmlview</Interp>
+				<script>tcl:&lt;file&gt;PLAT://\conf\menu\register.tcl</script>
+			</Register>
+			<Update>
+				<Interp>org.interp.tcl</Interp>
+				<script>PLAT://\conf\Menu\Update.tcl</script>
+			</Update>
+			<Download>
+				<Interp>org.owm.htmlview</Interp>
+				<script>http://www.blueantstudio.net/scriptnet/download/download.htm</script>
+			</Download>
+			<Homepage>
+				<Interp>org.owm.htmlview</Interp>
+				<script>http://www.blueantstudio.net</script>
+			</Homepage>
+			<BugReport>
+				<Interp>org.owm.htmlview</Interp>
+				<script>tcl:&lt;file&gt;PLAT://\conf\menu\feedback.tcl</script>
+			</BugReport>
+		</Help>
+		<!-- 输出窗口菜单下的内容 -->
+		<Output>
+			<ExportToExcel>
+				<Interp>org.interp.tcl</Interp>
+				<script>PLAT://\conf\Menu\exporttoexcel.tcl</script>
+			</ExportToExcel>
+		</Output>
+	</menus>
+</platform>

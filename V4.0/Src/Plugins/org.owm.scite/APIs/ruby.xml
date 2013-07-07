@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="Windows-1252" ?>
+<OwmScite>
+	<AutoComplete>
+		<Environment ignoreCase="no" startFunc="(" stopFunc=")" paramSeparator="," terminal=";" />
+		<KeyWord name="__FILE__" />
+		<KeyWord name="and" />
+		<KeyWord name="def" />
+		<KeyWord name="end" />
+		<KeyWord name="in" />
+		<KeyWord name="or" />
+		<KeyWord name="self" />
+		<KeyWord name="unless" />
+		<KeyWord name="__LINE__" />
+		<KeyWord name="begin" />
+		<KeyWord name="defined?" />
+		<KeyWord name="ensure" />
+		<KeyWord name="module" />
+		<KeyWord name="redo" />
+		<KeyWord name="super" />
+		<KeyWord name="until" />
+		<KeyWord name="BEGIN" />
+		<KeyWord name="break" />
+		<KeyWord name="do" />
+		<KeyWord name="false" />
+		<KeyWord name="next" />
+		<KeyWord name="rescue" />
+		<KeyWord name="then" />
+		<KeyWord name="when" />
+		<KeyWord name="END" />
+		<KeyWord name="case" />
+		<KeyWord name="else" />
+		<KeyWord name="for" />
+		<KeyWord name="nil" />
+		<KeyWord name="retry" />
+		<KeyWord name="true" />
+		<KeyWord name="while" />
+		<KeyWord name="alias" />
+		<KeyWord name="class" />
+		<KeyWord name="elsif" />
+		<KeyWord name="if" />
+		<KeyWord name="not" />
+		<KeyWord name="return" />
+		<KeyWord name="undef" />
+		<KeyWord name="yield" />
+	</AutoComplete>
+</OwmScite>

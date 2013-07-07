@@ -1,0 +1,17 @@
+//
+// BLUEUI.RC2 - resources Microsoft Visual C++ does not edit directly
+//
+
+#ifdef APSTUDIO_INVOKED
+	#error this file is not editable by Microsoft Visual C++
+#endif //APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Add manually edited resources here...
+//#include <Common/XTPVersion.h>
+
+//#ifdef _XTP_INCLUDE_COMMANDBARS
+#include "Styles\Office2007\Office2007.rc"
+//#endif
+/////////////////////////////////////////////////////////////////////////////

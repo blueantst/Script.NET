@@ -1,0 +1,309 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 中文(中华人民共和国) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 4, 2\r\n"
+    "#pragma code_page(936)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\WorkSpace.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.chs\\afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "080404b0"
+        BEGIN
+            VALUE "FileDescription", "WorkSpace DLL"
+            VALUE "FileVersion", "1, 0, 0, 1"
+            VALUE "InternalName", "WorkSpace"
+            VALUE "LegalCopyright", "版权所有 (C) 2002-2009"
+            VALUE "OriginalFilename", "WorkSpace.DLL"
+            VALUE "ProductName", "WorkSpace Dynamic Link Library"
+            VALUE "ProductVersion", "1, 0, 0, 1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x804, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOG  0, 0, 216, 61
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "关于WorkSpace"
+FONT 9, "宋体"
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,164,7,45,14
+    ICON            IDI_ICON_WORKSPACE,IDC_STATIC,7,7,20,20
+    LTEXT           "Script.NET资源工作间 v1.0",IDC_STATIC,45,13,100,11
+    LTEXT           "版权所有 (C) 2002-11-16",IDC_STATIC,45,27,100,10
+    LTEXT           "作者：Blueant",IDC_STATIC,45,42,100,10
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 209
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 54
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_OWM MENU 
+BEGIN
+    POPUP "WorkSpace"
+    BEGIN
+        MENUITEM "关于:WorkSpace",                ID_OWM_ABOUT
+    END
+END
+
+IDR_TESTTREE MENU 
+BEGIN
+    POPUP "TESTTREE"
+    BEGIN
+        MENUITEM "初始化",                         ID_TEST_INIT
+        MENUITEM SEPARATOR
+        MENUITEM "开始测试",                        ID_TEST_START
+        MENUITEM "停止测试",                        ID_TEST_STOP
+        MENUITEM SEPARATOR
+        MENUITEM "禁止测试",                        ID_TEST_DISABLE
+        MENUITEM "复位测试项",                       ID_TEST_FRESH
+        MENUITEM SEPARATOR
+        MENUITEM "属性",                          ID_TEST_PROPERTY
+    END
+END
+
+IDR_MENU_RSM_BASE MENU 
+BEGIN
+    POPUP "RSM_Base"
+    BEGIN
+        MENUITEM "隐藏",                          ID_RSM_HIDE
+        MENUITEM "刷新",                          ID_RSM_REFRESH
+        MENUITEM SEPARATOR
+        MENUITEM "属性",                          ID_RSM_PROPERTY
+    END
+END
+
+IDR_OWM_VIEW MENU 
+BEGIN
+    POPUP "View"
+    BEGIN
+        MENUITEM "导航树(&N)",                     ID_VIEW_NAVIGATER
+        MENUITEM "文件树(&F)",                     ID_VIEW_FILE
+    END
+END
+
+IDR_MENU_BASE MENU 
+BEGIN
+    POPUP "Base"
+    BEGIN
+        MENUITEM SEPARATOR
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_OWM                 BITMAP                  "res\\Toolbar.bmp"
+IDB_TREE_NORMAL         BITMAP                  "res\\tree_nor.bmp"
+IDB_TREE_TESTING        BITMAP                  "res\\tree_tes.bmp"
+IDB_TREE_DISABLE        BITMAP                  "res\\tree_dis.bmp"
+IDB_TREE_FAIL           BITMAP                  "res\\tree_fai.bmp"
+IDB_TREE_SUCC           BITMAP                  "res\\tree_suc.bmp"
+IDR_BAR_TEST            BITMAP                  "res\\toolbar1.bmp"
+IDR_BAR_RSM             BITMAP                  "res\\bmp00002.bmp"
+IDB_IL_FILE_EX          BITMAP                  "res\\img_filetree.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_OWM TOOLBAR  16, 15
+BEGIN
+    BUTTON      ID_VIEW_OWM
+    SEPARATOR
+    BUTTON      ID_TEST_PAUSE
+    BUTTON      ID_TEST_CONTINUE
+END
+
+IDR_BAR_TEST TOOLBAR  16, 15
+BEGIN
+    BUTTON      ID_TEST_INIT
+    BUTTON      ID_TEST_START
+    BUTTON      ID_TEST_STOP
+    BUTTON      ID_TEST_DISABLE
+    BUTTON      ID_TEST_FRESH
+    BUTTON      ID_TEST_PROPERTY
+END
+
+IDR_BAR_RSM TOOLBAR  16, 15
+BEGIN
+    BUTTON      ID_RSM_REFRESH
+    BUTTON      ID_RSM_PROPERTY
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_ICON_WORKSPACE      ICON                    "res\\274.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    ID_TEST_START           "开始测试\n开始测试"
+    ID_TEST_STOP            "停止测试\n停止测试"
+    ID_TEST_PAUSE           "暂停测试\n暂停测试"
+    ID_TEST_CONTINUE        "恢复测试\n恢复测试"
+    ID_TEST_DISABLE         "禁止测试\n禁止测试"
+    ID_TEST_FRESH           "复位测试项\n复位测试项"
+    ID_TEST_PROPERTY        "属性\n属性"
+    ID_TEST_INIT            "初始化\n初始化"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_OWM_WS              "测试树模块"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_BAR_WS              "工作间"
+    IDS_VIEW_MENU           "查看(&V)"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_NAVIGATER       "导航树\n导航树"
+    ID_VIEW_FILE            "文件树\n文件树"
+END
+
+#endif    // 中文(中华人民共和国) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE 4, 2
+#pragma code_page(936)
+#endif //_WIN32
+#include "res\WorkSpace.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.chs\afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?blueui version="2.0"?>
+<plugin
+   id="org.interp.lua"
+   owmid="0"
+   name="lua"
+   version="2.0.0.5"
+   provider-name="Blueant Studio"
+   type="interp"
+   class="IInterp"
+   class-version="1.0.0"
+   image="images/logo.gif">
+
+   <description>
+      Lua Interp.
+   </description>
+
+   <copyright>
+      Copyright Blueant, 2000-2009.  All rights reserved.
+   </copyright>
+
+   <license>
+      BLUEANT LICENSE
+   </license>
+
+   <url>
+      <about label="about page" url="html/about.htm"/>
+      <update label="LuaInterp update site" url="http://www.blueantstudio.net/vci/interp/luainterp"/>
+   </url>
+
+   <property>
+      <interp-type option="true" dynload="true"/>
+   </property>
+
+   <runtime>
+      <library name="Bin/LuaInterp.dll">
+         <export name="*"/>
+      </library>
+	  <library-debug name="Bin/LuaInterp_d.dll">
+         <export name="*"/>
+      </library-debug>
+	  <interface-define></interface-define>
+	  <!-- initial paramater -->
+	  <init></init>
+	  <!-- done paramater -->
+	  <done></done>
+   </runtime>
+   <requires>
+      <import plugin="org.blueui.core.runtime"/>
+   </requires>
+
+   <!-- document extension point -->
+   <doc-extend>
+      <doc name="Lua Files" id="interp.doc.lua">
+	     <exts>
+		    <ext>lua</ext>
+			<ext>luac</ext>
+		 </exts>
+	  </doc>
+   </doc-extend>
+   
+   <perspectives>
+   </perspectives>
+
+
+   <extension-point id="server" name="%server" schema="schema/server.exsd"/>
+
+</plugin>

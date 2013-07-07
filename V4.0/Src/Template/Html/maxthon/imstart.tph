@@ -1,0 +1,63 @@
+<META http-equiv=Content-Type content="text/html; charset=%PAGE_CHARSET%">
+%MENU_DISABLE_SCRIPT%
+<HTML><HEAD>
+<META HTTP-EQUIV="MSThemeCompatible" CONTENT="Yes">
+<TITLE>%HTML_TITLE%</TITLE>
+%CSS_FILES%
+%INCLUDE_JSCRIPTS%
+<script type="text/javascript" src="js/load.js" loadClass="%LOAD_JSCRIPT_CLASS%" loadPrototype="%LOAD_JSCRIPT_PROTOTYPE%"></script>
+%EXT_JSCRIPT_FILE%
+</HEAD>
+<BODY>
+<DIV class=wrapper id=wrapper>
+<DIV class=innerWrapper>
+
+<!-- header -->
+<DIV class=header id=header>
+<DIV class=innerHeader>
+<DIV class=titleIm id=im_logo></DIV>
+</DIV></DIV></DIV>
+<!-- header end -->
+
+<DIV class=contentWrapper>
+
+<!-- content -->
+<DIV class=content>
+<DIV class=innerContent>
+	<DIV class=contentBlock>
+	
+	  <!-- begin:page content -->
+	  <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+	    <TBODY>
+	    <TR>
+	      <TD vAlign=top align=middle>					  
+		  	<TABLE cellSpacing=0 cellPadding=5 width="100%" border=0>
+			%TABLE_ALL%
+	  		</TABLE>                        
+	      </TD>
+	    </TR>
+		</TBODY>
+	  </TABLE>
+	  <!--DIV style="PADDING-BOTTOM: 25px"></DIV-->
+	  <!-- end:page content -->
+					  
+	</DIV>
+</DIV></DIV>
+<!-- content end -->
+
+</DIV>
+
+<!-- footer -->
+<DIV class=footer id=footer>
+<DIV class=innerFooter>
+<DIV>%COPYRIGHT%</DIV>
+</DIV></DIV>
+<!-- footer end -->
+
+</DIV></DIV>
+
+<SCRIPT type="text/javascript">
+%JSCRIPT_BODY%
+</SCRIPT>
+
+</BODY></HTML>

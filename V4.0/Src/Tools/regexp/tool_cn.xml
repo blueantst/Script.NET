@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="GB2312"?>
+<?blueui version="2.0"?>
+<tool
+   id="org.tool.regexp"
+   name="正则表达式工具"
+   version="1.0.0"
+   provider-name="Blueant Studio"
+   image="images/logo.gif">
+
+   <description>
+      Regexp is a tool of regexp operate.
+   </description>
+
+   <copyright>
+      Copyright Blueant, 2000-2007.  All rights reserved.
+   </copyright>
+
+   <license>
+      BLUEANT LICENSE
+   </license>
+
+   <url>
+      <about label="about page" url="html/about.htm"/>
+      <update label="Regexp update site" url="http://www.blueantstudio.net/tools/regexp"/>
+   </url>
+
+   <property>
+      <category></category>
+	  <showmenu>true</showmenu>
+	  <showtask>true</showtask>
+   </property>
+
+   <runtime>
+      <type>interp</type>
+	  <vci>org.interp.tcl</vci>
+	  <instancename></instancename>
+	  <file>visual_regexp-3.1.tcl</file>
+   </runtime>
+   <requires>
+      <import plugin="org.blueui.core.runtime"/>
+   </requires>
+
+</tool>

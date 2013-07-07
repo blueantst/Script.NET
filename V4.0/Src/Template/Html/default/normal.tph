@@ -1,0 +1,127 @@
+<META http-equiv=Content-Type content="text/html; charset=%PAGE_CHARSET%">
+%MENU_DISABLE_SCRIPT%
+<HTML><HEAD>
+<META HTTP-EQUIV="MSThemeCompatible" CONTENT="Yes">
+<TITLE>%HTML_TITLE%</TITLE>
+<LINK href="%CSS_FILE%" type=text/css rel=stylesheet>
+<SCRIPT src="%INCLUDE_JSCRIPT%" type=text/javascript></SCRIPT>
+<script type="text/javascript" src="js/load.js" loadClass="%LOAD_JSCRIPT_CLASS%" loadPrototype="%LOAD_JSCRIPT_PROTOTYPE%"></script>
+%EXT_JSCRIPT_FILE%
+</HEAD>
+<BODY bottomMargin=0 bgColor=#ffffff leftMargin=0 topMargin=0 rightMargin=0>
+<TABLE id=table1 cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE id=table2 cellSpacing=0 cellPadding=0 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD>
+            <TABLE id=table3 cellSpacing=0 cellPadding=0 width="100%" border=0><TBODY>
+              <TR>
+                <TD colSpan=2>
+                  <TABLE id=table3 cellSpacing=0 cellPadding=0 width="100%" border=0>
+                    <TBODY>
+                    <TR>
+                      <TD align=middle><IMG height=59 src="image/top_logo.gif" width=342 border=0></TD>
+                      <TD align=middle width="100%" background="image/top_back.gif">
+					  	<IMG height=49 src="image/spacer.gif" width=196></TD>
+                      <TD align=middle><IMG height=59 src="image/top_back.gif" width=5></TD>
+                      <TD align=middle><IMG height=59 src="image/top_mcp.gif" width=70></TD>
+					</TR>
+					</TBODY>
+				  </TABLE>
+				</TD>
+			  </TR></TBODY>
+			</TABLE>
+            <TABLE id=table10 cellSpacing=0 cellPadding=0 width="100%" border=0><TBODY>
+              <TR>
+                <TD align=middle bgColor=#2e52af><IMG height=1 src="image/spacer.gif" width=1 border=0></TD>
+			  </TR>
+              </TBODY>
+			</TABLE>
+            <TABLE id=table49 cellSpacing=0 cellPadding=0 width="100%" border=0><TBODY>
+              <TR>
+                <TD class=ltblue width=3 background="image/light_blue_back.gif">
+					<IMG height=30 src="image/spacer.gif" width=3 border=0></TD>
+                <TD class=ltblueborder align=middle width=172 background="image/light_blue_back.gif">
+                  <TABLE id=table50 cellSpacing=0 cellPadding=2 width=150 border=0>
+                    <TBODY>
+                    <TR>
+                      <!--FORM name=frmSiteSearch onsubmit="return CheckSearchForm(this);" action="#" method=get>
+					  <INPUT type=hidden value=allwords name=mode> 
+                      <TD align=middle><B style="COLOR: #000000">Search:</B></TD>
+                      <TD align=middle width="100%"><INPUT class=searchbox onfocus=this.select() size=15 name=search></TD>
+                      <TD align=middle><INPUT id=image1 type=image height=16 width=16 src="image/icon_16x16_search.gif" name=image1></TD>
+					  </FORM-->
+					</TR>
+					</TBODY>
+				  </TABLE>
+				</TD>				
+                <TD class=ltblueborder background="image/light_blue_back.gif" align="right">
+					<a href="%STARTPAGE%" title="home"><IMG height=24 src="image/icon_24x24_home.gif" width=24 border=0 align="right"></a></TD>
+				<TD class=ltblue width=3 background="image/light_blue_back.gif">
+					<IMG height=30 src="image/spacer.gif" width=3 border=0></TD>				
+			  </TR>
+			  </TBODY>
+			</TABLE>
+		  </TD>
+		</TR>
+        <TR>
+          <TD>
+            <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+              <TBODY>
+              <TR>
+                <TD class=splitleft width=3><IMG height=1 src="image/spacer.gif" width=3 border=0></TD>
+                <TD style="BACKGROUND-COLOR: #fff" vAlign=top width="100%">
+				  <!-- begin:page content -->
+                  <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+                    <TBODY>
+                    <TR>
+                      <TD vAlign=top align=middle>					  
+					  	<TABLE cellSpacing=0 cellPadding=5 width="100%" border=0>
+						%TABLE_ALL%
+	      		  		</TABLE>                        
+                      </TD>
+                    </TR>
+					</TBODY>
+				  </TABLE>
+				  <!-- end:page content -->
+				</TD>
+				<TD class=splitleft width=1><IMG height=1 src="image/spacer.gif" width=1 border=0></TD>
+				<TD class=ltblue width=3>
+					<IMG height=30 src="image/spacer.gif" width=3 border=0></TD>				
+			  </TR>
+              <TR>
+                <TD colSpan=4>
+                  <TABLE cellSpacing=0 cellPadding=0 width="100%" bgColor=#a4c2f5 border=0>
+                    <TBODY>
+                    <TR>
+                      <TD width=3><IMG height=4 src="image/spacer.gif" width=3 border=0></TD>
+                      <TD class=splitbottom width=100%>
+					  	<IMG height=4 src="image/spacer.gif" width=%100 border=0></TD>
+					  <TD width=3><IMG height=4 src="image/spacer.gif" width=3 border=0></TD>
+					</TR>
+					</TBODY>
+				  </TABLE>
+				</TD>
+			  </TR>
+			  </TBODY>
+			</TABLE>
+		  </TD>
+		</TR>
+		</TBODY>
+	  </TABLE>
+	</TD>
+  </TR>
+  <TR>
+    <TD class=footer align=middle width="100%">
+	<BR>%COPYRIGHT%<BR><BR></TD>
+  </TR>
+  </TBODY>
+  </TABLE>
+  <SCRIPT type="text/javascript">
+  %JSCRIPT_BODY%
+  </SCRIPT>
+</BODY>
+</HTML>

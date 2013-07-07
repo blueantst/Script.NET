@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TclInterp", "..\..\Interps\Tcl\TclInterp\TclInterp.vcproj", "{72E04A45-EFC2-4EDC-9579-1FA4EF18BF67}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LuaInterp", "..\..\Interps\Lua\LuaInterp\LuaInterp.vcproj", "{A424DE48-A6E9-4C64-B39D-23738A19891A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lua5.1", "..\..\Interps\Lua\lua5.1\make.vc\lua5.1_dll.vcproj", "{FD76ED0B-5FF8-4990-B486-2933AFCBD9DB}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lua5.2", "..\..\Interps\Lua\lua5.2\make.vc\lua5.2_dll.vcproj", "{3CD8A4DF-779F-4FD5-80C9-3F36822560CA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		PDBRelease|Win32 = PDBRelease|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{72E04A45-EFC2-4EDC-9579-1FA4EF18BF67}.Debug|Win32.ActiveCfg = Debug|Win32
+		{72E04A45-EFC2-4EDC-9579-1FA4EF18BF67}.Debug|Win32.Build.0 = Debug|Win32
+		{72E04A45-EFC2-4EDC-9579-1FA4EF18BF67}.PDBRelease|Win32.ActiveCfg = PDBRelease|Win32
+		{72E04A45-EFC2-4EDC-9579-1FA4EF18BF67}.PDBRelease|Win32.Build.0 = PDBRelease|Win32
+		{72E04A45-EFC2-4EDC-9579-1FA4EF18BF67}.Release|Win32.ActiveCfg = Release|Win32
+		{72E04A45-EFC2-4EDC-9579-1FA4EF18BF67}.Release|Win32.Build.0 = Release|Win32
+		{A424DE48-A6E9-4C64-B39D-23738A19891A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A424DE48-A6E9-4C64-B39D-23738A19891A}.Debug|Win32.Build.0 = Debug|Win32
+		{A424DE48-A6E9-4C64-B39D-23738A19891A}.PDBRelease|Win32.ActiveCfg = PDBRelease|Win32
+		{A424DE48-A6E9-4C64-B39D-23738A19891A}.PDBRelease|Win32.Build.0 = PDBRelease|Win32
+		{A424DE48-A6E9-4C64-B39D-23738A19891A}.Release|Win32.ActiveCfg = Release|Win32
+		{A424DE48-A6E9-4C64-B39D-23738A19891A}.Release|Win32.Build.0 = Release|Win32
+		{FD76ED0B-5FF8-4990-B486-2933AFCBD9DB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FD76ED0B-5FF8-4990-B486-2933AFCBD9DB}.Debug|Win32.Build.0 = Debug|Win32
+		{FD76ED0B-5FF8-4990-B486-2933AFCBD9DB}.PDBRelease|Win32.ActiveCfg = Release|Win32
+		{FD76ED0B-5FF8-4990-B486-2933AFCBD9DB}.PDBRelease|Win32.Build.0 = Release|Win32
+		{FD76ED0B-5FF8-4990-B486-2933AFCBD9DB}.Release|Win32.ActiveCfg = Release|Win32
+		{FD76ED0B-5FF8-4990-B486-2933AFCBD9DB}.Release|Win32.Build.0 = Release|Win32
+		{3CD8A4DF-779F-4FD5-80C9-3F36822560CA}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3CD8A4DF-779F-4FD5-80C9-3F36822560CA}.Debug|Win32.Build.0 = Debug|Win32
+		{3CD8A4DF-779F-4FD5-80C9-3F36822560CA}.PDBRelease|Win32.ActiveCfg = Release|Win32
+		{3CD8A4DF-779F-4FD5-80C9-3F36822560CA}.PDBRelease|Win32.Build.0 = Release|Win32
+		{3CD8A4DF-779F-4FD5-80C9-3F36822560CA}.Release|Win32.ActiveCfg = Release|Win32
+		{3CD8A4DF-779F-4FD5-80C9-3F36822560CA}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

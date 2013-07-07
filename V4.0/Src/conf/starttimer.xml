@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Script.NET Start Timer config file - DO NOT EDIT -->
+<timertasks id="default">
+	<!--Task Name="Clock" Interp="org.interp.tcl" InterpName="Clock" CmdType="command"
+			 Seconds="30" Count="0" StartTime="" EndTime=""
+			 Trigger="">
+			 StatusBar -createpane -width 50 -id 11;
+			 StatusBar -settooltip 11 "Current time";
+			 set timetext [clock format [clock seconds] -format "%H:%M"];
+			 StatusBar -settext 11 $timetext;
+	</Task-->
+</timertasks>
