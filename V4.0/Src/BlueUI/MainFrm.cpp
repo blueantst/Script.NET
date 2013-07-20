@@ -1156,7 +1156,7 @@ void CMainFrame::OnIndicatorButton(UINT nID)
 			}else
 			{
 				// 执行按钮动作
-				// 未完成......,需要在App中添加一个通用的Action动作解析和执行函数,支持interp,html,owm,tool等类型的动作
+				// TODO:未完成......,需要在App中添加一个通用的Action动作解析和执行函数,支持interp,html,owm,tool等类型的动作
 			}
 		}
 	}

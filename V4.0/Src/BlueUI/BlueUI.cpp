@@ -1969,17 +1969,7 @@ void CBlueUIApp::OnOption()
 	{
 		tps.AddPage(strtpsPlatform,tps_item_branch,IDD_TPS_PLATFORM,strtpsAboutPlatform,NULL,OPT_PLATFORM);
 	}
-/*
-	if(CheckCmdEnable(PPID_ATEINFO))
-	{
-		CTpsATEInfo* pTpsATEInfo = new CTpsATEInfo();
-		PLAT_LOADSTRING(strtpsAteInfo, IDS_TPS_ATEINFO); // ATE信息
-		PLAT_LOADSTRING(strtpsAboutAteInfo, IDS_TPS_ABOUT_ATEINFO); // 设置测试设备和数据采集信息...
-		tps.AddPage(strtpsAteInfo,tps_item_node,IDD_TPS_ATEINFO,strtpsAboutAteInfo,pTpsATEInfo,OPT_NODE);
-	}
-*/
 
-	//if(CheckCmdEnable(PPID_FONT))
 	if(m_xmlPlat.GetNodeAttribute("options\\Language", "enable") != "false")
 	{
 		CTpsLanguage* pTpsLanguage = new CTpsLanguage();
@@ -2020,44 +2010,6 @@ void CBlueUIApp::OnOption()
 		tps.AddPage(strtpsWorkspace,tps_item_node,IDD_TPS_WORKSPACE,strtpsAboutWorkspace,pTpsWorkspace,OPT_NODE);
 	}
 
-/*
-	if(theApp.m_CurUser.nUserRight <= USER_DEVELOP)
-	{	// TEMS设置,需要开发人员以上权限
-		CTpsTems* pTpsTems = new CTpsTems();
-		PLAT_LOADSTRING(strtpsTems, IDS_TPS_TEMS); // TEMS服务
-		PLAT_LOADSTRING(strtpsAboutTems, IDS_TPS_ABOUT_TEMS); // 设置TEMS服务页面...
-		tps.AddPage(strtpsTems,tps_item_node,IDD_TPS_TEMS,strtpsAboutTems,pTpsTems,OPT_NODE);
-	}
-
-	if(theApp.m_CurUser.nUserRight <= USER_DEVELOP)
-	{	// 平台自动升级
-		CTpsAutoUpdate* pTpsAutoUpdate = new CTpsAutoUpdate();
-		PLAT_LOADSTRING(strtpsAutoUpdate, IDS_TPS_AUTOUPDATE); // 自动升级
-		PLAT_LOADSTRING(strtpsAboutAutoUpdate, IDS_TPS_ABOUT_AUTOUPDATE); // 设置自动升级功能...
-		tps.AddPage(strtpsAutoUpdate,tps_item_node,IDD_TPS_AUTOUPDATE,strtpsAboutAutoUpdate,pTpsAutoUpdate,OPT_NODE);
-	}
-
-	{
-		CTpsSuperCfg* pTpsSuperCfg = new CTpsSuperCfg();
-		PLAT_LOADSTRING(strtpsSuperCfg, IDS_TPS_SUPERCFG); // 远程协助
-		PLAT_LOADSTRING(strtpsAboutSuperCfg, IDS_TPS_ABOUT_SUPERCFG); // 配置远程协助和管理...
-		tps.AddPage(strtpsSuperCfg,tps_item_node,IDD_TPS_SUPERCFG,strtpsAboutSuperCfg,pTpsSuperCfg,OPT_NODE);
-	}
-
-	{
-		CTpsStartPage* pTpsStartPage = new CTpsStartPage();
-		PLAT_LOADSTRING(strtpsStartPage, IDS_TPS_STARTPAGE); // 起始页面
-		PLAT_LOADSTRING(strtpsAboutStartPage, IDS_TPS_ABOUT_STARTPAGE); // 设置起始页面...
-		tps.AddPage(strtpsStartPage,tps_item_node,IDD_TPS_STARTPAGE,strtpsAboutStartPage,pTpsStartPage,OPT_NODE);
-	}
-
-	{
-		CTpsProject* pTpsProject = new CTpsProject();
-		PLAT_LOADSTRING(strtpsProject, IDS_TPS_PROJECT); // 工程设置
-		PLAT_LOADSTRING(strtpsAboutStartPage, IDS_TPS_ABOUT_PROJECT); // 设置工程参数...
-		tps.AddPage(strtpsProject,tps_item_node,IDD_TPS_PROJECT,strtpsAboutStartPage,pTpsProject,OPT_NODE);
-	}
-*/
 	tps.SetLastPageType(tps_item_endbranch);
 
 	// OWM模块属性
@@ -2342,13 +2294,7 @@ void CBlueUIApp::ProcessPath(CString& strPath, CString strPlugInId)
 		{	// GetPlatRootPath已经包含了\,因此可以去掉
 			strTemp = strTemp.Right(strTemp.GetLength()-1);
 		}
-		if(strPlugInId.Find("org.prj.") == 0)
-		{
-			strPath = strPath.Left(nPos) + GetPlatRootPath() + "PrjPlugins\\" + strPlugInId + "\\" + strTemp;
-		}else
-		{
-			strPath = strPath.Left(nPos) + GetPlatRootPath() + "Plugins\\" + strPlugInId + "\\" + strTemp;
-		}
+		strPath = strPath.Left(nPos) + GetPlatRootPath() + "Plugins\\" + strPlugInId + "\\" + strTemp;
 	}
 }
 
