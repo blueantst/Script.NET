@@ -9,6 +9,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lua5.1", "..\..\Interps\Lua
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lua5.2", "..\..\Interps\Lua\lua5.2\make.vc\lua5.2_dll.vcproj", "{3CD8A4DF-779F-4FD5-80C9-3F36822560CA}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PythonInterp", "..\..\Interps\Python\PythonInterp\PythonInterp.vcproj", "{F94D785F-9603-4D08-86BD-18D0DAC4FA68}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RubyInterp", "..\..\Interps\Ruby\RubyInterp\RubyInterp.vcproj", "{5B762ECE-996D-4B36-A0F9-246A04A94613}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -40,6 +44,18 @@ Global
 		{3CD8A4DF-779F-4FD5-80C9-3F36822560CA}.PDBRelease|Win32.Build.0 = Release|Win32
 		{3CD8A4DF-779F-4FD5-80C9-3F36822560CA}.Release|Win32.ActiveCfg = Release|Win32
 		{3CD8A4DF-779F-4FD5-80C9-3F36822560CA}.Release|Win32.Build.0 = Release|Win32
+		{F94D785F-9603-4D08-86BD-18D0DAC4FA68}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F94D785F-9603-4D08-86BD-18D0DAC4FA68}.Debug|Win32.Build.0 = Debug|Win32
+		{F94D785F-9603-4D08-86BD-18D0DAC4FA68}.PDBRelease|Win32.ActiveCfg = PDBRelease|Win32
+		{F94D785F-9603-4D08-86BD-18D0DAC4FA68}.PDBRelease|Win32.Build.0 = PDBRelease|Win32
+		{F94D785F-9603-4D08-86BD-18D0DAC4FA68}.Release|Win32.ActiveCfg = Release|Win32
+		{F94D785F-9603-4D08-86BD-18D0DAC4FA68}.Release|Win32.Build.0 = Release|Win32
+		{5B762ECE-996D-4B36-A0F9-246A04A94613}.Debug|Win32.ActiveCfg = Debug|Win32
+		{5B762ECE-996D-4B36-A0F9-246A04A94613}.Debug|Win32.Build.0 = Debug|Win32
+		{5B762ECE-996D-4B36-A0F9-246A04A94613}.PDBRelease|Win32.ActiveCfg = PDBRelease|Win32
+		{5B762ECE-996D-4B36-A0F9-246A04A94613}.PDBRelease|Win32.Build.0 = PDBRelease|Win32
+		{5B762ECE-996D-4B36-A0F9-246A04A94613}.Release|Win32.ActiveCfg = Release|Win32
+		{5B762ECE-996D-4B36-A0F9-246A04A94613}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

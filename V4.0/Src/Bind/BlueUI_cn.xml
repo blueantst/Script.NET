@@ -10,7 +10,7 @@
 			<DockBars>
 				<DockBar0 Count="6" Id1="1" Id3="140" Id4="128"/>
 			</DockBars>
-			<StatusBar Panes="0=1;1=1"/>
+			<StatusBar Panes="0=1;1=1;501=1"/>
 		</Layout>
 	</CommandBars>
 	<DockingPane>
@@ -46,9 +46,9 @@
 		<Pane-29 Type="2" DockingCY="636" Horiz="1" Panes="2" Pane-1="30" Pane-2="31"/>
 		<Pane-30 Type="1" DockingCX="200" DockingCY="120" Panes="0"/>
 		<Pane-31 Type="2" DockingCX="1193" Panes="2" Pane-1="32" Pane-2="36"/>
-		<Pane-32 Type="2" DockingCY="563" Horiz="1" Panes="3" Pane-1="33" Pane-2="34" Pane-3="35"/>
+		<Pane-32 Type="2" DockingCY="558" Horiz="1" Panes="3" Pane-1="33" Pane-2="34" Pane-3="35"/>
 		<Pane-33 Type="1" DockingCX="200" DockingCY="120" Panes="2" Selected="8" Pane-1="8" Pane-2="1"/>
-		<Pane-34 Type="4" DockingCX="1228"/>
+		<Pane-34 Type="4" DockingCX="1220"/>
 		<Pane-35 Type="1" DockingCX="245" DockingCY="120" Panes="0"/>
 		<Pane-36 Type="2" DockingCX="1455" DockingCY="193" Horiz="1" Panes="1" Pane-1="37"/>
 		<Pane-37 Type="1" DockingCX="1013" DockingCY="193" Panes="6" Selected="3" Pane-1="2" Pane-2="3" Pane-3="4" Pane-4="7" Pane-5="11" Pane-6="10"/>

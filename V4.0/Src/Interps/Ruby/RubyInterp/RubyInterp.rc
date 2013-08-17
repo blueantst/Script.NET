@@ -1,0 +1,236 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 中文(中华人民共和国) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 4, 2\r\n"
+    "#pragma code_page(936)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\RubyInterp.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.chs\\afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 2,0,0,5
+ PRODUCTVERSION 2,0,0,5
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "080404b0"
+        BEGIN
+            VALUE "Author", "Blueant"
+            VALUE "Comments", "Ruby Interp"
+            VALUE "FileDescription", "VCI-RubyInterp"
+            VALUE "FileVersion", "2, 0, 0, 5"
+            VALUE "InternalName", "RubyInterp"
+            VALUE "OriginalFilename", "RubyInterp.DLL"
+            VALUE "ProductName", "RubyInterp"
+            VALUE "ProductVersion", "2, 0, 0, 5"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x804, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_RUBY                ICON                    "res\\ruby.ico"
+IDI_ICON_COMPILE        ICON                    "res\\link_intern.ico"
+IDI_ICON_BUILD          ICON                    "res\\141.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_TPS_RUBYINTERP DIALOG  0, 0, 233, 147
+STYLE DS_SETFONT | WS_CHILD
+FONT 9, "宋体"
+BEGIN
+    ICON            IDI_RUBY,-1,15,18,20,20
+    LTEXT           "Ruby解释器 v2.0",-1,47,13,122,11
+    LTEXT           "版权所有 (C) 2000-2009",-1,47,26,100,11
+    LTEXT           "内嵌解释器版本：1.8.6",-1,47,40,100,11
+    LTEXT           "最近更新日期：2009-01-26",-1,47,54,114,10
+END
+
+IDD_TPS_RUBY_BUILD DIALOG  0, 0, 250, 160
+STYLE DS_SETFONT | WS_CHILD
+FONT 9, "宋体"
+BEGIN
+    GROUPBOX        "构建选项：",IDC_STATIC,7,7,236,140
+    ICON            IDI_ICON_BUILD,IDC_STATIC,14,24,20,20
+    CONTROL         "自动设置输出文件（源文件相同目录）",IDC_CHECK_BUILD_AUTO_OUTFILE,"Button",BS_AUTOCHECKBOX | WS_DISABLED | WS_TABSTOP,43,25,194,9
+    CONTROL         "选择Ruby扩展包添加到生成文件中",IDC_CHECK_BUILD_ADD_RUBY_LIB,"Button",BS_AUTOCHECKBOX | WS_DISABLED | WS_TABSTOP,43,40,194,9
+    CONTROL         "添加源文件目录下的所有文件",IDC_CHECK_BUILD_ADD_SOURCE_PATHFILES,
+                    "Button",BS_AUTOCHECKBOX | WS_DISABLED | WS_TABSTOP,43,54,194,9
+    CONTROL         "使用RubyScript2Exe构建工具",IDC_CHECK_BUILD_SELECT_TOOL,
+                    "Button",BS_AUTOCHECKBOX | WS_DISABLED | WS_TABSTOP,43,68,194,9
+    CONTROL         "选择可执行文件类型",IDC_CHECK_BUILD_SELECT_TYPE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,43,81,194,9
+    CONTROL         "自定义可执行文件的图标",IDC_CHECK_BUILD_REPLACE_ICON,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,43,95,194,9
+    CONTROL         "使用源代码目录下的同名图标文件",IDC_RADIO_BUILD_USE_SOURCEICON,"Button",BS_AUTORADIOBUTTON | WS_GROUP,54,109,138,10
+    CONTROL         "用户选择图标文件",IDC_RADIO_BUILD_USER_SELECT_ICON,"Button",BS_AUTORADIOBUTTON,54,122,138,10
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_TPS_RUBYINTERP, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 226
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 140
+    END
+
+    IDD_TPS_RUBY_BUILD, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 243
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 153
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_WINDOW_VAR          "变量"
+    IDS_WINDOW_OBJ          "对象"
+    IDS_WINDOW_FUNC         "函数"
+    IDS_WINDOW_STACK        "堆栈"
+    IDS_COLUMN_NAME         "名字"
+    IDS_COLUMN_VALUE        "值"
+    IDS_COLUMN_TYPE         "类型"
+    IDS_COLUMN_SOURCE       "文件"
+    IDS_COLUMN_LINE         "行号"
+    IDS_COLUMN_WHAT         "函数"
+    IDS_TPS_RUBY_INTERP     "Ruby解释器"
+    IDS_TPS_ABOUT_RUBY_INTERP "关于Ruby解释器..."
+    IDS_TPS_RUBY_COMPILE    "编译选项"
+    IDS_TPS_ABOUT_RUBY_COMPILE "设置Ruby编译选项..."
+    IDS_WATCH_VAR_TITLE     "查看变量"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_WATCH_VAR_NAME      "变量名"
+    IDS_WATCH_VAR_VALUE     "变量值"
+    IDS_WATCH_VAR_TYPE      "变量类型"
+    IDS_OPTDLG_SELECT_SETUP_TYPE "选择可执行文件类型"
+    IDS_OPTDLG_SELECT_SETUP_TYPE_TITLE "选择可执行文件类型"
+    IDS_OPTDLG_SELECT_SETUP_TYPE_MSG "请选择可执行文件类型，会按照的选择的类型生成可执行文件"
+    IDS_TPS_RUBY_BUILD      "构建选项"
+    IDS_TPS_ABOUT_RUBY_BUILD "设置Ruby构建选项..."
+END
+
+#endif    // 中文(中华人民共和国) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE 4, 2
+#pragma code_page(936)
+#endif //_WIN32
+#include "res\RubyInterp.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.chs\afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
