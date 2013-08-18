@@ -65,8 +65,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 2,0,0,5
- PRODUCTVERSION 2,0,0,5
+ FILEVERSION 2,1,0,0
+ PRODUCTVERSION 2,1,0,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -84,11 +84,11 @@ BEGIN
             VALUE "Author", "Blueant"
             VALUE "Comments", "Tcl Interp"
             VALUE "FileDescription", "VCI-TclInterp"
-            VALUE "FileVersion", "2, 0, 0, 5"
+            VALUE "FileVersion", "2, 1, 0, 0"
             VALUE "InternalName", "TclInterp"
             VALUE "OriginalFilename", "TclInterp.DLL"
             VALUE "ProductName", "TclInterp"
-            VALUE "ProductVersion", "2, 0, 0, 5"
+            VALUE "ProductVersion", "2, 1, 0, 0"
         END
     END
     BLOCK "VarFileInfo"
@@ -103,15 +103,15 @@ END
 // Dialog
 //
 
-IDD_TPS_TCLINTERP DIALOG  0, 0, 233, 147
+IDD_TPS_TCLINTERP DIALOGEX 0, 0, 233, 147
 STYLE DS_SETFONT | WS_CHILD
-FONT 9, "宋体"
+FONT 9, "宋体", 0, 0, 0x0
 BEGIN
     ICON            IDI_TCL,-1,15,18,20,20
-    LTEXT           "Tcl解释器 v2.0",-1,47,13,122,11
-    LTEXT           "版权所有 (C) 2000-2009",-1,47,26,100,11
-    LTEXT           "内嵌解释器版本：8.4.2.7",-1,47,40,100,11
-    LTEXT           "最近更新日期：2009-01-26",-1,47,54,114,10
+    LTEXT           "Tcl解释器 v2.1",-1,47,13,122,11
+    LTEXT           "版权所有 (C) 2000-2013",-1,47,26,100,11
+    LTEXT           "内嵌解释器版本：8.5",-1,47,40,100,11
+    LTEXT           "最近更新日期：2013-07-10",-1,47,54,114,10
     GROUPBOX        "缺省加载的库：",-1,15,68,202,35
     CONTROL         "Tk",IDC_LOAD_LIB_TK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,30,83,37,11
     CONTROL         "iTcl",IDC_LOAD_LIB_ITCL,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,90,83,37,11
