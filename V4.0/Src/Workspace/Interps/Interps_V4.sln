@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PythonInterp", "..\..\Inter
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RubyInterp", "..\..\Interps\Ruby\RubyInterp\RubyInterp.vcproj", "{5B762ECE-996D-4B36-A0F9-246A04A94613}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PerlInterp", "..\..\Interps\Perl\PerlInterp\PerlInterp.vcproj", "{D4FF1BFE-E0EF-47EE-B67C-F3C7603C2B53}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -56,6 +58,12 @@ Global
 		{5B762ECE-996D-4B36-A0F9-246A04A94613}.PDBRelease|Win32.Build.0 = PDBRelease|Win32
 		{5B762ECE-996D-4B36-A0F9-246A04A94613}.Release|Win32.ActiveCfg = Release|Win32
 		{5B762ECE-996D-4B36-A0F9-246A04A94613}.Release|Win32.Build.0 = Release|Win32
+		{D4FF1BFE-E0EF-47EE-B67C-F3C7603C2B53}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D4FF1BFE-E0EF-47EE-B67C-F3C7603C2B53}.Debug|Win32.Build.0 = Debug|Win32
+		{D4FF1BFE-E0EF-47EE-B67C-F3C7603C2B53}.PDBRelease|Win32.ActiveCfg = PDBRelease|Win32
+		{D4FF1BFE-E0EF-47EE-B67C-F3C7603C2B53}.PDBRelease|Win32.Build.0 = PDBRelease|Win32
+		{D4FF1BFE-E0EF-47EE-B67C-F3C7603C2B53}.Release|Win32.ActiveCfg = Release|Win32
+		{D4FF1BFE-E0EF-47EE-B67C-F3C7603C2B53}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
