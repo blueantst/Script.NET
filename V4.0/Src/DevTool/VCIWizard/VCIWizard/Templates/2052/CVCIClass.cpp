@@ -1058,7 +1058,7 @@ int __stdcall C[!output INTERFACE_NAME]::GetPluginLicenseInfo(LPCTSTR lpszVciId,
 int __stdcall C[!output INTERFACE_NAME]::GetCustomerInfo(CString& strCustomerInfo)
 {
 	// TODO: Add your code here
-	strCustomerInfo = "";
+	strCustomerInfo = _T("");
 
 	return License::trOk;
 }
@@ -1067,7 +1067,7 @@ int __stdcall C[!output INTERFACE_NAME]::GetCustomerInfo(CString& strCustomerInf
 int __stdcall C[!output INTERFACE_NAME]::GetOrderInfo(CString& strOrderInfo)
 {
 	// TODO: Add your code here
-	strOrderInfo = "";
+	strOrderInfo = _T("");
 
 	return License::trOk;
 }
@@ -1185,6 +1185,14 @@ int __stdcall C[!output INTERFACE_NAME]::SetActiveProject(LPCTSTR lpszProject)
 	return trpOk;
 }
 
+// 获取工程信息
+int __stdcall C[!output INTERFACE_NAME]::GetProjectInfo(LPCTSTR lpszProject, CString& strProjectDesc, CString& strProjectFile, CString& strProjectPath)
+{
+	// TODO: Add your code here
+
+	return trpOk;
+}
+
 // 获取工程状态
 int __stdcall C[!output INTERFACE_NAME]::GetProjectState(LPCTSTR lpszProject)
 {
@@ -1213,6 +1221,7 @@ int __stdcall C[!output INTERFACE_NAME]::UnregisterMenu(COWMMenuArray& aOWMMenus
 CWnd* __stdcall C[!output INTERFACE_NAME]::OnShowDockingPane(int nID, CWnd* pParentWnd, LPCTSTR lpszParam)
 {
 	// TODO: Add your code here
+	
 	return NULL;
 }
 [!endif]
@@ -1232,10 +1241,8 @@ int __stdcall C[!output INTERFACE_NAME]::done(LPCSTR lpszParameter)
 // 策略合法性校验
 int __stdcall C[!output INTERFACE_NAME]::IsValid(LPCSTR lpszConfig)
 {
-	////////////////////////////////////////////
-	//lpszConfig为策略ID，此处需要将该ID与自身
-	//策略ID对比校验合法性.
-	////////////////////////////////////////////
+	//lpszConfig为策略ID，此处需要将该ID与自身策略ID对比校验合法性
+	
 	return POLICY_VALIDITY;
 }
 
@@ -1254,9 +1261,8 @@ int __stdcall C[!output INTERFACE_NAME]::Repair(LPCSTR lpszConfig)
 // 更新策略执行参数
 int __stdcall C[!output INTERFACE_NAME]::UpdateExecParam(LPCSTR lpszConfig)
 {
-	//////////////////////////////////////////////////
 	//该接口被调用时说明参数发生变化，需要更新
-	//////////////////////////////////////////////////
+	
 	return 0;
 }
 
