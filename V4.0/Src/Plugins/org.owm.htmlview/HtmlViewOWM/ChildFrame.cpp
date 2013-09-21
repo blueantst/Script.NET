@@ -47,10 +47,10 @@ int CChildFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		return -1;
 
 	get_dll_resource();
-	VERIFY(m_wndToolBar.CreateToolBar(WS_VISIBLE|WS_CHILD|CBRS_TOOLTIPS|CBRS_GRIPPER, this, AFX_IDW_TOOLBAR));
+/*	VERIFY(m_wndToolBar.CreateToolBar(WS_VISIBLE|WS_CHILD|CBRS_TOOLTIPS|CBRS_GRIPPER, this, AFX_IDW_TOOLBAR));
 	VERIFY(m_wndToolBar.LoadToolBar(IDR_EXPLORER_BAR));
 	m_wndToolBar.SetFlags(xtpFlagStretched);
-
+*/
 	XTPImageManager()->SetIcons(IDR_MENUBAR);
 
 	// 设置图标(需要切换资源)	
