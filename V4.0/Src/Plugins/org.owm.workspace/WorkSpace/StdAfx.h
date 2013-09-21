@@ -47,11 +47,6 @@
 
 #include "worktree.h"
 
-// 自动链接TCL库
-//#pragma comment(lib, "tcl84.lib") 
-//#pragma message("Automatically linking with tcl84.lib")
-//#include "TclCmd.h"		// TCL扩展头文件
-
 // 资源切换函数
 void get_dll_resource(void);
 void reset_dll_resource(void);

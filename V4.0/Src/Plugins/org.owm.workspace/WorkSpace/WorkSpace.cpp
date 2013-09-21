@@ -438,17 +438,6 @@ CWorkSpaceView* GetWorkSpaceView(int nId)
 	return (CWorkSpaceView*)(pWnd->GetDescendantWindow(AFX_IDW_PANE_FIRST));
 }
 
-// 创建树的结构
-struct STRU_ADDTREEEX
-{
-	CString	strTreeName;	// 窗口名
-	CString	strIconFile;	// 图标文件
-	int		nTreeType;		// 类型
-	int		nAttachPaneId;	// 创建在哪个窗口后面
-	CString	strBmpFile;		// 图片文件名
-	int		nPaneId;		// 指定的窗口PandeId
-};
-
 // 树窗口的起始ID
 static int g_nTreePaneId = 19000;
 
