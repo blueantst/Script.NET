@@ -1224,6 +1224,38 @@ CWnd* __stdcall C[!output INTERFACE_NAME]::OnShowDockingPane(int nID, CWnd* pPar
 	
 	return NULL;
 }
+
+// 初始化代码定义库
+int __stdcall C[!output INTERFACE_NAME]::InitCodeDefineLibrary(LPCTSTR lpszProject)
+{
+	// TODO: Add your code here
+
+	return 0;
+}
+
+// 加载代码定义库
+int __stdcall C[!output INTERFACE_NAME]::LoadCodeDefineLibrary(LPCTSTR lpszProject)
+{
+	// TODO: Add your code here
+
+	return 0;
+}
+
+// 查找代码定义列表(返回值表示个数)
+int __stdcall C[!output INTERFACE_NAME]::GetCodeDefine(LPCTSTR lpszCode, CCodePositionArray& asCodePosition)
+{
+	// TODO: Add your code here
+
+	return 0;
+}
+
+// 查找代码引用列表(返回值表示个数)
+int __stdcall C[!output INTERFACE_NAME]::GetCodeReference(LPCTSTR lpszCode, CCodePositionArray& asCodePosition)
+{
+	// TODO: Add your code here
+
+	return 0;
+}
 [!endif]
 [!if VCITYPE_POLICY]
 // 策略初始化,加载时调用

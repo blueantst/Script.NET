@@ -138,6 +138,14 @@ interface I[!output INTERFACE_NAME] : public IUnknown
 	virtual int __stdcall UnregisterMenu(COWMMenuArray& aOWMMenus) = 0;
 	// 显示DockingPane窗口时调用的函数
 	virtual CWnd* __stdcall OnShowDockingPane(int nID, CWnd* pParentWnd, LPCTSTR lpszParam) = 0;
+	// 初始化代码定义库
+	virtual int __stdcall InitCodeDefineLibrary(LPCTSTR lpszProject) = 0;
+	// 加载代码定义库
+	virtual int __stdcall LoadCodeDefineLibrary(LPCTSTR lpszProject) = 0;
+	// 查找代码定义列表
+	virtual int __stdcall GetCodeDefine(LPCTSTR lpszCode, CCodePositionArray& asCodePosition) = 0;
+	// 查找代码引用列表
+	virtual int __stdcall GetCodeReference(LPCTSTR lpszCode, CCodePositionArray& asCodePosition) = 0;
 [!endif]
 [!if VCITYPE_POLICY]
 	// 设置策略管理器对外接口指针
