@@ -65,8 +65,6 @@
 #define OC_WS_SETPAGEMENU		250	// 设置页面菜单
 
 
-
-
 // 定义根节点ID
 #define UNITID_ALL				-1
 
@@ -229,5 +227,16 @@ struct HWORKTASKITEM
 
 typedef CArray<HWORKTASKITEM, HWORKTASKITEM> CTaskPanelItemArray;
 
+
+// 创建树的命令结构
+struct STRU_ADDTREEEX
+{
+	CString	strTreeName;	// 窗口名
+	CString	strIconFile;	// 图标文件
+	int		nTreeType;		// 类型
+	int		nAttachPaneId;	// 创建在哪个窗口后面
+	CString	strBmpFile;		// 图片文件名
+	int		nPaneId;		// 指定的窗口PandeId
+};
 
 #endif // !defined(__WORKTREE_H_)
