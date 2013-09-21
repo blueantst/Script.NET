@@ -451,6 +451,7 @@ void CStylerView::OnActivateView( BOOL bActivate, CView* pActivateView, CView* p
 		GetDocument()->RefreshDocProperty();
 	}
 
+	/* // HtmlView组件取消主菜单中的内容
 	if (bActivate)
 	{
 		get_dll_resource();
@@ -465,7 +466,7 @@ void CStylerView::OnActivateView( BOOL bActivate, CView* pActivateView, CView* p
 		pMenu->LoadMenu(IDR_OWM_VIEW);
 		reset_dll_resource();
 		theApp.m_pIPlatUI->DelExtMenu(pMenu);
-	}
+	}*/
 	
 	CHtmlView:: OnActivateView(bActivate, pActivateView, pDeactiveView);
 }

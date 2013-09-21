@@ -16,7 +16,7 @@
    </description>
 
    <copyright>
-      Copyright Blueant, 2000-2009.  All rights reserved.
+      Copyright Blueant, 2000-2013.  All rights reserved.
    </copyright>
 
    <license>
@@ -25,7 +25,7 @@
 
    <url>
       <about label="about page" url="html/about.htm"/>
-      <update label="Htmlview update site" url="http://blueant.vip.nease.net/vci/owm/htmlview"/>
+      <update label="Htmlview update site" url="http://www.blueantstudio.net/vci/owm/htmlview"/>
    </url>
 
    <property>
