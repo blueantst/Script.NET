@@ -104,7 +104,7 @@ void CBlueUIApp::ExecProjectScript(CString strMenuAction)
 		return;
 	}
 
-	CString strPlugInPath = GetPlatRootPath() + "PrjPlugins\\" + strProjectPlugInId;
+	CString strPlugInPath = GetPlatRootPath() + "Plugins\\" + strProjectPlugInId;
 	CString strXmlFile = strPlugInPath;
 	if(LANGUAGE_PAGE_CHINESE == m_curLanguage)
 	{
@@ -195,7 +195,7 @@ BOOL CBlueUIApp::OpenProjectFile(CPlugIn* pPlugIn, CString strProjectFile)
 	}
 
 	// 注意要释放
-	IProject* pIProject = pPlugIn->CreateProjectObject("###project");
+	IProject* pIProject = pPlugIn->CreateProjectObject("###project###");
 	if(pIProject)
 	{
 		PLAT_LOADSTRING(strInfoOpenProject, IDS_INFO_OPEN_PROJECT); // 打开工程 %s\r\n
@@ -205,7 +205,12 @@ BOOL CBlueUIApp::OpenProjectFile(CPlugIn* pPlugIn, CString strProjectFile)
 		{
 			m_pIProject = pIProject;
 			SaveRecentProject(strProjectFile);
+			// 加载工程Pane
+			pPlugIn->LoadDockingPane(-1, TRUE);
+			// 执行工程打开脚本
 			ExecProjectScript("project\\open");
+			// 加载代码定义库
+			pIProject->LoadCodeDefineLibrary("");
 			return TRUE;
 		}
 	}
@@ -222,11 +227,31 @@ void CBlueUIApp::OnProjectNew()
 	PLAT_LOADSTRING(strInfoNewProject, IDS_INFO_NEW_PROJECT); // 新建工程\r\n
 	OUTPUT(COLOR_NORMAL, strInfoNewProject);
 
+	if(m_pIProjectManager == NULL)
+	{
+		m_pIProjectManager = (IProjectManager*)(CreateVciObject(VCIID_PROJECTMANAGER, "###projectmanager"));
+	}
+
+	if(m_pIProjectManager != NULL)
+	{
+		CString strPrjVci;
+		CString strPrjFile;
+		if(m_pIProjectManager->NewProjectWizard(strPrjVci, strPrjFile))
+		{
+			// 创建工程成功,打开工程
+			CPlugIn* pPlugIn = FindPlugIn(strPrjVci);
+			if(pPlugIn)
+			{
+				OpenProjectFile(pPlugIn, strPrjFile);
+			}
+		}
+	}
+/*
 	if(ExecMenuScript("project\\newproject") == "success")
 	{
-		m_pIProject = (IProject*)(theApp.GetObjectByInstanceName("###project"));
+		m_pIProject = (IProject*)(theApp.GetObjectByInstanceName("###project###"));
 		ExecProjectScript("project\\new");
-	}
+	}*/
 }
 
 void CBlueUIApp::OnUpdateProjectNew(CCmdUI* pCmdUI) 
@@ -251,23 +276,24 @@ void CBlueUIApp::OnProjectOpen()
 	// 挨个工程插件查找扩展点,看哪个工程插件可以打开此文档
 	for(int i=0; i<m_aPlugIns.GetSize(); i++)
 	{
-		if(m_aPlugIns[i].m_strType != "project")
+		CPlugIn* pPlugIn = &(m_aPlugIns[i]);
+		if(pPlugIn->m_strType != "project")
 			continue;
 
-		for(int j=0; j<m_aPlugIns[i].m_arDocExtend.GetSize(); j++)
+		for(int j=0; j<pPlugIn->m_arDocExtend.GetSize(); j++)
 		{
 			BOOL bDefaultExt = FALSE;
 			CString strTemp1;
-			for(int k=0; k<m_aPlugIns[i].m_arDocExtend[j].m_arDocExt.GetSize(); k++)
+			for(int k=0; k<pPlugIn->m_arDocExtend[j].m_arDocExt.GetSize(); k++)
 			{
 				strTemp1 += "*.";
-				strTemp1 += m_aPlugIns[i].m_arDocExtend[j].m_arDocExt[k];
-				if(k != (m_aPlugIns[i].m_arDocExtend[j].m_arDocExt.GetSize()-1))
+				strTemp1 += pPlugIn->m_arDocExtend[j].m_arDocExt[k];
+				if(k != (pPlugIn->m_arDocExtend[j].m_arDocExt.GetSize()-1))
 				{
 					strTemp1 += ";";
 				}
 
-				CString strDocExt = m_aPlugIns[i].m_arDocExtend[j].m_arDocExt[k];
+				CString strDocExt = pPlugIn->m_arDocExtend[j].m_arDocExt[k];
 				strDocExt.MakeLower();
 				if(strDefaultExt == strDocExt)
 				{
@@ -276,7 +302,7 @@ void CBlueUIApp::OnProjectOpen()
 				}
 			}
 
-			strTemp.Format("%s (%s)|%s|", m_aPlugIns[i].m_arDocExtend[j].m_strDocName, strTemp1, strTemp1);
+			strTemp.Format("%s (%s)|%s|", pPlugIn->m_arDocExtend[j].m_strDocName, strTemp1, strTemp1);
 			if(bDefaultExt && !bFoundDefaultExt)
 			{
 				strFilter = strTemp + strFilter;
@@ -296,10 +322,21 @@ void CBlueUIApp::OnProjectOpen()
 		WriteProfileString(REG_PROJECT_SUBKEY, REG_PROJECT_DEFFILEEXT, strExt);
 		for(int i=0; i<m_aPlugIns.GetSize(); i++)
 		{
-			if(m_aPlugIns[i].m_strType != "project")
+			CPlugIn* pPlugIn = &(m_aPlugIns[i]);
+			if(pPlugIn->m_strType != "project")
 				continue;
 
-			OpenProjectFile(&(m_aPlugIns[i]), dlg.GetPathName());
+			for(int j=0; j<pPlugIn->m_arDocExtend.GetSize(); j++)
+			{
+				for(int k=0; k<pPlugIn->m_arDocExtend[j].m_arDocExt.GetSize(); k++)
+				{
+					if(pPlugIn->m_arDocExtend[j].m_arDocExt[k].CompareNoCase(strExt) == 0)
+					{
+						OpenProjectFile(pPlugIn, dlg.GetPathName());
+						return;
+					}
+				}
+			}
 		}
 	}
 }

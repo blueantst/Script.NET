@@ -369,6 +369,7 @@ BOOL CPlugIn::LoadInfo()
 			paneInfo.m_nAttachType = PANE_ATTACH_WND;
 		}
 		paneInfo.m_bAutoCreate = (parser.GetNodeAttribute(pSubNode, "autocreate") == "true");
+		paneInfo.m_bProjectCreate = (parser.GetNodeAttribute(pSubNode, "projectcreate") == "true");
 		paneInfo.m_bSave = (parser.GetNodeAttribute(pSubNode, "save") == "true");
 		paneInfo.m_strOwmId = parser.GetNodeAttribute(pSubNode, "owm");
 
@@ -425,6 +426,20 @@ BOOL CPlugIn::LoadInfo()
 /////////////////////////////////////////////////////////////////////////////
 void CPlugIn::ShowAboutBox()
 {
+#ifdef APPLICATION_SCRIPTDEV
+	CString strLicensePlugin = theApp.m_xmlPlat.GetNodeText("application\\LicensePlugin");
+	if(strLicensePlugin == "")
+	{
+		return;
+	}
+
+	ILicense* pILicense = (ILicense*)(theApp.CreateVciObject(strLicensePlugin));
+	if(pILicense)
+	{
+		pILicense->ComponentAbout(m_strId);
+	}
+#endif
+
 	TTaskDialogInfo taskDialogInfo;
 	taskDialogInfo.strWindowTitle = m_strName;
 	taskDialogInfo.strMainInstruction = m_strName;
@@ -657,6 +672,25 @@ void* CPlugIn::OpenVciLib(CString strInterface)
 
 	if(m_hVciHandle == NULL)
 	{
+		#ifdef APPLICATION_SCRIPTDEV
+		// 首先判断License,看是否有权限可以加载此插件
+		if(theApp.m_pILicense && (!IsVciLicense()))
+		{
+			if(theApp.m_pILicense->VerifyPluginLicense(m_strId, License::FUNC_ACTION_LOAD) != License::trOk)
+			{
+				OUTPUT(COLOR_ERROR, "Verify license of %s failed!\r\n", m_strId);
+				return NULL;
+			}
+			// License有效性检查
+			theApp.m_pILicense->VerifyPluginLicense(m_strId, License::FUNC_ACTION_CHECKLICENSE);
+		}else
+		if(!IsVciLicense())
+		{
+			OUTPUT(COLOR_ERROR, "Verify license of %s failed, not found platform license!\r\n", m_strId);
+			return NULL;
+		}
+		#endif
+
 		// 保存并设置当前路径
 		theApp.SaveAndSetCurPath(m_strFile);
 
@@ -1202,7 +1236,7 @@ BOOL CPlugIn::LoadOwmPlugIn()
 // 加载DockingPane
 // nID = -1表示加载所有自动加载的
 /////////////////////////////////////////////////////////////////////////////
-BOOL CPlugIn::LoadDockingPane(int nID)
+BOOL CPlugIn::LoadDockingPane(int nID, BOOL bProjectLoad)
 {
 	CMainFrame* pMainFrame = (CMainFrame*)(AfxGetMainWnd());
 	if(nID == -1)
@@ -1217,7 +1251,8 @@ BOOL CPlugIn::LoadDockingPane(int nID)
 		for(int i=0; i<m_arDockingPane.GetSize(); i++)
 		{
 			CXTPDockingPane* pPane = pMainFrame->GetPaneManager()->FindPane(m_arDockingPane[i].m_nId);
-			if(m_arDockingPane[i].m_bAutoCreate || pPane)
+			// 如果需要自动创建，或者工程打开时创建（并且工程正在打开），或者Pane已经存在,则执行创建动作
+			if(m_arDockingPane[i].m_bAutoCreate || (m_arDockingPane[i].m_bProjectCreate && bProjectLoad) || pPane)
 			{
 				CString strIconPath = m_arDockingPane[i].m_strIcon;
 				if(strIconPath.Find(":") == -1)
@@ -1228,7 +1263,7 @@ BOOL CPlugIn::LoadDockingPane(int nID)
 				HICON hIcon = ::ExtractAssociatedIcon(theApp.m_hInstance,
 					strIconPath.GetBuffer(0), &wIndex);
 				strIconPath.ReleaseBuffer();
-				if(m_arDockingPane[i].m_bAutoCreate)
+				if(m_arDockingPane[i].m_bAutoCreate || (m_arDockingPane[i].m_bProjectCreate && bProjectLoad))
 				{
 					pMainFrame->CreateDockingBar(m_arDockingPane[i].m_nId,
 						m_arDockingPane[i].m_nDirection, hIcon);
