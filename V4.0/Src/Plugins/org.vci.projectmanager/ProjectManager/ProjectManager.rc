@@ -1,0 +1,367 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 中文(中华人民共和国) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 4, 2\r\n"
+    "#pragma code_page(936)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\ProjectManager.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.chs\\afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "080404b0"
+        BEGIN
+            VALUE "Author", "blueant"
+            VALUE "Comments", "Project manager"
+            VALUE "FileDescription", "VCI-ProjectManager"
+            VALUE "FileVersion", "1, 0, 0, 1"
+            VALUE "InternalName", "ProjectManager"
+            VALUE "OriginalFilename", "ProjectManager.DLL"
+            VALUE "ProductName", "ProjectManager"
+            VALUE "ProductVersion", "1, 0, 0, 1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x804, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_PROJECT             ICON                    "res\\cef.ico"
+IDR_VCI                 ICON                    "res\\ProjectManager.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_NEW_PROJECT DIALOGEX 0, 0, 375, 224
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "工程"
+FONT 9, "宋体", 0, 0, 0x1
+BEGIN
+    LISTBOX         IDC_LIST_PRJTYPE,7,7,126,181,LBS_OWNERDRAWFIXED | LBS_HASSTRINGS | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "工程信息：",-1,139,7,229,182
+    LTEXT           "工程名：",-1,148,28,35,9
+    EDITTEXT        IDC_EDIT_PRJNAME,186,26,173,13,ES_AUTOHSCROLL
+    LTEXT           "位  置：",-1,148,47,35,9
+    EDITTEXT        IDC_EDIT_PRJPATH,186,45,155,13,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_BUTTON_PRJPATH,343,45,16,13
+    LTEXT           "描  述：",-1,148,67,35,9
+    EDITTEXT        IDC_EDIT_PRJDESC,186,65,173,51,ES_MULTILINE | ES_AUTOHSCROLL
+    LTEXT           "作  者：",-1,148,124,35,9
+    EDITTEXT        IDC_EDIT_AUTHOR,186,122,173,13,ES_AUTOHSCROLL
+    PUSHBUTTON      "确定",IDOK,255,199,50,14
+    PUSHBUTTON      "取消",IDCANCEL,309,199,50,14
+END
+
+IDD_NEW_FILE DIALOGEX 0, 0, 375, 227
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "文件"
+FONT 9, "宋体", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "文件信息：",-1,139,7,229,182
+    CONTROL         "添加到工程",IDC_CHECK_ADDTOPROJECT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,147,22,116,12
+    LTEXT           "文件名：",-1,148,38,35,9
+    EDITTEXT        IDC_EDIT_FILENAME,186,36,172,13,ES_AUTOHSCROLL
+    LISTBOX         IDC_LIST_FILETYPE,7,7,126,181,LBS_OWNERDRAWFIXED | LBS_HASSTRINGS | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "位  置：",-1,148,58,35,9
+    EDITTEXT        IDC_EDIT_FILEPATH,186,56,155,13,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_BUTTON_FILEPATH,343,56,16,13
+    LTEXT           "描  述：",-1,148,78,35,9
+    EDITTEXT        IDC_EDIT_FILEDESC,186,76,173,51,ES_MULTILINE | ES_AUTOHSCROLL
+    LTEXT           "作  者：",-1,148,135,35,9
+    EDITTEXT        IDC_EDIT_FILE_AUTHOR,186,133,173,13,ES_AUTOHSCROLL
+    PUSHBUTTON      "确定",IDOK,255,200,50,14
+    PUSHBUTTON      "取消",IDCANCEL,309,200,50,14
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_NEW_PROJECT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 368
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 220
+    END
+
+    IDD_NEW_FILE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 368
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 223
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_NEW_TITLE           "新建"
+    IDS_NEW_XML_FILE        "new_cn.xml"
+    IDS_MUST_INPUT_PROJECTNAME "必须输入工程名!"
+    IDS_MUST_INPUT_PROJECTPATH "必须输入工程路径!"
+    IDS_MUST_SELECT_PROJECTTYPE "必须选择一种工程类型!"
+    IDS_TITLE_SELECT_PRJPATH "选择工程路径"
+    IDS_MUST_INPUT_FILENAME "必须输入文件名!"
+    IDS_MUST_SELECT_FILETYPE "必须选择一种文件类型!"
+    IDS_TITLE_SELECT_FILEPATH "选择文件路径"
+    IDS_SUB_TITLE_0         "新建文件和工程！"
+    IDS_SUB_TITLE_1         "请选择工程类型，并输入工程信息"
+    IDS_SUB_TITLE_2         "请选择文件类型，并输入文件信息"
+    IDS_SUB_TITLE_3         "新建页面！"
+    IDS_SUB_TITLE_DEFAULT   "新建"
+    IDS_BANNER_FONT         "微软雅黑"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_PROJECTPATH_CANTEXIST "工程目录已经存在，不能创建此工程！"
+    IDS_PROJECTTEMPLATE_NOTEXIST "工程模板不存在，无法创建工程！"
+    IDS_FILE_CANTEXIST      "文件已经存在，不能创建此文件！"
+    IDS_FILETEMPLATE_NOTEXIST "文件模板不存在，无法创建文件！"
+    IDS_CONFIRM_CLOSEPROJECT "是否关闭当前工程？"
+END
+
+#endif    // 中文(中华人民共和国) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// 英语(美国) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_NEW_PROJECT DIALOGEX 0, 0, 375, 227
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Project"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    LISTBOX         IDC_LIST_PRJTYPE,7,7,126,181,LBS_OWNERDRAWFIXED | LBS_HASSTRINGS | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Project &Information:",-1,139,7,229,182
+    LTEXT           "&Project:",-1,148,28,35,9
+    EDITTEXT        IDC_EDIT_PRJNAME,188,26,173,13,ES_AUTOHSCROLL
+    LTEXT           "Lo&cation:",-1,148,47,35,9
+    EDITTEXT        IDC_EDIT_PRJPATH,188,45,155,13,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_BUTTON_PRJPATH,345,45,16,13
+    LTEXT           "&Description:",-1,148,67,40,9
+    EDITTEXT        IDC_EDIT_PRJDESC,188,65,173,51,ES_MULTILINE | ES_AUTOHSCROLL
+    LTEXT           "&Author:",-1,148,124,35,9
+    EDITTEXT        IDC_EDIT_AUTHOR,188,122,173,13,ES_AUTOHSCROLL
+    PUSHBUTTON      "OK",IDOK,257,201,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,310,201,50,14
+END
+
+IDD_NEW_FILE DIALOGEX 0, 0, 375, 225
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "File"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "File &Information:",-1,139,7,229,182
+    CONTROL         "&Add to project",IDC_CHECK_ADDTOPROJECT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,147,22,116,12
+    LTEXT           "&File:",-1,148,38,35,9
+    EDITTEXT        IDC_EDIT_FILENAME,188,36,172,13,ES_AUTOHSCROLL
+    LISTBOX         IDC_LIST_FILETYPE,7,7,126,181,LBS_OWNERDRAWFIXED | LBS_HASSTRINGS | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Lo&cation:",-1,148,58,35,9
+    EDITTEXT        IDC_EDIT_FILEPATH,188,56,155,13,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_BUTTON_FILEPATH,345,56,16,13
+    LTEXT           "&Description:",-1,148,78,39,9
+    EDITTEXT        IDC_EDIT_FILEDESC,188,76,173,51,ES_MULTILINE | ES_AUTOHSCROLL
+    LTEXT           "&Author:",-1,148,135,35,9
+    EDITTEXT        IDC_EDIT_FILE_AUTHOR,188,133,173,13,ES_AUTOHSCROLL
+    PUSHBUTTON      "OK",IDOK,256,199,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,311,199,50,14
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_NEW_PROJECT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 368
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 223
+    END
+
+    IDD_NEW_FILE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 368
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 221
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_NEW_TITLE           "New"
+    IDS_NEW_XML_FILE        "new.xml"
+    IDS_MUST_INPUT_PROJECTNAME "Must input project name!"
+    IDS_MUST_INPUT_PROJECTPATH "Must input project path!"
+    IDS_MUST_SELECT_PROJECTTYPE "Must select a project type!"
+    IDS_TITLE_SELECT_PRJPATH "Select Project Path"
+    IDS_MUST_INPUT_FILENAME "Must input file name!"
+    IDS_MUST_SELECT_FILETYPE "Must select a file type!"
+    IDS_TITLE_SELECT_FILEPATH "Select File Path"
+    IDS_SUB_TITLE_0         "Create new file and project!"
+    IDS_SUB_TITLE_1         "Please select project type, and input project information"
+    IDS_SUB_TITLE_2         "Please select file type, and input file information"
+    IDS_SUB_TITLE_3         "Create new page!"
+    IDS_SUB_TITLE_DEFAULT   "new"
+    IDS_BANNER_FONT         "Tahoma"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_PROJECTPATH_CANTEXIST 
+                            "Project directory already exists and can not create this project!"
+    IDS_PROJECTTEMPLATE_NOTEXIST 
+                            "Project template does not exist can not create project!"
+    IDS_FILE_CANTEXIST      "File already exists and can not create this file!"
+    IDS_FILETEMPLATE_NOTEXIST 
+                            "File template does not exist can not create file!"
+    IDS_CONFIRM_CLOSEPROJECT "Confirm to close current project?"
+END
+
+#endif    // 英语(美国) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE 4, 2
+#pragma code_page(936)
+#endif //_WIN32
+#include "res\ProjectManager.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.chs\afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
