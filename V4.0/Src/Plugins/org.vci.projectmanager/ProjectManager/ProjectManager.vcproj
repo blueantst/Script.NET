@@ -42,7 +42,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="..\..\include;..\..\..\DependLib\include"
-				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;"
+				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;_CRT_SECURE_NO_WARNINGS"
 				RuntimeLibrary="3"
 				UsePrecompiledHeader="2"
 				WarningLevel="3"
@@ -113,8 +113,8 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\..\include;"
-				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;"
+				AdditionalIncludeDirectories="..\..\include;..\..\..\DependLib\include"
+				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;_CRT_SECURE_NO_WARNINGS"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"
 				WarningLevel="3"
@@ -134,6 +134,7 @@
 				OutputFile="../ProjectManager.dll"
 				LinkIncremental="2"
 				SuppressStartupBanner="true"
+				AdditionalLibraryDirectories="..\..\..\DependLib\lib"
 				GenerateDebugInformation="true"
 			/>
 			<Tool
