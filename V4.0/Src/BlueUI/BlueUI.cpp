@@ -115,7 +115,11 @@ CBlueUIApp::CBlueUIApp()
 {
 	// TODO: add construction code here,
 	// Place all significant initialization in InitInstance
+	m_pIProjectManager = NULL;
 	m_pIProject = NULL;
+	#ifdef APPLICATION_SCRIPTDEV
+	m_pILicense = NULL;
+	#endif
 	m_pIMessageQueue = NULL;
 }
 
@@ -222,11 +226,49 @@ BOOL CBlueUIApp::InterprocessCommunication()
 
 BOOL CBlueUIApp::InitInstance()
 {
+	#ifdef APPLICATION_SCRIPTDEV
+	// 启动时还无法使用注册表,因此先打开英文的主配置文件,获取必要的信息,
+	// 等注册表可用后再获取当前语言,打开相应的主配置文件
+	CString strConfigFile = GetPlatRootPath();
+	strConfigFile += "conf\\main.xml";
+	// 如果没有main.xml,表示是中文版,就查找并使用main_cn.xml
+	if(GetFileAttributes(strConfigFile) == 0xFFFFFFFF)
+	{
+		strConfigFile = GetPlatRootPath();
+		strConfigFile += "conf\\main_cn.xml";
+	}
+	#else
 	CString strConfigFile = GetPlatRootPath();
 	strConfigFile += "conf\\main_cn.xml";
+	#endif
 	m_xmlPlat.Open(strConfigFile);
 
 	CString strLicensePluginPath = "";
+	#ifdef APPLICATION_SCRIPTDEV
+	CString strLicensePlugin = m_xmlPlat.GetNodeText("application\\LicensePlugin");
+	if(strLicensePlugin != "")
+	{
+		// 如果license插件目录下也有一个平台配置文件,则使用此配置文件
+		CString strLicenseConfigFile = GetPlatRootPath();
+		strLicenseConfigFile += "Plugins\\";
+		strLicenseConfigFile += strLicensePlugin;
+		if(GetFileAttributes(strLicenseConfigFile + "\\main.xml") == 0xFFFFFFFF)
+		{
+			strLicenseConfigFile += "\\main_cn.xml";
+		}else
+		{
+			strLicenseConfigFile += "\\main.xml";
+		}
+		if(GetFileAttributes(strLicenseConfigFile) != 0xFFFFFFFF)
+		{
+			strLicensePluginPath = GetPlatRootPath();
+			strLicensePluginPath += "Plugins\\";
+			strLicensePluginPath += strLicensePlugin;
+			m_xmlPlat.Close();
+			m_xmlPlat.Open(strLicenseConfigFile);
+		}
+	}
+	#endif
 
 	CString strAppMutex = m_xmlPlat.GetNodeText("application\\appMutex");
 	::CreateMutex(NULL, FALSE, strAppMutex);//_T("##SCRIPT.NETV4##"));
@@ -274,7 +316,11 @@ BOOL CBlueUIApp::InitInstance()
 	LoadStdProfileSettings(8);  // Load standard INI file options (including MRU)
 
 	// 获取当前语言并设置语言
-	int nCurrentLanguage = LANGUAGE_PAGE_CHINESE;
+	int nCurrentLanguage = GetProfileInt(REG_VERSION_SUBKEY, REG_REG_LANGUAGE, ::GetSystemDefaultLangID());
+	#ifndef APPLICATION_SCRIPTDEV
+	// 如果应用程序不是ScriptDev,则只允许中文版
+	nCurrentLanguage = LANGUAGE_PAGE_CHINESE;
+	#endif
 	if(LANGUAGE_PAGE_CHINESE == nCurrentLanguage)
 	{
 		SetLocale(MAKELANGID(LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED),
@@ -315,6 +361,31 @@ BOOL CBlueUIApp::InitInstance()
 		strPlatVersion = pIPlatUI->GetPlatVersion();
 	}
 	theCrashDumper.Enable(m_xmlPlat.GetNodeText("application\\appName") + "_" + strPlatVersion, true);
+
+	#ifdef APPLICATION_SCRIPTDEV
+	// 创建License插件实例
+	if(strLicensePlugin != "")
+	{
+		m_pILicense = (ILicense*)(CreateVciObject(strLicensePlugin, "###license"));
+	}
+	// 如果加载License失败,就退出程序
+	if(m_pILicense == NULL)
+	{
+		AfxMessageBox(IDS_LOAD_LICENSE_FAILED);
+		return FALSE;
+	}
+
+	// 导入和校验License
+	CString strParamOut;
+	if(!m_pILicense->VerifyLicenseComponent(0, "243FE301-4848-482C-4A93-02E9AC25540B", strParamOut))
+	{
+		return FALSE;
+	}
+	if(strParamOut != "BFC741C490A608738D4991D405C996BD")
+	{
+		return FALSE;
+	}
+	#endif
 
 	// 获取进程标识
 	m_strProcessId = m_xmlPlat.GetNodeText("application\\Process");
@@ -670,6 +741,7 @@ public:
 	//{{AFX_DATA(CAboutDlg)
 	enum { IDD = IDD_ABOUTBOX };
 	CPictureEx	m_Picture;
+	//CString		m_strKeyCode;
 	//}}AFX_DATA
 
 	// ClassWizard generated virtual function overrides
@@ -689,7 +761,24 @@ protected:
 CAboutDlg::CAboutDlg() : CDialog(CAboutDlg::IDD)
 {
 	//{{AFX_DATA_INIT(CAboutDlg)
+	//m_strKeyCode = _T("B2F975A1-B72D-4281-B7BC-330DD414CBDE");
 	//}}AFX_DATA_INIT
+	#ifdef APPLICATION_SCRIPTDEV
+	// 通过tcl命令获取硬件ID
+	if(LANGUAGE_PAGE_CHINESE != theApp.m_curLanguage)
+	{
+		IInterp* pInterp = (IInterp*)(theApp.CreateVciObject("org.interp.tcl"));
+		if(pInterp)
+		{
+			pInterp->RunScriptCommand("License GetHID");
+			if(pInterp->GetErrorLine() == 0)
+			{
+				m_strKeyCode = pInterp->GetResult();
+			}
+			theApp.ReleaseObject(pInterp);
+		}
+	}
+	#endif
 }
 
 void CAboutDlg::DoDataExchange(CDataExchange* pDX)
@@ -697,6 +786,7 @@ void CAboutDlg::DoDataExchange(CDataExchange* pDX)
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CAboutDlg)
 	DDX_Control(pDX, IDC_STATIC_PICTURE, m_Picture);
+	//DDX_Text(pDX, IDC_EDIT_KEYCODE, m_strKeyCode);
 	//}}AFX_DATA_MAP
 }
 
@@ -723,8 +813,24 @@ BOOL CAboutDlg::OnInitDialog()
 // App command to run the dialog
 void CBlueUIApp::OnAppAbout()
 {
+#ifdef APPLICATION_SCRIPTDEV
+	CString strLicensePlugin = m_xmlPlat.GetNodeText("application\\LicensePlugin");
+	if(strLicensePlugin == "")
+	{
+		CAboutDlg aboutDlg;
+		aboutDlg.DoModal();
+		return;
+	}
+
+	ILicense* pILicense = (ILicense*)(theApp.CreateVciObject(strLicensePlugin));
+	if(pILicense)
+	{
+		pILicense->ApplicationAbout();
+	}
+#else
 	CAboutDlg aboutDlg;
 	aboutDlg.DoModal();
+#endif
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -2341,7 +2447,16 @@ CString CBlueUIApp::ExecMenuScript(CString strMenuName)
 /////////////////////////////////////////////////////////////////////////////
 void CBlueUIApp::OnProjectNewfile() 
 {
-	ExecMenuScript("files\\newfile");
+	//ExecMenuScript("files\\newfile");
+	if(m_pIProjectManager == NULL)
+	{
+		m_pIProjectManager = (IProjectManager*)(CreateVciObject(VCIID_PROJECTMANAGER, "###projectmanager"));
+	}
+
+	if(m_pIProjectManager != NULL)
+	{
+		m_pIProjectManager->NewFileWizard();
+	}
 }
 
 void CBlueUIApp::OnUpdateProjectNewfile(CCmdUI* pCmdUI) 

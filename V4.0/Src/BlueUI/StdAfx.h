@@ -47,11 +47,17 @@ static const UINT WM_CHECK_ITS_ME = RegisterWindowMessage("##SCRIPT.NET##");
 #include "vciowm.h"
 
 #include "IInterp.h"
+#include "IProjectManager.h"
 #include "IProject.h"
+#ifdef APPLICATION_SCRIPTDEV
+#include "ILicense.h"
+#endif
 #include "IMessageQueue.h"
 
 #include "PlatUI.h"
 
+
+//#define APPLICATION_SCRIPTDEV
 
 
 //{{AFX_INSERT_LOCATION}}

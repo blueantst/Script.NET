@@ -35,6 +35,7 @@ enum{
 #define VCIID_PLATFORM			_T("org.platform")			// 平台
 #define VCIID_EDITOR			_T("org.owm.edit")			// 编辑器
 #define VCIID_HTMLVIEW			_T("org.owm.htmlview")		// HtmlView组件
+#define VCIID_PROJECTMANAGER	_T("org.vci.projectmanager")// 工程管理组件
 #define VCIID_COMMUNICATE		_T("org.vci.communicate")	// 通信组件
 #define VCIID_IPC				_T("org.vci.ipc")			// IPC组件
 #define VCIID_MESSAGEQUEUE		_T("org.vci.messagequeue")	// 消息队列组件

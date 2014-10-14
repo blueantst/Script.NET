@@ -29,6 +29,39 @@ enum{
 	PROJECT_WORKING,		// 工作
 };
 
+//
+// 代码位置
+//
+class CCodePosition : public CObject
+{
+public:
+	CCodePosition()
+	{
+		m_strCodeFile = _T("");
+		m_nCodeLine = -1;
+	}
+	~CCodePosition() {};
+
+	CCodePosition(const CCodePosition& other)
+	{
+		m_strCodeFile	= other.m_strCodeFile;
+		m_nCodeLine		= other.m_nCodeLine;
+	}
+
+	CCodePosition& operator = (const CCodePosition& other)
+	{
+		m_strCodeFile	= other.m_strCodeFile;
+		m_nCodeLine		= other.m_nCodeLine;
+		return *this;
+	}
+
+public:
+	CString	m_strCodeFile;			// 文件
+	int		m_nCodeLine;			// 代码行
+};
+
+typedef CArray<CCodePosition, CCodePosition&> CCodePositionArray;
+
 
 interface IProject : public IUnknown
 {
@@ -76,6 +109,14 @@ interface IProject : public IUnknown
 	virtual int __stdcall UnregisterMenu(COWMMenuArray& aOWMMenus) = 0;
 	// 显示DockingPane窗口时调用的函数
 	virtual CWnd* __stdcall OnShowDockingPane(int nID, CWnd* pParentWnd, LPCTSTR lpszParam) = 0;
+	// 初始化代码定义库
+	virtual int __stdcall InitCodeDefineLibrary(LPCTSTR lpszProject) = 0;
+	// 加载代码定义库
+	virtual int __stdcall LoadCodeDefineLibrary(LPCTSTR lpszProject) = 0;
+	// 查找代码定义列表
+	virtual int __stdcall GetCodeDefine(LPCTSTR lpszCode, CCodePositionArray& asCodePosition) = 0;
+	// 查找代码引用列表
+	virtual int __stdcall GetCodeReference(LPCTSTR lpszCode, CCodePositionArray& asCodePosition) = 0;
 	//}}VCI_INTERFACE_END
 };
 
@@ -100,7 +141,11 @@ interface IProject : public IUnknown
 	virtual int __stdcall GetProjectState(LPCTSTR lpszProject);	\
 	virtual int __stdcall RegisterMenu(CMenu* pMenu, COWMMenuArray& aOWMMenus, int nOWMIdStart);	\
 	virtual int __stdcall UnregisterMenu(COWMMenuArray& aOWMMenus);	\
-	virtual CWnd* __stdcall OnShowDockingPane(int nID, CWnd* pParentWnd, LPCTSTR lpszParam);
+	virtual CWnd* __stdcall OnShowDockingPane(int nID, CWnd* pParentWnd, LPCTSTR lpszParam);	\
+	virtual int __stdcall InitCodeDefineLibrary(LPCTSTR lpszProject);	\
+	virtual int __stdcall LoadCodeDefineLibrary(LPCTSTR lpszProject);	\
+	virtual int __stdcall GetCodeDefine(LPCTSTR lpszCode, CCodePositionArray& asCodePosition);	\
+	virtual int __stdcall GetCodeReference(LPCTSTR lpszCode, CCodePositionArray& asCodePosition);
 
 
 // Project接口实现辅助宏
@@ -199,6 +244,26 @@ CWnd* __stdcall CProject::XProject::OnShowDockingPane(int nID, CWnd* pParentWnd,
 {	\
 	CProject *pObj = GET_INTERFACE_OBJECT(Project);	\
 	return pObj->OnShowDockingPane(nID, pParentWnd, lpszParam);	\
+}	\
+int __stdcall CProject::XProject::InitCodeDefineLibrary(LPCTSTR lpszProject)	\
+{	\
+	CProject *pObj = GET_INTERFACE_OBJECT(Project);	\
+	return pObj->InitCodeDefineLibrary(lpszProject);	\
+}	\
+int __stdcall CProject::XProject::LoadCodeDefineLibrary(LPCTSTR lpszProject)	\
+{	\
+	CProject *pObj = GET_INTERFACE_OBJECT(Project);	\
+	return pObj->LoadCodeDefineLibrary(lpszProject);	\
+}	\
+int __stdcall CProject::XProject::GetCodeDefine(LPCTSTR lpszCode, CCodePositionArray& asCodePosition)	\
+{	\
+	CProject *pObj = GET_INTERFACE_OBJECT(Project);	\
+	return pObj->GetCodeDefine(lpszCode, asCodePosition);	\
+}	\
+int __stdcall CProject::XProject::GetCodeReference(LPCTSTR lpszCode, CCodePositionArray& asCodePosition)	\
+{	\
+	CProject *pObj = GET_INTERFACE_OBJECT(Project);	\
+	return pObj->GetCodeReference(lpszCode, asCodePosition);	\
 }
 
 

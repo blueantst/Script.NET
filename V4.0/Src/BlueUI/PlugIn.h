@@ -174,6 +174,7 @@ public:
 		m_strIcon	= "";
 		m_nAttachType= PANE_ATTACH_WND;
 		m_bAutoCreate= FALSE;
+		m_bProjectCreate= FALSE;
 		m_bSave		= FALSE;
 		m_pWnd		= NULL;
 		m_strOwmId	= "";
@@ -189,6 +190,7 @@ public:
 		m_strIcon		= other.m_strIcon;
 		m_nAttachType	= other.m_nAttachType;
 		m_bAutoCreate	= other.m_bAutoCreate;
+		m_bProjectCreate= other.m_bProjectCreate;
 		m_bSave			= other.m_bSave;
 		m_pWnd			= other.m_pWnd;
 		m_strOwmId		= other.m_strOwmId;
@@ -203,6 +205,7 @@ public:
 		m_strIcon		= other.m_strIcon;
 		m_nAttachType	= other.m_nAttachType;
 		m_bAutoCreate	= other.m_bAutoCreate;
+		m_bProjectCreate= other.m_bProjectCreate;
 		m_bSave			= other.m_bSave;
 		m_pWnd			= other.m_pWnd;
 		m_strOwmId		= other.m_strOwmId;
@@ -217,6 +220,7 @@ public:
 	CString	m_strIcon;		// 图标文件位置
 	int		m_nAttachType;	// 关联的窗口类型
 	BOOL	m_bAutoCreate;	// 是否在模块加载时自动创建
+	BOOL	m_bProjectCreate;// 是否在打开工程时自动创建
 	BOOL	m_bSave;		// 是否在平台关闭时保存位置
 	CWnd*	m_pWnd;
 	CString	m_strOwmId;		// 所属OWM模块ID
@@ -415,7 +419,7 @@ public:
 	BOOL LoadPlugIn(BOOL bForce = FALSE);
 	BOOL LoadVciPlugIn();
 	BOOL LoadOwmPlugIn();
-	BOOL LoadDockingPane(int nID);
+	BOOL LoadDockingPane(int nID, BOOL bProjectLoad = FALSE);
 	BOOL IsVciOwm() { return (m_strType == "owm"); }
 	IVciOwm* GetIVciOwm() { return (IVciOwm*)m_pVciObj; }
 	IProject* GetIProject() { return (IProject*)m_pVciObj; }
