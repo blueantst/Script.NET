@@ -82,7 +82,6 @@ enum {
 
 // 定义主题
 enum {
-	//themeNone,
 	themeRibbon,
 	themeOffice2003,
 	themeOffice2007,
