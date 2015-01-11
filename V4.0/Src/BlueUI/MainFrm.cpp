@@ -245,6 +245,7 @@ static CSkinProgress* g_pSkinProgress = NULL;	// 进度状态条对象
 
 CMainFrame::CMainFrame()
 {
+	// 加载皮肤
 	LoadSkin();
 
 	m_strIniFileName = theApp.GetPlatRootPath();
@@ -270,11 +271,16 @@ CMainFrame::~CMainFrame()
 {
 }
 
+// 启动时候调用一次
 void CMainFrame::LoadSkin()
 {
+#ifdef _XTP_INCLUDE_SKINFRAMEWORK
+	XTPSkinManager()->GetResourceFile()->SetModuleHandle(AfxGetInstanceHandle());
+#endif
+
 	m_nSkinType = theApp.GetProfileInt(REG_CONFIG_SUBKEY, REG_CONFIG_SKIN_TYPE, SKIN_OFFICE2007);
 
-	m_nSkinType = SKIN_CJSTYLE;//SKIN_OFFICE2007;
+	//m_nSkinType = SKIN_OFFICE2007;
 
 	CString strSkinFile = "";
 
@@ -296,18 +302,14 @@ void CMainFrame::LoadSkin()
 
 	switch (m_nSkinType)
 	{
-	//case SKIN_OFFICE2007:
-	//	strSkinFile = strSkinPath + "Office2007Blue.dll";
-	//	XTPOffice2007Images()->SetHandle(strSkinFile);
-	//	break;
+	case SKIN_OFFICE2007:
+		break;
 	case SKIN_CJINI:
-		//strSkinFile = strSkinPath + "iTunes";
 		strSkinFile = strSkinPath + "Le5";
-		//XTPSkinManager()->LoadSkin(strSkinFile, _T("Normalitunes.INI"));
 		XTPSkinManager()->LoadSkin(strSkinFile, _T("NormalBlue.INI"));
 		break;
 	case SKIN_CJSTYLE:
-		strSkinFile = strSkinPath + "Office2010.cjstyles";//Vista.cjstyles";
+		strSkinFile = strSkinPath + "Office2010.cjstyles";
 		XTPSkinManager()->LoadSkin(strSkinFile, "");
 		break;
 	case SKIN_MSSTYLE:
@@ -326,9 +328,10 @@ void CMainFrame::RedrawFrame(CWnd* pWnd)
 	pWnd->RedrawWindow(0, 0, RDW_INVALIDATE|RDW_UPDATENOW|RDW_ERASE|RDW_ALLCHILDREN);		
 }
 
+// 更改皮肤时候调用
 void CMainFrame::OnSkinChanged()
 {
-	if (m_nTheme == xtpThemeOffice2003)
+	if (m_nTheme == themeOffice2003)
 	{
 		if (XTPSkinManager()->GetResourceFile() &&
 			XTPSkinManager()->GetResourceFile()->GetResourcePath().Find(_T("Office2007")) > 0)
@@ -357,90 +360,160 @@ void CMainFrame::OnSkinChanged()
 	GetCommandBars()->GetPaintManager()->RefreshMetrics();
 
 	GetCommandBars()->RedrawCommandBars();
-
 }
 
-void CMainFrame::SetTheme(int nTheme)
+// 根据配置文件中的主题字符串查找对一个的定义
+int CMainFrame::GetThemeString(CString strTheme)
+{
+	int nTheme = themeVisualStudio2010;
+	if(strTheme == "ThemeRibbon")
+		nTheme = themeRibbon;
+	else if(strTheme == "ThemeOffice2003")
+		nTheme = themeOffice2003;
+	else if(strTheme == "ThemeOffice2007")
+		nTheme = themeOffice2007;
+	else if(strTheme == "ThemeOffice2010")
+		nTheme = themeOffice2010;
+	else if(strTheme == "ThemeVisualStudio2005")
+		nTheme = themeVisualStudio2005;
+	else if(strTheme == "ThemeVisualStudio2008")
+		nTheme = themeVisualStudio2008;
+	else if(strTheme == "ThemeVisualStudio2010")
+		nTheme = themeVisualStudio2010;
+	return nTheme;
+}
+
+// 设置当前主题
+void CMainFrame::SetTheme(int nTheme, int nThemeColor)
 {
 	m_nTheme = nTheme;
+	m_nThemeColor = nThemeColor;
 
-	if (m_nTheme == xtpThemeOffice2003)
+	// 如果主题是Office2003,需要根据资源文件决定是否换成Office2007
+	if (m_nTheme == themeOffice2003)
 	{
 		//XTPColorManager()->m_bEnableLunaBlueForRoyaleTheme = TRUE;
 
 		if (XTPSkinManager()->GetResourceFile() &&
 			XTPSkinManager()->GetResourceFile()->GetResourcePath().Find(_T("Office2007")) > 0)
 		{
-			nTheme = xtpThemeOffice2007;
+			nTheme = themeOffice2007;
 		}
 	}
 
-	/*if(nTheme == xtpThemeRibbon)
-	{
-		CXTPCommandBars* pCommandBars = GetCommandBars();
-		if(pCommandBars)
-		{
-			pCommandBars->SetTheme(xtpThemeRibbon);
-			// 动画效果
-			pCommandBars->GetPaintManager()->m_bEnableAnimation = TRUE;
-		}
-	}else
-	{
-		CXTPCommandBars* pCommandBars = GetCommandBars();
-		if(pCommandBars)
-		{
-			pCommandBars->SetTheme((XTPPaintTheme)nTheme);
-		}
-	}*/
+	HMODULE hModule = AfxGetInstanceHandle();
+	CString strSkinPath = theApp.GetPlatRootPath();
+	strSkinPath += "\\Skins\\";
+	LPCTSTR lpszIniFile = 0;
 
-	CXTPPaintManager::SetTheme((XTPPaintTheme)nTheme);
+	switch (nTheme)
+	{
+	case themeRibbon:
+		XTPPaintManager()->SetTheme(xtpThemeRibbon);
+		hModule = LoadLibrary(strSkinPath + _T("Office2007.dll"));
+		((CXTPOffice2007Theme*)GetCommandBars()->GetPaintManager())->SetImageHandle(hModule, lpszIniFile);
+		m_paneManager.SetTheme(xtpPaneThemeResource);
+		XTPPaintManager()->m_bEnableAnimation = TRUE;	// 动画效果
+		break;
+
+	case themeOffice2003:
+		XTPPaintManager()->SetTheme(xtpThemeOffice2003);
+		m_paneManager.SetTheme(xtpPaneThemeOffice2003);
+		break;
+
+	case themeOffice2007:
+		XTPPaintManager()->SetTheme(xtpThemeRibbon);
+		hModule = LoadLibrary(strSkinPath + _T("Office2007.dll"));
+		if(nThemeColor == themeColorBlue)
+		{
+			lpszIniFile = _T("OFFICE2007BLUE.INI");
+		}else
+		if(nThemeColor == themeColorSilver)
+		{
+			lpszIniFile = _T("OFFICE2007SILVER.INI");
+		}else
+		if(nThemeColor == themeColorBlack)
+		{
+			lpszIniFile = _T("OFFICE2007BLACK.INI");
+		}
+		((CXTPOffice2007Theme*)GetCommandBars()->GetPaintManager())->SetImageHandle(hModule, lpszIniFile);
+		m_paneManager.SetTheme(xtpPaneThemeResource);
+		XTPPaintManager()->m_bEnableAnimation = TRUE;	// 动画效果
+		break;
+
+	case themeOffice2010:
+		XTPPaintManager()->SetTheme(xtpThemeRibbon);
+		hModule = LoadLibrary(strSkinPath + _T("Office2010.dll"));
+		if(nThemeColor == themeColorBlue)
+		{
+			lpszIniFile = _T("OFFICE2010BLUE.INI");
+		}else
+		if(nThemeColor == themeColorSilver)
+		{
+			lpszIniFile = _T("OFFICE2010SILVER.INI");
+		}else
+		if(nThemeColor == themeColorBlack)
+		{
+			lpszIniFile = _T("OFFICE2010BLACK.INI");
+		}
+		((CXTPOffice2007Theme*)GetCommandBars()->GetPaintManager())->SetImageHandle(hModule, lpszIniFile);
+		m_paneManager.SetTheme(xtpPaneThemeResource);
+		XTPPaintManager()->m_bEnableAnimation = TRUE;	// 动画效果
+		break;
+
+	case themeVisualStudio2005:
+		XTPPaintManager()->SetTheme(xtpThemeWhidbey);
+		m_paneManager.SetTheme(xtpPaneThemeVisualStudio2005);
+		//m_wndTaskPanel.SetTheme(xtpTaskPanelThemeToolboxWhidbey);
+		//m_wndProperties.m_wndPropertyGrid.SetTheme(xtpGridThemeWhidbey);
+		break;
+
+	case themeVisualStudio2008:
+		XTPPaintManager()->SetTheme(xtpThemeVisualStudio2008);
+		m_paneManager.SetTheme(xtpPaneThemeVisualStudio2008);
+		break;
+
+	case themeVisualStudio2010:
+		XTPPaintManager()->SetTheme(xtpThemeVisualStudio2010);
+		m_paneManager.SetTheme(xtpPaneThemeVisualStudio2010);
+		break;
+
+	default:
+		XTPPaintManager()->SetTheme(xtpThemeVisualStudio2010);
+		m_paneManager.SetTheme(xtpPaneThemeVisualStudio2010);
+		break;
+	}
+
+	//GetCommandBars()->EnableFrameTheme(TRUE);
+
+	// Pane如果是VS2010风格,需要设置一些特殊参数
+	if (m_paneManager.GetCurrentTheme() == xtpPaneThemeVisualStudio2010)
+	{
+		m_paneManager.SetClientMargin(6);
+		m_paneManager.SetThemedFloatingFrames(TRUE);
+	}
+	else
+	{
+		m_paneManager.SetClientMargin(0);
+		m_paneManager.SetThemedFloatingFrames(FALSE);
+	}
+
+	// 工具栏图标的一些选项设置
 	XTPPaintManager()->GetIconsInfo()->bUseFadedIcons = FALSE;
-	XTPPaintManager()->GetIconsInfo()->bIconsWithShadow = FALSE;
-
-	XTPDockingPanePaintTheme nThemeDP = xtpPaneThemeOffice2003;
-	if(nTheme == xtpThemeOffice2000)
-	{
-		nThemeDP = xtpPaneThemeOffice;
-	}else
-	if(nTheme == xtpThemeOfficeXP)
-	{
-		nThemeDP = xtpPaneThemeOffice2003;
-	}else
-	if(nTheme == xtpThemeOffice2003)
-	{
-		nThemeDP = xtpPaneThemeOffice2003;
-	}else
-	if(nTheme == xtpThemeNativeWinXP)
-	{
-		nThemeDP = xtpPaneThemeNativeWinXP;
-	}else
-	if(nTheme == xtpThemeWhidbey)
-	{
-		nThemeDP = xtpPaneThemeVisualStudio2005;
-	}else
-	if(nTheme == xtpThemeOffice2007)
-	{
-		nThemeDP = xtpPaneThemeOffice2007;
-	}else
-	if(nTheme == xtpThemeRibbon)
-	{
-		nThemeDP = xtpPaneThemeOffice2007;
-	}
-	m_paneManager.SetTheme((XTPDockingPanePaintTheme)nThemeDP);
+	XTPPaintManager()->GetIconsInfo()->bIconsWithShadow = TRUE;	// 鼠标移动到工具栏图标时候,图标会显示阴影效果
 
 	// 允许2007框架的效果是框架窗口边沿是圆滑的,但会影响皮肤的切换
 	CString strSkinFile = theApp.GetProfileString(REG_CONFIG_SUBKEY, REG_CONFIG_SKIN_FILE);
 	if(strSkinFile == "")
 	{
-		//EnableOffice2007Frame((nTheme == xtpThemeRibbon) ? GetCommandBars() : 0);
+		//EnableOffice2007Frame((nTheme == themeRibbon) ? GetCommandBars() : 0);
 	}
 
 	GetCommandBars()->RedrawCommandBars();
 
 	m_MTIClientWnd.GetPaintManager()->RefreshMetrics();	
 	
-	RedrawWindow( NULL, NULL, RDW_INVALIDATE | RDW_UPDATENOW | RDW_ERASE | RDW_ALLCHILDREN);
-
+	RedrawWindow(NULL, NULL, RDW_INVALIDATE | RDW_UPDATENOW | RDW_ERASE | RDW_ALLCHILDREN);
 }
 
 int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
@@ -466,7 +539,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
         return -1;
 
 	// 加载和初始化皮肤和主体
-	CString strSkinFile = theApp.GetProfileString(REG_CONFIG_SUBKEY, REG_CONFIG_SKIN_FILE);
+	/*CString strSkinFile = theApp.GetProfileString(REG_CONFIG_SUBKEY, REG_CONFIG_SKIN_FILE);
 	CString strSkinIni = theApp.GetProfileString(REG_CONFIG_SUBKEY, REG_CONFIG_SKIN_INI);
 	if(GetFileAttributes(strSkinFile) != 0xFFFFFFFF)
 	{
@@ -482,40 +555,21 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		XTPSkinManager()->SetApplyOptions(dwApplyOptions);
 		XTPSkinManager()->LoadSkin(strSkinFile, strSkinIni);
 		OnSkinChanged();
-	}
-	m_nTheme = theApp.GetProfileInt(REG_CONFIG_SUBKEY, REG_CONFIG_SKIN_THEME, xtpThemeRibbon);
-	//m_nTheme = xtpThemeOffice2003;
-	SetTheme(m_nTheme);
-	//XTPPaintManager()->SetTheme(xtpThemeNativeWinXP);
-	//XTPPaintManager()->GetIconsInfo()->bUseFadedIcons = FALSE;
+	}*/
+	m_nTheme = theApp.GetProfileInt(REG_CONFIG_SUBKEY, REG_CONFIG_SKIN_THEME, themeVisualStudio2010);
+	m_nThemeColor = theApp.GetProfileInt(REG_CONFIG_SUBKEY, REG_CONFIG_SKIN_THEMECOLOR, themeColorBlue);
+	//CString strTheme = theApp.GetConfText("Theme\\CommandBar");
+	//m_nTheme = GetThemeString(strTheme);
+	//m_nTheme = themeVisualStudio2010;
+	SetTheme(m_nTheme, m_nThemeColor);
 /*
 	//XTPOffice2007Images()->SetHandle(_T("Office2007Blue.dll"));
-
-    // Set Command Bar Theme
-	CString strTheme = theApp.GetConfText("Theme\\CommandBar");
 
 	// 如果皮肤类型不是DLL类型,则Theme默认设置为2003风格
 	if ((m_nSkinType == SKIN_CJINI) || (m_nSkinType == SKIN_CJSTYLE) || (m_nSkinType == SKIN_MSSTYLE))
 	{
 		strTheme = "ThemeOffice2003";
 	}
-
-	XTPPaintTheme nTheme = xtpThemeOffice2003;
-	if(strTheme == "ThemeOfficeXP")
-		nTheme = xtpThemeOfficeXP;
-	else if(strTheme == "ThemeOffice2000")
-		nTheme = xtpThemeOffice2000;
-	else if(strTheme == "ThemeOffice2003")
-		nTheme = xtpThemeOffice2003;
-	else if(strTheme == "ThemeNativeWinXP")
-		nTheme = xtpThemeNativeWinXP;
-	else if(strTheme == "ThemeWhidbey")
-		nTheme = xtpThemeWhidbey;
-	else if(strTheme == "ThemeRibbon")
-		nTheme = xtpThemeRibbon;
-	else if(strTheme == "ThemeCustom")
-		nTheme = xtpThemeCustom;
-    CXTPPaintManager::SetTheme(nTheme);
 */
     // Get a pointer to the command bars object.
     CXTPCommandBars* pCommandBars = GetCommandBars();
@@ -524,14 +578,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
         TRACE0("Failed to create command bars object.\n");
         return -1;      // fail to create
     }
-/*
-	if(m_nTheme == xtpThemeRibbon)
-	{
-		pCommandBars->SetTheme(xtpThemeRibbon);
-		// 动画效果
-		pCommandBars->GetPaintManager()->m_bEnableAnimation = TRUE;
-	}
-*/
+
 	m_wndStatusBar.SetFont(pCommandBars->GetPaintManager()->GetIconFont());
 	m_wndStatusBar.SetDrawDisabledText(FALSE);
 	m_wndStatusBar.SetCommandBars(pCommandBars);
@@ -610,39 +657,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	// initial them for the docking panes.  Do this only after all
 	// control bars objects have been created and docked.
 	m_paneManager.InstallDockingPanes(this);
-/*
-    // Set Office 2003 Theme
-	strTheme = theApp.GetConfText("Theme\\DockingPane");
-	XTPDockingPanePaintTheme nThemeDP = xtpPaneThemeOffice2003;
-	if(strTheme == "PaneThemeDefault")
-		nThemeDP = xtpPaneThemeDefault;
-	else if(strTheme == "ThemeOffice")
-		nThemeDP = xtpPaneThemeOffice;
-	else if(strTheme == "ThemeGrippered")
-		nThemeDP = xtpPaneThemeGrippered;
-	else if(strTheme == "ThemeVisio")
-		nThemeDP = xtpPaneThemeVisio;
-	else if(strTheme == "ThemeCustom")
-		nThemeDP = xtpPaneThemeCustom;
-	else if(strTheme == "ThemeOffice2003")
-		nThemeDP = xtpPaneThemeOffice2003;
-	else if(strTheme == "ThemeNativeWinXP")
-		nThemeDP = xtpPaneThemeNativeWinXP;
-	else if(strTheme == "ThemeWhidbey")
-		nThemeDP = xtpPaneThemeWhidbey;
-	else if(strTheme == "ThemeShortcutBar2003")
-		nThemeDP = xtpPaneThemeShortcutBar2003;
-	else if(strTheme == "ThemeExplorer")
-		nThemeDP = xtpPaneThemeExplorer;
 
-	if(nTheme == xtpThemeRibbon)
-	{
-		nThemeDP = xtpPaneThemeOffice2007;
-	}
-	m_paneManager.SetTheme(nThemeDP);
-
-	EnableOffice2007Frame((nTheme == xtpThemeRibbon) ? GetCommandBars() : 0);
-*/
 	// dockingpane皮肤模式
 	m_paneManager.SetThemedFloatingFrames(!m_paneManager.IsThemedFloatingFrames());
 	m_paneManager.SetStickyFloatingFrames(!m_paneManager.IsStickyFloatingFrames());

@@ -30,7 +30,7 @@
 
 // 定义平台统一标识子键
 #define REG_GUID_SUBKEY			_T("EquipInfo")		// 统一标识
-#define REG_GUID_PLATGUID		_T("GUID")			// 平台统一标识
+#define REG_GUID_PLATGUID		_T("GUID")		// 平台统一标识
 
 // 定义Path子键
 #define REG_PATH_SUBKEY			_T("Settings")		// 路径子键
@@ -63,7 +63,8 @@
 #define REG_CONFIG_SKIN_TYPE			_T("SkinType")			// 当前皮肤类型
 #define REG_CONFIG_SKIN_FILE			_T("SkinFile")			// 使用扩展皮肤文件
 #define REG_CONFIG_SKIN_INI				_T("SkinIni")			// 皮肤文件INI
-#define REG_CONFIG_SKIN_THEME			_T("SkinTheme")			// 主体
+#define REG_CONFIG_SKIN_THEME			_T("Theme")				// 主题
+#define REG_CONFIG_SKIN_THEMECOLOR		_T("ThemeColor")		// 主题颜色
 #define REG_CONFIG_SKIN_COLORSCHEMES	_T("SkinColorSchemes")	// 颜色
 #define REG_CONFIG_SKIN_FONTSIZE		_T("SkinFontSize")		// 文字大小
 #define REG_CONFIG_SKIN_APPLY_FRAMESKIN	_T("SkinApplyFrameSkin")// 应用FrameSkin
@@ -77,6 +78,26 @@ enum {
 	SKIN_CJINI,		// CodeJock INI File
 	SKIN_CJSTYLE,	// CodeJock Style File
 	SKIN_MSSTYLE	// Microsoft Style File
+};
+
+// 定义主题
+enum {
+	//themeNone,
+	themeRibbon,
+	themeOffice2003,
+	themeOffice2007,
+	themeOffice2010,
+	themeVisualStudio2005,
+	themeVisualStudio2008,
+	themeVisualStudio2010,
+	themeVisualStudio2012,
+};
+
+// 定义主题颜色
+enum {
+	themeColorBlue,
+	themeColorSilver,
+	themeColorBlack,
 };
 
 // 定义VCI子键
@@ -171,7 +192,7 @@ enum {
 #define REG_CUR_CLASS			_T("CurCategory")		// 当前工程大类
 #define REG_CUR_SCLASS			_T("CurClass")		// 当前工程小类
 #define REG_CUR_PROJECT			_T("CurProject")	// 当前工程
-#define REG_PROJECT_DEFAULTWS	_T("DefaultWS")		// 缺省任务列表
+#define REG_PROJECT_DEFAULTWS	_T("DefaultWS")		// 缺省工位
 
 // 定义最近工程子键
 #define REG_RECENTPRJ_SUBKEY	_T("RecentProject")

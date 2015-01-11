@@ -23,18 +23,18 @@ class CMainFrame : public CXTPMDIFrameWnd, CXTPOffice2007FrameHook
 public:
 	CMainFrame();
 
-	int	m_nSkinType;	// 当前皮肤类型
-
 	void LoadSkin();
 
 	void OnSkinChanged();
 	void RedrawFrame(CWnd* pWnd);
-	void SetTheme(int nTheme);
-
-	int m_nTheme;		// 当前主题
+	int  GetThemeString(CString strTheme);
+	void SetTheme(int nTheme, int nThemeColor);
 
 // Attributes
 public:
+	int							m_nSkinType;		// 当前皮肤类型(SKIN_OFFICE2007/SKIN_CJINI/SKIN_CJSTYLE/SKIN_MSSTYLE)
+	int							m_nTheme;			// 当前主题
+	int							m_nThemeColor;		// 当前主题颜色
 	CXTWindowPos				m_wndPosition;		// 窗口位置
 	COutputCtrlArray			m_aOutputCtrl;		// 输出窗口信息数组
 	CPanePropertyGrid			m_panePropertyGrid;	// 属性窗口

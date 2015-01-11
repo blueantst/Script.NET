@@ -23,7 +23,8 @@ CTpsUIStyle::CTpsUIStyle(CWnd* pParent /*=NULL*/)
 	m_bApplyMetrics = theApp.GetProfileInt(REG_CONFIG_SUBKEY, REG_CONFIG_SKIN_APPLY_METRICS, TRUE);
 	m_bApplyFrame = theApp.GetProfileInt(REG_CONFIG_SUBKEY, REG_CONFIG_SKIN_APPLY_FRAMESKIN, TRUE);
 	m_bApplyColors = theApp.GetProfileInt(REG_CONFIG_SUBKEY, REG_CONFIG_SKIN_APPLY_COLORS, TRUE);
-	m_nTheme = theApp.GetProfileInt(REG_CONFIG_SUBKEY, REG_CONFIG_SKIN_THEME, xtpThemeRibbon);
+	m_nTheme = theApp.GetProfileInt(REG_CONFIG_SUBKEY, REG_CONFIG_SKIN_THEME, themeVisualStudio2010);
+	m_nThemeColor = theApp.GetProfileInt(REG_CONFIG_SUBKEY, REG_CONFIG_SKIN_THEMECOLOR, themeColorBlue);
 	//}}AFX_DATA_INIT
 }
 
@@ -39,7 +40,8 @@ void CTpsUIStyle::DoDataExchange(CDataExchange* pDX)
 	DDX_Check(pDX, IDC_CHECK_APPLYMETRICS, m_bApplyMetrics);
 	DDX_Check(pDX, IDC_CHECK_APPLYFRAME, m_bApplyFrame);
 	DDX_Check(pDX, IDC_CHECK_APPLYCOLORS, m_bApplyColors);
-	DDX_Radio(pDX, IDC_RADIO_OFFICE2000, m_nTheme);
+	DDX_Radio(pDX, IDC_RADIO_RIBBON, m_nTheme);
+	DDX_Radio(pDX, IDC_RADIO_OFFICE_BLUE, m_nThemeColor);
 	//}}AFX_DATA_MAP
 }
 
@@ -53,16 +55,16 @@ BEGIN_MESSAGE_MAP(CTpsUIStyle, CDialog)
 	ON_BN_CLICKED(IDC_CHECK_APPLYMETRICS, OnCheckApplyMetrics)
 	ON_BN_CLICKED(IDC_CHECK_APPLYFRAME, OnCheckApplyFrame)
 	ON_BN_CLICKED(IDC_CHECK_APPLYCOLORS, OnCheckApplyColors)
-	ON_BN_CLICKED(IDC_RADIO_OFFICE2000, OnThemeChanged)
-	ON_BN_CLICKED(IDC_RADIO_OFFICE2003_BLUE, OnThemeChangedLuna)
-	ON_BN_CLICKED(IDC_RADIO_OFFICE2003, OnThemeChanged)
-	ON_BN_CLICKED(IDC_RADIO_OFFICEXP, OnThemeChanged)
-	ON_BN_CLICKED(IDC_RADIO_WINTHEME, OnThemeChanged)
-	ON_BN_CLICKED(IDC_RADIO_OFFICE2003_OLIVE, OnThemeChangedLuna)
-	ON_BN_CLICKED(IDC_RADIO_OFFICE2003_METALLIC, OnThemeChangedLuna)
-	ON_BN_CLICKED(IDC_RADIO_WHIDBEY, OnThemeChanged)
-	ON_BN_CLICKED(IDC_RADIO_OFFICE2007, OnThemeChanged)
 	ON_BN_CLICKED(IDC_RADIO_RIBBON, OnThemeChanged)
+	ON_BN_CLICKED(IDC_RADIO_OFFICE2003, OnThemeChanged)
+	ON_BN_CLICKED(IDC_RADIO_OFFICE2007, OnThemeChanged)
+	ON_BN_CLICKED(IDC_RADIO_OFFICE2010, OnThemeChanged)
+	ON_BN_CLICKED(IDC_RADIO_VS2005, OnThemeChanged)
+	ON_BN_CLICKED(IDC_RADIO_VS2008, OnThemeChanged)
+	ON_BN_CLICKED(IDC_RADIO_VS2010, OnThemeChanged)
+	ON_BN_CLICKED(IDC_RADIO_OFFICE_BLUE, OnThemeColorChanged)
+	ON_BN_CLICKED(IDC_RADIO_OFFICE_SILVER, OnThemeColorChanged)
+	ON_BN_CLICKED(IDC_RADIO_OFFICE_BLACK, OnThemeColorChanged)
 	ON_WM_DRAWITEM()
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
@@ -521,25 +523,26 @@ void CTpsUIStyle::OnCheckApplyColors()
 	theApp.WriteProfileInt(REG_CONFIG_SUBKEY, REG_CONFIG_SKIN_APPLY_COLORS, m_bApplyColors);
 }
 
+// 更改界面主题
 void CTpsUIStyle::OnThemeChanged() 
 {
-	XTPColorManager()->SetLunaTheme(xtpSystemThemeAuto);
 	UpdateData();
 	
 	CMainFrame* pWnd = (CMainFrame*)AfxGetMainWnd();
-	pWnd->SetTheme(m_nTheme);
+	pWnd->SetTheme(m_nTheme, m_nThemeColor);
 
 	theApp.WriteProfileInt(REG_CONFIG_SUBKEY, REG_CONFIG_SKIN_THEME, m_nTheme);
 }
 
-void CTpsUIStyle::OnThemeChangedLuna() 
+// 更改界面主题颜色
+void CTpsUIStyle::OnThemeColorChanged() 
 {
 	UpdateData();
 	
-	XTPColorManager()->SetLunaTheme(XTPCurrentSystemTheme(xtpSystemThemeBlue + m_nTheme - 4));
-	
 	CMainFrame* pWnd = (CMainFrame*)AfxGetMainWnd();	
-	pWnd->SetTheme(xtpThemeOffice2003);
+	pWnd->SetTheme(m_nTheme, m_nThemeColor);
+
+	theApp.WriteProfileInt(REG_CONFIG_SUBKEY, REG_CONFIG_SKIN_THEMECOLOR, m_nThemeColor);
 }
 
 void CTpsUIStyle::OnDrawItem(int nIDCtl, LPDRAWITEMSTRUCT lpDIS) 

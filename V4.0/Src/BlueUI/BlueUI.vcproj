@@ -83,6 +83,7 @@
 				LinkIncremental="1"
 				SuppressStartupBanner="true"
 				AdditionalLibraryDirectories="&quot;../DependLib/Xtreme ToolkitPro/Lib/vc90&quot;;../DependLib/Lib"
+				GenerateDebugInformation="true"
 				ProgramDatabaseFile=".\Release/BlueUI.pdb"
 				SubSystem="2"
 				RandomizedBaseAddress="1"
@@ -356,6 +357,7 @@
 					<Tool
 						Name="VCResourceCompilerTool"
 						PreprocessorDefinitions=""
+						AdditionalIncludeDirectories="&quot;../DependLib/Xtreme ToolkitPro/Source&quot;"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
@@ -364,6 +366,7 @@
 					<Tool
 						Name="VCResourceCompilerTool"
 						PreprocessorDefinitions=""
+						AdditionalIncludeDirectories="&quot;../DependLib/Xtreme ToolkitPro/Source&quot;"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
@@ -372,6 +375,7 @@
 					<Tool
 						Name="VCResourceCompilerTool"
 						PreprocessorDefinitions=""
+						AdditionalIncludeDirectories="&quot;../DependLib/Xtreme ToolkitPro/Source&quot;"
 					/>
 				</FileConfiguration>
 			</File>

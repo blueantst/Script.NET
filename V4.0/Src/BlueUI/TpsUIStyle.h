@@ -41,6 +41,7 @@ public:
 	BOOL	m_bApplyFrame;
 	BOOL	m_bApplyColors;
 	int		m_nTheme;
+	int		m_nThemeColor;
 	//}}AFX_DATA
 
 	CStringArray m_asSkinName;
@@ -82,7 +83,7 @@ protected:
 	afx_msg void OnCheckApplyFrame();
 	afx_msg void OnCheckApplyColors();
 	afx_msg void OnThemeChanged();
-	afx_msg void OnThemeChangedLuna();
+	afx_msg void OnThemeColorChanged();
 	afx_msg void OnDrawItem(int nIDCtl, LPDRAWITEMSTRUCT lpDIS);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
