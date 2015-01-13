@@ -9,8 +9,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HtmlViewOWM", "..\..\Plugin
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OwmScite", "..\..\Plugins\org.owm.scite\OwmScite\OwmScite.vcproj", "{6C962800-1952-4B79-8168-D99B3D48748E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SciLexer", "..\..\Plugins\org.owm.scite\scintilla\vcbuild\SciLexer.vcproj", "{B4EEA8BD-FA87-449A-B87A-704E8C322A7B}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OwmGrep", "..\..\Plugins\org.owm.grep\OwmGrep\OwmGrep.vcproj", "{3C5DB77D-90C8-4C91-AC08-6617569513FD}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PTerminal", "..\..\Plugins\org.owm.terminal\PTerminal\PTerminal.vcproj", "{7AFDBA6B-53DF-4D0E-8C20-D847B4F343AE}"
@@ -18,6 +16,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ProjectManager", "..\..\Plugins\org.vci.projectmanager\ProjectManager\ProjectManager.vcproj", "{4F1805A4-EF65-4E9F-A653-78DA801B9248}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GeneralProject", "..\..\Plugins\org.prj.general\GeneralProject\GeneralProject.vcproj", "{5BF67B2F-0342-4CBB-AD99-B3558EC60B6C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SciLexer", "..\..\Plugins\org.owm.scite\scintilla3.5.2\win32\SciLexer.vcproj", "{B4EEA8BD-FA87-449A-B87A-704E8C322A7B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,12 +50,6 @@ Global
 		{6C962800-1952-4B79-8168-D99B3D48748E}.PDBRelease|Win32.Build.0 = PDBRelease|Win32
 		{6C962800-1952-4B79-8168-D99B3D48748E}.Release|Win32.ActiveCfg = Release|Win32
 		{6C962800-1952-4B79-8168-D99B3D48748E}.Release|Win32.Build.0 = Release|Win32
-		{B4EEA8BD-FA87-449A-B87A-704E8C322A7B}.Debug|Win32.ActiveCfg = Debug|Win32
-		{B4EEA8BD-FA87-449A-B87A-704E8C322A7B}.Debug|Win32.Build.0 = Debug|Win32
-		{B4EEA8BD-FA87-449A-B87A-704E8C322A7B}.PDBRelease|Win32.ActiveCfg = Release|Win32
-		{B4EEA8BD-FA87-449A-B87A-704E8C322A7B}.PDBRelease|Win32.Build.0 = Release|Win32
-		{B4EEA8BD-FA87-449A-B87A-704E8C322A7B}.Release|Win32.ActiveCfg = Release|Win32
-		{B4EEA8BD-FA87-449A-B87A-704E8C322A7B}.Release|Win32.Build.0 = Release|Win32
 		{3C5DB77D-90C8-4C91-AC08-6617569513FD}.Debug|Win32.ActiveCfg = Debug|Win32
 		{3C5DB77D-90C8-4C91-AC08-6617569513FD}.Debug|Win32.Build.0 = Debug|Win32
 		{3C5DB77D-90C8-4C91-AC08-6617569513FD}.PDBRelease|Win32.ActiveCfg = PDBRelease|Win32
@@ -80,6 +74,12 @@ Global
 		{5BF67B2F-0342-4CBB-AD99-B3558EC60B6C}.PDBRelease|Win32.Build.0 = Release|Win32
 		{5BF67B2F-0342-4CBB-AD99-B3558EC60B6C}.Release|Win32.ActiveCfg = Release|Win32
 		{5BF67B2F-0342-4CBB-AD99-B3558EC60B6C}.Release|Win32.Build.0 = Release|Win32
+		{B4EEA8BD-FA87-449A-B87A-704E8C322A7B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B4EEA8BD-FA87-449A-B87A-704E8C322A7B}.Debug|Win32.Build.0 = Debug|Win32
+		{B4EEA8BD-FA87-449A-B87A-704E8C322A7B}.PDBRelease|Win32.ActiveCfg = Release|Win32
+		{B4EEA8BD-FA87-449A-B87A-704E8C322A7B}.PDBRelease|Win32.Build.0 = Release|Win32
+		{B4EEA8BD-FA87-449A-B87A-704E8C322A7B}.Release|Win32.ActiveCfg = Release|Win32
+		{B4EEA8BD-FA87-449A-B87A-704E8C322A7B}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
