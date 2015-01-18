@@ -4,7 +4,7 @@
 		<Project Name="Script.NET¹¤³Ì" Type="org.prj.general" Ext="snp" Icon="image\general.ico"
 				 Template="Template\project files"
 				 Interp="org.interp.tcl"
-				 Script="project.tcl">
+				 Script="script\project.tcl">
 		</Project>
 	</NewPrj>
 	<NewFile>
