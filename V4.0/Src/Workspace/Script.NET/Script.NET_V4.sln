@@ -17,7 +17,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ProjectManager", "..\..\Plu
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GeneralProject", "..\..\Plugins\org.prj.general\GeneralProject\GeneralProject.vcproj", "{5BF67B2F-0342-4CBB-AD99-B3558EC60B6C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SciLexer", "..\..\Plugins\org.owm.scite\scintilla3.5.2\win32\SciLexer.vcproj", "{B4EEA8BD-FA87-449A-B87A-704E8C322A7B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SciLexer", "..\..\Plugins\org.owm.scite\scintilla1.7.7\vcbuild\SciLexer.vcproj", "{B4EEA8BD-FA87-449A-B87A-704E8C322A7B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
