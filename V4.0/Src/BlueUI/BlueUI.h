@@ -98,6 +98,7 @@ public:
 	// 工程操作
 	BOOL	IsProjectOpen();
 	void	SaveRecentProject(CString strProjectFile);
+	void	RemoveRecentProject(CString strProjectFile);
 	void	ExecProjectScript(CString strMenuAction);
 	BOOL	OpenProjectFile(CPlugIn* pPlugIn, CString strProjectFile);
 
@@ -119,9 +120,6 @@ public:
 	CStringArray	m_asProject;			// 打开的工程列表
 	IProjectManager* m_pIProjectManager;	// 工程管理插件接口指针
 	IProject*		m_pIProject;			// 工程插件接口指针
-	#ifdef APPLICATION_SCRIPTDEV
-	ILicense*		m_pILicense;			// License插件接口指针
-	#endif
 	IMessageQueue*	m_pIMessageQueue;		// 消息队列插件接口指针
 
 	CXTPPopupControl	m_wndPopupControl;	// popup window object

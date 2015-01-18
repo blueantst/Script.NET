@@ -92,6 +92,38 @@ void CBlueUIApp::SaveRecentProject(CString strProjectFile)
 	}
 }
 
+//////////////////////////////////////////////////////////////////////
+// 删除最近打开的工程信息中的一项,并写入到注册表
+//////////////////////////////////////////////////////////////////////
+void CBlueUIApp::RemoveRecentProject(CString strProjectFile)
+{
+	CStringArray asRecentProject;
+	for(int i=0; i<MAX_RECENT_PROJECT; i++)
+	{
+		CString strPrjName;
+		strPrjName.Format("%s%d", REG_RECENT_PROJECT, i+1);
+		CString strPrjPath = AfxGetApp()->GetProfileString(REG_RECENTPRJ_SUBKEY, strPrjName, "");
+		if((strPrjPath != "") && (strProjectFile.CompareNoCase(strPrjPath)))
+		{
+			asRecentProject.Add(strPrjPath);
+		}
+	}
+
+	int nCount = asRecentProject.GetSize();
+	for(int i=0; i<MAX_RECENT_PROJECT; i++)
+	{
+		CString strPrjName;
+		strPrjName.Format("%s%d", REG_RECENT_PROJECT, i+1);
+		if(i < nCount)
+		{
+			AfxGetApp()->WriteProfileString(REG_RECENTPRJ_SUBKEY, strPrjName, asRecentProject[i]);
+		}else
+		{
+			AfxGetApp()->WriteProfileString(REG_RECENTPRJ_SUBKEY, strPrjName, "");
+		}
+	}
+}
+
 /////////////////////////////////////////////////////////////////////////////
 // 执行工程脚本操作
 /////////////////////////////////////////////////////////////////////////////
@@ -204,6 +236,7 @@ BOOL CBlueUIApp::OpenProjectFile(CPlugIn* pPlugIn, CString strProjectFile)
 		if(pIProject->OpenProject(strProjectFile) == trpOk)
 		{
 			m_pIProject = pIProject;
+			// 添加到最近工程列表
 			SaveRecentProject(strProjectFile);
 			// 加载工程Pane
 			pPlugIn->LoadDockingPane(-1, TRUE);
@@ -212,6 +245,10 @@ BOOL CBlueUIApp::OpenProjectFile(CPlugIn* pPlugIn, CString strProjectFile)
 			// 加载代码定义库
 			pIProject->LoadCodeDefineLibrary("");
 			return TRUE;
+		}else
+		{
+			// 工程打开失败,删除最近工程列表中的工程
+			RemoveRecentProject(strProjectFile);
 		}
 	}
 

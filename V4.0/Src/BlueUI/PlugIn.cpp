@@ -426,20 +426,6 @@ BOOL CPlugIn::LoadInfo()
 /////////////////////////////////////////////////////////////////////////////
 void CPlugIn::ShowAboutBox()
 {
-#ifdef APPLICATION_SCRIPTDEV
-	CString strLicensePlugin = theApp.m_xmlPlat.GetNodeText("application\\LicensePlugin");
-	if(strLicensePlugin == "")
-	{
-		return;
-	}
-
-	ILicense* pILicense = (ILicense*)(theApp.CreateVciObject(strLicensePlugin));
-	if(pILicense)
-	{
-		pILicense->ComponentAbout(m_strId);
-	}
-#endif
-
 	TTaskDialogInfo taskDialogInfo;
 	taskDialogInfo.strWindowTitle = m_strName;
 	taskDialogInfo.strMainInstruction = m_strName;
@@ -672,25 +658,6 @@ void* CPlugIn::OpenVciLib(CString strInterface)
 
 	if(m_hVciHandle == NULL)
 	{
-		#ifdef APPLICATION_SCRIPTDEV
-		// 首先判断License,看是否有权限可以加载此插件
-		if(theApp.m_pILicense && (!IsVciLicense()))
-		{
-			if(theApp.m_pILicense->VerifyPluginLicense(m_strId, License::FUNC_ACTION_LOAD) != License::trOk)
-			{
-				OUTPUT(COLOR_ERROR, "Verify license of %s failed!\r\n", m_strId);
-				return NULL;
-			}
-			// License有效性检查
-			theApp.m_pILicense->VerifyPluginLicense(m_strId, License::FUNC_ACTION_CHECKLICENSE);
-		}else
-		if(!IsVciLicense())
-		{
-			OUTPUT(COLOR_ERROR, "Verify license of %s failed, not found platform license!\r\n", m_strId);
-			return NULL;
-		}
-		#endif
-
 		// 保存并设置当前路径
 		theApp.SaveAndSetCurPath(m_strFile);
 
