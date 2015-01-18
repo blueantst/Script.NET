@@ -8,7 +8,7 @@
 		<appMutex>##SCRIPT.NETV4##</appMutex>
 		<RegCompany>Blueant</RegCompany>
 		<RegProfile>Script.NET\4.0</RegProfile>
-		<CopyRight>&amp;copy;蓝蚂蚁工作室版权所有2000-2013，保留所有权利。</CopyRight>
+		<CopyRight>&amp;copy;蓝蚂蚁工作室版权所有2000-2015，保留所有权利。</CopyRight>
 		<StartPage>tcl:&lt;file&gt;PLAT://\html\start.tcl</StartPage>
 		<HomeURL>http://www.blueantstudio.net</HomeURL>
 		<DownloadURL>http://www.blueantstudio.net/scriptnet/download/download.htm</DownloadURL>
