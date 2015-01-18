@@ -41,7 +41,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\..\include;"
+				AdditionalIncludeDirectories="..\..\include;../../../DependLib/Include"
 				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;_CRT_SECURE_NO_WARNINGS"
 				RuntimeLibrary="3"
 				UsePrecompiledHeader="2"
@@ -62,6 +62,7 @@
 				OutputFile="../GeneralProject_d.dll"
 				LinkIncremental="2"
 				SuppressStartupBanner="true"
+				AdditionalLibraryDirectories="../../../DependLib/lib"
 				GenerateDebugInformation="true"
 			/>
 			<Tool
@@ -112,7 +113,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\..\include;"
+				AdditionalIncludeDirectories="..\..\include;../../../DependLib/Include"
 				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;_CRT_SECURE_NO_WARNINGS"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"
@@ -133,6 +134,7 @@
 				OutputFile="../GeneralProject.dll"
 				LinkIncremental="2"
 				SuppressStartupBanner="true"
+				AdditionalLibraryDirectories="../../../DependLib/lib"
 				GenerateDebugInformation="true"
 			/>
 			<Tool

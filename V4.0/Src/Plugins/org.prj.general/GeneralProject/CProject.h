@@ -23,6 +23,13 @@ public:
 	CProject();
 	~CProject();
 
+public:
+	CXmlParser		m_xmlProject;		// 工程文件
+	CString			m_strProjectName;
+	CString			m_strProjectDesc;
+	CString			m_strProjectFile;
+	CString			m_strProjectPath;
+
 //////////////////////////////////////////////////////////////////////////
 // 提供给接口的功能函数
 //////////////////////////////////////////////////////////////////////////

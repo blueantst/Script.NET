@@ -45,6 +45,7 @@ void reset_dll_resource(void);
 
 #include "platdef.h"	// platform common define
 #include "IPlatUI.h"	// 平台功能接口
+#include "XMLDom.h"		// XML封装库
 #include "owm.h"		// OWM公共头文件
 #include "vcicomm.h"
 #include "IProject.h"

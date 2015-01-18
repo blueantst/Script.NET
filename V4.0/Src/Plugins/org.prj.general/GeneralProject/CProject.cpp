@@ -59,6 +59,11 @@ IPlatUI* gGetIPlatUI()
 CProject::CProject()
 {
 	g_Project = this;
+
+	m_strProjectName = "";
+	m_strProjectDesc = "";
+	m_strProjectFile = "";
+	m_strProjectPath = "";
 }
 
 CProject::~CProject()
@@ -101,6 +106,22 @@ int CProject::ProcessMessage(CVciMessage* pIn, CVciMessage* ppOut)
 int __stdcall CProject::NewProject(LPCTSTR lpszProjectName, LPCTSTR lpszProjectPath, LPCTSTR lpszProjectDesc, LPCTSTR lpszAuthor)
 {
 	// TODO: Add your code here
+	// 工程信息写入工程文件
+	CString strProjectFile = lpszProjectPath;
+	strProjectFile += "\\";
+	strProjectFile += lpszProjectName;
+	strProjectFile += ".snp";
+	strProjectFile.Replace("/", "\\");
+
+	CXmlParser	xmlProject;
+	xmlProject.Open(strProjectFile, "GB2312");
+	DOMNode* pRoot = xmlProject.CreateDomRoot("project");
+	xmlProject.SetNodeText(xmlProject.CreateChildNode(pRoot, "name"), lpszProjectName);
+	xmlProject.SetNodeText(xmlProject.CreateChildNode(pRoot, "desc"), lpszProjectDesc);
+	xmlProject.SetNodeText(xmlProject.CreateChildNode(pRoot, "author"), lpszAuthor);
+
+	xmlProject.Save(strProjectFile);
+	xmlProject.Close();
 
 	return trpOk;
 }
@@ -109,6 +130,26 @@ int __stdcall CProject::NewProject(LPCTSTR lpszProjectName, LPCTSTR lpszProjectP
 int __stdcall CProject::OpenProject(LPCTSTR lpszProjectFile)
 {
 	// TODO: Add your code here
+	if(m_xmlProject.Open(lpszProjectFile) != 0)
+	{
+		// 打开工程文件失败
+		return trpFail;
+	}
+
+	// 读取工程信息
+	m_strProjectFile = lpszProjectFile;
+	m_strProjectName = m_xmlProject.GetNodeText("name");
+	m_strProjectDesc = m_xmlProject.GetNodeText("desc");
+
+	m_strProjectPath = lpszProjectFile;
+	m_strProjectPath.Replace("/", "\\");
+	int nPos = m_strProjectPath.ReverseFind('\\');
+	if(nPos != -1)
+	{
+		m_strProjectPath = m_strProjectPath.Left(nPos);
+	}
+
+	m_xmlProject.Close();
 
 	return trpOk;
 }
@@ -117,6 +158,10 @@ int __stdcall CProject::OpenProject(LPCTSTR lpszProjectFile)
 int __stdcall CProject::SaveProject()
 {
 	// TODO: Add your code here
+	if(m_strProjectName.IsEmpty())
+	{
+		return trpFail;
+	}
 
 	return trpOk;
 }
@@ -133,6 +178,10 @@ int __stdcall CProject::RunProject()
 int __stdcall CProject::CloseProject(BOOL bForce)
 {
 	// TODO: Add your code here
+	m_strProjectName = "";
+	m_strProjectDesc = "";
+	m_strProjectFile = "";
+	m_strProjectPath = "";
 
 	return trpOk;
 }
@@ -197,8 +246,9 @@ int __stdcall CProject::GetOpenProjectList(CStringArray& asProjectFile)
 int __stdcall CProject::GetActiveProject(CString& strProject)
 {
 	// TODO: Add your code here
+	strProject = m_strProjectName;
 
-	return trpOk;
+	return !m_strProjectName.IsEmpty() ? trpOk : trpFail;
 }
 
 // 设置激活的工程
@@ -213,6 +263,12 @@ int __stdcall CProject::SetActiveProject(LPCTSTR lpszProject)
 int __stdcall CProject::GetProjectInfo(LPCTSTR lpszProject, CString& strProjectDesc, CString& strProjectFile, CString& strProjectPath)
 {
 	// TODO: Add your code here
+	if(m_strProjectName == lpszProject)
+	{
+		strProjectDesc = m_strProjectDesc;
+		strProjectFile = m_strProjectFile;
+		strProjectPath = m_strProjectPath;
+	}
 
 	return trpOk;
 }
@@ -221,6 +277,10 @@ int __stdcall CProject::GetProjectInfo(LPCTSTR lpszProject, CString& strProjectD
 int __stdcall CProject::GetProjectState(LPCTSTR lpszProject)
 {
 	// TODO: Add your code here
+	if(m_strProjectName.IsEmpty())
+	{
+		return PROJECT_CLOSE;
+	}
 
 	return PROJECT_IDLE;
 }

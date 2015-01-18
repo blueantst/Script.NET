@@ -16,7 +16,7 @@
    </description>
 
    <copyright>
-      Copyright blueant studio, 2000-2013.  All rights reserved.
+      Copyright blueant studio, 2000-2015.  All rights reserved.
    </copyright>
 
    <license>
@@ -67,11 +67,11 @@
    	  <project>
 	     <open>
 		 	<Interp Name="project">org.interp.tcl</Interp>
-			<script>PLUGIN://\projectopen.tcl</script>
+			<script>PLUGIN://\script\projectopen.tcl</script>
 		 </open>
 	     <close>
 		 	<Interp Name="project">org.interp.tcl</Interp>
-			<script>PLUGIN://\projectclose.tcl</script>
+			<script>PLUGIN://\script\projectclose.tcl</script>
 		 </close>
 	     <information>
 		 	<Interp>org.owm.htmlview</Interp>
@@ -81,11 +81,11 @@
 	  <dockingpane>
 	     <pane_10008>
 		 	<Interp Name="project">org.interp.tcl</Interp>
-			<script>PLUGIN://\projectpane.tcl</script>
+			<script>PLUGIN://\script\projectpane.tcl</script>
 		 </pane_10008>
 	     <pane_10009>
 		 	<Interp>org.interp.tcl</Interp>
-			<script>PLUGIN://\taskpane.tcl</script>
+			<script>PLUGIN://\script\taskpane.tcl</script>
 		 </pane_10009>
 	  </dockingpane>
    </menu-action>
