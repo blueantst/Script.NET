@@ -76,7 +76,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="imm32.lib comctl32.lib"
-				OutputFile=".\../bin/SciLexer.dll"
+				OutputFile="../../SciLexer.dll"
 				LinkIncremental="2"
 				SuppressStartupBanner="true"
 				GenerateDebugInformation="true"
@@ -173,7 +173,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="imm32.lib comctl32.lib"
-				OutputFile=".\../bin/SciLexer.dll"
+				OutputFile="../../SciLexer.dll"
 				LinkIncremental="1"
 				SuppressStartupBanner="true"
 				GenerateMapFile="true"
