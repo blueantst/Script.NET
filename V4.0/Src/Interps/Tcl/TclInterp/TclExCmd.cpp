@@ -13,12 +13,162 @@
 #include "CTclInterp.h"
 #include "wait.h"
 #include "TclExCmd.h"
+#include "IProject.h"
 
 #ifdef _DEBUG
 #undef THIS_FILE
 static char THIS_FILE[]=__FILE__;
 #define new DEBUG_NEW
 #endif
+
+/////////////////////////////////////////////////////////////////////////////
+// Tcl command
+
+//TCL函数定义宏
+#define TCL_CMDEF(fname) int fname (ClientData cd, Tcl_Interp *pInterp, int objc, Tcl_Obj *CONST objv[])
+#define TCL_CMD_PARAM    ClientData cd, Tcl_Interp *pInterp, int objc, Tcl_Obj *CONST objv[]
+
+/////////////////////////////////////////////////////////////////////////////
+// 扩展命令:License
+// GetESN		: 获取硬件ID
+// GenerateLID	: 获取License ID
+// ImportLicense: 导入License信息到注册表
+// GetLicense	: 获取License ID
+// VerifyLID	: 校验License ID
+// GetLicenseInfo: 获取某个功能项的License信息
+// GetCustomerInfo: 获取授权用户信息
+// GetOrderInfo: 获取订单信息
+/////////////////////////////////////////////////////////////////////////////
+int Tcl_Cmd_Plat_License(ClientData clientData, Tcl_Interp *interp, int objc, Tcl_Obj *CONST objv[])
+{
+	if(objc < 2)
+	{
+		Tcl_WrongNumArgs(interp, 1, objv, "option");
+		return TCL_ERROR;
+	}
+
+	CTclInterp* pTclInterp = GetTclInterp((LPVOID)interp);
+	if(pTclInterp == NULL)
+	{
+		Tcl_AppendResult(interp, "Get tcl interp pointer failed!", (char *)NULL);
+		return TCL_ERROR;
+	}
+
+	ILicense* pILicense = pTclInterp->GetILicense();
+	if(pILicense == NULL)
+	{
+		Tcl_AppendResult(interp, "Get license interface failed!", (char *)NULL);
+		return TCL_ERROR;
+	}
+
+	CString strOption = Tcl_GetString(objv[1]);
+
+	if(strOption == "GetESN")	// 获取硬件ID
+	{
+		CString strESN = "";
+		pILicense->GetESN(strESN);
+		Tcl_AppendResult(interp, strESN, (char *)NULL);
+	}else
+#ifdef _DEBUG
+	if(strOption == "GenerateLID")	// 获取License ID
+	{
+		if(objc < 4)
+		{
+			Tcl_WrongNumArgs(interp, 1, objv, "GenerateLID ESN MaskCode");
+			return TCL_ERROR;
+		}
+
+		CString strESN = Tcl_GetString(objv[2]);
+		CString strMaskCode = Tcl_GetString(objv[3]);
+		CString strLicenseID = "";
+		pILicense->GenerateLicenseID(strESN, strMaskCode, strLicenseID);
+		Tcl_AppendResult(interp, strLicenseID, (char *)NULL);
+	}else
+#endif
+	if(strOption == "ImportLicense")	// 导入License信息到注册表
+	{
+		if(objc < 3)
+		{
+			Tcl_WrongNumArgs(interp, 1, objv, "ImportLicense LID");
+			return TCL_ERROR;
+		}
+
+		CString strLicenseID = Tcl_GetString(objv[2]);
+		if(pILicense->ImportLicenseID(strLicenseID) != License::trOk)
+		{
+			Tcl_AppendResult(interp, "Import License ID failed!", (char *)NULL);
+			return TCL_ERROR;
+		}
+	}else
+	if(strOption == "GetLicense")	// 获取License ID
+	{
+		CString strLicenseID = "";
+		if(pILicense->GetLicenseID(strLicenseID) == License::trOk)
+		{
+			Tcl_AppendResult(interp, strLicenseID, (char *)NULL);
+		}
+	}else
+	if(strOption == "VerifyLID")	// 校验LicenseID
+	{
+		CString strMaskCode = Tcl_GetString(objv[2]);
+		if(pILicense->VerifyLicenseID(strMaskCode) != License::trOk)
+		{
+			Tcl_AppendResult(interp, "Verify License ID failed!", (char *)NULL);
+			return TCL_ERROR;
+		}
+		Tcl_AppendResult(interp, "1", (char *)NULL);
+	}else
+	if(strOption == "GetLicenseInfo")	// 获取某个功能项的License信息
+	{
+		if(objc < 3)
+		{
+			Tcl_WrongNumArgs(interp, 1, objv, "GetLicenseInfo Function");
+			return TCL_ERROR;
+		}
+
+		CString strFuncID = Tcl_GetString(objv[2]);
+		int nLicenseType;
+		CTime tUpdateLimit;
+		int nUserCount;
+		CTime tTrialTime;
+		if(pILicense->GetPluginLicenseInfo(strFuncID, nLicenseType, tUpdateLimit, nUserCount, tTrialTime) != License::trOk)
+		{
+			//Tcl_AppendResult(interp, "Not found license info of " + strFuncID + "!", (char *)NULL);
+			Tcl_AppendResult(interp, "Free", (char *)NULL);
+			return TCL_OK;
+		}
+		CString strTmp;
+		strTmp.Format("%d", nLicenseType);
+		Tcl_AppendElement(interp, strTmp);
+		strTmp.Format("%d", tUpdateLimit);
+		Tcl_AppendElement(interp, strTmp);
+		strTmp.Format("%d", nUserCount);
+		Tcl_AppendElement(interp, strTmp);
+		strTmp.Format("%d", tTrialTime);
+		Tcl_AppendElement(interp, strTmp);
+	}else
+	if(strOption == "GetCustomerInfo")	// 获取授权用户信息
+	{
+		CString strCustomerInfo = "";
+		if(pILicense->GetCustomerInfo(strCustomerInfo) == License::trOk)
+		{
+			Tcl_AppendResult(interp, strCustomerInfo, (char *)NULL);
+		}
+	}else
+	if(strOption == "GetOrderInfo")	// 获取订单信息
+	{
+		CString strOrderInfo = "";
+		if(pILicense->GetOrderInfo(strOrderInfo) == License::trOk)
+		{
+			Tcl_AppendResult(interp, strOrderInfo, (char *)NULL);
+		}
+	}else
+	{
+		return TCL_ERROR;
+	}
+
+	return TCL_OK;
+}
 
 /////////////////////////////////////////////////////////////////////////////
 // 扩展命令:信息提示对话框
@@ -2526,10 +2676,251 @@ int Tcl_Cmd_Plat_VarConvert(ClientData clientData, Tcl_Interp *interp, int objc,
 	return TCL_OK;
 }
 
+//功能：工程操作
+//用法：
+//      pproject isopen				-- 是否打开
+//		pproject isworking			-- 是否在工作
+//		pproject name				-- 获取工程名
+//		pproject desc				-- 获取工程描述
+//		pproject path				-- 获取工程路径
+//		pproject file				-- 获取工程文件
+//		pproject open prjfile		-- 打开工程
+//		pproject close				-- 关闭工程
+//		pproject save				-- 保存工程
+//		pproject run				-- 运行工程
+//		pproject build				-- 编译工程
+//		pproject rebuild			-- 重新编译工程
+//		pproject clean				-- 清除编译信息
+//		pproject information		-- 显示工程信息页面
+//		pproject property			-- 显示工程属性
+//参数：
+//返回值：
+TCL_CMDEF( Tcl_Cmd_Plat_Project )
+{
+	Tcl_ResetResult(pInterp);
+
+	if( objc < 2 )
+	{
+		Tcl_WrongNumArgs (pInterp, 1, objv, "operate");
+		ConvertResultToUTF(pInterp);
+		return TCL_ERROR;
+	}
+
+	// 查找平台接口对象
+	CTclInterp* pTclInterp = GetTclInterp((LPVOID)pInterp);
+	IPlatUI* pIPlatUI = NULL;
+	if(pTclInterp)
+	{
+		pIPlatUI = pTclInterp->pIPlatUI;
+	}
+	if(pIPlatUI == NULL)
+	{
+		Tcl_AppendResult(pInterp, "Get platform interface fail.", (char *) NULL);
+		return TCL_ERROR;
+	}
+
+	CString strOp = ConvertUTFParam(Tcl_GetString(objv[1]));
+
+	CString strProjectName;
+	CString strProjectDesc;
+	CString strProjectFile;
+	CString strProjectPath;
+	BOOL bProjectIsOpen = FALSE;
+
+	// 获取工程插件接口
+	IProject* pIProject = (IProject*)(pIPlatUI->GetObjectByInstanceName("###project###"));
+	if(pIProject)
+	{
+		bProjectIsOpen = (pIProject->GetActiveProject(strProjectName) == trpOk);	// 获取当前活动工程
+		pIProject->GetProjectInfo(strProjectName, strProjectDesc, strProjectFile, strProjectPath);	// 获取活动工程的信息
+	}
+
+	if(strOp == "isopen")
+	{
+		Tcl_AppendResult( pInterp, bProjectIsOpen ? "1" : "0", (char *)NULL);
+	}else
+	if(strOp == "isworking")
+	{
+		BOOL bIsWorking = FALSE;
+		if(bProjectIsOpen)
+		{
+			bIsWorking = (pIProject->GetProjectState(strProjectName) == PROJECT_WORKING);
+		}
+		Tcl_AppendResult( pInterp, bIsWorking ? "1" : "0", (char *)NULL);
+	}else
+	if(strOp == "name")
+	{
+		Tcl_AppendResult( pInterp, strProjectName, (char *)NULL);
+	}else
+	if(strOp == "desc")
+	{
+		Tcl_AppendResult( pInterp, strProjectDesc, (char *)NULL);
+	}else
+	if(strOp == "path")
+	{
+		Tcl_AppendResult( pInterp, strProjectPath, (char *)NULL);
+	}else
+	if(strOp == "file")
+	{
+		Tcl_AppendResult( pInterp, strProjectFile, (char *)NULL);
+	}else
+	if(strOp == "open")
+	{
+		if( objc < 3 )
+		{
+			Tcl_WrongNumArgs (pInterp, 1, objv, "open project");
+			ConvertResultToUTF(pInterp);
+			return TCL_ERROR;
+		}
+		CString strProjectFile = ConvertUTFParam(Tcl_GetString(objv[2]));	// 要打开的工程名
+
+		pIPlatUI->SendOwmCmd("", OC_OPENPROJECT, NULL, (LPARAM)(LPCTSTR)strProjectFile, NULL);
+	}else
+	if(strOp == "close")
+	{
+		if(bProjectIsOpen)
+		{
+			// 关闭工程
+			pIProject->CloseProject(TRUE);
+			// 释放工程插件对象
+			pIPlatUI->ReleaseVciObject(pIProject, TRUE);
+		}
+	}else
+	if(strOp == "save")
+	{
+		if(bProjectIsOpen)
+		{
+			pIProject->SaveProject();
+		}
+	}else
+	if(strOp == "build")
+	{
+		if(bProjectIsOpen)
+		{
+			pIProject->BuildProject();
+		}
+	}else
+	if(strOp == "rebuild")
+	{
+		if(bProjectIsOpen)
+		{
+			pIProject->RebuildProject();
+		}
+	}else
+	if(strOp == "run")
+	{
+		if(bProjectIsOpen)
+		{
+			pIProject->RunProject();
+		}
+	}else
+	if(strOp == "clean")
+	{
+		if(bProjectIsOpen)
+		{
+			pIProject->CleanProject();
+		}
+	}else
+	if(strOp == "information")
+	{
+		if(bProjectIsOpen)
+		{
+			pIProject->ProjectInformation();
+		}
+	}else
+	if(strOp == "property")
+	{
+		if(bProjectIsOpen)
+		{
+			pIProject->RefreshProjectProperty();
+		}
+	}else
+	/*if(strOp == "get")
+	{
+		if( objc < 3 )
+		{
+			Tcl_WrongNumArgs (pInterp, 1, objv, "get files");
+			ConvertResultToUTF(pInterp);
+			return TCL_ERROR;
+		}
+		CString szType = ConvertUTFParam(Tcl_GetString(objv[2]));
+		if(szType == "files")
+		{
+		}
+	}else
+	if(strOp == "add")
+	{
+		if( objc < 4 )
+		{
+			Tcl_WrongNumArgs (pInterp, 1, objv, "add file");
+			ConvertResultToUTF(pInterp);
+			return TCL_ERROR;
+		}
+		CString szType = ConvertUTFParam(Tcl_GetString(objv[2]));
+		if(szType == "file")
+		{
+			int nListCount = 0;
+			Tcl_Obj** paList;
+			if(TCL_ERROR == Tcl_ListObjGetElements(pInterp, objv[3], &nListCount, &paList))
+			{
+				Tcl_AppendResult(pInterp, "get bsdlfile list error.",  (char *) NULL);
+				return TCL_ERROR;
+			}
+
+			if(0 == nListCount)
+			{
+				// 列表为空则不继续
+				return TCL_OK;
+			}
+
+			Tcl_AppendResult( pInterp, bRet ? "1" : "0", (char *)NULL);
+		}
+	}else
+	if(strOp == "del")
+	{
+		if( objc < 4 )
+		{
+			Tcl_WrongNumArgs (pInterp, 1, objv, "del file");
+			ConvertResultToUTF(pInterp);
+			return TCL_ERROR;
+		}
+		CString szType = ConvertUTFParam(Tcl_GetString(objv[2]));
+		if(szType == "file")
+		{
+			int nListCount = 0;
+			Tcl_Obj** paList;
+			if(TCL_ERROR == Tcl_ListObjGetElements(pInterp, objv[3], &nListCount, &paList))
+			{
+				Tcl_AppendResult(pInterp, "get bsdlfile list error.",  (char *) NULL);
+				return TCL_ERROR;
+			}
+
+			if(0 == nListCount)
+			{
+				// 列表为空则不继续
+				return TCL_OK;
+			}
+
+			Tcl_AppendResult( pInterp, bRet ? "1" : "0", (char *)NULL);
+		}
+	}else*/
+	{
+		Tcl_AppendResult(pInterp, "bad argument \"", Tcl_GetString(objv[1]), "\" : must be isopen, isworking, name, desc, path, file, open, close, save, build, rebuild, run, information, property, add or del", (char *) NULL);
+		return TCL_ERROR;
+	}
+
+	ConvertResultToUTF(pInterp);
+	return TCL_OK;
+}
+
 //TCL命令声明函数
 int TclExCmd_Init(Tcl_Interp *interp)
 {
 	// 注册命令
+
+	// License命令
+	Tcl_CreateObjCommand(interp, "License", Tcl_Cmd_Plat_License, 
+			(ClientData)NULL, (Tcl_CmdDeleteProc*)NULL);
 
 	// 信息提示对话框
 	Tcl_CreateCommand(interp, "MessageBox", Tcl_Cmd_Plat_MessageBox, 
@@ -2587,5 +2978,9 @@ int TclExCmd_Init(Tcl_Interp *interp)
 	Tcl_CreateObjCommand(interp, "varconvert", Tcl_Cmd_Plat_VarConvert, 
 			(ClientData)NULL, (Tcl_CmdDeleteProc*)NULL);
 	
+	// 工程操作
+	Tcl_CreateObjCommand(interp, "pproject", Tcl_Cmd_Plat_Project, 
+			(ClientData)NULL, (Tcl_CmdDeleteProc*)NULL);
+
     return TCL_OK;
 }

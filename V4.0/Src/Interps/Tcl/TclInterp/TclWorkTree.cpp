@@ -51,17 +51,6 @@ static char THIS_FILE[]=__FILE__;
 	}	\
 
 
-// 创建树的结构
-struct STRU_ADDTREEEX
-{
-	CString	strTreeName;	// 窗口名
-	CString	strIconFile;	// 图标文件
-	int		nTreeType;		// 类型
-	int		nAttachPaneId;	// 创建在哪个窗口后面
-	CString	strBmpFile;		// 图片文件名
-	int		nPaneId;		// 指定的窗口PandeId
-};
-
 /////////////////////////////////////////////////////////////////////////////
 // 扩展命令:WorkSpace命令
 // WorkTree addtree TreeType TreeName ?IconFile? ?BmpFile? ?AttachPaneId? ?PaneId?

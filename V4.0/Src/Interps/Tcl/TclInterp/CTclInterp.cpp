@@ -1533,11 +1533,16 @@ CTclInterp::CTclInterp()
 	pIPlatUI		= NULL;
 	m_strAppProcess	= _T("");
 	m_dwRunThreadId	= NULL;
-	#ifdef _USE_TCL85
-	Tcl_FindExecutable(_T(""));	// Tcl8.5版本不能使用Tcl_GetNameOfExecutable，否则会异常
-	#else
+	#ifdef _USE_TCL84
 	Tcl_FindExecutable(Tcl_GetNameOfExecutable());
 	#endif
+	#ifdef _USE_TCL85
+	Tcl_FindExecutable(_T(""));	// Tcl8.5及以上版本不能使用Tcl_GetNameOfExecutable，否则会异常
+	#endif
+	#ifdef _USE_TCL86
+	Tcl_FindExecutable(_T(""));	// Tcl8.5及以上版本不能使用Tcl_GetNameOfExecutable，否则会异常
+	#endif
+
 	m_strInterpName	= _T("");
 	pInterp			= Tcl_CreateInterp();
 	Tcl_SetServiceMode(TCL_SERVICE_NONE);
@@ -1579,6 +1584,8 @@ CTclInterp::CTclInterp()
 	// 初始化基础Tcl解释器
 	InitTclBaseInterp();
 	g_TclInterpList.AddTail(this);
+
+	m_pILicense = NULL;
 }
 
 CTclInterp::~CTclInterp()
@@ -1740,6 +1747,12 @@ int __stdcall CTclInterp::SetIPlatUI(LPVOID lpIPlatUI)
 	}
 	strCmd.ReleaseBuffer();
 
+	// 获取License接口指针
+	if(getIPlatUI())
+	{
+		m_pILicense = (ILicense*)(((IPlatUI*)getIPlatUI())->GetObjectByInstanceName("###license"));
+	}
+
 	return 0;
 }
 
@@ -1872,18 +1885,26 @@ int CTclInterp::InitTclBaseInterp()
 	// 注：某些用\必须用\\\来替代,行尾必须加\r\n
 	// tcl_library
 	CString strTclLibrary = m_strTclLibPath;
+	#ifdef _USE_TCL84
+	strTclLibrary += "tcl8.4";
+	#endif
 	#ifdef _USE_TCL85
 	strTclLibrary += "tcl8.5";
-	#else
-	strTclLibrary += "tcl8.4";
+	#endif
+	#ifdef _USE_TCL86
+	strTclLibrary += "tcl8.6";
 	#endif
 	strTclLibrary.Replace('\\', '/');
 	// tk_library
 	CString strTkLibrary = m_strTclLibPath;
+	#ifdef _USE_TCL84
+	strTkLibrary += "tk8.4";
+	#endif
 	#ifdef _USE_TCL85
 	strTkLibrary += "tk8.5";
-	#else
-	strTkLibrary += "tcl8.4";
+	#endif
+	#ifdef _USE_TCL86
+	strTkLibrary += "tk8.6";
 	#endif
 	strTkLibrary.Replace('\\', '/');
 
@@ -1960,18 +1981,26 @@ int CTclInterp::PreScript()
 	// 注：某些用\必须用\\\来替代,行尾必须加\r\n
 	// tcl_library
 	CString strTclLibrary = m_strTclLibPath;
+	#ifdef _USE_TCL84
+	strTclLibrary += "tcl8.4";
+	#endif
 	#ifdef _USE_TCL85
 	strTclLibrary += "tcl8.5";
-	#else
-	strTclLibrary += "tcl8.4";
+	#endif
+	#ifdef _USE_TCL86
+	strTclLibrary += "tcl8.6";
 	#endif
 	strTclLibrary.Replace('\\', '/');
 	// tk_library
 	CString strTkLibrary = m_strTclLibPath;
+	#ifdef _USE_TCL84
+	strTkLibrary += "tk8.4";
+	#endif
 	#ifdef _USE_TCL85
 	strTkLibrary += "tk8.5";
-	#else
-	strTkLibrary += "tk8.4";
+	#endif
+	#ifdef _USE_TCL86
+	strTkLibrary += "tk8.6";
 	#endif
 	strTkLibrary.Replace('\\', '/');
 

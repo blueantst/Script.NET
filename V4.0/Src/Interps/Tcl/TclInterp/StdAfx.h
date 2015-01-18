@@ -58,17 +58,30 @@ CString GetInterpRootPath();
 #define _SUPPORT_TK
 
 // 是否使用Tcl8.5版本编译
+//#define _USE_TCL84
 #define _USE_TCL85
+//#define _USE_TCL86
+
+#ifdef _USE_TCL84
+#include "../include/tcl.h"
+#ifdef _SUPPORT_TK
+#include "../include/tk.h"
+#endif
+#endif
 
 #ifdef _USE_TCL85
 #include "../include/tcl8.5/tcl.h"
 #ifdef _SUPPORT_TK
 #include "../include/tcl8.5/tk.h"
 #endif
-#else
-#include "../include/tcl.h"
+#endif
+
+#ifdef _USE_TCL86
+#define USE_INTERP_RESULT
+#define USE_INTERP_ERRORLINE
+#include "../include/tcl8.6/tcl.h"
 #ifdef _SUPPORT_TK
-#include "../include/tk.h"
+#include "../include/tcl8.6/tk.h"
 #endif
 #endif
 
@@ -76,11 +89,21 @@ CString GetInterpRootPath();
 
 #include "IPlatUI.h"	// 平台功能接口
 #include "owm.h"
+#include "ILicense.h"
 
 #include "XMLDom.h"
 
 //////////////////////////////////////////////////////////////////////
 // 自动链接TCL和TK库
+#ifdef _USE_TCL84
+#pragma comment(lib, "tcl84.lib")		// 自动链接Tcl库
+#pragma message("Automatically linking with tcl84.lib")
+#ifdef _SUPPORT_TK
+#pragma comment(lib, "tk84.lib")		// 自动链接Tk库
+#pragma message("Automatically linking with tk84.lib")
+#endif
+#endif
+
 #ifdef _USE_TCL85
 #pragma comment(lib, "tcl85.lib")		// 自动链接Tcl库
 #pragma message("Automatically linking with tcl85.lib")
@@ -88,12 +111,14 @@ CString GetInterpRootPath();
 #pragma comment(lib, "tk85.lib")		// 自动链接Tk库
 #pragma message("Automatically linking with tk84.lib")
 #endif
-#else
-#pragma comment(lib, "tcl84.lib")		// 自动链接Tcl库
-#pragma message("Automatically linking with tcl85.lib")
+#endif
+
+#ifdef _USE_TCL86
+#pragma comment(lib, "tcl86.lib")		// 自动链接Tcl库
+#pragma message("Automatically linking with tcl86.lib")
 #ifdef _SUPPORT_TK
-#pragma comment(lib, "tk84.lib")		// 自动链接Tk库
-#pragma message("Automatically linking with tk84.lib")
+#pragma comment(lib, "tk86.lib")		// 自动链接Tk库
+#pragma message("Automatically linking with tk86.lib")
 #endif
 #endif
 

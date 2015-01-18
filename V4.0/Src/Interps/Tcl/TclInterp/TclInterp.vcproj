@@ -4,6 +4,7 @@
 	Version="9.00"
 	Name="TclInterp"
 	ProjectGUID="{72E04A45-EFC2-4EDC-9579-1FA4EF18BF67}"
+	RootNamespace="TclInterp"
 	Keyword="MFCProj"
 	TargetFrameworkVersion="0"
 	>
@@ -49,7 +50,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="../include;../../../Plugins/include;../../../DependLib/Include"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"
 				PrecompiledHeaderThrough="stdafx.h"
@@ -142,7 +143,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="../include"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"
 				PrecompiledHeaderThrough="stdafx.h"
@@ -240,7 +241,7 @@
 				AdditionalOptions="/Zm500 "
 				Optimization="0"
 				AdditionalIncludeDirectories="../include;../../../Plugins/include;../../../DependLib/Include"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
