@@ -116,10 +116,14 @@ int CProjectManager::NewProjectWizard(CString& strPrjVci, CString& strPrjFile)
 	IProject* pOldIProject = (IProject*)pIPlatUI->GetObjectByInstanceName("###project###");
 	if(pOldIProject != NULL)
 	{
-		DLL_LOADSTRING(strConfirm, IDS_CONFIRM_CLOSEPROJECT)
-		if(AfxMessageBox(strConfirm, MB_YESNO | MB_ICONQUESTION) != IDYES)
+		CString strActiveProject;
+		if(pOldIProject->GetActiveProject(strActiveProject) == trpOk)
 		{
-			return FALSE;
+			DLL_LOADSTRING(strConfirm, IDS_CONFIRM_CLOSEPROJECT)
+			if(AfxMessageBox(strConfirm, MB_YESNO | MB_ICONQUESTION) != IDYES)
+			{
+				return FALSE;
+			}
 		}
 		pIPlatUI->ReleaseObjectByInstanceName("###project###");
 	}

@@ -21,7 +21,7 @@ CNewPrjPage::CNewPrjPage(CWnd* pParent) : CDialog(CNewPrjPage::IDD, pParent)
 	m_strPrjName = _T("");
 	m_strPrjDesc = _T("");
 	m_strAuthor = _T("");
-	m_strPrjPath = _T("");
+	m_strPrjPath = AfxGetApp()->GetProfileString(REG_CONFIG_SUBKEY, REG_CONFIG_RECENT_PROJECTPATH, "");
 	//}}AFX_DATA_INIT
 	m_nPrjType = 100;
 }
@@ -320,6 +320,9 @@ void CNewPrjPage::OnOK()
 		AfxMessageBox(strMsg);
 		return;
 	}
+
+	// 工程路径保存到注册表
+	AfxGetApp()->WriteProfileString(REG_CONFIG_SUBKEY, REG_CONFIG_RECENT_PROJECTPATH, m_strPrjPath);
 
 	//ProcessPath(m_strTemplate);
 	m_strPrjType = m_asType[m_nPrjType];

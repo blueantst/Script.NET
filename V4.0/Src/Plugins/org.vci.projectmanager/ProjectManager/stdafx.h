@@ -70,6 +70,10 @@ void ProcessPath(CString& strPath, CString strBasePath = "");
 
 #include "resource.h"
 
+// 定义注册表键
+#define REG_CONFIG_SUBKEY		_T("Settings")
+#define REG_CONFIG_RECENT_PROJECTPATH	_T("RecentProjectPath")	// 最近的新建工程路径
+
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.
 
