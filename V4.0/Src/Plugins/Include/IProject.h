@@ -22,7 +22,7 @@ enum{
 	trpWorking,				// 工程正在运行
 };
 
-// 工程状态状态
+// 工程状态
 enum{
 	PROJECT_CLOSE,			// 关闭
 	PROJECT_IDLE,			// 空闲
