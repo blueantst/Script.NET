@@ -2,10 +2,10 @@
 <Settings CompactMode="1">
 	<CommandBars Schema="38">
 		<Layout>
-			<DockState Version="38" ScreenSize="1920, 1080" Count="3">
+			<DockState Version="38" ScreenSize="1366, 768" Count="3">
 				<BarInfo0 BarId="1" MRUWidth="32767"/>
-				<BarInfo1 BarId="128" MRUWidth="32767" PointPos="0, 23"/>
-				<BarInfo2 BarId="140" MRUWidth="32767" PointPos="245, 23" MRUDockPos="243, 23, 486, 49"/>
+				<BarInfo1 BarId="128" MRUWidth="32767" PointPos="0, 25"/>
+				<BarInfo2 BarId="140" MRUWidth="32767" PointPos="245, 25" MRUDockPos="243, 23, 486, 49"/>
 			</DockState>
 			<DockBars>
 				<DockBar0 Count="6" Id1="1" Id3="140" Id4="128"/>
@@ -14,43 +14,45 @@
 		</Layout>
 	</CommandBars>
 	<DockingPane>
-		<Summary Panes="37" TopContainer="28" Client="34"/>
-		<Pane-1 Type="0" DockingCX="200" DockingCY="120" Title="属性\n\n" ID="4001" DockingHolder="33" LastHolder="33"/>
-		<Pane-2 Type="0" DockingCX="200" DockingCY="120" Title="运行\n输出窗口\n" ID="30000" DockingHolder="37" LastHolder="37"/>
-		<Pane-3 Type="0" DockingCX="200" DockingCY="120" Title="调试\n\n" ID="30001" DockingHolder="37" FloatingHolder="27" LastHolder="37"/>
-		<Pane-4 Type="0" DockingCX="200" DockingCY="120" Title="信息\n\n" ID="30002" DockingHolder="37" LastHolder="37"/>
-		<Pane-5 Type="0" DockingCX="245" DockingCY="120" Title="动态帮助\n\n" ID="10014" DockingHolder="35" LastHolder="35"/>
-		<Pane-6 Type="0" DockingCX="200" DockingCY="120" Title="查找替换\n\n" ID="10002" DockingHolder="30" FloatingHolder="18" LastHolder="18"/>
-		<Pane-7 Type="0" DockingCX="200" DockingCY="120" Title="查找结果\n\n" ID="10003" DockingHolder="37" FloatingHolder="21" LastHolder="37"/>
-		<Pane-8 Type="0" DockingCX="200" DockingCY="120" Title="文件\n\n" ID="10006" DockingHolder="33" FloatingHolder="24" LastHolder="33"/>
-		<Pane-9 Type="0" DockingCX="200" DockingCY="120" Title="消息\n\n" ID="10011" DockingHolder="33" LastHolder="33"/>
-		<Pane-10 Type="0" DockingCX="200" DockingCY="120" Title="断点\n\n" ID="30011" DockingHolder="37" LastHolder="37"/>
-		<Pane-11 Type="0" DockingCX="200" DockingCY="120" Title="书签\n\n" ID="30010" DockingHolder="37" LastHolder="37"/>
-		<Pane-12 Type="0" DockingCX="200" DockingCY="120" Title="控制台\n\n" ID="10013" DockingHolder="37" LastHolder="37"/>
-		<Pane-13 Type="5" Direction="0" Panes="0"/>
-		<Pane-14 Type="5" Direction="1" Panes="1" Pane-1="15"/>
-		<Pane-15 Type="1" DockingCX="245" DockingCY="120" Panes="1" Selected="5" Pane-1="5"/>
-		<Pane-16 Type="3" WindowRectTopPos="112" WindowRectBottomPos="502" WindowRectLeftPos="781" WindowRectRightPos="1184" TopContaner="17"/>
-		<Pane-17 Type="2" DockingCX="200" DockingCY="120" Horiz="1" Panes="1" Pane-1="18"/>
-		<Pane-18 Type="1" DockingCX="200" DockingCY="120" Panes="0"/>
-		<Pane-19 Type="3" WindowRectTopPos="636" WindowRectBottomPos="829" WindowRectLeftPos="65" WindowRectRightPos="1462" ExpandedHeight="193" TopContaner="20"/>
-		<Pane-20 Type="2" DockingCX="200" DockingCY="120" Horiz="1" Panes="1" Pane-1="21"/>
-		<Pane-21 Type="1" DockingCX="200" DockingCY="120" Panes="0"/>
-		<Pane-22 Type="3" WindowRectTopPos="161" WindowRectBottomPos="281" WindowRectLeftPos="268" WindowRectRightPos="468" TopContaner="23"/>
-		<Pane-23 Type="2" DockingCX="200" DockingCY="120" Horiz="1" Panes="1" Pane-1="24"/>
-		<Pane-24 Type="1" DockingCX="200" DockingCY="120" Panes="0"/>
-		<Pane-25 Type="3" WindowRectTopPos="718" WindowRectBottomPos="911" WindowRectLeftPos="64" WindowRectRightPos="1519" TopContaner="26"/>
-		<Pane-26 Type="2" DockingCX="200" DockingCY="120" Horiz="1" Panes="1" Pane-1="27"/>
-		<Pane-27 Type="1" DockingCX="200" DockingCY="120" Panes="0"/>
-		<Pane-28 Type="2" DockingCY="649" Panes="1" Pane-1="29"/>
-		<Pane-29 Type="2" DockingCY="636" Horiz="1" Panes="2" Pane-1="30" Pane-2="31"/>
-		<Pane-30 Type="1" DockingCX="200" DockingCY="120" Panes="0"/>
-		<Pane-31 Type="2" DockingCX="1193" Panes="2" Pane-1="32" Pane-2="36"/>
-		<Pane-32 Type="2" DockingCY="558" Horiz="1" Panes="3" Pane-1="33" Pane-2="34" Pane-3="35"/>
-		<Pane-33 Type="1" DockingCX="200" DockingCY="120" Panes="2" Selected="8" Pane-1="8" Pane-2="1"/>
-		<Pane-34 Type="4" DockingCX="1220"/>
-		<Pane-35 Type="1" DockingCX="245" DockingCY="120" Panes="0"/>
-		<Pane-36 Type="2" DockingCX="1455" DockingCY="193" Horiz="1" Panes="1" Pane-1="37"/>
-		<Pane-37 Type="1" DockingCX="1013" DockingCY="193" Panes="6" Selected="3" Pane-1="2" Pane-2="3" Pane-3="4" Pane-4="7" Pane-5="11" Pane-6="10"/>
+		<Summary Panes="39" TopContainer="30" Client="36"/>
+		<Pane-1 Type="0" DockingCX="200" DockingCY="120" Title="属性\n\n" ID="4001" DockingHolder="35" LastHolder="35"/>
+		<Pane-2 Type="0" DockingCX="200" DockingCY="120" Title="运行\n输出窗口\n" ID="30000" DockingHolder="39" LastHolder="39"/>
+		<Pane-3 Type="0" DockingCX="200" DockingCY="120" Title="调试\n\n" ID="30001" DockingHolder="39" FloatingHolder="29" LastHolder="39"/>
+		<Pane-4 Type="0" DockingCX="200" DockingCY="120" Title="信息\n\n" ID="30002" DockingHolder="39" LastHolder="39"/>
+		<Pane-5 Type="0" DockingCX="245" DockingCY="120" Title="动态帮助\n\n" ID="10014" DockingHolder="37" LastHolder="37"/>
+		<Pane-6 Type="0" DockingCX="200" DockingCY="120" Title="查找替换\n\n" ID="10002" DockingHolder="32" FloatingHolder="20" LastHolder="20"/>
+		<Pane-7 Type="0" DockingCX="200" DockingCY="120" Title="查找结果\n\n" ID="10003" DockingHolder="39" FloatingHolder="23" LastHolder="39"/>
+		<Pane-8 Type="0" DockingCX="200" DockingCY="120" Title="文件\n\n" ID="10006" DockingHolder="35" FloatingHolder="26" LastHolder="35"/>
+		<Pane-9 Type="0" DockingCX="200" DockingCY="120" Title="消息\n\n" ID="10011" DockingHolder="35" LastHolder="35"/>
+		<Pane-10 Type="0" DockingCX="200" DockingCY="120" Title="断点\n\n" ID="30011" DockingHolder="39" LastHolder="39"/>
+		<Pane-11 Type="0" DockingCX="200" DockingCY="120" Title="书签\n\n" ID="30010" DockingHolder="39" LastHolder="39"/>
+		<Pane-12 Type="0" DockingCX="200" DockingCY="120" Title="控制台\n\n" ID="10013" DockingHolder="39" LastHolder="39"/>
+		<Pane-13 Type="0" DockingCX="200" DockingCY="120" Title="工程\n\n" ID="10008" DockingHolder="35" LastHolder="35"/>
+		<Pane-14 Type="0" DockingCX="200" DockingCY="120" Title="任务\n\n" ID="10009" DockingHolder="35" LastHolder="35"/>
+		<Pane-15 Type="5" Direction="0" Panes="0"/>
+		<Pane-16 Type="5" Direction="1" Panes="1" Pane-1="17"/>
+		<Pane-17 Type="1" DockingCX="245" DockingCY="120" Panes="1" Selected="5" Pane-1="5"/>
+		<Pane-18 Type="3" WindowRectTopPos="112" WindowRectBottomPos="502" WindowRectLeftPos="781" WindowRectRightPos="1184" TopContaner="19"/>
+		<Pane-19 Type="2" DockingCX="200" DockingCY="120" Horiz="1" Panes="1" Pane-1="20"/>
+		<Pane-20 Type="1" DockingCX="200" DockingCY="120" Panes="0"/>
+		<Pane-21 Type="3" WindowRectTopPos="636" WindowRectBottomPos="829" WindowRectLeftPos="65" WindowRectRightPos="1447" ExpandedHeight="193" TopContaner="22"/>
+		<Pane-22 Type="2" DockingCX="200" DockingCY="120" Horiz="1" Panes="1" Pane-1="23"/>
+		<Pane-23 Type="1" DockingCX="200" DockingCY="120" Panes="0"/>
+		<Pane-24 Type="3" WindowRectTopPos="161" WindowRectBottomPos="281" WindowRectLeftPos="268" WindowRectRightPos="468" TopContaner="25"/>
+		<Pane-25 Type="2" DockingCX="200" DockingCY="120" Horiz="1" Panes="1" Pane-1="26"/>
+		<Pane-26 Type="1" DockingCX="200" DockingCY="120" Panes="0"/>
+		<Pane-27 Type="3" WindowRectTopPos="718" WindowRectBottomPos="911" WindowRectLeftPos="64" WindowRectRightPos="1446" TopContaner="28"/>
+		<Pane-28 Type="2" DockingCX="200" DockingCY="120" Horiz="1" Panes="1" Pane-1="29"/>
+		<Pane-29 Type="1" DockingCX="200" DockingCY="120" Panes="0"/>
+		<Pane-30 Type="2" DockingCY="649" Horiz="1" Panes="1" Pane-1="31"/>
+		<Pane-31 Type="2" DockingCY="636" Horiz="1" Panes="2" Pane-1="32" Pane-2="33"/>
+		<Pane-32 Type="1" DockingCX="200" DockingCY="120" Panes="0"/>
+		<Pane-33 Type="2" DockingCX="1193" DockingCY="553" Panes="2" Pane-1="34" Pane-2="38"/>
+		<Pane-34 Type="2" DockingCY="385" Horiz="1" Panes="3" Pane-1="35" Pane-2="36" Pane-3="37"/>
+		<Pane-35 Type="1" DockingCX="224" DockingCY="120" Panes="4" Selected="8" Pane-1="8" Pane-2="1" Pane-3="13" Pane-4="14"/>
+		<Pane-36 Type="4" DockingCX="919"/>
+		<Pane-37 Type="1" DockingCX="245" DockingCY="120" Panes="0"/>
+		<Pane-38 Type="2" DockingCX="1455" DockingCY="164" Horiz="1" Panes="1" Pane-1="39"/>
+		<Pane-39 Type="1" DockingCX="1013" DockingCY="193" Panes="6" Selected="3" Pane-1="2" Pane-2="3" Pane-3="4" Pane-4="7" Pane-5="11" Pane-6="10"/>
 	</DockingPane>
 </Settings>
