@@ -55,14 +55,14 @@ body TLFAppPage::ProcessFormValue {name value} {
 #-------------------------------------------------------------
 body TLFAppPage::OnCreate {} {
 
-	set vciprj [vci_exec plat GetObjectByInstanceName "###project###"]
-	set tclvciprj [vci_info -gettclvciobj "org.prj.general" $vciprj]
-	set project_name ""
-	set project_desc ""
-	set project_file ""
-	set project_path ""
-	vci_exec $tclvciprj GetActiveProject project_name
-	vci_exec $tclvciprj GetProjectInfo $project_name project_desc project_file project_path
+	#set vciprj [vci_exec plat GetObjectByInstanceName "###project###"]
+	#set tclvciprj [vci_info -gettclvciobj "org.prj.general" $vciprj]
+	set project_name [pproject name]
+	set project_desc [pproject desc]
+	set project_file [pproject file]
+	set project_path [pproject path]
+	#vci_exec $tclvciprj GetActiveProject project_name
+	#vci_exec $tclvciprj GetProjectInfo $project_name project_desc project_file project_path
 	#if {$project_path == ""} {
 	#	return
 	#}
