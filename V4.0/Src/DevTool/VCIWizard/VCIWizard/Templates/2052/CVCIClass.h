@@ -112,7 +112,6 @@ public:
 
 // attribute
 public:
-	//Tcl_Interp*	pInterp;		// 解释器
 	int			m_nInterpID;	// 解释器ID(解释器唯一标识)
 	IPlatUI*	pIPlatUI;		// 平台界面接口
 	DWORD		m_dwRunThreadId;// 脚本运行的线程ID
