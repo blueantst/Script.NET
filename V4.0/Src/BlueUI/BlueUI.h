@@ -102,6 +102,9 @@ public:
 	void	ExecProjectScript(CString strMenuAction);
 	BOOL	OpenProjectFile(CPlugIn* pPlugIn, CString strProjectFile);
 
+	// 日志操作
+	int		PLATDEBUG(CString strComponentName, int nLevel, LPCSTR lpData, int nType, int nMode);
+
 public:
 	UINT			m_curLanguage;			// 当前语言
 	BOOL			m_bIsRTL;
@@ -117,9 +120,17 @@ public:
 	CList<CTimerTask*, CTimerTask*> m_lsTimerTask; // 定时器任务队列
 	CMutex			m_MutexTimerTask;		// 定时任务操作的互斥对象
 
+	CString			m_strLogFile;			// 日志文件名
+	BOOL			m_bLogEnable;			// 是否写日志文件
+	int				m_nLogLevel;			// 日志级别
+	CCriticalSection* m_pLogCritic;			// 日志同步锁
+
 	CStringArray	m_asProject;			// 打开的工程列表
 	IProjectManager* m_pIProjectManager;	// 工程管理插件接口指针
 	IProject*		m_pIProject;			// 工程插件接口指针
+	#ifdef APPLICATION_SCRIPTDEV
+	ILicense*		m_pILicense;			// License插件接口指针
+	#endif
 	IMessageQueue*	m_pIMessageQueue;		// 消息队列插件接口指针
 
 	CXTPPopupControl	m_wndPopupControl;	// popup window object

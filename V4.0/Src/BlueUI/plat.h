@@ -185,6 +185,24 @@ struct STRU_COMCMD
 
 
 ////////////////////////////////////////////////////////////////////////////
+// Log define
+#define MAXLOGFILESIZE			(1024 << 10)	// 日志文件最大长度
+#define _LOG_DATABUFF			1024			// 日志数据缓冲区大小
+
+// 日志级别
+#define	__DEBUG					"DEBUG"
+#define	__ERROR					"ERROR"
+#define	__INFO					"INFO"
+#define	__CRITICAL				"CRITICAL"
+
+#define	LOG_FILE_NAME			"BlueUILog"		// 日志文件名
+
+// 转储文件名
+#define	LOG_CONVEY_FILE_NAME	"BlueUILogBak"
+#define	LOG_CONVEY_RULE			"BlueUILogBak.*"
+#define	LOG_MAX_SAVE_NUM		5
+
+////////////////////////////////////////////////////////////////////////////
 // PlatForm Message define
 
 #define WM_PLAT_DYNCLOSE		(WM_USER+51)
