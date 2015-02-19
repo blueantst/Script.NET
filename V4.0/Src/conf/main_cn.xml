@@ -15,6 +15,9 @@
 		<Splash enable="true" time="2000">conf/splash.bmp</Splash>
 		<Process>UI</Process>
 		<LicensePlugin>org.license.blueant</LicensePlugin>
+		<Log enable="true">
+            <Level>1</Level>
+        </Log>
 	</application>
 	<shell>
 		<File Name="Script.NET project file" Extension="snp" Class="snp.Document">
