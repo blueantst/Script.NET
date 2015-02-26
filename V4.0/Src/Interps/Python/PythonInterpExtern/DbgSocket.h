@@ -29,13 +29,13 @@ public:
 
 	// socket服务端
 	// 启动服务
-	int StartServer(unsigned short uPort = 18964);
+	int StartServer(unsigned short uPort = 17664);
 
 	// 停止服务
 	BOOL StopServer();
 
 	// 启动服务线程
-	int StartServerThread(unsigned short uPort = 18964);
+	int StartServerThread(unsigned short uPort = 17664);
 
 	// 发送消息给Socket客户端
 	int SendCmdToClient(const char *pMsg);
