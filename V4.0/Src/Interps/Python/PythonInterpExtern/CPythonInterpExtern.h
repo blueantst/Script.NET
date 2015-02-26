@@ -109,6 +109,8 @@ public:
 	BOOL TerminatePipeProcess();
 	BOOL ExecProcess(CString strExePath, CString strParam, BOOL bWaitEnd = FALSE);
 
+	BOOL SetBreakListToDebuger(LPCTSTR lpszFile);
+
 // attribute
 public:
 	int			m_nInterpID;	// 解释器ID(解释器唯一标识)
@@ -138,6 +140,9 @@ public:
 	CMap<int,int,int,int> m_ProfileMap;	// 存储覆盖行的哈希表
 	INTERP_EXIT_FUNC*	m_lpfnExit;	// 退出回调函数
 	INTERP_DEBUG_FUNC*	m_lpfnDebug;// 调试回调函数
+
+	int			m_nCurCommand;     //当前收到的调试指令，IDB_STEPINTO，IDB_NEXT等
+	BOOL		m_bFirstLineNo;	// 是否开始执行之后到第一行的位置
 
 	int			m_nOutputVar;      // 变量窗口ID
 	int			m_nOutputObject;   // 对象窗口ID

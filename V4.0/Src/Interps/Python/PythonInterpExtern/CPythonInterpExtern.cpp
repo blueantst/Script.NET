@@ -145,6 +145,7 @@ CPythonInterpExtern::CPythonInterpExtern()
 	m_bPipeProcessTerminated = FALSE;
 	m_hPipeWrite	= NULL;
 	m_hPipeRead		= NULL;
+	m_bFirstLineNo	= FALSE;
 	g_InterpList.AddTail(this);
 }
 
@@ -446,7 +447,7 @@ BOOL CPythonInterpExtern::RunDebugServerWithPipe(CString strExePath, CString str
 	}
 
 	// 首先等待socket连接
-	int nWaitTime = 10;
+	int nWaitTime = 20;
 	while(!CDebugSocket::Instance()->IsConnect() && (nWaitTime > 0))
 	{
 		CPythonInterpExtern::Instance()->DEBUG_OUTF(LOG_LEVEL_DEBUG, "RunDebugServerWithPipe, wait debug socket connect");
@@ -459,14 +460,20 @@ BOOL CPythonInterpExtern::RunDebugServerWithPipe(CString strExePath, CString str
 	{
 		CPythonInterpExtern::Instance()->DEBUG_OUTF(LOG_LEVEL_ERROR, "RunDebugServerWithPipe, debug socket is not connect");
 		TerminatePipeProcess();
+		if(pIPlatUI)
+		{
+			pIPlatUI->OutputSet(nOutputId, "COLOR=255,0,0");	// Set output color
+			pIPlatUI->Output(nOutputId, "Connect to debug service failed!");
+		}
 		return FALSE;
 	}
 
 	//SendCmdToDebugProcess("l");
 	//SendCmdToDebugProcess("w");
-
-	//设置当前状态为中断状态
-	//SetRunState(SCRIPT_STATE_BREAK);
+	if(SCRIPT_RUN_DEBUG_GO == m_nRunMode)	// 断点调试运行模式
+	{
+		SendCmdToDebugProcess("continue");
+	}
 
 	char buffer[4096] = {0};
 	DWORD bytesRead;
@@ -645,8 +652,23 @@ int CPythonInterpExtern::DbgSocketMsgProcess(void *pData)
 
 	CString strDbgMsg = (char*)pData;
 	strDbgMsg.TrimLeft();
+	int nPos = strDbgMsg.Find("[RMDBG]");
+	strDbgMsg.Delete(0, nPos);
+	nPos = strDbgMsg.Find("\n");
+	if(nPos != -1)
+	{
+		strDbgMsg = strDbgMsg.Left(nPos);
+		strDbgMsg.TrimRight();
+	}
 	if(strDbgMsg.Find("[RMDBG][LINE]") == 0)	// 显示当前行
 	{
+		// 如果是调试状态执行到第一行,则需要初始化断点信息
+		if(!CPythonInterpExtern::Instance()->m_bFirstLineNo)
+		{
+			CPythonInterpExtern::Instance()->m_bFirstLineNo = TRUE;
+			CPythonInterpExtern::Instance()->SetBreakListToDebuger(CPythonInterpExtern::Instance()->GetScriptFile());
+		}
+
 		strDbgMsg.Delete(0, 13);
 		CString strFileName,strLineNo;
 		GetStringKeyValue(strDbgMsg, "f", strFileName);
@@ -685,6 +707,8 @@ int CPythonInterpExtern::DbgSocketMsgProcess(void *pData)
 			{
 				CPythonInterpExtern::Instance()->m_lpfnDebug(IDB_USER_SETCURRENTLINE, strFileName, atoi(strLineNo));
 			}
+
+			// 刷新调试信息窗口
 		}
 	}
 
@@ -732,6 +756,8 @@ int __stdcall CPythonInterpExtern::RunScriptFile(LPCTSTR lpszPathName)
 
 	m_nRunState = SCRIPT_STATE_RUN;
 
+	m_bFirstLineNo = FALSE;
+
 	DEBUG_OUTF(LOG_LEVEL_DEBUG, "CPythonInterpExtern::RunScriptFile %s", lpszPathName);
 
 	////////////////////////////////////////////
@@ -759,7 +785,6 @@ int __stdcall CPythonInterpExtern::RunScriptFile(LPCTSTR lpszPathName)
 		CDebugSocket::Instance()->StartServerThread();
 
 		Sleep(100);
-		//Sleep(30000);
 
 		if(!RunDebugServerWithPipe(strPythonExeFile, strScriptCmd))
 		{
@@ -979,11 +1004,11 @@ int __stdcall CPythonInterpExtern::GetKeyWordList(LPCTSTR lpszType, CStringArray
 int __stdcall CPythonInterpExtern::SetDebugEvent(int nEvent, int nParam, LPCTSTR lpszParam)
 {
 	// TODO: Add your code here
+	m_nCurCommand = nEvent;
 	CString strParam = lpszParam;
 
 	if(nEvent == IDB_STOP)
 	{
-		//sprintf(szTclCmd, "td -stop");
 		// 通过socket发送命令给调试进程
 		SendCmdToDebugProcess("sysexit");
 		Sleep(200);
@@ -992,34 +1017,36 @@ int __stdcall CPythonInterpExtern::SetDebugEvent(int nEvent, int nParam, LPCTSTR
 	}else
 	if(nEvent == IDB_NEXT)
 	{
-		//sprintf(szTclCmd, "td -next");
 		SendCmdToDebugProcess("continue");
 	}else
 	if(nEvent == IDB_GOTO)
 	{
+		if(nParam > 0)
+		{
+			// 执行到指定的行
+			CString strCmd;
+			strCmd.Format("jump %d", nParam);
+			SendCmdToDebugProcess(strCmd);
+		}
+
 		if(strParam.GetLength() == 0)
 		{
 			// 行断点
-			//sprintf(szTclCmd, "td -goto *%d", nParam);
 		}else
 		{
 			// 命名断点
-			//sprintf(szTclCmd, "td -goto #%s", lpszParam);
 		}
 	}else
 	if(nEvent == IDB_STEPINTO)
 	{
-		//sprintf(szTclCmd, "td -step into");
 		SendCmdToDebugProcess("step");
 	}else
 	if(nEvent == IDB_SETPOUT)
 	{
-		//sprintf(szTclCmd, "td -step return");
-		SendCmdToDebugProcess("next");
+		SendCmdToDebugProcess("return");
 	}else
 	if(nEvent == IDB_STEP)
 	{
-		//sprintf(szTclCmd, "td -step");
 		SendCmdToDebugProcess("next");
 	}else
 	if(nEvent == IDB_END)
@@ -1050,6 +1077,11 @@ int __stdcall CPythonInterpExtern::SetBreakList(LPCTSTR lpszFile, CUIntArray& au
 		m_auBreakList.Add(auBreaks[i]);
 	}
 
+	//if(CDebugSocket::Instance()->IsConnect())
+	{
+		SetBreakListToDebuger(GetScriptFile());
+	}
+
 	return 0;
 }
 
@@ -1064,6 +1096,25 @@ int __stdcall CPythonInterpExtern::GetBreakList(LPCTSTR lpszFile, CUIntArray& au
 	}
 
 	return 0;
+}
+
+// 更新断点到调试器
+BOOL CPythonInterpExtern::SetBreakListToDebuger(LPCTSTR lpszFile)
+{
+	CString strCmd;
+	// 首先清除所有断点
+	strCmd.Format("clear %s", lpszFile);
+	SendCmdToDebugProcess(strCmd);
+
+	// 设置断点
+	for(int i=0; i<m_auBreakList.GetSize(); i++)
+	{
+		CString strCmd;
+		strCmd.Format("break %s:%d", lpszFile, m_auBreakList.GetAt(i));
+		SendCmdToDebugProcess(strCmd);
+	}
+
+	return TRUE;
 }
 
 // 获取是否允许覆盖率分析
@@ -1237,6 +1288,7 @@ int __stdcall CPythonInterpExtern::RefreshDebugWindow(LPCTSTR lpszWindow, BOOL b
 
 	if(bWindowVar)
 	{
+		//SendCmdToDebugProcess("print_stack");
 		//RunCommand(_T("global _plat_Tcl_WatchVariables;eval $_plat_Tcl_WatchVariables"));
 		if(bActive)
 		{
@@ -1251,6 +1303,8 @@ int __stdcall CPythonInterpExtern::RefreshDebugWindow(LPCTSTR lpszWindow, BOOL b
 	}
 	if(bWindowStack)
 	{
+		// 显示堆栈
+		//SendCmdToDebugProcess("print_stack");
 	}
 
 	return TRUE;
