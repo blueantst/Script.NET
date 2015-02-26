@@ -33,10 +33,10 @@
    </property>
 
    <runtime>
-      <library name="Bin/PythonInterp.dll">
+      <library name="Bin/PythonInterpExtern.dll">
          <export name="*"/>
       </library>
-	  <library-debug name="Bin/PythonInterp_d.dll">
+	  <library-debug name="Bin/PythonInterpExtern_d.dll">
          <export name="*"/>
       </library-debug>
 	  <interface-define></interface-define>
