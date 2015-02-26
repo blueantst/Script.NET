@@ -644,7 +644,7 @@ int CPythonInterpExtern::DbgSocketEventProcess(int nEventCode)
 	return 0;
 }
 
-// socket接收的消息回调,对命令的解析都在此函数进行
+// socket接收的消息回调,对命令的解析
 int CPythonInterpExtern::DbgSocketMsgProcess(void *pData)
 {
 	CPythonInterpExtern::Instance()->DEBUG_OUT(LOG_LEVEL_DEBUG, "socket recv msg:");
@@ -653,13 +653,30 @@ int CPythonInterpExtern::DbgSocketMsgProcess(void *pData)
 	CString strDbgMsg = (char*)pData;
 	strDbgMsg.TrimLeft();
 	int nPos = strDbgMsg.Find("[RMDBG]");
-	strDbgMsg.Delete(0, nPos);
-	nPos = strDbgMsg.Find("\n");
-	if(nPos != -1)
+	while(nPos != -1)
 	{
-		strDbgMsg = strDbgMsg.Left(nPos);
-		strDbgMsg.TrimRight();
+		strDbgMsg.Delete(0, nPos);
+		CString strSubDbgMsg = strDbgMsg;
+		int nPos1 = strSubDbgMsg.Find("\n");
+		if(nPos1 != -1)
+		{
+			strSubDbgMsg = strSubDbgMsg.Left(nPos1);
+			strSubDbgMsg.TrimRight();
+		}
+
+		DbgSocketSubMsgProcess(strSubDbgMsg);
+
+		strDbgMsg.Delete(0, 7);
+		nPos = strDbgMsg.Find("[RMDBG]");
 	}
+
+	return 0;
+}
+
+#define SEPATATOE "<<&@&>>"
+// socket接收的消息回调,对子命令的解析
+int CPythonInterpExtern::DbgSocketSubMsgProcess(CString strDbgMsg)
+{
 	if(strDbgMsg.Find("[RMDBG][LINE]") == 0)	// 显示当前行
 	{
 		// 如果是调试状态执行到第一行,则需要初始化断点信息
@@ -707,9 +724,91 @@ int CPythonInterpExtern::DbgSocketMsgProcess(void *pData)
 			{
 				CPythonInterpExtern::Instance()->m_lpfnDebug(IDB_USER_SETCURRENTLINE, strFileName, atoi(strLineNo));
 			}
-
-			// 刷新调试信息窗口
 		}
+	}else
+	if(strDbgMsg.Find("[RMDBG][STACK]") == 0)	// 显示堆栈
+	{
+		strDbgMsg.Delete(0, 14);
+		CString strFileName,strLineNo,strSubName;
+		GetStringKeyValue(strDbgMsg, "f", strFileName);
+		GetStringKeyValue(strDbgMsg, "l", strLineNo);
+		GetStringKeyValue(strDbgMsg, "n", strSubName);
+
+		CString strOutput = "";
+
+		TTREEITEM item;
+		item.hItem = NULL;
+		item.nParent = -1;
+		item.nExpand = 0;
+		item.nImage = 27;
+		item.nClickFunc = 1;
+
+		strOutput += strSubName;
+		strOutput += SEPATATOE;
+		strOutput += strFileName;
+		strOutput += SEPATATOE;
+		strOutput += strLineNo;
+
+		item.strLine = strOutput;
+		CPythonInterpExtern::Instance()->m_aItemsStack.Add(item);
+
+		CPythonInterpExtern::Instance()->pIPlatUI->SendCommand(OC_TREEOUTPUT, CPythonInterpExtern::Instance()->m_nOutputStack, (LPARAM)(LPVOID)(&CPythonInterpExtern::Instance()->m_aItemsStack));
+	}else
+	if(strDbgMsg.Find("[RMDBG][VAR][LOCAL]") == 0)	// 显示变量信息(局部变量)
+	{
+		strDbgMsg.Delete(0, 19);
+		CString strName,strValue,strType;
+		GetStringKeyValue(strDbgMsg, "n", strName);
+		GetStringKeyValue(strDbgMsg, "v", strValue);
+		GetStringKeyValue(strDbgMsg, "t", strType);
+
+		CString strOutput = "";
+
+		TTREEITEM item;
+		item.hItem = NULL;
+		item.nParent = 0;
+		item.nExpand = 0;
+		item.nImage = 5;
+		item.nClickFunc = 1;
+
+		strOutput += strName;
+		strOutput += SEPATATOE;
+		strOutput += strValue;
+		strOutput += SEPATATOE;
+		strOutput += strType;
+
+		item.strLine = strOutput;
+		CPythonInterpExtern::Instance()->m_aItemsVars.Add(item);
+
+		CPythonInterpExtern::Instance()->pIPlatUI->SendCommand(OC_TREEOUTPUT, CPythonInterpExtern::Instance()->m_nOutputVar, (LPARAM)(LPVOID)(&CPythonInterpExtern::Instance()->m_aItemsVars));
+	}else
+	if(strDbgMsg.Find("[RMDBG][VAR][GLOBAL]") == 0)	// 显示变量信息(全局变量)
+	{
+		strDbgMsg.Delete(0, 20);
+		CString strName,strValue,strType;
+		GetStringKeyValue(strDbgMsg, "n", strName);
+		GetStringKeyValue(strDbgMsg, "v", strValue);
+		GetStringKeyValue(strDbgMsg, "t", strType);
+
+		CString strOutput = "";
+
+		TTREEITEM item;
+		item.hItem = NULL;
+		item.nParent = 1;
+		item.nExpand = 0;
+		item.nImage = 5;
+		item.nClickFunc = 1;
+
+		strOutput += strName;
+		strOutput += SEPATATOE;
+		strOutput += strValue;
+		strOutput += SEPATATOE;
+		strOutput += strType;
+
+		item.strLine = strOutput;
+		CPythonInterpExtern::Instance()->m_aItemsVars.Add(item);
+
+		CPythonInterpExtern::Instance()->pIPlatUI->SendCommand(OC_TREEOUTPUT, CPythonInterpExtern::Instance()->m_nOutputVar, (LPARAM)(LPVOID)(&CPythonInterpExtern::Instance()->m_aItemsVars));
 	}
 
 	return 0;
@@ -1191,7 +1290,7 @@ int __stdcall CPythonInterpExtern::InitialDebugMode(CString& strResult)
 	pIPlatUI->OutputSet(m_nOutputVar, "ModifyStyle Horizontal Solid;ModifyStyle Vertical Solid");
 	pIPlatUI->OutputSet(m_nOutputVar, "SEPARATOR=" SEPATATOE); //设置分隔符
 	m_nOutputVar = pIPlatUI->AddOutput(strWinVar + "##GRID");
-
+/*
 	// 初始化对象窗口
 	m_nOutputObject = ::atoi(pIPlatUI->OutputGet(-1, strWinObj));
 	if(m_nOutputObject <= 0)
@@ -1226,7 +1325,7 @@ int __stdcall CPythonInterpExtern::InitialDebugMode(CString& strResult)
 	pIPlatUI->OutputSet(m_nOutputFunc, "ModifyStyle Horizontal Solid;ModifyStyle Vertical Solid");
 	pIPlatUI->OutputSet(m_nOutputFunc, "SEPARATOR=" SEPATATOE); //设置分隔符
 	m_nOutputFunc = pIPlatUI->AddOutput(strWinFunc + "##GRID");
-
+*/
 	// 初始化堆栈窗口
 	m_nOutputStack = ::atoi(pIPlatUI->OutputGet(-1, strWinStack));
 	if(m_nOutputStack <= 0)
@@ -1250,6 +1349,39 @@ int __stdcall CPythonInterpExtern::InitialDebugMode(CString& strResult)
 	pIPlatUI->ActiveOutput(m_nOutputVar);
 
 	return TRUE;
+}
+
+// 刷新变量窗口
+int CPythonInterpExtern::RefreshVarWindow()
+{
+	m_aItemsStack.RemoveAll();
+
+	CString strOutput = "";
+
+	TTREEITEM item;
+	item.hItem = NULL;
+	item.nParent = -1;
+	item.nExpand = 0;
+
+	// Locals
+	strOutput = "Locals";
+	item.strLine = strOutput;
+	item.nParent = -1;
+	item.nImage = 4;
+	item.nExpand = 1;
+	item.nClickFunc = 0;
+	m_aItemsVars.Add(item);
+
+	// Globals
+	strOutput = "Globals";
+	item.strLine = strOutput;
+	item.nParent = -1;
+	item.nImage = 4;
+	item.nExpand = 1;
+	item.nClickFunc = 0;
+	m_aItemsVars.Add(item);
+
+	return 0;
 }
 
 // 更新调试窗口信息
@@ -1281,19 +1413,16 @@ int __stdcall CPythonInterpExtern::RefreshDebugWindow(LPCTSTR lpszWindow, BOOL b
 	if(strWindow == "all")
 	{
 		bWindowVar = TRUE;
-		bWindowObject = TRUE;
+		//bWindowObject = TRUE;
 		//bWindowProc = TRUE;
 		bWindowStack = TRUE;
 	}
 
 	if(bWindowVar)
 	{
-		//SendCmdToDebugProcess("print_stack");
-		//RunCommand(_T("global _plat_Tcl_WatchVariables;eval $_plat_Tcl_WatchVariables"));
-		if(bActive)
-		{
-			//RunCommand(_T("_plat_Tcl_ActiveDebugWatch var"));
-		}
+		// 显示变量
+		m_aItemsVars.RemoveAll();
+		SendCmdToDebugProcess("print_vars");
 	}
 	if(bWindowObject)
 	{
@@ -1304,7 +1433,8 @@ int __stdcall CPythonInterpExtern::RefreshDebugWindow(LPCTSTR lpszWindow, BOOL b
 	if(bWindowStack)
 	{
 		// 显示堆栈
-		//SendCmdToDebugProcess("print_stack");
+		RefreshVarWindow();
+		SendCmdToDebugProcess("print_stack");
 	}
 
 	return TRUE;

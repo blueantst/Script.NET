@@ -46,7 +46,7 @@ void reset_dll_resource(void);
 #include "platdef.h"	// platform common define
 #include "IPlatUI.h"	// 平台功能接口
 #include "IInterp.h"	// 解释器接口头文件
-
+#include "owm.h"
 #include "DbgSocket.h"
 
 

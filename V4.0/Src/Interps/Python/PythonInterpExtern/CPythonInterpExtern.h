@@ -96,7 +96,8 @@ public:
 	static int     DbgSocketEventProcess(int nEventCode);
 
 	// 处理socket消息回调
-	static int     DbgSocketMsgProcess(void *pData); 
+	static int     DbgSocketMsgProcess(void *pData);
+	static int	   DbgSocketSubMsgProcess(CString strDbgMsg);
 
 	// socket日志回调函数
 	static void    DbgSocketLog(LPCSTR lpData);
@@ -110,6 +111,8 @@ public:
 	BOOL ExecProcess(CString strExePath, CString strParam, BOOL bWaitEnd = FALSE);
 
 	BOOL SetBreakListToDebuger(LPCTSTR lpszFile);
+
+	int RefreshVarWindow();
 
 // attribute
 public:
@@ -148,6 +151,9 @@ public:
 	int			m_nOutputObject;   // 对象窗口ID
 	int			m_nOutputFunc;	   // 函数窗口ID
 	int			m_nOutputStack;    // 堆栈窗口ID
+
+	CTTreeItemArray m_aItemsVars;	// 变量信息
+	CTTreeItemArray m_aItemsStack;	// 堆栈信息
 
 //////////////////////////////////////////////////////////////////////////
 // 要输出的功能接口
