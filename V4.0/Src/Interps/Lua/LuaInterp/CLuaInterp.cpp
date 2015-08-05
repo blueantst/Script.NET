@@ -132,7 +132,7 @@ CString GetValueString(lua_State *pLState, int nIndex)
 		strValue = LuaMakeNumber(pLState, lua_tonumber(pLState, nIndex));
 		break;
 	case LUA_TSTRING:
-		strValue.Format("%.63s", lua_tostring(pLState, nIndex));
+		strValue.Format("%s", lua_tostring(pLState, nIndex));
 		break;
 	case LUA_TTABLE:
 		strValue = LuaGetTableInfo(pLState, nIndex);
@@ -1926,7 +1926,7 @@ CString CLuaInterp::GetValueString(int nIndex)
 		strValue = LuaMakeNumber(lua_tonumber(pLState, nIndex));
 		break;
 	case LUA_TSTRING:
-		strValue.Format("%.63s", lua_tostring(pLState, nIndex));
+		strValue.Format("%s", lua_tostring(pLState, nIndex));
 		break;
 	case LUA_TTABLE:
 		strValue = LuaGetTableInfo(nIndex);
