@@ -19,6 +19,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GeneralProject", "..\..\Plu
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SciLexer", "..\..\Plugins\org.owm.scite\scintilla1.7.7\vcbuild\SciLexer.vcproj", "{B4EEA8BD-FA87-449A-B87A-704E8C322A7B}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DuiVisionDesigner", "..\..\Plugins\org.owm.duivision\DuiVisionDesigner\DuiVisionDesigner.vcproj", "{C0E05E37-261B-45BD-81DF-E3DAE7EAA70F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -80,6 +82,12 @@ Global
 		{B4EEA8BD-FA87-449A-B87A-704E8C322A7B}.PDBRelease|Win32.Build.0 = Release|Win32
 		{B4EEA8BD-FA87-449A-B87A-704E8C322A7B}.Release|Win32.ActiveCfg = Release|Win32
 		{B4EEA8BD-FA87-449A-B87A-704E8C322A7B}.Release|Win32.Build.0 = Release|Win32
+		{C0E05E37-261B-45BD-81DF-E3DAE7EAA70F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C0E05E37-261B-45BD-81DF-E3DAE7EAA70F}.Debug|Win32.Build.0 = Debug|Win32
+		{C0E05E37-261B-45BD-81DF-E3DAE7EAA70F}.PDBRelease|Win32.ActiveCfg = Release|Win32
+		{C0E05E37-261B-45BD-81DF-E3DAE7EAA70F}.PDBRelease|Win32.Build.0 = Release|Win32
+		{C0E05E37-261B-45BD-81DF-E3DAE7EAA70F}.Release|Win32.ActiveCfg = Release|Win32
+		{C0E05E37-261B-45BD-81DF-E3DAE7EAA70F}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
