@@ -4,6 +4,7 @@
 -->
 <plugins id="default">
 	<PlugIns AutoLoad="false">
+		<PlugIn name="DuiVisionPlugin" enable="true">org.vci.duivision</PlugIn>
 		<PlugIn name="OwmScite" enable="true">org.owm.scite</PlugIn>
 		<PlugIn name="HtmlView" enable="true">org.owm.htmlview</PlugIn>
 		<PlugIn name="Terminal" enable="true">org.owm.terminal</PlugIn>
