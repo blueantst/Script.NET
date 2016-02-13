@@ -116,17 +116,20 @@ CString CDuiVisionDesignerApp::GetModulePath()
 	return szPath;
 }
 
+// DuiVision插件接口对象ID定义
+#define UIID_IDuiPluginPanel _T("IDuiPluginPanel"	)	// panel对象
+
 /////////////////////////////////////////////////////////////////////////////
 // 加载DuiVision插件
 /////////////////////////////////////////////////////////////////////////////
-typedef LPVOID (*TYPEOF_CreateObject)(LPCSTR lpcsInterfaceName, LPVOID* lppVciControl, LPVOID lpInitData);
+typedef LPVOID (*TYPEOF_CreateObject)(LPCTSTR lpcsInterfaceName, LPVOID* lppVciControl, LPVOID lpInitData);
 BOOL CDuiVisionDesignerApp::LoadDuiPlugin()
 {
 	CString strPluginFile = GetModulePath();
 #ifdef _DEBUG
-	strPluginFile += "\\DuiPluginDemo_d.dll";
+	strPluginFile += "\\DuiVisionDesignerPlugin_d.dll";
 #else
-	strPluginFile += "\\DuiPluginDemo.dll";
+	strPluginFile += "\\DuiVisionDesignerPlugin.dll";
 #endif
 
 	// 加载插件动态库
@@ -152,7 +155,7 @@ BOOL CDuiVisionDesignerApp::LoadDuiPlugin()
 	TRACE("Load DUI plugin %s succ\n", strPluginFile);
 
 	LPVOID pIVciControl = NULL;
-	m_pDuiPluginObject = (IDuiPluginPanel*)fnCreateObject(IID_IDuiPluginPanel, &pIVciControl, NULL);
+	m_pDuiPluginObject = (IDuiPluginPanel*)fnCreateObject(UIID_IDuiPluginPanel, &pIVciControl, NULL);
 	if(m_pDuiPluginObject == NULL)
 	{
 		FreeLibrary(m_hDuiPluginHandle);
