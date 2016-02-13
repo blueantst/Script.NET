@@ -116,9 +116,6 @@ CString CDuiVisionDesignerApp::GetModulePath()
 	return szPath;
 }
 
-// DuiVision插件接口对象ID定义
-#define UIID_IDuiPluginPanel _T("IDuiPluginPanel"	)	// panel对象
-
 /////////////////////////////////////////////////////////////////////////////
 // 加载DuiVision插件
 /////////////////////////////////////////////////////////////////////////////
@@ -155,7 +152,7 @@ BOOL CDuiVisionDesignerApp::LoadDuiPlugin()
 	TRACE("Load DUI plugin %s succ\n", strPluginFile);
 
 	LPVOID pIVciControl = NULL;
-	m_pDuiPluginObject = (IDuiPluginPanel*)fnCreateObject(UIID_IDuiPluginPanel, &pIVciControl, NULL);
+	m_pDuiPluginObject = (IDuiPluginPanel*)fnCreateObject(IID_IDuiPluginPanel, &pIVciControl, NULL);
 	if(m_pDuiPluginObject == NULL)
 	{
 		FreeLibrary(m_hDuiPluginHandle);
