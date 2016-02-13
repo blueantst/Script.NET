@@ -119,48 +119,37 @@ CString CDuiVisionDesignerApp::GetModulePath()
 /////////////////////////////////////////////////////////////////////////////
 // 加载DuiVision插件
 /////////////////////////////////////////////////////////////////////////////
-typedef LPVOID (*TYPEOF_CreateObject)(LPCTSTR lpcsInterfaceName, LPVOID* lppVciControl, LPVOID lpInitData);
 BOOL CDuiVisionDesignerApp::LoadDuiPlugin()
 {
-	CString strPluginFile = GetModulePath();
-#ifdef _DEBUG
-	strPluginFile += "\\DuiVisionDesignerPlugin_d.dll";
-#else
-	strPluginFile += "\\DuiVisionDesignerPlugin.dll";
-#endif
-
-	// 加载插件动态库
-	m_hDuiPluginHandle = LoadLibrary(strPluginFile);
-	if(m_hDuiPluginHandle == NULL)
+	if(m_pIPlatUI == NULL)
 	{
-		// 加载失败
-		DWORD dwError = ::GetLastError();
-		TRACE("Load DUI plugin %s failed, errorcode is %u\n", strPluginFile, dwError);
 		return FALSE;
 	}
 
-	// 加载VCI组件对象
-	// 获取函数指针
-	TYPEOF_CreateObject fnCreateObject = (TYPEOF_CreateObject)GetProcAddress(m_hDuiPluginHandle, "CreateObject");
-	if(fnCreateObject == NULL)
+	CString strDuiVisionPluginObjectName;	// DuiVision插件的VCI对象名(通过配置文件加载)
+	CString strDefaultValue;
+	m_pIPlatUI->GetVciParameter("org.owm.duivisiondesigner", "DuiVisionPluginObjectName", strDuiVisionPluginObjectName, strDefaultValue);
+	if(strDuiVisionPluginObjectName.IsEmpty())
 	{
-		FreeLibrary(m_hDuiPluginHandle);
-		TRACE("Load DUI plugin %s failed, not found CreateObject function\n", strPluginFile);
+		TRACE("Get DuiVision plugin object name from owm parameter failed\n");
 		return FALSE;
 	}
 
-	TRACE("Load DUI plugin %s succ\n", strPluginFile);
-
-	LPVOID pIVciControl = NULL;
-	m_pDuiPluginObject = (IDuiPluginPanel*)fnCreateObject(IID_IDuiPluginPanel, &pIVciControl, NULL);
+	// 如果DuiVision插件对象已经加载过,则使用已经加载的对象
+	m_pDuiPluginObject = (IDuiPluginPanel*)m_pIPlatUI->GetObjectByInstanceName(strDuiVisionPluginObjectName);
 	if(m_pDuiPluginObject == NULL)
 	{
-		FreeLibrary(m_hDuiPluginHandle);
-		TRACE("Create DUI plugin %s object failed\n", strPluginFile);
+		// 如果DuiVision插件对象没有加载过,则加载新的插件对象
+		m_pDuiPluginObject = (IDuiPluginPanel*)m_pIPlatUI->CreateVciObject("org.vci.duivision", strDuiVisionPluginObjectName);
+	}
+
+	if(m_pDuiPluginObject == NULL)
+	{
+		TRACE("Load DuiVision plugin object failed\n");
 		return FALSE;
 	}
 
-	TRACE("Create DUI plugin %s object succ\n", strPluginFile);
+	TRACE("Load DuiVision plugin object succ\n");
 	return TRUE;
 }
 
@@ -169,20 +158,16 @@ BOOL CDuiVisionDesignerApp::LoadDuiPlugin()
 /////////////////////////////////////////////////////////////////////////////
 BOOL CDuiVisionDesignerApp::ReleaseDuiPlugin()
 {
-	// 释放界面插件对象和动态库
-	if(m_pDuiPluginObject != NULL)
+	if(m_pIPlatUI == NULL)
 	{
-		m_pDuiPluginObject->Release();
-		m_pDuiPluginObject = NULL;
+		return FALSE;
 	}
 
-	if(m_hDuiPluginHandle != NULL)
-	{
-		FreeLibrary(m_hDuiPluginHandle);
-		m_hDuiPluginHandle = NULL;
-	}
+	// 释放DuiVision插件对象实例
+	BOOL bRet = m_pIPlatUI->ReleaseVciObject(m_pDuiPluginObject, FALSE);
+	TRACE("Release DuiVision plugin object\n");
 
-	return TRUE;
+	return bRet;
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -407,9 +392,6 @@ BOOL InstallOWM(OWM_LINKAGE& ol)
 	// 把OWM结构拷贝到本地备份
 	memcpy(&(theApp.m_ol), &ol, sizeof(OWM_LINKAGE));
 
-	// 加载DuiVision插件
-	theApp.LoadDuiPlugin();
-
 	return TRUE;
 }
 
@@ -423,9 +405,6 @@ void TerminateOWM(void)
 		delete theApp.m_pDocTemplate;
 		theApp.m_pDocTemplate = NULL;
 	}
-
-	// 释放DuiVision插件
-	theApp.ReleaseDuiPlugin();
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -723,6 +702,8 @@ int RegisterOption(COWMOptionArray& aOWMOption)
 int InitOWM()
 {
 	// 注:在下面添加你的代码
+	// 加载DuiVision插件
+	theApp.LoadDuiPlugin();
 
 	return 0;
 }
@@ -733,6 +714,8 @@ int InitOWM()
 int DoneOWM()
 {
 	// 注:在下面添加你的代码
+	// 释放DuiVision插件
+	theApp.ReleaseDuiPlugin();
 
 	return 0;
 }
