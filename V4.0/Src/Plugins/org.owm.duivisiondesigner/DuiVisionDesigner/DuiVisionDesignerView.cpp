@@ -47,11 +47,16 @@ END_MESSAGE_MAP()
 CDuiVisionDesignerView::CDuiVisionDesignerView()
 {
 	// TODO: add construction code here
-
+	m_pDuiPluginPanelObject = NULL;
 }
 
 CDuiVisionDesignerView::~CDuiVisionDesignerView()
 {
+	// 释放DuiVision插件的Panel对象实例
+	if((theApp.m_pIPlatUI != NULL) && (m_pDuiPluginPanelObject != NULL))
+	{
+		theApp.m_pIPlatUI->ReleaseVciObject(m_pDuiPluginPanelObject, FALSE);
+	}
 }
 
 BOOL CDuiVisionDesignerView::PreCreateWindow(CREATESTRUCT& cs)
@@ -93,10 +98,9 @@ void CDuiVisionDesignerView::OnDraw(CDC* pDC)
 	if (memDC.GetSafeHdc() != NULL)
 	{
 		// first drop the controls on the memory dc
-		IDuiPluginPanel* pDuiPluginObject = theApp.m_pDuiPluginObject;
-		if(pDuiPluginObject)
+		if(m_pDuiPluginPanelObject)
 		{
-			pDuiPluginObject->DrawControl(memDC, rect);
+			m_pDuiPluginPanelObject->DrawControl(memDC, rect);
 			// finally send the result to the display
 			pDC->BitBlt(0, 0, rect.Width(), rect.Height(), 
 				  &memDC, 0, 0, SRCCOPY) ;
@@ -105,10 +109,10 @@ void CDuiVisionDesignerView::OnDraw(CDC* pDC)
 
 	memDC.SelectObject(oldBitmap) ;
 
-	/*IDuiPluginPanel* pDuiPluginObject = theApp.m_pDuiPluginObject;
-	if(pDuiPluginObject)
+	/*
+	if(m_pDuiPluginPanelObject)
 	{
-		pDuiPluginObject->DrawControl(*pDC, rect);
+		m_pDuiPluginPanelObject->DrawControl(*pDC, rect);
 	}*/
 	
 }
@@ -178,7 +182,7 @@ void CDuiVisionDesignerView::OnActivateView(BOOL bActivate, CView* pActivateView
 {
 	if (bActivate)
 	{
-		// 在属性窗口显示图像信息
+		// 在属性窗口显示文档信息
 		GetDocument()->RefreshDocProperty();
 	}
 /*
@@ -219,31 +223,41 @@ void CDuiVisionDesignerView::OnInitialUpdate()
 	CView::OnInitialUpdate();
 
 	// TODO: 在此添加专用代码和/或调用基类
-	IDuiPluginPanel* pDuiPluginObject = theApp.m_pDuiPluginObject;
-	if(pDuiPluginObject)
+	if(theApp.m_pIPlatUI == NULL)
 	{
-		HWND hWnd = GetSafeHwnd();
-		CDuiVisionDesignerDoc* pDoc = GetDocument();
-		if(pDoc)
-		{
-			CString strResourceXml = "";
-			CString strFile = pDoc->GetPathName();
-			/*strFile.MakeLower();
-			strFile.Replace("\\", "/");
-			int nPos = strFile.ReverseFind('/');
-			if(nPos != -1)
-			{
-				CString strFileName = strFile;
-				CString strDir = strFile.Left(nPos);
-				strFileName.Delete(0, nPos+1);
-				strResourceXml = strDir;
-				strResourceXml += "xml\\resource.xml";
-			}*/
-			CRect rect;
-			GetClientRect(rect);
-			pDuiPluginObject->OnInit(IDD_ABOUTBOX, hWnd, strFile, rect);
-		}
+		return;
 	}
+
+	HWND hWnd = GetSafeHwnd();
+	CDuiVisionDesignerDoc* pDoc = GetDocument();
+	if(pDoc == NULL)
+	{
+		return;
+	}
+
+	//CString strResourceXml = "";
+	CString strFile = pDoc->GetPathName();
+
+	// 每个窗口需要创建一个DuiVision插件的Panel对象实例
+	m_pDuiPluginPanelObject = (IDuiPluginPanel*)theApp.m_pIPlatUI->CreateVciObject("org.vci.duivision", strFile);
+	if(m_pDuiPluginPanelObject)
+	{
+		CRect rect;
+		GetClientRect(rect);
+		m_pDuiPluginPanelObject->OnInit(IDD_ABOUTBOX, hWnd, strFile, rect);
+	}
+
+	/*strFile.MakeLower();
+	strFile.Replace("\\", "/");
+	int nPos = strFile.ReverseFind('/');
+	if(nPos != -1)
+	{
+		CString strFileName = strFile;
+		CString strDir = strFile.Left(nPos);
+		strFileName.Delete(0, nPos+1);
+		strResourceXml = strDir;
+		strResourceXml += "xml\\resource.xml";
+	}*/
 }
 
 // 窗口大小变化
@@ -252,22 +266,20 @@ void CDuiVisionDesignerView::OnSize(UINT nType, int cx, int cy)
 	CView::OnSize(nType, cx, cy);
 
 	// TODO: 在此处添加消息处理程序代码
-	IDuiPluginPanel* pDuiPluginObject = theApp.m_pDuiPluginObject;
-	if(pDuiPluginObject)
+	if(m_pDuiPluginPanelObject)
 	{
 		CRect rect;
 		GetClientRect(rect);
-		pDuiPluginObject->SetRect(rect);
+		m_pDuiPluginPanelObject->SetRect(rect);
 	}
 }
 
 void CDuiVisionDesignerView::OnMouseMove(UINT nFlags, CPoint point)
 {
 	// TODO: 在此添加消息处理程序代码和/或调用默认值
-	IDuiPluginPanel* pDuiPluginObject = theApp.m_pDuiPluginObject;
-	if(pDuiPluginObject)
+	if(m_pDuiPluginPanelObject)
 	{
-		pDuiPluginObject->OnMouseMove(nFlags, point);
+		m_pDuiPluginPanelObject->OnMouseMove(nFlags, point);
 	}
 
 	CView::OnMouseMove(nFlags, point);
@@ -276,10 +288,9 @@ void CDuiVisionDesignerView::OnMouseMove(UINT nFlags, CPoint point)
 void CDuiVisionDesignerView::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	// TODO: 在此添加消息处理程序代码和/或调用默认值
-	IDuiPluginPanel* pDuiPluginObject = theApp.m_pDuiPluginObject;
-	if(pDuiPluginObject)
+	if(m_pDuiPluginPanelObject)
 	{
-		pDuiPluginObject->OnLButtonDown(nFlags, point);
+		m_pDuiPluginPanelObject->OnLButtonDown(nFlags, point);
 	}
 
 	CView::OnLButtonDown(nFlags, point);
@@ -288,10 +299,9 @@ void CDuiVisionDesignerView::OnLButtonDown(UINT nFlags, CPoint point)
 void CDuiVisionDesignerView::OnLButtonUp(UINT nFlags, CPoint point)
 {
 	// TODO: 在此添加消息处理程序代码和/或调用默认值
-	IDuiPluginPanel* pDuiPluginObject = theApp.m_pDuiPluginObject;
-	if(pDuiPluginObject)
+	if(m_pDuiPluginPanelObject)
 	{
-		pDuiPluginObject->OnLButtonUp(nFlags, point);
+		m_pDuiPluginPanelObject->OnLButtonUp(nFlags, point);
 	}
 
 	CView::OnLButtonUp(nFlags, point);
@@ -300,10 +310,9 @@ void CDuiVisionDesignerView::OnLButtonUp(UINT nFlags, CPoint point)
 void CDuiVisionDesignerView::OnLButtonDblClk(UINT nFlags, CPoint point)
 {
 	// TODO: 在此添加消息处理程序代码和/或调用默认值
-	IDuiPluginPanel* pDuiPluginObject = theApp.m_pDuiPluginObject;
-	if(pDuiPluginObject)
+	if(m_pDuiPluginPanelObject)
 	{
-		pDuiPluginObject->OnLButtonDblClk(nFlags, point);
+		m_pDuiPluginPanelObject->OnLButtonDblClk(nFlags, point);
 	}
 
 	CView::OnLButtonDblClk(nFlags, point);
@@ -339,10 +348,9 @@ BOOL CDuiVisionDesignerView::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt)
 	zDelta = abs(zDelta);
 
 	BOOL bRet = FALSE;
-	IDuiPluginPanel* pDuiPluginObject = theApp.m_pDuiPluginObject;
-	if(pDuiPluginObject)
+	if(m_pDuiPluginPanelObject)
 	{
-		bRet = pDuiPluginObject->OnScroll(TRUE, nFlag, pt);
+		bRet = m_pDuiPluginPanelObject->OnScroll(TRUE, nFlag, pt);
 	}
 
 	return bRet;//CView::OnMouseWheel(nFlags, zDelta, pt);
@@ -351,10 +359,9 @@ BOOL CDuiVisionDesignerView::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt)
 void CDuiVisionDesignerView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
 	// TODO: 在此添加消息处理程序代码和/或调用默认值
-	IDuiPluginPanel* pDuiPluginObject = theApp.m_pDuiPluginObject;
-	if(pDuiPluginObject)
+	if(m_pDuiPluginPanelObject)
 	{
-		pDuiPluginObject->OnKeyDown(nChar, nRepCnt, nFlags);
+		m_pDuiPluginPanelObject->OnKeyDown(nChar, nRepCnt, nFlags);
 	}
 
 	CView::OnKeyDown(nChar, nRepCnt, nFlags);

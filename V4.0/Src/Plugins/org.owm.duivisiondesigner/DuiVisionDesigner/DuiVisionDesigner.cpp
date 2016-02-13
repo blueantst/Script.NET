@@ -71,7 +71,7 @@ CDuiVisionDesignerApp::CDuiVisionDesignerApp()
 	m_pDocTemplate = NULL;
 	m_pIPlatUI = NULL;
 	m_hDuiPluginHandle = NULL;
-	m_pDuiPluginObject = NULL;
+	//m_pDuiPluginObject = NULL;
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -114,60 +114,6 @@ CString CDuiVisionDesignerApp::GetModulePath()
 	szPath = szPath.Left(szPath.GetLength() - 1);
 
 	return szPath;
-}
-
-/////////////////////////////////////////////////////////////////////////////
-// 加载DuiVision插件
-/////////////////////////////////////////////////////////////////////////////
-BOOL CDuiVisionDesignerApp::LoadDuiPlugin()
-{
-	if(m_pIPlatUI == NULL)
-	{
-		return FALSE;
-	}
-
-	CString strDuiVisionPluginObjectName;	// DuiVision插件的VCI对象名(通过配置文件加载)
-	CString strDefaultValue;
-	m_pIPlatUI->GetVciParameter("org.owm.duivisiondesigner", "DuiVisionPluginObjectName", strDuiVisionPluginObjectName, strDefaultValue);
-	if(strDuiVisionPluginObjectName.IsEmpty())
-	{
-		TRACE("Get DuiVision plugin object name from owm parameter failed\n");
-		return FALSE;
-	}
-
-	// 如果DuiVision插件对象已经加载过,则使用已经加载的对象
-	m_pDuiPluginObject = (IDuiPluginPanel*)m_pIPlatUI->GetObjectByInstanceName(strDuiVisionPluginObjectName);
-	if(m_pDuiPluginObject == NULL)
-	{
-		// 如果DuiVision插件对象没有加载过,则加载新的插件对象
-		m_pDuiPluginObject = (IDuiPluginPanel*)m_pIPlatUI->CreateVciObject("org.vci.duivision", strDuiVisionPluginObjectName);
-	}
-
-	if(m_pDuiPluginObject == NULL)
-	{
-		TRACE("Load DuiVision plugin object failed\n");
-		return FALSE;
-	}
-
-	TRACE("Load DuiVision plugin object succ\n");
-	return TRUE;
-}
-
-/////////////////////////////////////////////////////////////////////////////
-// 释放DuiVision插件
-/////////////////////////////////////////////////////////////////////////////
-BOOL CDuiVisionDesignerApp::ReleaseDuiPlugin()
-{
-	if(m_pIPlatUI == NULL)
-	{
-		return FALSE;
-	}
-
-	// 释放DuiVision插件对象实例
-	BOOL bRet = m_pIPlatUI->ReleaseVciObject(m_pDuiPluginObject, FALSE);
-	TRACE("Release DuiVision plugin object\n");
-
-	return bRet;
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -702,8 +648,6 @@ int RegisterOption(COWMOptionArray& aOWMOption)
 int InitOWM()
 {
 	// 注:在下面添加你的代码
-	// 加载DuiVision插件
-	theApp.LoadDuiPlugin();
 
 	return 0;
 }
@@ -714,8 +658,6 @@ int InitOWM()
 int DoneOWM()
 {
 	// 注:在下面添加你的代码
-	// 释放DuiVision插件
-	theApp.ReleaseDuiPlugin();
 
 	return 0;
 }

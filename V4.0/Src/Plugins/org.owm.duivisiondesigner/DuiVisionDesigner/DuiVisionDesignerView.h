@@ -22,6 +22,8 @@ protected: // create from serialization only
 public:
 	CDuiVisionDesignerDoc* GetDocument();
 
+	IDuiPluginPanel* m_pDuiPluginPanelObject; // DUI界面插件Panel对象
+
 // Operations
 public:
 

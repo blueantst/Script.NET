@@ -27,8 +27,6 @@ public:
 
 	CString GetPlatRootPath();
 	CString GetModulePath();
-	BOOL LoadDuiPlugin();
-	BOOL ReleaseDuiPlugin();
 
 	CString	GetIniString(LPCTSTR lpszSection, LPCTSTR lpszEntry, LPCTSTR lpszDefault = "");
 	int		GetIniInt(LPCTSTR lpszSection, LPCTSTR lpszEntry, int nDefault = 0);
@@ -53,7 +51,6 @@ public:
 	int			m_nLanguage;// 语言类型
 	IPlatUI*	m_pIPlatUI;	// 平台接口指针
 	HINSTANCE	m_hDuiPluginHandle;		// 保存界面插件动态库的句柄
-	IDuiPluginPanel* m_pDuiPluginObject; // DUI界面插件对象
 };
 
 class CDuiVisionDesignerView;
