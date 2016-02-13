@@ -8,7 +8,7 @@
 		<PlugIn name="HtmlView" enable="true">org.owm.htmlview</PlugIn>
 		<PlugIn name="Terminal" enable="true">org.owm.terminal</PlugIn>
 		<PlugIn name="WorkSpace" enable="true">org.owm.workspace</PlugIn>
-		<PlugIn name="DuiVisionDesigner" enable="true">org.owm.duivision</PlugIn>
+		<PlugIn name="DuiVisionDesigner" enable="true">org.owm.duivisiondesigner</PlugIn>
 		<PlugIn name="GeneralProject" enable="true">org.prj.general</PlugIn>
 	</PlugIns>
 </plugins>
