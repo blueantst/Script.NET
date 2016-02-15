@@ -9,10 +9,12 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
+#include "timer.h"
+
 /////////////////////////////////////////////////////////////////////////////
 // CDuiVisionDesignerView view
 class CDuiVisionDesignerDoc;
-class CDuiVisionDesignerView : public CView
+class CDuiVisionDesignerView : public CView, public CTimer
 {
 protected: // create from serialization only
 	CDuiVisionDesignerView();
@@ -24,8 +26,14 @@ public:
 
 	IDuiPluginPanel* m_pDuiPluginPanelObject; // DUI界面插件Panel对象
 
+	UINT			m_uTimerAnimation;			// 动画定时器
+	UINT			m_uTimerAutoClose;			// 用于窗口自动关闭的定时器ID
+
 // Operations
 public:
+	// 定时器消息
+	virtual void OnTimer(UINT uTimerID);
+	virtual void OnTimer(UINT uTimerID, CString strTimerName);
 
 // Overrides
 	// ClassWizard generated virtual function overrides

@@ -48,10 +48,14 @@ CDuiVisionDesignerView::CDuiVisionDesignerView()
 {
 	// TODO: add construction code here
 	m_pDuiPluginPanelObject = NULL;
+	m_uTimerAnimation = 0;
+	m_uTimerAutoClose = 0;
 }
 
 CDuiVisionDesignerView::~CDuiVisionDesignerView()
 {
+	CTimer::KillTimer(m_uTimerAnimation);
+
 	// 释放DuiVision插件的Panel对象实例
 	if((theApp.m_pIPlatUI != NULL) && (m_pDuiPluginPanelObject != NULL))
 	{
@@ -65,6 +69,37 @@ BOOL CDuiVisionDesignerView::PreCreateWindow(CREATESTRUCT& cs)
 	//  the CREATESTRUCT cs
 
 	return CView::PreCreateWindow(cs);
+}
+
+// 定时器消息
+void CDuiVisionDesignerView::OnTimer(UINT uTimerID)
+{
+	if(m_uTimerAnimation == uTimerID)	// 动画定时器
+	{
+		if(m_pDuiPluginPanelObject)
+		{
+			m_pDuiPluginPanelObject->OnTimer(uTimerID, NULL);
+		}
+	}else
+	if(m_uTimerAutoClose == uTimerID)	// 窗口自动关闭的定时器
+	{
+		CTimer::KillTimer(m_uTimerAutoClose);
+		m_uTimerAutoClose = 0;
+		/*if(m_bAutoHide)
+		{
+			ShowWindow(SW_HIDE);	// 隐藏窗口模式
+		}else
+		{
+			DoClose();	// 关闭窗口模式
+		}*/
+	}
+}
+
+// 定时器消息(带定时器名字的定时函数)
+void CDuiVisionDesignerView::OnTimer(UINT uTimerID, CString strTimerName)
+{
+	// 应用创建的定时器都调用事件处理对象的定时处理函数
+	//DuiSystem::Instance()->CallDuiHandlerTimer(uTimerID, strTimerName);
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -245,6 +280,9 @@ void CDuiVisionDesignerView::OnInitialUpdate()
 		CRect rect;
 		GetClientRect(rect);
 		m_pDuiPluginPanelObject->OnInit(IDD_ABOUTBOX, hWnd, strFile, rect);
+
+		//启动动画定时器
+		m_uTimerAnimation = CTimer::SetTimer(30);
 	}
 
 	/*strFile.MakeLower();
