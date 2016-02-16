@@ -359,6 +359,10 @@ void CDuiVisionDesignerView::OnLButtonDblClk(UINT nFlags, CPoint point)
 void CDuiVisionDesignerView::OnRButtonDown(UINT nFlags, CPoint point)
 {
 	// TODO: 在此添加消息处理程序代码和/或调用默认值
+	if(m_pDuiPluginPanelObject)
+	{
+		m_pDuiPluginPanelObject->OnRButtonDown(nFlags, point);
+	}
 
 	CView::OnRButtonDown(nFlags, point);
 }
@@ -366,6 +370,10 @@ void CDuiVisionDesignerView::OnRButtonDown(UINT nFlags, CPoint point)
 void CDuiVisionDesignerView::OnRButtonUp(UINT nFlags, CPoint point)
 {
 	// TODO: 在此添加消息处理程序代码和/或调用默认值
+	if(m_pDuiPluginPanelObject)
+	{
+		m_pDuiPluginPanelObject->OnRButtonUp(nFlags, point);
+	}
 
 	CView::OnRButtonUp(nFlags, point);
 }
@@ -373,6 +381,10 @@ void CDuiVisionDesignerView::OnRButtonUp(UINT nFlags, CPoint point)
 void CDuiVisionDesignerView::OnRButtonDblClk(UINT nFlags, CPoint point)
 {
 	// TODO: 在此添加消息处理程序代码和/或调用默认值
+	if(m_pDuiPluginPanelObject)
+	{
+		m_pDuiPluginPanelObject->OnRButtonDblClk(nFlags, point);
+	}
 
 	CView::OnRButtonDblClk(nFlags, point);
 }
