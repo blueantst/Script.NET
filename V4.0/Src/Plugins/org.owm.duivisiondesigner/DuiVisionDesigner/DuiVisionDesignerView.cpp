@@ -50,6 +50,7 @@ CDuiVisionDesignerView::CDuiVisionDesignerView()
 	m_pDuiPluginPanelObject = NULL;
 	m_uTimerAnimation = 0;
 	m_uTimerAutoClose = 0;
+	m_nTooltipCtrlID = 0;
 }
 
 CDuiVisionDesignerView::~CDuiVisionDesignerView()
@@ -100,6 +101,31 @@ void CDuiVisionDesignerView::OnTimer(UINT uTimerID, CString strTimerName)
 {
 	// 应用创建的定时器都调用事件处理对象的定时处理函数
 	//DuiSystem::Instance()->CallDuiHandlerTimer(uTimerID, strTimerName);
+}
+
+// 设置当前的Tooltip
+void CDuiVisionDesignerView::SetTooltip(int nCtrlID, LPCTSTR lpszTooltip, CRect rect, int nTipWidth)
+{
+	m_wndToolTip.DelTool(this, 1);
+	m_wndToolTip.Activate(FALSE);
+	CString strTooltip = lpszTooltip;
+	if(!strTooltip.IsEmpty())
+	{
+		if(nTipWidth > 0)
+		{
+			// 指定tooltip的宽度
+			m_wndToolTip.SetMaxTipWidth(nTipWidth);
+		}
+		m_wndToolTip.AddTool(this, strTooltip, rect, 1);	//Tooltip默认都用1作为ID
+		m_wndToolTip.Activate(TRUE);
+		m_nTooltipCtrlID = nCtrlID;
+	}
+}
+
+// 清除当前的Tooltip
+void CDuiVisionDesignerView::ClearTooltip()
+{
+	m_wndToolTip.DelTool(this, 1);
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -275,15 +301,20 @@ void CDuiVisionDesignerView::OnInitialUpdate()
 
 	// 每个窗口需要创建一个DuiVision插件的Panel对象实例
 	m_pDuiPluginPanelObject = (IDuiPluginPanel*)theApp.m_pIPlatUI->CreateVciObject("org.vci.duivision", strFile);
-	if(m_pDuiPluginPanelObject)
+	if(m_pDuiPluginPanelObject == NULL)
 	{
-		CRect rect;
-		GetClientRect(rect);
-		m_pDuiPluginPanelObject->OnInit(IDD_ABOUTBOX, hWnd, strFile, rect);
-
-		//启动动画定时器
-		m_uTimerAnimation = CTimer::SetTimer(30);
+		return;
 	}
+
+	CRect rect;
+	GetClientRect(rect);
+	m_pDuiPluginPanelObject->OnInit(IDD_ABOUTBOX, hWnd, strFile, rect);
+
+	//启动动画定时器
+	m_uTimerAnimation = CTimer::SetTimer(30);
+
+	// 初始化Tooltip
+	m_wndToolTip.Create(this);
 
 	/*strFile.MakeLower();
 	strFile.Replace("\\", "/");
@@ -423,4 +454,18 @@ BOOL CDuiVisionDesignerView::OnEraseBkgnd(CDC* pDC)
 	// 禁止刷新背景,否则界面会闪烁
 	return FALSE;
 	//return CView::OnEraseBkgnd(pDC);
+}
+
+BOOL CDuiVisionDesignerView::PreTranslateMessage(MSG* pMsg)
+{
+	// TODO: 在此添加专用代码和/或调用基类
+
+	if ( pMsg->message == WM_MOUSEMOVE ||
+		 pMsg->message == WM_LBUTTONDOWN ||
+		 pMsg->message == WM_LBUTTONUP )
+	{
+		m_wndToolTip.RelayEvent(pMsg);
+	}
+
+	return __super::PreTranslateMessage(pMsg);
 }

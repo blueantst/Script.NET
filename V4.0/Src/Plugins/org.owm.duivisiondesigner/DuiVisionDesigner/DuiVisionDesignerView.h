@@ -29,11 +29,18 @@ public:
 	UINT			m_uTimerAnimation;			// 动画定时器
 	UINT			m_uTimerAutoClose;			// 用于窗口自动关闭的定时器ID
 
+	CToolTipCtrl	m_wndToolTip;				// Tooltip
+	int				m_nTooltipCtrlID;			// 当前Tooltip显示的控件ID
+
 // Operations
 public:
 	// 定时器消息
 	virtual void OnTimer(UINT uTimerID);
 	virtual void OnTimer(UINT uTimerID, CString strTimerName);
+
+	void SetTooltip(int nCtrlID, LPCTSTR lpszTooltip, CRect rect, int nTipWidth);
+	void ClearTooltip();
+	int  GetTooltipCtrlID() { return m_nTooltipCtrlID; }
 
 // Overrides
 	// ClassWizard generated virtual function overrides
@@ -84,6 +91,7 @@ public:
 	afx_msg BOOL OnMouseWheel(UINT nFlags, short zDelta, CPoint pt);
 	afx_msg void OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
+	virtual BOOL PreTranslateMessage(MSG* pMsg);
 };
 
 #ifndef _DEBUG  // debug version in DuiVisionDesignerView.cpp
