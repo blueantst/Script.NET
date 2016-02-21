@@ -47,6 +47,7 @@ END_MESSAGE_MAP()
 CDuiVisionDesignerView::CDuiVisionDesignerView()
 {
 	// TODO: add construction code here
+	m_ulRefCount = 0;
 	m_pDuiPluginPanelObject = NULL;
 	m_uTimerAnimation = 0;
 	m_uTimerAutoClose = 0;
@@ -308,7 +309,7 @@ void CDuiVisionDesignerView::OnInitialUpdate()
 
 	CRect rect;
 	GetClientRect(rect);
-	m_pDuiPluginPanelObject->OnInit(IDD_ABOUTBOX, hWnd, strFile, rect);
+	m_pDuiPluginPanelObject->OnInit(IDD_ABOUTBOX, hWnd, strFile, rect, &m_xDuiVisionDesignerView);
 
 	//启动动画定时器
 	m_uTimerAnimation = CTimer::SetTimer(30);
@@ -468,4 +469,201 @@ BOOL CDuiVisionDesignerView::PreTranslateMessage(MSG* pMsg)
 	}
 
 	return __super::PreTranslateMessage(pMsg);
+}
+
+/////////////////////////////////////////////////////////////////////////////
+// 插件宿主窗口功能实现
+INTERFACE_IMPLEMENT(DuiVisionDesignerView)
+
+// 获取应用程序名
+STDMETHODIMP_(CString)
+CDuiVisionDesignerView::XDuiVisionDesignerView::GetAppName()
+{
+	if(theApp.m_pIPlatUI != NULL)
+	{
+		return theApp.m_pIPlatUI->GetAppName();
+	}
+	return _T("");
+}
+
+// 获取平台路径
+STDMETHODIMP_(CString)
+CDuiVisionDesignerView::XDuiVisionDesignerView::GetPlatPath()
+{
+	if(theApp.m_pIPlatUI != NULL)
+	{
+		return theApp.m_pIPlatUI->GetPlatPath();
+	}
+	return _T("");
+}
+
+// 获取平台版本
+STDMETHODIMP_(CString)
+CDuiVisionDesignerView::XDuiVisionDesignerView::GetPlatVersion()
+{
+	if(theApp.m_pIPlatUI != NULL)
+	{
+		return theApp.m_pIPlatUI->GetPlatVersion();
+	}
+	return _T("");
+}
+
+// 获取当前语言
+STDMETHODIMP_(int)
+CDuiVisionDesignerView::XDuiVisionDesignerView::GetCurrentLanguage()
+{
+	if(theApp.m_pIPlatUI != NULL)
+	{
+		return theApp.m_pIPlatUI->GetCurrentLanguage();
+	}
+	return 0;
+}
+
+// 获取平台注册表根路径
+STDMETHODIMP_(CString)
+CDuiVisionDesignerView::XDuiVisionDesignerView::GetPlatRegistry()
+{
+	if(theApp.m_pIPlatUI != NULL)
+	{
+		return theApp.m_pIPlatUI->GetPlatRegistry();
+	}
+	return _T("");
+}
+
+// 获取平台版权字符串
+STDMETHODIMP_(CString)
+CDuiVisionDesignerView::XDuiVisionDesignerView::GetPlatCopyRight()
+{
+	if(theApp.m_pIPlatUI != NULL)
+	{
+		return theApp.m_pIPlatUI->GetPlatCopyRight();
+	}
+	return _T("");
+}
+
+// 获取主页URL
+STDMETHODIMP_(CString)
+CDuiVisionDesignerView::XDuiVisionDesignerView::GetPlatHomeURL()
+{
+	if(theApp.m_pIPlatUI != NULL)
+	{
+		return theApp.m_pIPlatUI->GetPlatHomeURL();
+	}
+	return _T("");
+}
+
+// 获取下载URL
+STDMETHODIMP_(CString)
+CDuiVisionDesignerView::XDuiVisionDesignerView::GetPlatDownloadURL()
+{
+	if(theApp.m_pIPlatUI != NULL)
+	{
+		return theApp.m_pIPlatUI->GetPlatDownloadURL();
+	}
+	return _T("");
+}
+
+// 发送消息
+STDMETHODIMP_(int)
+CDuiVisionDesignerView::XDuiVisionDesignerView::SendMessage(CVciMessage* pIn, CVciMessage* ppOut)
+{
+	if(theApp.m_pIPlatUI != NULL)
+	{
+		return theApp.m_pIPlatUI->SendMessage(pIn, ppOut);
+	}
+	return 0;
+}
+
+// 平台的消息处理
+STDMETHODIMP_(int)
+CDuiVisionDesignerView::XDuiVisionDesignerView::ProcessMessage(CVciMessage* pIn, CVciMessage* ppOut)
+{
+	if(theApp.m_pIPlatUI != NULL)
+	{
+		return theApp.m_pIPlatUI->ProcessMessage(pIn, ppOut);
+	}
+	return 0;
+}
+
+// 发送平台命令
+STDMETHODIMP_(int)
+CDuiVisionDesignerView::XDuiVisionDesignerView::SendCommand(int nCmd, WPARAM wParam, LPARAM lParam)
+{
+	if(theApp.m_pIPlatUI != NULL)
+	{
+		return theApp.m_pIPlatUI->SendCommand(nCmd, wParam, lParam);
+	}
+	return 0;
+}
+
+// 发送平台命令
+STDMETHODIMP_(BOOL)
+CDuiVisionDesignerView::XDuiVisionDesignerView::SendCommand(int nCmd, WPARAM wParam, LPARAM lParam, LPVOID lpResult)
+{
+	if(theApp.m_pIPlatUI != NULL)
+	{
+		return theApp.m_pIPlatUI->SendCommand(nCmd, wParam, lParam, lpResult);
+	}
+	return 0;
+}
+
+// 获取DuiVision应用ID
+STDMETHODIMP_(int)
+CDuiVisionDesignerView::XDuiVisionDesignerView::GetAppID()
+{
+	return 1117;
+}
+
+// 获取窗口背景信息
+STDMETHODIMP_(BOOL)
+CDuiVisionDesignerView::XDuiVisionDesignerView::GetWindowBkInfo(int& nType, int& nIDResource, COLORREF& clr, CString& strImgFile)
+{
+	return FALSE;
+}
+
+// 设置窗口背景信息
+STDMETHODIMP_(BOOL)
+CDuiVisionDesignerView::XDuiVisionDesignerView::SetWindowBkInfo(int nType, int nIDResource, COLORREF clr, LPCTSTR lpszImgFile)
+{
+	return FALSE;
+}
+
+// 设置Tooltip
+STDMETHODIMP_(void)
+CDuiVisionDesignerView::XDuiVisionDesignerView::SetTooltip(int nCtrlID, LPCTSTR lpszTooltip, CRect rect, int nTipWidth)
+{
+	CDuiVisionDesignerView *pObj = GET_INTERFACE_OBJECT(DuiVisionDesignerView);
+	pObj->SetTooltip(nCtrlID, lpszTooltip, rect, nTipWidth);
+}
+
+// 清除Tooltip
+STDMETHODIMP_(void)
+CDuiVisionDesignerView::XDuiVisionDesignerView::ClearTooltip()
+{
+	CDuiVisionDesignerView *pObj = GET_INTERFACE_OBJECT(DuiVisionDesignerView);
+	pObj->ClearTooltip();
+}
+
+// 设置当前Tooltip控件ID
+STDMETHODIMP_(void)
+CDuiVisionDesignerView::XDuiVisionDesignerView::SetTooltipCtrlID(int nTooltipCtrlID)
+{
+	CDuiVisionDesignerView *pObj = GET_INTERFACE_OBJECT(DuiVisionDesignerView);
+	if(pObj)
+	{
+		pObj->SetTooltipCtrlID(nTooltipCtrlID);
+	}
+}
+
+// 获取当前Tooltip控件ID
+STDMETHODIMP_(int)
+CDuiVisionDesignerView::XDuiVisionDesignerView::GetTooltipCtrlID()
+{
+	CDuiVisionDesignerView *pObj = GET_INTERFACE_OBJECT(DuiVisionDesignerView);
+	if(pObj)
+	{
+		return pObj->GetTooltipCtrlID();
+	}
+
+	return 0;
 }

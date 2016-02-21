@@ -10,6 +10,7 @@
 #endif // _MSC_VER > 1000
 
 #include "timer.h"
+#include "IDuiHostWnd.h"
 
 /////////////////////////////////////////////////////////////////////////////
 // CDuiVisionDesignerView view
@@ -24,6 +25,7 @@ protected: // create from serialization only
 public:
 	CDuiVisionDesignerDoc* GetDocument();
 
+	ULONG			m_ulRefCount;			// 内嵌接口类使用的引用计数,vcicomm使用
 	IDuiPluginPanel* m_pDuiPluginPanelObject; // DUI界面插件Panel对象
 
 	UINT			m_uTimerAnimation;			// 动画定时器
@@ -40,7 +42,40 @@ public:
 
 	void SetTooltip(int nCtrlID, LPCTSTR lpszTooltip, CRect rect, int nTipWidth);
 	void ClearTooltip();
+	void  SetTooltipCtrlID(int nTooltipCtrlID) { m_nTooltipCtrlID = nTooltipCtrlID; }
 	int  GetTooltipCtrlID() { return m_nTooltipCtrlID; }
+
+protected:
+	// 导出的插件宿主窗口功能接口
+    BEGIN_INTERFACE_PART(DuiVisionDesignerView, IDuiHostWnd)
+		// 平台操作
+		STDMETHOD_( CString , GetAppName) ();				// 获取应用程序名
+		STDMETHOD_( CString , GetPlatPath) ();				// 获取平台路径
+		STDMETHOD_( CString , GetPlatVersion) ();			// 获取平台版本
+		STDMETHOD_( int , GetCurrentLanguage) ();			// 获取当前语言
+		STDMETHOD_( CString , GetPlatRegistry) ();			// 获取平台注册表根路径
+		STDMETHOD_( CString , GetPlatCopyRight) ();			// 获取平台版权字符串
+		STDMETHOD_( CString , GetPlatHomeURL) ();			// 获取主页URL
+		STDMETHOD_( CString , GetPlatDownloadURL) ();		// 获取下载URL
+		STDMETHOD_( int  , SendMessage) (CVciMessage* pIn, CVciMessage* ppOut);	// 发送消息
+		STDMETHOD_( int  , ProcessMessage) (CVciMessage* pIn, CVciMessage* ppOut);	// 平台的消息处理
+		STDMETHOD_( int  , SendCommand) (int nCmd, WPARAM wParam, LPARAM lParam);	// 发送平台命令
+		STDMETHOD_( BOOL , SendCommand) (int nCmd, WPARAM wParam, LPARAM lParam, LPVOID lpResult);	// 发送平台命令
+
+		// DuiVision系统功能
+		STDMETHOD_( int  , GetAppID) ();	// 获取DuiVision应用ID
+
+		// 窗口操作
+		STDMETHOD_( BOOL , GetWindowBkInfo) (int& nType, int& nIDResource, COLORREF& clr, CString& strImgFile);	// 获取窗口背景信息
+		STDMETHOD_( BOOL , SetWindowBkInfo) (int nType, int nIDResource, COLORREF clr, LPCTSTR lpszImgFile);	// 设置窗口背景信息
+
+		// Tooltip操作
+		STDMETHOD_( void  , SetTooltip) (int nCtrlID, LPCTSTR lpszTooltip, CRect rect, int nTipWidth);	// 设置Tooltip
+		STDMETHOD_( void , ClearTooltip) ();			// 清除Tooltip
+		STDMETHOD_( void , SetTooltipCtrlID) (int nTooltipCtrlID);	// 设置当前Tooltip控件ID
+		STDMETHOD_( int , GetTooltipCtrlID) ();		// 获取当前Tooltip控件ID
+	END_INTERFACE_PART(DuiVisionDesignerView)
+	EXPORT_INTERFACE_PART(DuiVisionDesignerView)
 
 // Overrides
 	// ClassWizard generated virtual function overrides
