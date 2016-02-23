@@ -51,6 +51,13 @@ void reset_dll_resource(void);
 #include "IDuiHostWnd.h"	// DuiVision插件的宿主窗口功能接口
 #include "IDuiPlugin.h"	// DuiVision插件接口
 
+#include "encoding.h"
+
+#include <gdiplus.h> 
+using namespace Gdiplus;
+
+#pragma comment(lib, "gdiplus.lib")
+
 // OWM调试宏定义
 #define _IF_OWM_DEBUG		if(theApp.m_bDebug){
 #define _ENDIF_OWM_DEBUG	}

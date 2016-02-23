@@ -5,6 +5,7 @@
 #include "DuiVisionDesigner.h"
 #include "DuiVisionDesignerDoc.h"
 #include "DuiVisionDesignerView.h"
+#include "GlobalFunction.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -52,11 +53,34 @@ CDuiVisionDesignerView::CDuiVisionDesignerView()
 	m_uTimerAnimation = 0;
 	m_uTimerAutoClose = 0;
 	m_nTooltipCtrlID = 0;
+
+	m_MinSize.cx = 0;
+	m_MinSize.cy = 0;
+	m_bChangeSize = FALSE;
+
+	m_nOverRegioX = 100;
+	m_nOverRegioY = 100;
+	m_sizeBKImage.cx = 100;
+	m_sizeBKImage.cy = 100;
+
+	m_clrBK = RGB(186, 226, 239);
+	m_crlBackTransParent = RGB(255, 255, 255);
+
+	m_strBkImg = _T("");
+	m_crlBack = RGB(0,0,0);
+	m_nBackTranslucent = 255;	// 背景透明度,255表示不透明,1表示全透明
 }
 
 CDuiVisionDesignerView::~CDuiVisionDesignerView()
 {
 	CTimer::KillTimer(m_uTimerAnimation);
+
+	if(m_BKImage.m_hObject != NULL)
+	{
+		m_BKImage.DeleteObject();
+		m_MemBKDC.SelectObject(m_pOldMemBK);
+		m_MemBK.DeleteObject();
+	}
 
 	// 释放DuiVision插件的Panel对象实例
 	if((theApp.m_pIPlatUI != NULL) && (m_pDuiPluginPanelObject != NULL))
@@ -71,6 +95,19 @@ BOOL CDuiVisionDesignerView::PreCreateWindow(CREATESTRUCT& cs)
 	//  the CREATESTRUCT cs
 
 	return CView::PreCreateWindow(cs);
+}
+
+// 获取DuiVision插件的路径
+CString CDuiVisionDesignerView::GetDuiVisionPluginPath()
+{
+	if(theApp.m_pIPlatUI != NULL)
+	{
+		CString strPath = theApp.m_pIPlatUI->GetPlatPath();
+		strPath += _T("Plugins\\org.vci.duivision\\");
+		return strPath;
+	}
+
+	return _T("");
 }
 
 // 定时器消息
@@ -102,6 +139,233 @@ void CDuiVisionDesignerView::OnTimer(UINT uTimerID, CString strTimerName)
 {
 	// 应用创建的定时器都调用事件处理对象的定时处理函数
 	//DuiSystem::Instance()->CallDuiHandlerTimer(uTimerID, strTimerName);
+}
+
+// 初始化窗口背景皮肤(加载到背景内存dc)
+void CDuiVisionDesignerView::InitWindowBkSkin()
+{
+	m_strBkImg = _T("skin:");
+
+	int nType = 0;
+	COLORREF clr = RGB(0,0,0);
+	CString strImgFile = _T("");
+
+	BOOL bRet = TRUE;
+	if(!m_strBkImg.IsEmpty())	// 如果窗口设置了背景图片属性，就用此背景图片
+	{
+		// 通过Skin读取
+		if(m_strBkImg.Find(_T("skin:")) == 0)
+		{
+			strImgFile = GetDuiVisionPluginPath() + _T("bkimg\\SKIN_PIC_0.png");//DuiSystem::Instance()->GetSkin(m_strBkImg);
+		}else
+		{
+			strImgFile = m_strBkImg;
+		}
+
+		if(strImgFile.Find(_T(".")) != -1)	// 加载图片文件
+		{
+			nType = BKTYPE_IMAGE_FILE;
+		}
+	}else
+	if(m_crlBack != RGB(0,0,0))	// 如果窗口设置了背景颜色属性，就用此背景颜色
+	{
+		nType = BKTYPE_COLOR;
+		clr = m_crlBack;
+	}else
+	{
+		// 调用DuiSystem从应用程序获取背景信息
+		bRet = FALSE;//DuiSystem::Instance()->GetWindowBkInfo(nType, nIDResource, clr, strImgFile);
+	}
+
+	// 设置窗口背景皮肤
+	if(bRet)
+	{
+		if(nType == BKTYPE_COLOR)	// 颜色
+		{
+			DrawBackground(clr);
+		}else
+		if(nType == BKTYPE_IMAGE_FILE)	// 图片文件
+		{
+			LoadBackgroundImage(strImgFile);
+		}
+	}else
+	{
+		// 默认加载第一张背景图片
+		strImgFile = GetDuiVisionPluginPath() + _T("bkimg\\SKIN_PIC_0.png");//DuiSystem::Instance()->GetSkin(_T("SKIN_PIC_0"));
+		LoadBackgroundImage(strImgFile);
+	}
+}
+
+// 加载窗口背景图片(从文件或zip资源加载)
+void CDuiVisionDesignerView::LoadBackgroundImage(CString strFileName)
+{
+	CBitmap bitBackground;
+	if(LoadBitmapFromFile(strFileName, bitBackground, m_sizeBKImage))
+	{
+		DrawBackground(bitBackground);
+	}
+}
+
+// 画背景图片
+void CDuiVisionDesignerView::DrawBackground(CBitmap &bitBackground)
+{
+	if(m_MinSize.cx - 2 > m_sizeBKImage.cx || m_MinSize.cy - 2 > m_sizeBKImage.cy || m_bChangeSize)
+	{
+		if(m_MinSize.cx - 2 > m_sizeBKImage.cx)
+		{
+			m_nOverRegioX = __min(100, m_sizeBKImage.cx - 2);
+		}
+		else
+		{
+			m_nOverRegioX = 0;
+		}
+
+		if(m_MinSize.cy - 2 > m_sizeBKImage.cy)
+		{
+			m_nOverRegioY = __min(100, m_sizeBKImage.cy - 2);
+		}
+		else
+		{
+			m_nOverRegioY = 0;
+		}
+	}
+ 	else
+ 	{
+ 		m_nOverRegioX = 0;
+		m_nOverRegioY = 0;
+ 	}
+	if(bitBackground.m_hObject)
+	{
+		m_bDrawImage = TRUE;
+		int nWidth = m_sizeBKImage.cx;
+		int nHeight = m_sizeBKImage.cy;
+
+		if(m_MemBKDC.m_hDC)
+		{
+			m_MemBKDC.DeleteDC();
+		}
+
+		CDC *pDC = GetDC();
+		
+		::GetAverageColor(pDC, bitBackground, m_sizeBKImage, m_clrBK);
+
+		m_MemBKDC.CreateCompatibleDC(pDC);
+
+		if(m_MemBK.m_hObject)
+		{
+			m_MemBK.DeleteObject();
+		}
+		m_MemBK.CreateCompatibleBitmap(pDC, m_sizeBKImage.cx, m_sizeBKImage.cy);
+		m_pOldMemBK =  m_MemBKDC.SelectObject(&m_MemBK);
+
+		CDC TempDC;
+		TempDC.CreateCompatibleDC(pDC);
+
+		CBitmap* pOldBitmap = TempDC.SelectObject(&bitBackground);
+
+		// 画出平均图片
+		m_MemBKDC.FillSolidRect(0, 0, nWidth, nHeight, m_clrBK);
+		// 设置文字的背景透明
+		//m_MemBKDC.SetBkMode(TRANSPARENT);
+
+		if(m_nOverRegioX > 0 && m_nOverRegioY > 0)
+		{
+			int nOverRegio = __min(m_nOverRegioX, m_nOverRegioY);
+
+			// 左上
+			m_MemBKDC.BitBlt(0, 0, nWidth - nOverRegio, nHeight - nOverRegio, &TempDC, 0, 0, SRCCOPY ); 
+
+			// 中间
+			CRect rc(0, 0, nWidth, nHeight);
+			DrawRightBottomTransition(m_MemBKDC, TempDC, rc, nOverRegio, m_clrBK);
+
+			// 右上
+			rc.SetRect(nWidth - nOverRegio, 0, nWidth, nHeight - nOverRegio);
+			DrawHorizontalTransition(m_MemBKDC, TempDC, rc, rc, 0, 100);
+
+			// 左下
+			rc.SetRect(0, nHeight - nOverRegio, nWidth - nOverRegio, nHeight);
+			DrawVerticalTransition(m_MemBKDC, TempDC, rc, rc, 0, 100);
+		}
+		else if(m_nOverRegioX > 0 && m_nOverRegioY == 0)
+		{
+			// 左边
+			m_MemBKDC.BitBlt(0, 0, nWidth - m_nOverRegioX, nHeight, &TempDC, 0, 0, SRCCOPY ); 
+
+			// 右边
+			CRect rc(nWidth - m_nOverRegioX, 0, nWidth, nHeight);
+			DrawHorizontalTransition(m_MemBKDC, TempDC, rc, rc, 0, 100);
+		}
+		else if(m_nOverRegioX == 0 && m_nOverRegioY > 0)
+		{
+			// 边上
+			m_MemBKDC.BitBlt(0, 0, nWidth, nHeight - m_nOverRegioY, &TempDC, 0, 0, SRCCOPY ); 
+
+			// 下边
+			CRect rc(0, nHeight - m_nOverRegioY, nWidth, nHeight);
+			DrawVerticalTransition(m_MemBKDC, TempDC, rc, rc, 0, 100);
+		}
+		else
+		{
+			m_MemBKDC.BitBlt(0, 0, nWidth, nHeight, &TempDC, 0, 0, SRCCOPY ); 
+		}
+
+		TempDC.SelectObject(pOldBitmap);
+		TempDC.DeleteDC();
+		ReleaseDC(pDC);
+
+		InvalidateRect(NULL);
+	}
+}
+
+// 画背景颜色
+void CDuiVisionDesignerView::DrawBackground(COLORREF clr)
+{
+	m_clrBK = clr;
+	m_bDrawImage = FALSE;
+	InvalidateRect(NULL);
+}
+
+// 画Area控件的半透明层
+void CDuiVisionDesignerView::DrawAreaControl(CDC &dc, CRect rcArea, COLORREF clr, int nBeginTransparent, int nEndTransparent)
+{
+	CRect  rcTemp(0, 0, rcArea.Width(), rcArea.Height());
+
+	CDC TempDC;
+	TempDC.CreateCompatibleDC(&dc);
+
+	CBitmap memBmpTemp;
+	memBmpTemp.CreateCompatibleBitmap(&dc, rcArea.Width(), rcArea.Height());
+	CBitmap *pOldmap =  TempDC.SelectObject(&memBmpTemp);
+
+	TempDC.FillSolidRect(&rcTemp, clr);		
+
+	DrawVerticalTransition(dc, TempDC, rcArea, rcArea, nBeginTransparent, nEndTransparent);
+	
+	TempDC.SelectObject(pOldmap);
+	memBmpTemp.DeleteObject();
+	TempDC.DeleteDC();
+}
+
+// 画窗口背景和控件
+void CDuiVisionDesignerView::DrawBackgroundAndAreas(CDC &dc, const CRect &rcClient, const CRect &rcUpdate)
+{
+	// 没有指定背景,则填充背景颜色为背景图片的平均色,当背景图片不够大时起到渐变色的效果
+	dc.FillSolidRect(rcUpdate.left, rcUpdate.top, rcUpdate.Width(), rcUpdate.Height(), m_clrBK);
+
+	// 如果指定了背景,已经生成了背景的内存dc,则画背景,从背景内存dc输出到当前dc(背景dc的大小可能小于当前dc)
+	if(m_bDrawImage)
+	{
+		CRect rcBk(1, 1, 1 + m_sizeBKImage.cx, 1 + m_sizeBKImage.cy);
+		rcBk = rcBk & rcUpdate;
+		if(!rcBk.IsRectEmpty())
+		{
+			dc.BitBlt(rcBk.left, rcBk.top, rcBk.Width() , rcBk.Height(), &m_MemBKDC, rcBk.left, rcBk.top, SRCCOPY ); 
+		}	
+	}
+
+	// 画所有的Area控件，实现半透明层
+	DrawAreaControl(dc, rcClient, m_crlBackTransParent, 40, 40);
 }
 
 // 设置当前的Tooltip
@@ -137,8 +401,12 @@ void CDuiVisionDesignerView::OnDraw(CDC* pDC)
 	CDuiVisionDesignerDoc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
 	// TODO: add draw code for native data here
-	CRect rect;
-	GetClientRect(rect);
+
+	//CRect rcUpdate;
+	//GetUpdateRect(&rcUpdate);
+
+	CRect rcClient;
+	GetClientRect(rcClient);
 
 	CDC memDC ;
 	CBitmap memBitmap ;
@@ -149,34 +417,31 @@ void CDuiVisionDesignerView::OnDraw(CDC* pDC)
 	// to avoid flicker, establish a memory dc, draw to it 
 	// and then BitBlt it to the client
 	memDC.CreateCompatibleDC(pDC) ;
-	memBitmap.CreateCompatibleBitmap(pDC, rect.Width(), rect.Height()) ;
+	memBitmap.CreateCompatibleBitmap(pDC, rcClient.Width(), rcClient.Height()) ;
 	oldBitmap = (CBitmap *)memDC.SelectObject(&memBitmap) ;
 
+	// 画背景和Area控件到内存dc
+	DrawBackgroundAndAreas(memDC, rcClient, rcClient);
 	// 背景复制到内存dc
-	//memDC.BitBlt(0, 0, rect.Width(), rect.Height(), pDC, 0, 0, SRCCOPY);
+	//memDC.BitBlt(0, 0, rcClient.Width(), rcClient.Height(), pDC, 0, 0, SRCCOPY);
 	// 画白色背景
-	memDC.BitBlt(0, 0, rect.Width(), rect.Height(), pDC, 0, 0, WHITENESS);
+	//memDC.BitBlt(0, 0, rcClient.Width(), rcClient.Height(), pDC, 0, 0, WHITENESS);
 
 	if (memDC.GetSafeHdc() != NULL)
 	{
 		// first drop the controls on the memory dc
 		if(m_pDuiPluginPanelObject)
 		{
-			m_pDuiPluginPanelObject->DrawControl(memDC, rect);
+			// 画控件
+			m_pDuiPluginPanelObject->DrawControl(memDC, rcClient);
 			// finally send the result to the display
-			pDC->BitBlt(0, 0, rect.Width(), rect.Height(), 
-				  &memDC, 0, 0, SRCCOPY) ;
+			pDC->BitBlt(0, 0, rcClient.Width(), rcClient.Height(), &memDC, 0, 0, SRCCOPY) ;
 		}
 	}
 
 	memDC.SelectObject(oldBitmap) ;
-
-	/*
-	if(m_pDuiPluginPanelObject)
-	{
-		m_pDuiPluginPanelObject->DrawControl(*pDC, rect);
-	}*/
-	
+	memDC.DeleteDC();
+	memBitmap.DeleteObject();
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -310,6 +575,12 @@ void CDuiVisionDesignerView::OnInitialUpdate()
 	CRect rect;
 	GetClientRect(rect);
 	m_pDuiPluginPanelObject->OnInit(IDD_ABOUTBOX, hWnd, strFile, rect, &m_xDuiVisionDesignerView);
+
+	m_MinSize.cx = rect.Width();
+	m_MinSize.cy = rect.Height();
+
+	// 初始化窗口背景
+	InitWindowBkSkin();
 
 	//启动动画定时器
 	m_uTimerAnimation = CTimer::SetTimer(30);

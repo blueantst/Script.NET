@@ -12,6 +12,14 @@
 #include "timer.h"
 #include "IDuiHostWnd.h"
 
+// 窗口背景模式
+enum
+{
+	BKTYPE_IMAGE_RESOURCE	= 0,	// 图片资源
+	BKTYPE_COLOR,					// 指定颜色
+	BKTYPE_IMAGE_FILE,				// 图片文件
+};
+
 /////////////////////////////////////////////////////////////////////////////
 // CDuiVisionDesignerView view
 class CDuiVisionDesignerDoc;
@@ -34,12 +42,50 @@ public:
 	CToolTipCtrl	m_wndToolTip;				// Tooltip
 	int				m_nTooltipCtrlID;			// 当前Tooltip显示的控件ID
 
+	BOOL			m_bChangeSize;				// 改变窗口大小
+	CSize			m_MinSize;					// 窗口限定最小大小
+
+	COLORREF		m_clrBK;					// 背景颜色,由背景图片计算出的平均色,当背景图片不够大时可以达到渐变色效果
+	CBitmap			m_BKImage;					// 框架背景图片对象
+	CSize			m_sizeBKImage;				// 背景图片大小
+	//CString			m_strFramePicture;			// 背景图片
+	CDC				m_MemBKDC;					// 背景dc(由背景图片或背景颜色生成)
+	CBitmap			*m_pOldMemBK;
+	CBitmap			m_MemBK;
+	BOOL			m_bDrawImage;				// 图片或纯色背景
+
+	CString			m_strBkImg;					// 背景图片
+	COLORREF		m_crlBack;					// 背景颜色
+	COLORREF		m_crlBackTransParent;		// 背景透明颜色
+	int				m_nBackTranslucent;			// 背景透明度
+
+	int				m_nOverRegioX;				// 过度的大小
+	int				m_nOverRegioY;				// 过度的大小
+
 // Operations
 public:
+	CString GetDuiVisionPluginPath();
+
 	// 定时器消息
 	virtual void OnTimer(UINT uTimerID);
 	virtual void OnTimer(UINT uTimerID, CString strTimerName);
 
+	// 初始化窗口背景皮肤(加载到背景内存dc)
+	void InitWindowBkSkin();
+	// 加载窗口背景图片
+	void LoadBackgroundImage(CString strFileName);
+	// 设置窗口背景透明度
+	void SetupBackTranslucent();
+	// 画背景图片
+	void DrawBackground(CBitmap &bitBackground);
+	// 画背景颜色
+	void DrawBackground(COLORREF clr);
+	// 画Area控件的半透明层
+	void DrawAreaControl(CDC &dc, CRect rcArea, COLORREF clr, int nBeginTransparent, int nEndTransparent);
+	// 画背景和Area控件到内存dc
+	void DrawBackgroundAndAreas(CDC &dc, const CRect &rcClient, const CRect &rcUpdate);
+
+	// Tooltip操作
 	void SetTooltip(int nCtrlID, LPCTSTR lpszTooltip, CRect rect, int nTipWidth);
 	void ClearTooltip();
 	void  SetTooltipCtrlID(int nTooltipCtrlID) { m_nTooltipCtrlID = nTooltipCtrlID; }
