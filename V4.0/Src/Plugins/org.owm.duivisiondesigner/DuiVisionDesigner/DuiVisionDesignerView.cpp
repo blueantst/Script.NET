@@ -899,6 +899,22 @@ CDuiVisionDesignerView::XDuiVisionDesignerView::SetWindowBkInfo(int nType, int n
 	return FALSE;
 }
 
+// 坐标转换为屏幕坐标
+STDMETHODIMP_(void)
+CDuiVisionDesignerView::XDuiVisionDesignerView::ClientToScreen(LPPOINT lpPoint)
+{
+	CDuiVisionDesignerView *pObj = GET_INTERFACE_OBJECT(DuiVisionDesignerView);
+	pObj->ClientToScreen(lpPoint);
+}
+
+// 获取宿主窗口的句柄
+STDMETHODIMP_(HWND)
+CDuiVisionDesignerView::XDuiVisionDesignerView::GetPaintHWnd()
+{
+	CDuiVisionDesignerView *pObj = GET_INTERFACE_OBJECT(DuiVisionDesignerView);
+	return pObj->GetSafeHwnd();
+}
+
 // 设置Tooltip
 STDMETHODIMP_(void)
 CDuiVisionDesignerView::XDuiVisionDesignerView::SetTooltip(int nCtrlID, LPCTSTR lpszTooltip, CRect rect, int nTipWidth)
