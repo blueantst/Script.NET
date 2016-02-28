@@ -76,7 +76,7 @@
 	      ThemeOffice2003Plain/ThemeNativeWinXPPlain/ThemeToolbox/ThemeToolboxWhidbey/ThemeListView/
 		  ThemeListViewOfficeXP/ThemeListViewOffice2003/ThemeShortcutBarOffice2003/ThemeShortcutBarOffice2007-->
       <parameter name="ToolboxTheme" value="ThemeShortcutBarOffice2007" defaultValue="ThemeShortcutBarOffice2007"/>
-	  <parameter name="DuiVisionPluginObjectName" value="DuiVisionDesignerVci" defaultValue="DuiVisionDesignerVci"/>
+	  <!--parameter name="DuiVisionPluginObjectName" value="DuiVisionDesignerVci" defaultValue="DuiVisionDesignerVci"/-->
    </parameters>
 
 </plugin>
