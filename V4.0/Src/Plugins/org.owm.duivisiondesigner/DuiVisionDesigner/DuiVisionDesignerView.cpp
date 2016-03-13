@@ -40,6 +40,7 @@ BEGIN_MESSAGE_MAP(CDuiVisionDesignerView, CView)
 	ON_WM_MOUSEWHEEL()
 	ON_WM_KEYDOWN()
 	ON_WM_ERASEBKGND()
+	ON_COMMAND(ID_VIEW_TOOLBOX, &CDuiVisionDesignerView::OnViewToolbox)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -512,13 +513,13 @@ void CDuiVisionDesignerView::OnActivateView(BOOL bActivate, CView* pActivateView
 		// 在属性窗口显示文档信息
 		GetDocument()->RefreshDocProperty();
 	}
-/*
+
 	if (bActivate)
 	{
 		// 窗口激活时显示OWM菜单
 		get_dll_resource();
 		CMenu* pMenuTerm = new CMenu();
-		pMenuTerm->LoadMenu(IDR_MENU_DuiVisionDesigner);
+		pMenuTerm->LoadMenu(IDR_OWM);
 		reset_dll_resource();
 		theApp.m_pIPlatUI->AddExtMenu(pMenuTerm);
 	}else
@@ -526,11 +527,11 @@ void CDuiVisionDesignerView::OnActivateView(BOOL bActivate, CView* pActivateView
 		// 窗口去激活时删除 OWM菜单
 		get_dll_resource();
 		CMenu* pMenuTerm = new CMenu();
-		pMenuTerm->LoadMenu(IDR_MENU_DuiVisionDesigner);
+		pMenuTerm->LoadMenu(IDR_OWM);
 		reset_dll_resource();
 		theApp.m_pIPlatUI->DelExtMenu(pMenuTerm);
 	}
-*/	
+
 	CView::OnActivateView(bActivate, pActivateView, pDeactiveView);
 }
 
@@ -953,4 +954,10 @@ CDuiVisionDesignerView::XDuiVisionDesignerView::GetTooltipCtrlID()
 	}
 
 	return 0;
+}
+
+// 显示工具栏
+void CDuiVisionDesignerView::OnViewToolbox()
+{
+	theApp.ActiveToolboxPane();
 }

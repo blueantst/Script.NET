@@ -60,7 +60,7 @@
    </doc-extend>
    
    <dockingpanes>
-      <pane name="DUI工具箱" id="11160" direction="right" icon="dui.ico" type="window" autocreate="false" save="true"></pane>
+      <pane name="DuiVision工具箱" id="11111" direction="right" icon="dui.ico" type="window" autocreate="false" save="true"></pane>
    </dockingpanes>
    
    <perspectives>

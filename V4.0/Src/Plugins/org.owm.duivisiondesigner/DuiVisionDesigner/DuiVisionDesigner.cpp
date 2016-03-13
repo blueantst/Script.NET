@@ -72,6 +72,9 @@ CDuiVisionDesignerApp::CDuiVisionDesignerApp()
 	m_pIPlatUI = NULL;
 	m_hDuiPluginHandle = NULL;
 	//m_pDuiPluginObject = NULL;
+	m_pToolboxPane = NULL;
+	m_pCurToolboxGroup = NULL;
+	m_pToolboxItemPointer = NULL;
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -114,6 +117,139 @@ CString CDuiVisionDesignerApp::GetModulePath()
 	szPath = szPath.Left(szPath.GetLength() - 1);
 
 	return szPath;
+}
+
+CString CDuiVisionDesignerApp::StripMnemonics(CString str)
+{
+	XTPDrawHelpers()->StripMnemonics(str);
+	int nIndex = str.Find(_T('\t'));
+	if (nIndex > 0)
+	{
+		return str.Left(nIndex);
+	}
+	return str;
+}
+
+#define DOCKPANE_ID_TOOLBOX 11111
+/////////////////////////////////////////////////////////////////////////////
+// 创建工具Pane
+/////////////////////////////////////////////////////////////////////////////
+void CDuiVisionDesignerApp::CreateToolboxPane()
+{
+	if(theApp.m_pIPlatUI)
+	{
+		if(theApp.m_pIPlatUI->GetDockingPaneWnd(DOCKPANE_ID_TOOLBOX) == NULL)
+		{
+			theApp.m_pIPlatUI->CreateDockingPane("org.owm.duivisiondesigner", DOCKPANE_ID_TOOLBOX);
+		}
+	}
+}
+
+/////////////////////////////////////////////////////////////////////////////
+// 激活工具Pane
+/////////////////////////////////////////////////////////////////////////////
+void CDuiVisionDesignerApp::ActiveToolboxPane()
+{
+	if(theApp.m_pIPlatUI)
+	{
+		theApp.m_pIPlatUI->CreateDockingPane("org.owm.duivisiondesigner", DOCKPANE_ID_TOOLBOX);
+	}
+}
+
+/////////////////////////////////////////////////////////////////////////////
+// 创建工具组
+/////////////////////////////////////////////////////////////////////////////
+CXTPTaskPanelGroup* CDuiVisionDesignerApp::CreateToolboxGroup(UINT nID, LPCTSTR lpszCaption)
+{
+	if(m_pToolboxPane == NULL)
+	{
+		return NULL;
+	}
+
+	CXTPTaskPanelGroup* pFolder = m_pToolboxPane->AddGroup(nID, nID);
+	pFolder->SetCaption(StripMnemonics(lpszCaption));
+/*
+	CXTPTaskPanelGroupItem* pPointer = pFolder->AddLinkItem(ID_BUTTON_SELECT, 1);
+	pPointer->SetItemSelected(TRUE);
+	pPointer->AllowDrag(FALSE);
+	pPointer->AllowDrop(FALSE);
+	pFolder->SetIconIndex(0);
+
+	m_pToolboxItemPointer = pPointer;*/
+	m_pCurToolboxGroup = pFolder;
+
+	return pFolder;
+}
+
+/////////////////////////////////////////////////////////////////////////////
+// 查找工具组
+/////////////////////////////////////////////////////////////////////////////
+CXTPTaskPanelGroup* CDuiVisionDesignerApp::FindToolboxGroup(UINT nID)
+{
+	if(m_pToolboxPane == NULL)
+	{
+		return NULL;
+	}
+
+	return m_pToolboxPane->FindGroup(nID);
+}
+
+/////////////////////////////////////////////////////////////////////////////
+// 设置工具组的选择项为默认项
+/////////////////////////////////////////////////////////////////////////////
+void CDuiVisionDesignerApp::SetToolboxDefaultItem()
+{
+	if(m_pCurToolboxGroup)
+	{
+		m_pCurToolboxGroup->SetSelectedItem(m_pToolboxItemPointer);
+	}
+}
+
+/////////////////////////////////////////////////////////////////////////////
+// 添加图片组文件到工具箱图片中,可以指定多个命令ID的图标
+/////////////////////////////////////////////////////////////////////////////
+BOOL CDuiVisionDesignerApp::SetToolboxIcons(LPCTSTR lpszBmpFile, CUIntArray* paIDs)
+{
+	if(paIDs == NULL)
+		return FALSE;
+
+	CBitmap bmp;
+
+	HBITMAP hBitmap = (HBITMAP)::LoadImage(::AfxGetInstanceHandle(), lpszBmpFile,
+        IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE|LR_CREATEDIBSECTION);
+	if(hBitmap == NULL)
+		return FALSE;
+
+	BITMAP bmpInfo;
+	::GetObject(hBitmap, sizeof(BITMAP), &bmpInfo);
+
+	bmp.Attach(hBitmap);
+
+	UINT uIDs[100];
+	for(int i=0; i<(*paIDs).GetSize(); i++)
+	{
+		if(i < 100)
+		{
+			uIDs[i] = (*paIDs)[i];
+		}
+	}
+
+	BOOL bRet = theApp.m_pToolboxPane->GetImageManager()->SetIcons(bmp, uIDs, (*paIDs).GetSize(), CSize(bmpInfo.bmHeight,bmpInfo.bmHeight), xtpImageNormal);
+
+	return bRet;
+}
+
+/////////////////////////////////////////////////////////////////////////////
+// 添加单个图标文件到工具箱图片中
+/////////////////////////////////////////////////////////////////////////////
+BOOL CDuiVisionDesignerApp::SetToolboxIcon(CString strIcon, int nId)
+{
+	WORD wIndex = 0;
+	HICON hIcon = ::ExtractAssociatedIcon(AfxGetApp()->m_hInstance,	strIcon.GetBuffer(0), &wIndex);
+	strIcon.ReleaseBuffer();
+	theApp.m_pToolboxPane->GetImageManager()->SetIcon(CXTPImageManagerIconHandle(hIcon), nId);
+
+	return TRUE;
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -658,6 +794,14 @@ int InitOWM()
 int DoneOWM()
 {
 	// 注:在下面添加你的代码
+	if(theApp.m_pToolboxPane)
+	{
+		// 释放Toolbox窗口,否则会造成主程序在此OWM卸载后仍然发送ToolboxPane销毁消息,导致异常
+		theApp.m_pToolboxPane->DestroyWindow();
+		// 删除Toolbox对象,防止内存泄露
+		delete theApp.m_pToolboxPane;
+		theApp.m_pToolboxPane = NULL;
+	}
 
 	return 0;
 }

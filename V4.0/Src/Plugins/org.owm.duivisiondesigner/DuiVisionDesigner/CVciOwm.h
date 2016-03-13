@@ -38,6 +38,8 @@ public:
 	virtual int __stdcall UninstallHandler(DWORD nEventID, LPVOID lpHandler);
 	virtual int __stdcall ProcessMessage(CVciMessage* pIn, CVciMessage* ppOut);
 
+	BOOL LoadToolbox(LPCTSTR lpszToolboxFile);
+
 //////////////////////////////////////////////////////////////////////////
 // 要输出的功能接口
 //////////////////////////////////////////////////////////////////////////

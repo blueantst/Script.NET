@@ -48,6 +48,8 @@ void reset_dll_resource(void);
 #include "owm.h"		// OWM公共头文件
 #include "vcicomm.h"
 
+#include "XMLDom.h"
+
 #include "IDuiHostWnd.h"	// DuiVision插件的宿主窗口功能接口
 #include "IDuiPlugin.h"	// DuiVision插件接口
 
@@ -57,6 +59,8 @@ void reset_dll_resource(void);
 using namespace Gdiplus;
 
 #pragma comment(lib, "gdiplus.lib")
+
+#include <XTToolkitPro.h>		// X~treme Toolkit MFC extensions
 
 // OWM调试宏定义
 #define _IF_OWM_DEBUG		if(theApp.m_bDebug){

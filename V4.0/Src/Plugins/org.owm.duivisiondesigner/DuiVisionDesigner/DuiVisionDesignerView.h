@@ -175,6 +175,7 @@ public:
 	afx_msg void OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
 	virtual BOOL PreTranslateMessage(MSG* pMsg);
+	afx_msg void OnViewToolbox();
 };
 
 #ifndef _DEBUG  // debug version in DuiVisionDesignerView.cpp
