@@ -220,52 +220,19 @@ CWnd* __stdcall CVciOwm::XVciOwm::OnShowDockingPane(int nID, CWnd* pParentWnd, L
 
 	// 加载toolbox配置文件
 	CString strToolboxPath = theApp.GetModulePath() + "\\toolbox";
-	if(LANGUAGE_PAGE_CHINESE == pObj->GetLanguage())
+	if(LANGUAGE_CHINESE == pObj->GetLanguage())
 	{
 		strToolboxPath += "\\cn";
 	}else
 	{
-		strToolboxPath += "\\cn";
+		strToolboxPath += "\\en";
 	}
 
 	theApp.m_pToolboxPane->GetGroups()->Clear(FALSE);
 
 	CString strToolboxFile = strToolboxPath + "\\duivision_base_control_cn.xml";
 	pObj->LoadToolbox(strToolboxFile);
-/*
-	// 加载工具组图片
-	theApp.SetToolboxIcons(theApp.GetModulePath() + "\\image\\toolbox\\toolbox_uml.bmp");
-	theApp.SetToolboxIcons(theApp.GetModulePath() + "\\image\\toolbox\\toolbox_ui.bmp");
-	//theApp.SetToolboxIcons(theApp.GetModulePath() + "\\image\\toolbox\\toolbox_flow.bmp");
 
-	theApp.m_pToolboxPane->GetGroups()->Clear(FALSE);
-
-	// UML组
-	CXTPTaskPanelGroup* pFolderClass = theApp.CreateToolboxGroup(ID_TOOLBOXGROUP_CLASS);
-	pFolderClass->AddLinkItem(ID_BUTTON_CLASS,2);
-	pFolderClass->AddLinkItem(ID_BUTTON_TEMPLATE,3);
-	pFolderClass->AddLinkItem(ID_BUTTON_PACKAGE,4);
-	pFolderClass->AddLinkItem(ID_BUTTON_INTERFACE,5);
-	pFolderClass->AddLinkItem(ID_BUTTON_NOTE,6);
-	pFolderClass->AddLinkItem(ID_BUTTON_LABEL,7);
-	pFolderClass->AddLinkItem(ID_BUTTON_OBJECT,8);
-	pFolderClass->AddLinkItem(ID_BUTTON_LINK,9);
-
-	pFolderClass->SetExpanded(TRUE);
-
-	// UI组
-	CXTPTaskPanelGroup* pFolderUI = theApp.CreateToolboxGroup(ID_TOOLBOXGROUP_UI);
-	pFolderUI->AddLinkItem(ID_BUTTON_UI_BUTTON,10);
-	pFolderUI->AddLinkItem(ID_BUTTON_UI_EDIT,11);
-	pFolderUI->AddLinkItem(ID_BUTTON_UI_STATIC,12);
-	pFolderUI->AddLinkItem(ID_BUTTON_UI_CHECKBOX,13);
-	pFolderUI->AddLinkItem(ID_BUTTON_UI_RADIOBUTTON,14);
-	pFolderUI->AddLinkItem(ID_BUTTON_UI_COMBOBOX,15);
-	pFolderUI->AddLinkItem(ID_BUTTON_UI_LISTBOX,16);
-	pFolderUI->AddLinkItem(ID_BUTTON_UI_GROUPBOX,17);
-
-	pFolderUI->SetExpanded(FALSE);
-*/
 	reset_dll_resource();
 
 	return pWnd;

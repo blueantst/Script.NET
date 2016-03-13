@@ -5,7 +5,6 @@
 #include "DuiVisionDesigner.h"
 #include "DuiVisionDesignerDoc.h"
 #include "DuiVisionDesignerView.h"
-#include "GlobalFunction.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

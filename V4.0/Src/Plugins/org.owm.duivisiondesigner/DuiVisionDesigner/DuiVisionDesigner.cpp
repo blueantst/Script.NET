@@ -213,18 +213,6 @@ BOOL CDuiVisionDesignerApp::SetToolboxIcons(LPCTSTR lpszBmpFile, CUIntArray* paI
 	if(paIDs == NULL)
 		return FALSE;
 
-	CBitmap bmp;
-
-	HBITMAP hBitmap = (HBITMAP)::LoadImage(::AfxGetInstanceHandle(), lpszBmpFile,
-        IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE|LR_CREATEDIBSECTION);
-	if(hBitmap == NULL)
-		return FALSE;
-
-	BITMAP bmpInfo;
-	::GetObject(hBitmap, sizeof(BITMAP), &bmpInfo);
-
-	bmp.Attach(hBitmap);
-
 	UINT uIDs[100];
 	for(int i=0; i<(*paIDs).GetSize(); i++)
 	{
@@ -234,7 +222,40 @@ BOOL CDuiVisionDesignerApp::SetToolboxIcons(LPCTSTR lpszBmpFile, CUIntArray* paI
 		}
 	}
 
-	BOOL bRet = theApp.m_pToolboxPane->GetImageManager()->SetIcons(bmp, uIDs, (*paIDs).GetSize(), CSize(bmpInfo.bmHeight,bmpInfo.bmHeight), xtpImageNormal);
+	CString strBmpFile = lpszBmpFile;
+	strBmpFile.MakeLower();
+	BOOL bIsBmp = (strBmpFile.Find(".bmp") != -1);
+
+	CBitmap bmp;
+	CSize sizeBmp;
+	int cx,cy;
+
+	if(bIsBmp)
+	{
+		HBITMAP hBitmap = (HBITMAP)::LoadImage(::AfxGetInstanceHandle(), lpszBmpFile,
+			IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE|LR_CREATEDIBSECTION);
+		if(hBitmap == NULL)
+			return FALSE;
+
+		BITMAP bmpInfo;
+		::GetObject(hBitmap, sizeof(BITMAP), &bmpInfo);
+
+		bmp.Attach(hBitmap);
+
+		cx = bmpInfo.bmWidth / (*paIDs).GetSize();
+		cy = bmpInfo.bmHeight;
+	}else
+	{
+		if(!LoadBitmapFromFile(lpszBmpFile, bmp, sizeBmp))
+		{
+			return FALSE;
+		}
+
+		cx = sizeBmp.cx / (*paIDs).GetSize();
+		cy = sizeBmp.cy;
+	}
+
+	BOOL bRet = theApp.m_pToolboxPane->GetImageManager()->SetIcons(bmp, uIDs, (*paIDs).GetSize(), CSize(cx, cy), xtpImageNormal);
 
 	return bRet;
 }

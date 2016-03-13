@@ -60,6 +60,8 @@ using namespace Gdiplus;
 
 #pragma comment(lib, "gdiplus.lib")
 
+#include "GlobalFunction.h"
+
 #include <XTToolkitPro.h>		// X~treme Toolkit MFC extensions
 
 // OWMµ÷ÊÔºê¶¨Òå
