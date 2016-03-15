@@ -164,6 +164,7 @@ public:
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	afx_msg void OnSize(UINT nType, int cx, int cy);
 	virtual void OnInitialUpdate();
+	virtual BOOL PreTranslateMessage(MSG* pMsg);
 	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
 	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
@@ -174,8 +175,9 @@ public:
 	afx_msg BOOL OnMouseWheel(UINT nFlags, short zDelta, CPoint pt);
 	afx_msg void OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
-	virtual BOOL PreTranslateMessage(MSG* pMsg);
 	afx_msg void OnViewToolbox();
+	afx_msg void OnDuiControlCmd(UINT nID);
+	afx_msg void OnUpdateDuiControlCmd(CCmdUI* pCmdUI);
 };
 
 #ifndef _DEBUG  // debug version in DuiVisionDesignerView.cpp

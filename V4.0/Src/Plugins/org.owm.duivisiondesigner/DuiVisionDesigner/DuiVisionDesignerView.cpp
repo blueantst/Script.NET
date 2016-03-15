@@ -15,6 +15,10 @@ static char THIS_FILE[] = __FILE__;
 /////////////////////////////////////////////////////////////////////////////
 // CDuiVisionDesignerView
 
+// 控件命令的范围定义
+#define FIRST_DUICONTROL_COMMAND            1000
+#define LAST_DUICONTROL_COMMAND            2999
+
 IMPLEMENT_DYNCREATE(CDuiVisionDesignerView, CView)
 
 BEGIN_MESSAGE_MAP(CDuiVisionDesignerView, CView)
@@ -40,6 +44,9 @@ BEGIN_MESSAGE_MAP(CDuiVisionDesignerView, CView)
 	ON_WM_KEYDOWN()
 	ON_WM_ERASEBKGND()
 	ON_COMMAND(ID_VIEW_TOOLBOX, &CDuiVisionDesignerView::OnViewToolbox)
+
+	ON_COMMAND_RANGE(FIRST_DUICONTROL_COMMAND, LAST_DUICONTROL_COMMAND, OnDuiControlCmd)
+	ON_UPDATE_COMMAND_UI_RANGE(FIRST_DUICONTROL_COMMAND, LAST_DUICONTROL_COMMAND, OnUpdateDuiControlCmd)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -959,4 +966,18 @@ CDuiVisionDesignerView::XDuiVisionDesignerView::GetTooltipCtrlID()
 void CDuiVisionDesignerView::OnViewToolbox()
 {
 	theApp.ActiveToolboxPane();
+}
+
+// 工具panel的Dui控件事件处理
+void CDuiVisionDesignerView::OnDuiControlCmd(UINT nID)
+{
+	CString str;
+	str.Format("%d", nID);
+	AfxMessageBox(str);
+}
+
+// 工具panel的Dui控件刷新
+void CDuiVisionDesignerView::OnUpdateDuiControlCmd(CCmdUI* pCmdUI)
+{
+	pCmdUI->Enable(TRUE);
 }
