@@ -60,7 +60,7 @@
    </doc-extend>
    
    <dockingpanes>
-      <pane name="DUI工具箱" id="11160" direction="right" icon="dui.ico" type="window" autocreate="false" save="true"></pane>
+      <pane name="DuiVision工具箱" id="11111" direction="right" icon="dui.ico" type="window" autocreate="false" save="true"></pane>
    </dockingpanes>
    
    <perspectives>
@@ -76,7 +76,7 @@
 	      ThemeOffice2003Plain/ThemeNativeWinXPPlain/ThemeToolbox/ThemeToolboxWhidbey/ThemeListView/
 		  ThemeListViewOfficeXP/ThemeListViewOffice2003/ThemeShortcutBarOffice2003/ThemeShortcutBarOffice2007-->
       <parameter name="ToolboxTheme" value="ThemeShortcutBarOffice2007" defaultValue="ThemeShortcutBarOffice2007"/>
-	  <parameter name="DuiVisionPluginObjectName" value="DuiVisionDesignerVci" defaultValue="DuiVisionDesignerVci"/>
+	  <!--parameter name="DuiVisionPluginObjectName" value="DuiVisionDesignerVci" defaultValue="DuiVisionDesignerVci"/-->
    </parameters>
 
 </plugin>

@@ -180,18 +180,153 @@ int __stdcall CVciOwm::XVciOwm::GetRuntimeClass(int nType, CRuntimeClass** ppRun
 	return TRUE;
 }
 
+// Theme 注册表键
+#define REG_CONFIG_SUBKEY		_T("Settings")
+#define REG_CONFIG_SKIN_THEME	_T("SkinTheme")			// 主题
+
 // 显示DockingPane窗口时调用的函数
 CWnd* __stdcall CVciOwm::XVciOwm::OnShowDockingPane(int nID, CWnd* pParentWnd, LPCTSTR lpszParam)
 {
-	CWnd* pWnd = NULL;
-	/*if(nID == VIEW_ID_DuiVisionDesigner)
-	{
-		get_dll_resource();
-		pWnd = (CWnd*)(RUNTIME_CLASS(CDuiVisionDesignerView));
-		theApp.m_pDuiVisionDesignerView = pWnd;
-	}*/
+	CVciOwm *pObj = GET_INTERFACE_OBJECT(VciOwm);
+
+	XTPTaskPanelPaintTheme paneTheme = xtpTaskPanelThemeShortcutBarOffice2003;
 	
+	int nTheme = AfxGetApp()->GetProfileInt(REG_CONFIG_SUBKEY, REG_CONFIG_SKIN_THEME, xtpThemeRibbon);
+	switch(nTheme)
+	{
+	case xtpThemeOffice2000: paneTheme = xtpTaskPanelThemeOffice2000; break;
+	case xtpThemeOfficeXP: paneTheme = xtpTaskPanelThemeListViewOfficeXP; break;
+	case xtpThemeOffice2003: paneTheme = xtpTaskPanelThemeListViewOffice2003; break;
+	case xtpThemeNativeWinXP: paneTheme = xtpTaskPanelThemeNativeWinXP; break;
+	case xtpThemeWhidbey: paneTheme = xtpTaskPanelThemeToolboxWhidbey; break;
+	case xtpThemeOffice2007: paneTheme = xtpTaskPanelThemeShortcutBarOffice2003; break;
+	case xtpThemeRibbon: paneTheme = xtpTaskPanelThemeShortcutBarOffice2007; break;
+	}
+
+	CWnd* pWnd = (CWnd*)(new CXTPTaskPanel());
+	theApp.m_pToolboxPane = (CXTPTaskPanel*)pWnd;
+	theApp.m_pToolboxPane->Create(WS_CHILD|WS_VISIBLE, CRect(0, 0, 0, 0), pParentWnd, nID);//DOCKPANE_ID_TOOLBOX);
+	theApp.m_pToolboxPane->SetOwner(pParentWnd);
+	theApp.m_pToolboxPane->SetBehaviour(xtpTaskPanelBehaviourToolbox);
+	theApp.m_pToolboxPane->SetTheme(paneTheme);
+	theApp.m_pToolboxPane->SetSelectItemOnFocus(TRUE);
+	theApp.m_pToolboxPane->SetGroupIconSize(CSize(16, 16));
+	theApp.m_pToolboxPane->Reposition();
+	theApp.m_pToolboxPane->AllowDrag(FALSE);
+	theApp.m_pToolboxPane->EnableAnimation(TRUE);
+
+	// 创建工具组
+	get_dll_resource();
+
+	// 加载toolbox配置文件
+	CString strToolboxPath = theApp.GetModulePath() + "\\toolbox";
+	if(LANGUAGE_CHINESE == pObj->GetLanguage())
+	{
+		strToolboxPath += "\\cn";
+	}else
+	{
+		strToolboxPath += "\\en";
+	}
+
+	theApp.m_pToolboxPane->GetGroups()->Clear(FALSE);
+
+	CString strToolboxFile = strToolboxPath + "\\duivision_base_control_cn.xml";
+	pObj->LoadToolbox(strToolboxFile);
+
+	reset_dll_resource();
+
 	return pWnd;
+}
+
+// 加载Toolbox配置文件
+BOOL CVciOwm::LoadToolbox(LPCTSTR lpszToolboxFile)
+{
+	if(GetFileAttributes(lpszToolboxFile) == 0xFFFFFFFF)
+	{
+		return FALSE;
+	}
+
+	CXmlParser parser;
+	if(parser.Open(lpszToolboxFile))
+	{
+		DEBUG_OUTF(LOG_LEVEL_ERROR, "Load toolbox file %s fail!", lpszToolboxFile);
+		return FALSE;
+	}
+
+	CString strImagePath = theApp.GetModulePath();
+
+	BOOL bRet = TRUE;
+	DOMNode* pNode = parser.GetRootNode();
+
+	// 加载图片资源
+	DOMNode* pImageNode = parser.GetChildNode(pNode, "image");
+	while (pImageNode != NULL)
+	{
+		CString strIconFile = strImagePath + "\\" + parser.GetNodeAttribute(pImageNode, "file");
+		int nImageId = atoi(parser.GetNodeAttribute(pImageNode, "id"));
+
+		// 加载单个图片
+		if(!theApp.SetToolboxIcon(strIconFile, nImageId))
+		{
+			bRet = FALSE;
+		}
+
+		pImageNode = parser.GetNextNode(pImageNode, "image");
+	}
+
+	DOMNode* pImageListNode = parser.GetChildNode(pNode, "imagelist");
+	while (pImageListNode != NULL)
+	{
+		CString strBmpFile = strImagePath + "\\" + parser.GetNodeAttribute(pImageListNode, "file");
+		CString strIDs = parser.GetNodeText(pImageListNode);
+		CUIntArray auID;
+		int nPos = strIDs.Find(",");
+		while(nPos != -1)
+		{
+			auID.Add(atoi(strIDs.Left(nPos)));
+			strIDs.Delete(0, nPos+1);
+			nPos = strIDs.Find(",");
+		}
+		auID.Add(atoi(strIDs));
+
+		// 加载图片列表
+		if(!theApp.SetToolboxIcons(strBmpFile, &auID))
+		{
+			bRet = FALSE;
+		}
+
+		pImageListNode = parser.GetNextNode(pImageListNode, "imagelist");
+	}
+
+	// 加载控件组和控件
+	DOMNode* pGroupNode = parser.GetChildNode(pNode, "group");
+	while (pGroupNode != NULL)
+	{
+		CString strGroupName = parser.GetNodeAttribute(pGroupNode, "name");
+		int nGroupId = atoi(parser.GetNodeAttribute(pGroupNode, "id"));
+		BOOL bExpand = (parser.GetNodeAttribute(pGroupNode, "expand") == "true");
+		CXTPTaskPanelGroup* pFolderClass = theApp.CreateToolboxGroup(nGroupId, strGroupName);
+
+		// 加载控件
+		DOMNode* pItemNode = parser.GetChildNode(pGroupNode, "control");
+		while (pItemNode != NULL)
+		{
+			CString strControlName = parser.GetNodeAttribute(pItemNode, "name");
+			int nControlImageId = atoi(parser.GetNodeAttribute(pItemNode, "image-id"));
+			CXTPTaskPanelGroupItem* pItem = pFolderClass->AddLinkItem(nControlImageId, nControlImageId);
+			pItem->SetCaption(theApp.StripMnemonics(strControlName));
+
+			pItemNode = parser.GetNextNode(pItemNode, "control");
+		}
+
+		pFolderClass->SetExpanded(bExpand);
+
+		pGroupNode = parser.GetNextNode(pGroupNode, "group");
+	}
+
+	parser.Close();
+
+	return TRUE;
 }
 
 // OWM命令处理

@@ -28,6 +28,16 @@ public:
 	CString GetPlatRootPath();
 	CString GetModulePath();
 
+	// 工具箱操作
+	CString StripMnemonics(CString str);
+	void CreateToolboxPane();
+	void ActiveToolboxPane();
+	CXTPTaskPanelGroup* CreateToolboxGroup(UINT nID, LPCTSTR lpszCaption);
+	CXTPTaskPanelGroup* FindToolboxGroup(UINT nID);
+	void SetToolboxDefaultItem();
+	BOOL SetToolboxIcons(LPCTSTR lpszBmpFile, CUIntArray* paIDs);
+	BOOL SetToolboxIcon(CString strIcon, int nId);
+
 	CString	GetIniString(LPCTSTR lpszSection, LPCTSTR lpszEntry, LPCTSTR lpszDefault = "");
 	int		GetIniInt(LPCTSTR lpszSection, LPCTSTR lpszEntry, int nDefault = 0);
 	CString WriteIniString(LPCTSTR lpszSection, LPCTSTR lpszEntry, LPCTSTR lpszValue);
@@ -51,6 +61,10 @@ public:
 	int			m_nLanguage;// 语言类型
 	IPlatUI*	m_pIPlatUI;	// 平台接口指针
 	HINSTANCE	m_hDuiPluginHandle;		// 保存界面插件动态库的句柄
+
+	CXTPTaskPanel*			m_pToolboxPane;	// 工具箱Pane
+	CXTPTaskPanelGroup*		m_pCurToolboxGroup;	// 当前工具组
+	CXTPTaskPanelGroupItem*	m_pToolboxItemPointer;	// 工具组的默认项
 };
 
 class CDuiVisionDesignerView;
