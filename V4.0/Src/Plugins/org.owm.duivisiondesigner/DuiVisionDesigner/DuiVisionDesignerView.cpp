@@ -424,3 +424,10 @@ BOOL CDuiVisionDesignerView::OnEraseBkgnd(CDC* pDC)
 	return FALSE;
 	//return CView::OnEraseBkgnd(pDC);
 }
+
+BOOL CDuiVisionDesignerView::PreTranslateMessage(MSG* pMsg)
+{
+	// TODO: 在此添加专用代码和/或调用基类
+
+	return __super::PreTranslateMessage(pMsg);
+}
