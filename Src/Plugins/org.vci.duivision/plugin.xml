@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?blueui version="2.0"?>
+<plugin
+   id="org.vci.duivision"
+   owmid=""
+   name="duivision plugin"
+   version="1.0.0"
+   provider-name="scriptdevelop.com"
+   type="vci"
+   class="IDuiPluginPanel"
+   class-version="1.0.0"
+   image="images/logo.gif">
+
+   <description>
+      duivision plugin vci.
+   </description>
+
+   <copyright>
+      Copyright scriptdevelop.com, 2000-2016.  All rights reserved.
+   </copyright>
+
+   <license>
+      BLUEANT LICENSE
+   </license>
+
+   <url>
+      <about label="about page" url="html/about.htm"/>
+      <update label="duivision update site" url="http://www.scriptdevelop.com/vci/duivision"/>
+   </url>
+
+   <property>
+   </property>
+
+   <runtime>
+      <library name="DuiVisionDesignerPlugin.dll">
+         <export name="*"/>
+      </library>
+	  <library-debug name="DuiVisionDesignerPlugin_d.dll">
+         <export name="*"/>
+      </library-debug>
+	  <interface-define>IDuiPlugin.h</interface-define>
+	  <!-- initial paramater -->
+	  <init></init>
+	  <!-- done paramater -->
+	  <done></done>
+   </runtime>
+   <requires>
+      <import plugin="org.blueui.core.runtime"/>
+   </requires>
+
+   <!-- document extension point -->
+   <doc-extend>
+   </doc-extend>
+   
+   <perspectives>
+   </perspectives>
+
+
+   <extension-point id="server" name="%server" schema="schema/server.exsd"/>
+
+</plugin>

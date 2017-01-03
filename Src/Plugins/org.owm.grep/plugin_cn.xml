@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="GB2312"?>
+<?blueui version="2.0"?>
+<plugin
+   id="org.owm.grep"
+   owmid="151"
+   name="文件搜索"
+   version="1.2.0"
+   provider-name="Blueant Studio"
+   type="owm"
+   class="IVciOwm"
+   class-version="1.0.0"
+   image="images/logo.gif">
+
+   <description>
+      Grep view is a view of grep.
+   </description>
+
+   <copyright>
+      Copyright Blueant, 2000-2009.  All rights reserved.
+   </copyright>
+
+   <license>
+      BLUEANT LICENSE
+   </license>
+
+   <url>
+      <about label="about page" url="html/about.htm"/>
+      <update label="Grep update site" url="http://www.blueantstudio.net/vci/owm/grep"/>
+   </url>
+
+   <property>
+      <owm-type doc="true" dockbar="false" menu="true" toolbar="true" option="true"
+	  		oneframe="true" autocreate="false" maxwindow="false" dynload="true" broadcast="false"/>
+   </property>
+
+   <runtime>
+      <library name="owmgrep.dll">
+         <export name="*"/>
+      </library>
+	  <library-debug name="owmgrepd.dll">
+         <export name="*"/>
+      </library-debug>
+	  <interface-define></interface-define>
+	  <!-- initial paramater -->
+	  <init></init>
+	  <!-- done paramater -->
+	  <done></done>
+   </runtime>
+   <requires>
+      <import plugin="org.blueui.core.runtime"/>
+   </requires>
+
+   <!-- document extension point -->
+   <doc-extend>
+   </doc-extend>
+   
+   <dockingpanes>
+      <pane name="查找替换" id="10002" direction="left" icon="grep.ico"
+	   		type="view" autocreate="false" save="true">
+	  </pane>
+      <pane name="查找结果" id="10003" direction="bottom" icon="grep.ico"
+	   		type="view" autocreate="false" save="true">
+	  </pane>
+   </dockingpanes>
+
+   <menus>
+		<menu mainmenu="编辑(&amp;E)" submenu="查找替换(&amp;F)">showpane:10002</menu>
+		<menu mainmenu="查看(&amp;V)" submenu="查找结果(&amp;S)">showpane:10003</menu>
+   </menus>
+   
+   <perspectives>
+      <perspective name="Grep" id="perspective.grep">
+	     <view name="grep"/>
+		 <dock-view name="dock1"/>
+		 <dock-view name="dock2"/>
+		 <menus>
+		    <menu>html</menu>
+		 </menus>
+		 <toolbar/>
+	  </perspective>
+   </perspectives>
+
+
+   <extension-point id="server" name="%server" schema="schema/server.exsd"/>
+
+</plugin>

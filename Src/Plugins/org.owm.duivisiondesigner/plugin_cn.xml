@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="GB2312"?>
+<?blueui version="2.0"?>
+<plugin
+   id="org.owm.duivisiondesigner"
+   owmid="100"
+   name="DuiVision界面设计器"
+   version="1.0.0"
+   provider-name="Blueant Studio"
+   type="owm"
+   class="IVciOwm"
+   class-version="1.0.0"
+   image="images/logo.gif">
+
+   <description>
+      DuiVision UI Designer is a view of DuiVision UI editor.
+   </description>
+
+   <copyright>
+      Copyright Blueant, 2000-2016.  All rights reserved.
+   </copyright>
+
+   <license>
+      BLUEANT LICENSE
+   </license>
+
+   <url>
+      <about label="about page" url="html/about.htm"/>
+      <update label="duivisiondesigner update site" url="http://www.blueantstudio.net/vci/owm/duivisiondesigner"/>
+   </url>
+
+   <property>
+      <owm-type doc="true" dockbar="false" menu="true" toolbar="true" option="false"
+	  		oneframe="true" autocreate="false" maxwindow="false" dynload="true" broadcast="false"/>
+   </property>
+
+   <runtime>
+      <library name="DuiVisionDesigner.dll">
+         <export name="*"/>
+      </library>
+	  <library-debug name="DuiVisionDesigner_d.dll">
+         <export name="*"/>
+      </library-debug>
+	  <interface-define></interface-define>
+	  <!-- initial paramater -->
+	  <init></init>
+	  <!-- done paramater -->
+	  <done></done>
+   </runtime>
+   <requires>
+      <import plugin="org.blueui.core.runtime"/>
+   </requires>
+
+   <!-- document extension point -->
+   <doc-extend>
+      <doc name="DUI Files" id="doc.edit.dui" icon="dui.ico">
+	     <exts>
+		    <ext>xml</ext>
+		 </exts>
+	  </doc>
+   </doc-extend>
+   
+   <dockingpanes>
+      <pane name="DuiVision工具箱" id="11111" direction="right" icon="dui.ico" type="window" autocreate="false" save="true"></pane>
+   </dockingpanes>
+   
+   <perspectives>
+      <perspective name="Edit" id="perspective.edit">
+	  </perspective>
+   </perspectives>
+
+   <extension-point id="server" name="%server" schema="schema/server.exsd"/>
+
+   <!-- parameters -->
+   <parameters>
+      <!--ThemeOffice2000/ThemeOffice2003/ThemeNativeWinXP/ThemeOffice2000Plain/ThemeOfficeXPPlain/
+	      ThemeOffice2003Plain/ThemeNativeWinXPPlain/ThemeToolbox/ThemeToolboxWhidbey/ThemeListView/
+		  ThemeListViewOfficeXP/ThemeListViewOffice2003/ThemeShortcutBarOffice2003/ThemeShortcutBarOffice2007-->
+      <parameter name="ToolboxTheme" value="ThemeShortcutBarOffice2007" defaultValue="ThemeShortcutBarOffice2007"/>
+	  <!--parameter name="DuiVisionPluginObjectName" value="DuiVisionDesignerVci" defaultValue="DuiVisionDesignerVci"/-->
+   </parameters>
+
+</plugin>

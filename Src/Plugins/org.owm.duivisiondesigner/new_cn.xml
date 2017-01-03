@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="GB2312"?>
+<newfile id="default">
+	<NewFile>
+		<File Name="DuiVision界面" Type="owm" Ext="dui" Icon="image\icon\dui.ico"
+				 Template="" Interp="org.owm.duivision">
+		</File>
+	</NewFile>
+</newfile>

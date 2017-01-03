@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="GB2312"?>
+<?blueui version="2.0"?>
+<tool
+   id="org.tool.terminal"
+   name="控制台"
+   version="1.0.0"
+   provider-name="Blueant Studio"
+   image="images/logo.gif">
+
+   <description>
+      Terminal is a tool of script terminal.
+   </description>
+
+   <copyright>
+      Copyright Blueant, 2000-2008.  All rights reserved.
+   </copyright>
+
+   <license>
+      BLUEANT LICENSE
+   </license>
+
+   <url>
+      <about label="about page" url="html/about.htm"/>
+      <update label="Terminal update site" url="http://www.blueantstudio.net/tools/terminal"/>
+   </url>
+
+   <property>
+      <category></category>
+	  <showmenu>true</showmenu>
+	  <showtask>true</showtask>
+	  <showtoolbar>false</showtoolbar>
+	  <showstatusbar>true</showstatusbar>
+   </property>
+
+   <statusbar>
+      <pane id="501" width="22" text="" tooltip="控制台" icon="terminal.ico" />
+   </statusbar>
+
+   <runtime>
+      <type>owm</type>
+	  <vci>org.owm.terminal</vci>
+	  <instancename></instancename>
+	  <file></file>
+   </runtime>
+   <requires>
+      <import plugin="org.blueui.core.runtime"/>
+   </requires>
+
+</tool>

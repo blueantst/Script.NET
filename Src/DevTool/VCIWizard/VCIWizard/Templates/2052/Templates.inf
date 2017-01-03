@@ -1,0 +1,47 @@
+-- 说明：以下面的字符串起始的行的处理方式
+-- '=' => 直接拷贝,不进行内容替换
+-- '-' => 只拷贝，不需要添加
+
+readme.txt
+
+stdafx.h
+stdafx.cpp
+resource.h
+vci.ini
+
+-- VCI工程框架
+vci.def
+[!if !VCITYPE_OWM]
+vci.cpp
+[!endif]
+vci.rc
+vci.rc2
+[!if VCITYPE_OWM]
+owm.ico
+toolbar.bmp
+[!else]
+vci.ico
+[!endif]
+
+-- VCI组件接口和类
+[!if VCITYPE_VCI]
+IVCIClass.h
+[!endif]
+CVCIClass.h
+CVCIClass.cpp
+
+-- OWM组件文件
+[!if VCITYPE_OWM]
+owmapp.h
+owmapp.cpp
+Doc.h
+Doc.cpp
+View.h
+View.cpp
+ChildFrame.h
+ChildFrame.cpp
+[!if OWM_CONTROLBAR || OWM_TABCTRLBAR]
+Bar.h
+Bar.cpp
+[!endif]
+[!endif]

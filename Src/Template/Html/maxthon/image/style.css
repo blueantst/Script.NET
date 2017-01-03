@@ -1,0 +1,24 @@
+#maxthon_explorer_maps {
+	BORDER-RIGHT: #dad6cb 1px solid; PADDING-RIGHT: 0px; DISPLAY: none; PADDING-LEFT: 0px; FONT-SIZE: 12px; Z-INDEX: 50000; LEFT: 50px; PADDING-BOTTOM: 0px; MARGIN: 0px; BORDER-LEFT: #dad6cb 1px solid; WIDTH: 150px; CURSOR: pointer; PADDING-TOP: 0px; BORDER-BOTTOM: #dad6cb 1px solid; FONT-FAMILY: Verdana; POSITION: absolute; TOP: 50px; BACKGROUND-COLOR: white
+}
+#maxthon_explorer_maps LI {
+	PADDING-RIGHT: 0px; BORDER-TOP: #dad6cb 1px solid; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; LIST-STYLE-TYPE: none
+}
+#maxthon_explorer_maps A {
+	PADDING-RIGHT: 0px; DISPLAY: block; PADDING-LEFT: 0px; BACKGROUND-IMAGE: url(item_bg.gif); PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; BACKGROUND-COLOR: white; TEXT-DECORATION: none
+}
+#maxthon_explorer_maps A IMG {
+	BORDER-TOP-WIDTH: 0px; PADDING-RIGHT: 0px; PADDING-LEFT: 10px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; PADDING-BOTTOM: 6px; VERTICAL-ALIGN: middle; WIDTH: 20px; PADDING-TOP: 6px; HEIGHT: 20px; BORDER-RIGHT-WIDTH: 0px
+}
+#maxthon_explorer_maps A:hover {
+	BACKGROUND-IMAGE: url(item_bg_active.gif); BACKGROUND-COLOR: #f4fadf
+}
+#maxthon_explorer_maps A SPAN {
+	PADDING-LEFT: 10px
+}
+#logo {
+	CURSOR: pointer
+}
+#tips {
+	BORDER-RIGHT: gray 1px solid; PADDING-RIGHT: 12px; BORDER-TOP: gray 1px solid; DISPLAY: none; PADDING-LEFT: 12px; PADDING-BOTTOM: 8px; BORDER-LEFT: gray 1px solid; PADDING-TOP: 8px; BORDER-BOTTOM: gray 1px solid; POSITION: absolute; BACKGROUND-COLOR: white
+}

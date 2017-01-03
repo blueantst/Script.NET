@@ -1,0 +1,38 @@
+.DronFw_Window
+{
+	position:absolute;
+}
+.DronFw_Window .window_table
+{
+	table-layout:fixed;
+	border-top: 2px outset #fff;
+	border-left: 2px outset #fff;
+	border-bottom: 2px outset #969696;
+	border-right: 2px outset #969696;
+}
+.DronFw_Window .window_ico
+{
+	width:16px;
+	height:16px;
+	border:0;
+}
+.DronFw_Window .window_title
+{
+	color:#fff;
+	font-weight:bold;
+	font-size:12px;
+	cursor:default;
+}
+.DronFw_Window .window_button input
+{
+	width:16px;
+	height:14px;
+}
+.DronFw_Window .window_button1 {background:#d6d3ce url(min.gif) no-repeat -2px -2px;}
+.DronFw_Window .window_button2 {background:#d6d3ce url(res.gif) no-repeat -2px -2px;}
+.DronFw_Window .window_button3 {background:#d6d3ce url(clo.gif) no-repeat -2px -2px;}
+.DronFw_Window .window_content
+{
+	background:#d6d3ce;
+	font-size:12px;
+}

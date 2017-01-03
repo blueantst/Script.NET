@@ -1,0 +1,615 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 中文(中华人民共和国) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 4, 2\r\n"
+    "#pragma code_page(936)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\PTerminal.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.chs\\afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,7,0,0
+ PRODUCTVERSION 1,7,0,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "080404b0"
+        BEGIN
+            VALUE "FileDescription", "PTerminal DLL"
+            VALUE "FileVersion", "1, 7, 0, 0"
+            VALUE "InternalName", "PTerminal"
+            VALUE "LegalCopyright", "版权所有 (C) 2000-2009"
+            VALUE "OriginalFilename", "PTerminal.DLL"
+            VALUE "ProductName", "PTerminal Dynamic Link Library"
+            VALUE "ProductVersion", "1, 7, 0, 0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x804, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_OWM                 ICON                    "res\\idr_owm.ico"
+IDI_TELNET              ICON                    "res\\telnet.ico"
+IDI_COM                 ICON                    "res\\Hardware - Plug.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOG  0, 0, 265, 136
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "关于控制台"
+FONT 9, "宋体"
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,213,46,45,14
+    ICON            IDI_TELNET,IDC_STATIC,10,48,20,20
+    LTEXT           "Script.NET控制台模块 v1.7",IDC_STATIC,40,47,100,11
+    LTEXT           "版权所有 (C) 2000-2009",IDC_STATIC,40,60,100,11
+    CONTROL         3006,IDC_STATIC,"Static",SS_BITMAP,0,0,275,51
+    LTEXT           "最近更新日期：2009-01-26",IDC_STATIC,40,75,100,11
+    CONTROL         "",IDC_STATIC,"Static",SS_BLACKFRAME | SS_SUNKEN,40,90,213,1
+    LTEXT           "警告：本计算机程序受著作权法和国际公约的保护，未经授权擅自复制或传播本程序的部分或全部，可能受到严厉的民事及刑事制裁，并将在法律许可的范围内受到最大可能的起诉。",IDC_STATIC,40,97,217,27
+END
+
+IDD_TPS_PTERMINAL DIALOG  0, 0, 270, 151
+STYLE DS_SETFONT | WS_CHILD
+FONT 9, "宋体"
+BEGIN
+    ICON            IDI_TELNET,IDC_STATIC,16,18,21,21
+    GROUPBOX        "",IDC_STATIC,10,4,240,128
+    LTEXT           "默认控制台类型：",IDC_STATIC,51,18,67,10
+    COMBOBOX        IDC_COMBO_DEFAULTSHELL,120,15,108,72,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "控制台解释器名：",IDC_STATIC,50,35,64,10
+    EDITTEXT        IDC_EDIT_TCLINTERPNAME,120,33,108,12,ES_AUTOHSCROLL
+    CONTROL         "允许以对话框方式显示列表数据",IDC_CHECK_ENABLE_LISTDLG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,50,53,175,13
+END
+
+IDD_DIALOG_COMPARAM DIALOG  0, 0, 209, 207
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "打开本地串口"
+FONT 9, "宋体"
+BEGIN
+    ICON            IDI_COM,IDC_STATIC,15,42,21,21
+    LTEXT           "请输入串口号和参数",IDC_STATIC,46,47,97,11
+    RTEXT           "串口号：",IDC_STATIC,21,70,44,10
+    COMBOBOX        IDC_COMBO_COM,72,68,120,165,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
+    RTEXT           "波特率：",IDC_STATIC,21,88,44,10
+    COMBOBOX        IDC_COMBO_BAUD,72,86,120,107,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
+    RTEXT           "数据位：",IDC_STATIC,21,106,44,10
+    COMBOBOX        IDC_COMBO_DATABITS,72,104,120,33,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    RTEXT           "停止位：",IDC_STATIC,21,124,44,10
+    COMBOBOX        IDC_COMBO_STOPBITS,72,122,120,33,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    RTEXT           "奇偶校验：",IDC_STATIC,21,143,44,10
+    COMBOBOX        IDC_COMBO_PARITY,72,141,120,44,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "确定",IDOK,91,182,48,14
+    PUSHBUTTON      "放弃",IDCANCEL,143,182,48,14
+    CONTROL         209,IDC_STATIC,"Static",SS_BITMAP,0,0,213,35
+    CONTROL         "是否回显",IDC_CHECK_ECHO,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,71,162,87,15
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 258
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 129
+    END
+
+    IDD_TPS_PTERMINAL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 263
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 144
+    END
+
+    IDD_DIALOG_COMPARAM, DIALOG
+    BEGIN
+        LEFTMARGIN, 10
+        RIGHTMARGIN, 199
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 200
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_CONTEXT MENU 
+BEGIN
+    POPUP "PTerminal"
+    BEGIN
+        MENUITEM "切换控制台\tCtrl+T",               ID_SWITCH_TERMINAL
+        MENUITEM SEPARATOR
+        MENUITEM "连接",                          ID_SERVER_CONNECT
+        MENUITEM "断开连接",                        ID_SERVER_DISCONNECT
+        MENUITEM SEPARATOR
+        MENUITEM "剪切\tCtrl+X",                  ID_EDIT_CUT
+        MENUITEM "复制\tCtrl+C",                  ID_EDIT_COPY
+        MENUITEM "粘贴\tCtrl+V",                  ID_EDIT_PASTE
+        MENUITEM "全选\tCtrl+A",                  ID_EDIT_SELECT_ALL
+        MENUITEM "清空...",                       ID_EDIT_CLEAR_ALL
+        MENUITEM SEPARATOR
+        MENUITEM "查找\tCtrl+F",                  ID_EDIT_FIND
+        MENUITEM "查找下一个\tF3",                   ID_EDIT_REPEAT
+        MENUITEM "替换\tCtrl+H",                  ID_EDIT_REPLACE
+        MENUITEM SEPARATOR
+        MENUITEM "关于控制台",                       ID_OWM_ABOUT
+    END
+END
+
+IDR_TERM_TCL MENU 
+BEGIN
+    POPUP "控制台(&C)"
+    BEGIN
+        MENUITEM "切换控制台\tCtrl+T",               ID_SWITCH_TERMINAL
+        MENUITEM "重置解释器",                       ID_RESET_INTERP
+        MENUITEM SEPARATOR
+        MENUITEM "连接",                          ID_SERVER_CONNECT
+        MENUITEM "断开连接",                        ID_SERVER_DISCONNECT
+        MENUITEM SEPARATOR
+        MENUITEM "加载文件\tCtrl+O",                ID_TERM_OPENFILE
+        MENUITEM SEPARATOR
+        MENUITEM "剪切\tCtrl+X",                  ID_EDIT_CUT
+        MENUITEM "复制\tCtrl+C",                  ID_EDIT_COPY
+        MENUITEM "粘贴\tCtrl+V",                  ID_EDIT_PASTE
+        MENUITEM "全选\tCtrl+A",                  ID_EDIT_SELECT_ALL
+        MENUITEM SEPARATOR
+        MENUITEM "查找\tCtrl+F",                  ID_EDIT_FIND
+        MENUITEM "查找下一个\tF3",                   ID_EDIT_REPEAT
+        MENUITEM "替换\tCtrl+H",                  ID_EDIT_REPLACE
+        MENUITEM SEPARATOR
+        MENUITEM "可用命令列表\tCtrl+I",              ID_LIST_COMMAND
+        MENUITEM "历史命令列表",                      ID_LIST_HISTORYCMD
+        POPUP "其他列表"
+        BEGIN
+            MENUITEM "已加载库列表",                      ID_LIST_LOADLIB
+            MENUITEM "可加载库列表",                      ID_LIST_KNOWNLIB
+            MENUITEM SEPARATOR
+            MENUITEM "过程列表",                        ID_LIST_PROCS
+            MENUITEM SEPARATOR
+            MENUITEM "全局变量列表",                      ID_LIST_GLOBALS
+            MENUITEM "局部变量列表",                      ID_LIST_LOCALVARS
+            MENUITEM SEPARATOR
+            MENUITEM "类和对象列表",                      ID_LIST_ITCLOBJECT
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "关于控制台",                       ID_OWM_ABOUT
+    END
+END
+
+IDR_OWM_VIEW MENU 
+BEGIN
+    POPUP "VIEW"
+    BEGIN
+        MENUITEM "控制台(&T)",                     ID_VIEW_TERMINAL
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_OWM                 BITMAP                  "res\\Toolbar.bmp"
+IDR_TELNET              BITMAP                  "res\\mainfram.bmp"
+IDB_EDIT_AUTOCOMPLETE   BITMAP                  "res\\workspc.bmp"
+IDB_LOGO_ATESTUDIOOWM   BITMAP                  "res\\aboutowm.bmp"
+IDB_TITLE               BITMAP                  "res\\login_title.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_OWM TOOLBAR  16, 15
+BEGIN
+    BUTTON      ID_VIEW_OWM
+END
+
+IDR_TELNET TOOLBAR  16, 15
+BEGIN
+    BUTTON      ID_SWITCH_TERMINAL
+    SEPARATOR
+    BUTTON      ID_SERVER_CONNECT
+    BUTTON      ID_SERVER_DISCONNECT
+    SEPARATOR
+    BUTTON      ID_TERM_OPENFILE
+    SEPARATOR
+    BUTTON      ID_EDIT_FIND
+    BUTTON      ID_EDIT_CUT
+    BUTTON      ID_EDIT_COPY
+    BUTTON      ID_EDIT_PASTE
+    SEPARATOR
+    BUTTON      ID_LIST_COMMAND
+    BUTTON      ID_LIST_HISTORYCMD
+    BUTTON      ID_LIST_PROCS
+    BUTTON      ID_LIST_KNOWNLIB
+    BUTTON      ID_LIST_GLOBALS
+    BUTTON      ID_LIST_LOCALVARS
+    SEPARATOR
+    BUTTON      ID_LIST_ITCLOBJECT
+    SEPARATOR
+    BUTTON      ID_FILE_PRINT
+    BUTTON      ID_OWM_ABOUT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_ACCELERATOR ACCELERATORS 
+BEGIN
+    "A",            ID_EDIT_SELECT_ALL,     VIRTKEY, CONTROL, NOINVERT
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    "F",            ID_EDIT_FIND,           VIRTKEY, CONTROL, NOINVERT
+    "H",            ID_EDIT_REPLACE,        VIRTKEY, CONTROL, NOINVERT
+    "I",            ID_LIST_COMMAND,        VIRTKEY, CONTROL, NOINVERT
+    "O",            ID_TERM_OPENFILE,       VIRTKEY, CONTROL, NOINVERT
+    "T",            ID_SWITCH_TERMINAL,     VIRTKEY, CONTROL, NOINVERT
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL, NOINVERT
+    VK_F3,          ID_EDIT_REPEAT,         VIRTKEY, NOINVERT
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL, NOINVERT
+    "Y",            ID_EDIT_REDO,           VIRTKEY, CONTROL, NOINVERT
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_TPS_PTERMINAL DLGINIT
+BEGIN
+    IDC_COMBO_DEFAULTSHELL, 0x403, 14, 0
+0xbeb1, 0xd8b5, 0x4354, 0xbf4c, 0xd6d8, 0xccc6, 0x00a8, 
+    IDC_COMBO_DEFAULTSHELL, 0x403, 17, 0
+0xbeb1, 0xd8b5, 0x7950, 0x6874, 0x6e6f, 0xd8bf, 0xc6d6, 0xa8cc, "\000" 
+    IDC_COMBO_DEFAULTSHELL, 0x403, 14, 0
+0xbeb1, 0xd8b5, 0x754c, 0xbf61, 0xd6d8, 0xccc6, 0x00a8, 
+    IDC_COMBO_DEFAULTSHELL, 0x403, 15, 0
+0xbeb1, 0xd8b5, 0x7552, 0x7962, 0xd8bf, 0xc6d6, 0xa8cc, "\000" 
+    IDC_COMBO_DEFAULTSHELL, 0x403, 15, 0
+0xbeb1, 0xd8b5, 0x6550, 0x6c72, 0xd8bf, 0xc6d6, 0xa8cc, "\000" 
+    IDC_COMBO_DEFAULTSHELL, 0x403, 13, 0
+0x4554, 0x4e4c, 0x5445, 0xd8bf, 0xc6d6, 0xa8cc, "\000" 
+    IDC_COMBO_DEFAULTSHELL, 0x403, 11, 0
+0xaeb4, 0xdabf, 0xd8bf, 0xc6d6, 0xa8cc, "\000" 
+    IDC_COMBO_DEFAULTSHELL, 0x403, 11, 0
+0xb6d4, 0xccb3, 0xd8bf, 0xc6d6, 0xa8cc, "\000" 
+    0
+END
+
+IDD_DIALOG_COMPARAM DLGINIT
+BEGIN
+    IDC_COMBO_COM, 0x403, 5, 0
+0x4f43, 0x314d, "\000" 
+    IDC_COMBO_COM, 0x403, 5, 0
+0x4f43, 0x324d, "\000" 
+    IDC_COMBO_COM, 0x403, 5, 0
+0x4f43, 0x334d, "\000" 
+    IDC_COMBO_COM, 0x403, 5, 0
+0x4f43, 0x344d, "\000" 
+    IDC_COMBO_COM, 0x403, 5, 0
+0x4f43, 0x354d, "\000" 
+    IDC_COMBO_COM, 0x403, 5, 0
+0x4f43, 0x364d, "\000" 
+    IDC_COMBO_COM, 0x403, 5, 0
+0x4f43, 0x374d, "\000" 
+    IDC_COMBO_COM, 0x403, 5, 0
+0x4f43, 0x384d, "\000" 
+    IDC_COMBO_COM, 0x403, 5, 0
+0x4f43, 0x394d, "\000" 
+    IDC_COMBO_COM, 0x403, 6, 0
+0x4f43, 0x314d, 0x0030, 
+    IDC_COMBO_COM, 0x403, 6, 0
+0x4f43, 0x314d, 0x0031, 
+    IDC_COMBO_COM, 0x403, 6, 0
+0x4f43, 0x314d, 0x0032, 
+    IDC_COMBO_COM, 0x403, 6, 0
+0x4f43, 0x314d, 0x0033, 
+    IDC_COMBO_COM, 0x403, 6, 0
+0x4f43, 0x314d, 0x0034, 
+    IDC_COMBO_COM, 0x403, 6, 0
+0x4f43, 0x314d, 0x0035, 
+    IDC_COMBO_COM, 0x403, 6, 0
+0x4f43, 0x314d, 0x0036, 
+    IDC_COMBO_BAUD, 0x403, 5, 0
+0x3231, 0x3030, "\000" 
+    IDC_COMBO_BAUD, 0x403, 5, 0
+0x3432, 0x3030, "\000" 
+    IDC_COMBO_BAUD, 0x403, 5, 0
+0x3834, 0x3030, "\000" 
+    IDC_COMBO_BAUD, 0x403, 5, 0
+0x3639, 0x3030, "\000" 
+    IDC_COMBO_BAUD, 0x403, 6, 0
+0x3931, 0x3032, 0x0030, 
+    IDC_COMBO_BAUD, 0x403, 6, 0
+0x3833, 0x3034, 0x0030, 
+    IDC_COMBO_BAUD, 0x403, 6, 0
+0x3735, 0x3036, 0x0030, 
+    IDC_COMBO_BAUD, 0x403, 7, 0
+0x3131, 0x3235, 0x3030, "\000" 
+    IDC_COMBO_BAUD, 0x403, 7, 0
+0x3332, 0x3430, 0x3030, "\000" 
+    IDC_COMBO_BAUD, 0x403, 7, 0
+0x3634, 0x3830, 0x3030, "\000" 
+    IDC_COMBO_BAUD, 0x403, 7, 0
+0x3239, 0x3631, 0x3030, "\000" 
+    IDC_COMBO_DATABITS, 0x403, 4, 0
+0xce37, 0x00bb, 
+    IDC_COMBO_DATABITS, 0x403, 4, 0
+0xce38, 0x00bb, 
+    IDC_COMBO_STOPBITS, 0x403, 4, 0
+0xce31, 0x00bb, 
+    IDC_COMBO_STOPBITS, 0x403, 4, 0
+0xce32, 0x00bb, 
+    IDC_COMBO_PARITY, 0x403, 7, 0
+0xe6c6, 0xa3d0, 0xe9d1, "\000" 
+    IDC_COMBO_PARITY, 0x403, 7, 0
+0xbcc5, 0xa3d0, 0xe9d1, "\000" 
+    IDC_COMBO_PARITY, 0x403, 7, 0
+0xdece, 0xa3d0, 0xe9d1, "\000" 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    ID_INDICATOR_INFO       "Local terminal"
+    ID_INDICATOR_TERMTYPE   "VT100"
+    ID_INDICATOR_SHELL      "Shell"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_LIST_LOADLIB         "已加载库列表\n已加载库列表"
+    ID_LIST_KNOWNLIB        "可加载库列表\n可加载库列表"
+    ID_LIST_GLOBALS         "全局变量列表\n全局变量列表"
+    ID_LIST_LOCALVARS       "局部变量列表\n局部变量列表"
+    ID_LIST_PROCS           "过程列表\n过程列表"
+    ID_LIST_ITCLOBJECT      "类和对象列表\n类和对象列表"
+    ID_SERVER_CONNECT       "连接"
+    ID_SERVER_DISCONNECT    "断开连接"
+    ID_SWITCH_TERMINAL      "切换控制台\n切换控制台"
+    ID_PROP_COMMAND_LIST    "命令列表"
+    ID_RESET_INTERP         "重置解释器\n重置解释器"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_TERMINAL        "显示控制台\n控制台"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_OWM_ABOUT            "关于控制台"
+    IDS_DEFAULTTEXTFONT     "FixedSys"
+    IDS_DEFAULTFONT         "FixedSys"
+    ID_TERM_OPENFILE        "加载脚本或库文件\n加载文件"
+    ID_LIST_COMMAND         "当前可以使用的命令列表\n可用命令列表"
+    ID_LIST_HISTORYCMD      "历史命令列表\n历史命令列表"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_EDIT_CLEAR           "清空\n清空"
+    ID_EDIT_CLEAR_ALL       "清空\n清空"
+    ID_EDIT_COPY            "复制\n复制"
+    ID_EDIT_CUT             "剪切\n剪切"
+    ID_EDIT_FIND            "查找\n查找"
+    ID_EDIT_PASTE           "粘贴\n粘贴"
+    ID_EDIT_REPEAT          "查找下一个\n查找下一个"
+    ID_EDIT_REPLACE         "替换\n替换"
+    ID_EDIT_SELECT_ALL      "全选\n全选"
+    IDS_TERM_LOCAL          "本地控制台"
+    IDS_CONN_LOCAL          "本地连接"
+    IDS_TERM_TYPE_STD       "标准终端"
+    IDS_TERM_TCL            "Tcl控制台"
+    IDS_TCL_INTERP          "Tcl解释器名:%s"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_TERM_TELNET         "Telnet控制台"
+    IDS_TERM_TYPE_VT        "VT100"
+    IDS_TERM_COM            "串口控制台"
+    IDS_TERM_REMOTE         "远程控制台"
+    IDS_SOCK_CLOSE          "连接中断!"
+    IDS_SOCK_RC_OUTBAND_DATA "接收到Socket带外数据!"
+    IDS_OWM_CONSOLE         "控制台模块"
+    IDS_MENU_CONSOLE        "控制台(&C)"
+    IDS_STR_CONSOLE         "控制台"
+    IDS_PROP_ABOUT          "关于Script.NET控制台..."
+    IDS_STR_LOGIN           "登录"
+    IDS_LOGIN_TELNET_FAIL   "登录Telnet服务器失败!"
+    IDS_TCL_FILE_FILTER     "Tcl脚本文件(*.tcl;*.tbc)|*.tcl;*.tbc|TCL库文件(*.dll)|*.dll|所有文件(*.*)|*.*||"
+    IDS_TCLCMD_USE_TOTAL    "可用命令列表(共%d条命令)"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_TCLCMD_KERNEL_LIB   "内核和库命令"
+    IDS_TCLCMD_KERNEL_LIB_TOTAL "内核和库命令(共%d条命令)"
+    IDS_TCLCMD_EXPAND       "平台扩展命令(共%d条命令)"
+    IDS_TCLCMD_LIST         "可用命令列表"
+    IDS_TCLCMD_USE_INFO     "下面列出的是当前可用的命令(共%d条命令),可以选择其中一条命令执行。"
+    IDS_TCLCMD_HISTORY_TOTAL "历史命令列表(共%d条命令)"
+    IDS_TCLCMD_HISTORY_LIST "历史命令列表"
+    IDS_TCLCMD_HISTORY_INFO "下面列出的是控制台输入的历史命令(共%d条命令),可以选择其中一条命令执行。"
+    IDS_TCLDLL_TOTAL        "已加载库列表(共%d个库)"
+    IDS_TCLDLL_LIST         "已加载的库列表"
+    IDS_TCLDLL_INFO         "下面列出的是当前已加载的TCL库(共%d个库)。"
+    IDS_TCLPROC_TOTAL       "可用过程列表(共%d个过程)"
+    IDS_TCLPROC_LIST        "过程列表"
+    IDS_TCLPROC_INFO        "下面列出的是当前可用的过程(共%d个过程),可以选择其中一个过程执行。"
+    IDS_GLOBEVAR_TOTAL      "全局变量列表(共%d个全局变量)"
+    IDS_GLOBEVAR_LIST       "全局变量列表"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_GLOBEVAR_INFO       "下面列出的是当前的全局变量(共%d个全局变量)。"
+    IDS_LOCAL_TOTAL         "局部变量列表(共%d个局部变量)"
+    IDS_LOCAL_IN_PROC       "当前位于过程%s中(共%d个局部变量)。"
+    IDS_LOCAL_OUT_PROC      "当前不在任何过程中(共%d个局部变量)。"
+    IDS_LOCAL_LIST          "局部变量列表"
+    IDS_ITCL_TOTAL          "iTcl类列表(共%d个类)"
+    IDS_ITCL_LIST           "iTcl类和对象列表"
+    IDS_ITCL_INFO           "共%d个iTcl类。"
+    IDS_DOMAIN_TELNET       "Telnet服务器"
+    IDS_TERM_PYTHON         "Python控制台"
+    IDS_PYTHON_INTERP       "Python解释器名:%s"
+    IDS_INTERPRETER_NAME    "RemoteAdmin"
+    IDS_LOGIN_RCADMIN_FAIL  "登录远程TCL服务器失败"
+    IDS_RC_INTERPRETER      "解释器名："
+    IDS_TCL_RCINTERP        "远程TCL解释器名:%s[%d]-[%s]"
+    IDS_PYTHON_FILE_FILTER  "Python脚本文件(*.py;*.pyw;*.pyc)|*.py;*.pyw;*.pyc||"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_SWITCH_SHELL        "切换控制台"
+    IDS_TELNET_LOGIN_INFO   "请输入登录地址和端口号"
+    IDS_TELNET_PORT_LABEL   "协议端口："
+    IDS_TOOL_MENU           "工具(&T)"
+    IDS_TELNET_ENABLE_ANSI_COLOR "是否允许ANSI颜色定义"
+    IDS_TELNET_ADDRESS_LABEL "登录地址："
+    IDS_TELNET_DOMAIN_LABEL "登录域："
+    IDS_TERM_RUBY           "Ruby控制台"
+    IDS_TERM_LUA            "Lua控制台"
+    IDS_TERM_PERL           "Perl控制台"
+    IDS_RUBY_INTERP         "Ruby解释器名:%s"
+    IDS_LUA_INTERP          "Lua解释器名:%s"
+    IDS_PERL_INTERP         "Perl解释器名:%s"
+    IDS_RUBY_FILE_FILTER    "Ruby脚本文件(*.rb)|*.rb||"
+    IDS_LUA_FILE_FILTER     "Lua脚本文件(*.lua;*.luac)|*.lua;*.luac||"
+    IDS_PERL_FILE_FILTER    "Perl脚本文件(*.pl)|*.pl||"
+END
+
+#endif    // 中文(中华人民共和国) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE 4, 2
+#pragma code_page(936)
+#endif //_WIN32
+#include "res\PTerminal.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.chs\afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

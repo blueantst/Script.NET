@@ -1,0 +1,71 @@
+;-------------------------------------------------------------------------------
+; Snippet file for ruby file type
+; Language     : C/C++
+; Author       : blueant
+; Format:        #{Template Name
+;                      Template text here...
+;                }#
+;-------------------------------------------------------------------------------
+
+#{源代码文件头
+/////////////////////////////////////////////////////////////////////////////
+// #%FILENAME_ONLY%#.cpp
+//
+// Copyright (c)
+// All rights reserved.
+//
+// Date       : #%LONGDATE%#
+// Author     : #%USERNAME%#
+// Description: #@描述@#
+///////////////
+
+#include "StdAfx.h"
+#include "#%FILENAME_ONLY%#.h"
+
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
+}#
+
+#{头文件文件头
+/////////////////////////////////////////////////////////////////////////////
+// #%FILENAME_ONLY%#.h
+//
+// Copyright (c)
+// All rights reserved.
+//
+// Date       : #%LONGDATE%#
+// Author     : #%USERNAME%#
+// Description: #@描述@#
+///////////////
+
+#if !defined(#<U __#%FILENAME_ONLY%#>#_H__)
+#define #<U __#%FILENAME_ONLY%#>#_H__
+
+#if _MSC_VER >= 1000
+#pragma once
+#endif // _MSC_VER >= 1000
+
+}#
+
+#{函数头
+
+/////////////////////////////////////////////////////////////////////////////
+// Name       :	#@函数名@#
+// Description:	#@描述@#
+// Parameters :	#@参数@#
+// Returns    :	#@返回值@#
+// Author     :	#%USERNAME%#
+// Date       :	#%LONGDATE%#
+///////////////
+
+}#
+
+#{精简的函数头
+/////////////////////////////////////////////////////////////////////////////
+// #@函数描述@#
+/////////////////////////////////////////////////////////////////////////////
+}#

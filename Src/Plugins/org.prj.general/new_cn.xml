@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="GB2312"?>
+<newfile id="default">
+	<NewPrj>
+		<Project Name="Script.NET工程" Type="org.prj.general" Ext="snp" Icon="image\general.ico"
+				 Template="Template\project files"
+				 Interp="org.interp.tcl"
+				 Script="script\project.tcl">
+		</Project>
+	</NewPrj>
+	<NewFile>
+		<File Name="Tcl脚本" Type="tcl" Ext="tcl" Icon="5"
+				 Template="PLAT://\Template\File\new.tcl"
+				 Interp="org.interp.tcl"
+				 Script="PLAT://\conf\wizard\File\tcl.tcl">
+		</File>
+	</NewFile>
+</newfile>

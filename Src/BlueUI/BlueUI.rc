@@ -1,0 +1,969 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 中文(中华人民共和国) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\BlueUI.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#include ""afxprint.rc""       // printing/print preview resources\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\BlueUI.ico"
+IDR_BLUEUITYPE          ICON                    "res\\BlueUIDoc.ico"
+IDI_PROPERTY            ICON                    "res\\6.ico"
+IDI_DISPLAY             ICON                    "res\\63.ico"
+IDI_ICON_FONT           ICON                    "res\\155.ico"
+IDI_VCI                 ICON                    "res\\80.ico"
+IDI_ICON_ERROR          ICON                    "res\\16.ico"
+IDI_ICON_INFO           ICON                    "res\\icon_inf.ico"
+IDI_ICON_WARN           ICON                    "res\\1.ico"
+IDI_CLOSE               ICON                    "res\\ico00002.ico"
+IDI_ICON_DIRECT         ICON                    "res\\256.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
+IDB_BITMAP_ABOUT_TITLE  BITMAP                  "res\\abouttitle.bmp"
+IDR_OUTPUT              BITMAP                  "res\\output.bmp"
+IDR_PANE_PROPERTIES     BITMAP                  "res\\PaneProperties.bmp"
+IDB_OPTIONTREE          BITMAP                  "res\\bitmap1.bmp"
+IDB_REPORT_CTRL         BITMAP                  "res\\img_reportctrl.bmp"
+IDR_EXPLORER            BITMAP                  "res\\toolbar1.bmp"
+IDB_OPTION_TITLE        BITMAP                  "res\\flash2.bmp"
+IDB_OPTIONMARKS         BITMAP                  "res\\optionmarks.bmp"
+IDB_OPTIONS             BITMAP                  "res\\options.bmp"
+IDB_TITLE               BITMAP                  "res\\login_title.bmp"
+IDB_CLOSEMSN            BITMAP                  "res\\CloseMSN.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR  16, 15
+BEGIN
+    BUTTON      ID_FILE_NEW
+    BUTTON      ID_FILE_OPEN
+    BUTTON      ID_FILE_SAVE
+    SEPARATOR
+    BUTTON      ID_EDIT_CUT
+    BUTTON      ID_EDIT_COPY
+    BUTTON      ID_EDIT_PASTE
+    SEPARATOR
+    BUTTON      ID_FILE_PRINT
+    SEPARATOR
+    BUTTON      ID_OPTION
+    SEPARATOR
+    BUTTON      ID_APP_ABOUT
+END
+
+IDR_OUTPUT TOOLBAR  16, 15
+BEGIN
+    BUTTON      ID_FILE_NEW
+    SEPARATOR
+    BUTTON      ID_FILE_OPEN
+    BUTTON      ID_OFILE_SAVE
+    BUTTON      IDC_STATIC
+    SEPARATOR
+    BUTTON      ID_OEDIT_CUT
+    BUTTON      ID_OEDIT_COPY
+    BUTTON      ID_EDIT_PASTE
+    SEPARATOR
+    BUTTON      ID_OEDIT_SEARCH
+    SEPARATOR
+    BUTTON      ID_OUTCTRL_SCRIPT
+    BUTTON      ID_OUTCTRL_CLOSE
+END
+
+IDR_PANE_PROPERTIES TOOLBAR  16, 16
+BEGIN
+    BUTTON      ID_PANEPROPERIES_CATEGORIZED
+    BUTTON      ID_PANEPROPERIES_ALPHABETIC
+END
+
+IDR_EXPLORER TOOLBAR  16, 15
+BEGIN
+    BUTTON      ID_GOTO_URL
+    BUTTON      ID_REFRESH_GOTO_URL
+    BUTTON      ID_FILE_NEW_BLANK
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU 
+BEGIN
+    POPUP "文件(&F)"
+    BEGIN
+        MENUITEM "新建文件...",                     ID_PROJECT_NEWFILE
+        MENUITEM "新建(&N)\tCtrl+N",              ID_FILE_NEW
+        MENUITEM "打开(&O)...\tCtrl+O",           ID_FILE_OPEN
+        MENUITEM "关闭(&C)",                      ID_FILE_CLOSE
+        MENUITEM "保存(&S)\tCtrl+S",              ID_FILE_SAVE
+        MENUITEM "另存为(&A)...",                  ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "读取会话...",                     ID_FILE_LOADSESSION
+        MENUITEM "保存会话...",                     ID_FILE_SAVESESSION
+        MENUITEM SEPARATOR
+        POPUP "导出"
+        BEGIN
+            MENUITEM "[Exports]",                   ID_EXPORT_FILES
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "打印(&P)...\tCtrl+P",           ID_FILE_PRINT
+        MENUITEM "打印预览(&V)",                    ID_FILE_PRINT_PREVIEW
+        POPUP "打印设置"
+        BEGIN
+            MENUITEM "打印设置(&R)...",                 ID_FILE_PRINT_SETUP
+            MENUITEM "打印页面设置...",                   ID_FILE_PRINT_PAGESETUP
+        END
+        MENUITEM SEPARATOR
+        POPUP "最近文件"
+        BEGIN
+            MENUITEM "最近文件",                        ID_FILE_MRU_FILE1, GRAYED
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "退出(&X)",                      ID_APP_EXIT
+    END
+    POPUP "编辑(&E)"
+    BEGIN
+        MENUITEM "撤消(&U)\tCtrl+Z",              ID_EDIT_UNDO
+        MENUITEM "重新执行\tCtrl+Y",                ID_EDIT_REDO
+        MENUITEM SEPARATOR
+        MENUITEM "剪切(&T)\tCtrl+X",              ID_EDIT_CUT
+        MENUITEM "复制(&C)\tCtrl+C",              ID_EDIT_COPY
+        MENUITEM "粘贴(&P)\tCtrl+V",              ID_EDIT_PASTE
+        MENUITEM SEPARATOR
+    END
+    POPUP "查看(&V)"
+    BEGIN
+        POPUP "工具栏(&T)"
+        BEGIN
+            MENUITEM "工具栏(&T)",                     ID_VIEW_TOOLBAR
+            MENUITEM SEPARATOR
+            MENUITEM "&Customize...",               35001
+        END
+        MENUITEM "状态栏(&S)",                     ID_VIEW_STATUS_BAR
+        MENUITEM SEPARATOR
+        MENUITEM "输出窗口(&O)",                    ID_VIEW_OUTPUT
+        MENUITEM "属性窗口(&P)",                    ID_VIEW_PROPERTIES
+        MENUITEM SEPARATOR
+        MENUITEM "查看日志(&L)",                    ID_VIEW_LOG
+    END
+    POPUP "工程(&P)"
+    BEGIN
+        MENUITEM "新建工程(&N)",                    ID_PROJECT_NEW
+        MENUITEM "打开工程(&O)",                    ID_PROJECT_OPEN
+        MENUITEM "保存工程(&S)",                    ID_PROJECT_SAVE
+        MENUITEM "运行工程(&R)",                    ID_PROJECT_RUN
+        MENUITEM "关闭工程(&C)",                    ID_PROJECT_CLOSE
+        MENUITEM SEPARATOR
+        MENUITEM "编译工程(&B)",                    ID_PROJECT_BUILD
+        MENUITEM "重编译工程(&R)",                   ID_PROJECT_REBUILD
+        MENUITEM "清除编译信息(&L)",                  ID_PROJECT_CLEAN
+        MENUITEM SEPARATOR
+        MENUITEM "工程信息(&I)",                    ID_PROJECT_INFO
+        MENUITEM "工程设置(&P)",                    ID_PROJECT_PROPERTY
+    END
+    POPUP "工具(&T)"
+    BEGIN
+        MENUITEM "系统设置(&S)",                    ID_OPTION
+        MENUITEM SEPARATOR
+        MENUITEM "组件管理(&C)",                    ID_VCI_MANAGER
+        MENUITEM "工具管理(&E)",                    ID_TOOLS_EXTEND
+        MENUITEM SEPARATOR
+        MENUITEM "[Extend Tools]",              ID_EXTEND_TOOLS
+    END
+    POPUP "窗口(&W)"
+    BEGIN
+        MENUITEM "新建窗口(&N)",                    ID_WINDOW_NEW
+        MENUITEM "层叠(&C)",                      ID_WINDOW_CASCADE
+        MENUITEM "平铺(&T)",                      ID_WINDOW_TILE_HORZ
+        MENUITEM "排列图标(&A)",                    ID_WINDOW_ARRANGE
+        MENUITEM SEPARATOR
+        MENUITEM "Workspace Actions",           35002
+        MENUITEM SEPARATOR
+        MENUITEM "Window List",                 35000
+    END
+    POPUP "帮助(&H)"
+    BEGIN
+        MENUITEM "帮助主题(&T)",                    ID_HELP_TOPICS
+        MENUITEM SEPARATOR
+        MENUITEM "注册(&R)...",                   ID_HELP_REGISTERATE
+        MENUITEM "升级(&U)...",                   ID_HELP_UPGRADE
+        MENUITEM "下载(&D)...",                   ID_HELP_DOWNLOAD
+        MENUITEM "主页(&H)",                      ID_HELP_HOMEPAGE
+        MENUITEM "发送反馈意见(&B)",                  ID_HELP_BUGREPORT
+        MENUITEM SEPARATOR
+        MENUITEM "关于(&A)...",                   ID_APP_ABOUT
+    END
+END
+
+IDR_OUTPUT MENU 
+BEGIN
+    POPUP "OUTPUT"
+    BEGIN
+        MENUITEM "复制(&C)\tCtrl+C",              ID_OEDIT_COPY
+        MENUITEM "清除(&R)",                      ID_OEDIT_CLEAR
+        MENUITEM "全选(&A)",                      ID_OEDIT_SELECTALL
+        MENUITEM SEPARATOR
+        MENUITEM "查找(&F)",                      ID_OEDIT_SEARCH
+        MENUITEM "重复查找",                        ID_OEDIT_SEARCH_AGAIN
+        MENUITEM SEPARATOR
+        MENUITEM "保存(&S)",                      ID_OFILE_SAVE
+        MENUITEM SEPARATOR
+        MENUITEM "关闭窗口",                        ID_OUTCTRL_CLOSE
+    END
+END
+
+IDR_POPUP_TABS MENU 
+BEGIN
+    POPUP "Popup"
+    BEGIN
+        MENUITEM "打开为...",                      ID_OPEN_WITH
+        MENUITEM "关闭",                          ID_FILE_CLOSE
+        MENUITEM SEPARATOR
+        MENUITEM "Workspace Actions",           35002
+    END
+END
+
+IDR_OUTPUT_GRID MENU 
+BEGIN
+    POPUP "OUTPUT_GRID"
+    BEGIN
+        MENUITEM "全部清除(&R)",                    ID_OEDIT_CLEAR
+        MENUITEM "删除行(&L)",                     ID_OUTCTRL_DELROW
+        MENUITEM SEPARATOR
+        MENUITEM "查找(&F)",                      ID_OEDIT_SEARCH
+        MENUITEM "重复查找",                        ID_OEDIT_SEARCH_AGAIN
+        MENUITEM SEPARATOR
+        MENUITEM "查看脚本(&V)",                    ID_OUTCTRL_SCRIPT
+        MENUITEM "保存(&S)",                      ID_OFILE_SAVE
+        MENUITEM "导出到Excel文件",                  ID_EXPORT_EXCEL
+        MENUITEM "定制...",                       ID_OUTCTRL_SELFDEFINE
+        MENUITEM SEPARATOR
+        MENUITEM "关闭窗口",                        ID_OUTCTRL_CLOSE
+    END
+END
+
+IDR_POPUP_WORKSPACE MENU 
+BEGIN
+    POPUP "popup"
+    BEGIN
+        MENUITEM "关闭所有窗口",                      ID_WINDOW_CLOSE_ALL
+        MENUITEM "切换标签位置",                      ID_TOGGLE_DOCK
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS 
+BEGIN
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL, NOINVERT
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL, NOINVERT
+    "P",            ID_FILE_PRINT,          VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL, NOINVERT
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL, NOINVERT
+    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT, NOINVERT
+    VK_DELETE,      ID_EDIT_CUT,            VIRTKEY, SHIFT, NOINVERT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY, NOINVERT
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT, NOINVERT
+    VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT, NOINVERT
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL, NOINVERT
+    "Y",            ID_EDIT_REDO,           VIRTKEY, CONTROL, NOINVERT
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 353, 197
+STYLE DS_SETFONT | WS_POPUP | WS_SYSMENU
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    LTEXT           "Static",IDC_STATIC_PICTURE,0,0,25,8
+    DEFPUSHBUTTON   "OK",IDOK,270,168,50,14,WS_GROUP
+END
+
+IDD_DIALOGFLASH DIALOGEX 0, 0, 200, 31
+STYLE DS_SETFONT | DS_MODALFRAME | DS_CONTROL | DS_CENTER | WS_POPUP | WS_VISIBLE | WS_CLIPCHILDREN
+EXSTYLE WS_EX_TOOLWINDOW
+FONT 9, "宋体", 0, 0, 0x1
+BEGIN
+    LTEXT           "正在读入数据... ... ...",IDC_TITLE,39,11,153,8
+    ICON            IDR_MAINFRAME,IDC_STATIC_FLASH,7,4,20,20
+END
+
+IDD_TPS_PLATFORM DIALOGEX 0, 0, 235, 149
+STYLE DS_SETFONT | WS_CHILD
+FONT 9, "宋体", 0, 0, 0x0
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
+    LTEXT           "Script.NET通用开发平台 V4",IDC_STATIC,40,10,119,8,SS_NOPREFIX
+    LTEXT           "版权所有 (C) 2000-2013",IDC_STATIC,40,25,119,8
+    LTEXT           "蓝蚂蚁软件工作室",IDC_STATIC,40,41,119,8
+END
+
+IDD_TPS_FONT DIALOG  0, 0, 286, 167
+STYLE DS_SETFONT | WS_CHILD
+FONT 9, "宋体"
+BEGIN
+    GROUPBOX        "项目：",IDC_STATIC,7,7,117,106
+    LISTBOX         IDC_LIST_ITEM,10,18,111,91,LBS_OWNERDRAWFIXED | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "属性：",IDC_STATIC,127,7,152,106
+    LTEXT           "字体：",IDC_STATIC_FONT,134,21,26,9
+    COMBOBOX        IDC_COMBO_FONT,161,19,112,72,CBS_DROPDOWNLIST | CBS_OWNERDRAWFIXED | CBS_SORT | CBS_HASSTRINGS | CBS_DISABLENOSCROLL | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "大小：",IDC_STATIC_SIZE,134,37,26,9
+    COMBOBOX        IDC_COMBO_SIZE,161,35,112,72,CBS_DROPDOWNLIST | CBS_DISABLENOSCROLL | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "文字色：",IDC_STATIC_COLORFG,134,53,36,9
+    LTEXT           "背景色：",IDC_STATIC_COLORBK,206,53,36,9
+    PUSHBUTTON      "",IDC_COLORFG_PICKER,133,63,65,13
+    PUSHBUTTON      "",IDC_COLORBK_PICKER,206,63,65,13
+    CONTROL         "粗体",IDC_CHECK_BOLD,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,134,83,31,11
+    CONTROL         "斜体",IDC_CHECK_ITALIC,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,205,83,31,11
+    CONTROL         "下划线",IDC_CHECK_UNDERLINE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,134,97,41,11
+    CONTROL         "删除线",IDC_CHECK_STRIKEOUT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,205,97,41,11
+    GROUPBOX        "字体范例",IDC_STATIC,7,121,198,32
+    CTEXT           "字体范例 Sample Text",IDC_SAMPLEBOX,10,129,192,20,SS_NOPREFIX | SS_CENTERIMAGE
+    PUSHBUTTON      "缺省",IDC_BTN_FONTRESET,215,132,56,14
+END
+
+IDD_TPS_ASSOCIATE DIALOGEX 0, 0, 286, 177
+STYLE DS_SETFONT | WS_CHILD
+FONT 9, "宋体", 0, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_ASSOCIATE_TREE,"XTPReport",WS_TABSTOP,2,6,280,164,WS_EX_CLIENTEDGE
+END
+
+IDD_TPS_LANGUAGE DIALOG  0, 0, 286, 167
+STYLE DS_SETFONT | WS_CHILD
+FONT 9, "宋体"
+BEGIN
+    GROUPBOX        "设置语言：",IDC_STATIC,7,7,266,142
+    LTEXT           "当前语言：",IDC_STATIC,17,31,45,12
+    COMBOBOX        IDC_COMBO_LANGUAGE,70,28,156,72,CBS_DROPDOWNLIST | CBS_DISABLENOSCROLL | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "注：更改语言只有在重新启动程序之后才会生效。",IDC_STATIC,18,59,206,11
+END
+
+IDD_TPS_UISTYLE DIALOGEX 0, 0, 300, 199
+STYLE DS_SETFONT | WS_CHILD
+FONT 9, "宋体", 0, 0, 0x0
+BEGIN
+    LISTBOX         IDC_LIST_THEMES,7,9,98,115,LBS_OWNERDRAWFIXED | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "应用框架皮肤",IDC_CHECK_APPLYFRAME,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,129,91,10
+    CONTROL         "应用字体方案",IDC_CHECK_APPLYMETRICS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,141,89,9
+    CONTROL         "应用色彩方案",IDC_CHECK_APPLYCOLORS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,153,90,9
+    LTEXT           "色彩方案：",IDC_STATIC,110,9,74,10
+    COMBOBOX        IDC_COMBO_COLORS,110,20,183,44,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "字体方案：",IDC_STATIC,110,36,61,9
+    COMBOBOX        IDC_COMBO_FONTS,110,46,183,44,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "界面主题和颜色：",IDC_STATIC,110,61,183,103
+    CONTROL         "Ribbon",IDC_RADIO_RIBBON,"Button",BS_AUTORADIOBUTTON | WS_GROUP,118,73,97,11
+    CONTROL         "Office 2003",IDC_RADIO_OFFICE2003,"Button",BS_AUTORADIOBUTTON,118,87,71,9
+    CONTROL         "Office 2007",IDC_RADIO_OFFICE2007,"Button",BS_AUTORADIOBUTTON,118,99,55,10
+    CONTROL         "Office 2010",IDC_RADIO_OFFICE2010,"Button",BS_AUTORADIOBUTTON,118,113,90,9
+    CONTROL         "Visual Studio 2005",IDC_RADIO_VS2005,"Button",BS_AUTORADIOBUTTON,118,126,90,9
+    CONTROL         "Visual Studio 2008",IDC_RADIO_VS2008,"Button",BS_AUTORADIOBUTTON,118,138,90,9
+    CONTROL         "Visual Studio 2010",IDC_RADIO_VS2010,"Button",BS_AUTORADIOBUTTON,118,151,90,9
+    CONTROL         "Blue",IDC_RADIO_OFFICE_BLUE,"Button",BS_AUTORADIOBUTTON | WS_GROUP,235,75,28,10
+    CONTROL         "Silver",IDC_RADIO_OFFICE_SILVER,"Button",BS_AUTORADIOBUTTON,235,88,31,9
+    CONTROL         "Black",IDC_RADIO_OFFICE_BLACK,"Button",BS_AUTORADIOBUTTON,235,101,44,9
+    LTEXT           "页面风格：",IDC_STATIC,7,175,47,9
+    COMBOBOX        IDC_COMBO_HTML_STYLE,56,173,237,46,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+END
+
+CG_IDD_PROGRESS DIALOG  0, 0, 276, 74
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "取消",IDCANCEL,219,47,50,14
+    CONTROL         "Progress1",CG_IDC_PROGDLG_PROGRESS,"msctls_progress32",WS_BORDER,9,45,203,17
+    LTEXT           "",CG_IDC_PROGDLG_STATUS,40,13,229,27
+    ICON            IDI_PROPERTY,IDC_STATIC,10,12,20,20
+END
+
+IDD_TREE_OPTIONS DIALOG  0, 0, 296, 188
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "设置"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         220,IDC_STATIC,"Static",SS_BITMAP,0,0,309,52
+    LTEXT           "信息",IDC_STATIC_MSG,46,7,225,21
+    CONTROL         "",IDC_REPORT,"MFCReportOptionsCtrl",WS_BORDER | WS_TABSTOP | 0xa000,4,45,241,135
+    DEFPUSHBUTTON   "确定",IDOK,253,46,39,14,WS_GROUP
+    PUSHBUTTON      "取消",IDCANCLE,253,63,39,14,WS_GROUP
+    PUSHBUTTON      "帮助",IDHELP,253,95,39,14,WS_GROUP
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDVERT | NOT WS_VISIBLE,248,46,1,136
+END
+
+IDD_TCL_LOGIN DIALOG  0, 0, 207, 165
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "登录"
+FONT 9, "宋体"
+BEGIN
+    CONTROL         209,IDC_STATIC,"Static",SS_BITMAP,0,0,213,39
+    LTEXT           "请输入登录地址和用户名信息",IDC_STATIC_INFO,13,45,184,11
+    LTEXT           "登录地址：",IDC_LABEL_ADDRESS,13,63,43,10
+    EDITTEXT        IDC_LOGIN_ADDRESS,57,61,133,12,ES_AUTOHSCROLL
+    LTEXT           "用户名称：",IDC_LABEL_USERNAME,13,79,43,10
+    EDITTEXT        IDC_LOGIN_USERNAME,57,77,133,12,ES_AUTOHSCROLL
+    LTEXT           "用户口令：",IDC_LABEL_PASSWORD,13,95,42,10
+    EDITTEXT        IDC_LOGIN_PASSWORD,57,93,133,12,ES_PASSWORD | ES_AUTOHSCROLL
+    LTEXT           "登 录 域：",IDC_LABEL_DOMAIN,13,111,40,10
+    COMBOBOX        IDC_COMBO_DOMAIN,57,110,133,63,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "保存密码",IDC_CHECK_LOGIN,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,131,179,10
+    DEFPUSHBUTTON   "确定",IDOK,103,144,45,14
+    PUSHBUTTON      "放弃",IDCANCEL,152,144,44,14
+END
+
+IDD_TPS_WORKSPACE DIALOG  0, 0, 286, 167
+STYLE DS_SETFONT | WS_CHILD
+FONT 9, "宋体"
+BEGIN
+    GROUPBOX        "工作空间设置：",-1,7,7,266,142
+    CONTROL         "程序启动时自动打开上一次的文档",IDC_CHECK_RELOAD_DOCUMENT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,21,29,203,9
+    CONTROL         "程序启动时自动打开起始页",IDC_CHECK_AUTO_OPEN_STARTPAGE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,21,44,203,9
+    CONTROL         "添加程序到Windows右键菜单",IDC_CHECK_ADD_SHELL_CONTEXT_MENU,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,21,58,203,9
+END
+
+IDD_TPS_VCI DIALOGEX 0, 0, 235, 150
+STYLE DS_SETFONT | WS_CHILD
+FONT 9, "宋体", 0, 0, 0x0
+BEGIN
+    CONTROL         "允许输出VCI组件的调试信息",IDC_CHECK_ENABLE_DEBUGOUT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,19,67,155,9
+    ICON            IDI_VCI,IDC_STATIC,11,17,20,20
+    LTEXT           "VCI组件 V4.0",IDC_STATIC,40,24,119,8,SS_NOPREFIX
+    LTEXT           "版权所有 (C) 2000-2013",IDC_STATIC,40,39,119,8,NOT WS_VISIBLE
+END
+
+IDD_TPS_INTERP_DIRECT DIALOG  0, 0, 233, 142
+STYLE DS_SETFONT | WS_CHILD
+FONT 9, "宋体"
+BEGIN
+    GROUPBOX        "标准输出重定向：",IDC_STATIC,7,7,219,104
+    ICON            IDI_ICON_DIRECT,IDC_STATIC,15,24,20,20
+    CONTROL         "重定向到平台输出窗口，ID：",IDC_CHECK_DIRECT_OUTPUT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,43,25,118,9
+    EDITTEXT        IDC_EDIT_DIRECT_OUTPUTID,162,24,46,12,ES_AUTOHSCROLL | ES_NUMBER
+    CONTROL         "Spin1",IDC_SPIN_TCL_DIRECT_OUTPUTID,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | UDS_NOTHOUSANDS,201,25,9,11
+    CONTROL         "重定向到文件，文件名：",IDC_CHECK_DIRECT_FILE,"Button",BS_AUTOCHECKBOX | WS_DISABLED | WS_TABSTOP,43,39,118,9
+    CONTROL         "重定向到脚本标准输出",IDC_CHECK_DIRECT_RESULT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,43,53,118,9
+    CONTROL         "重定向到管道",IDC_CHECK_DIRECT_PIPE,"Button",BS_AUTOCHECKBOX | WS_DISABLED | WS_TABSTOP,43,67,118,9
+    CONTROL         "重定向到共享内存区",IDC_CHECK_DIRECT_MEMORY,"Button",BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_DISABLED | WS_TABSTOP,43,81,118,9
+    CONTROL         "重定向到管理员用户",IDC_CHECK_DIRECT_ADMIN,"Button",BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_DISABLED | WS_TABSTOP,43,95,118,9
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 4,0,0,1
+ PRODUCTVERSION 4,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "FileDescription", "BlueUI MFC Application"
+            VALUE "FileVersion", "4, 0, 0, 1"
+            VALUE "InternalName", "BlueUI"
+            VALUE "LegalCopyright", "Copyright (C) 2000-2014"
+            VALUE "OriginalFilename", "BlueUI.EXE"
+            VALUE "ProductName", "BlueUI Application"
+            VALUE "ProductVersion", "4, 0, 0, 1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 346
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 190
+    END
+
+    IDD_DIALOGFLASH, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 198
+        TOPMARGIN, 4
+        BOTTOMMARGIN, 26
+    END
+
+    IDD_TPS_PLATFORM, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 228
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 142
+    END
+
+    IDD_TPS_FONT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 279
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 160
+    END
+
+    IDD_TPS_ASSOCIATE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 279
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 170
+    END
+
+    IDD_TPS_LANGUAGE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 279
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 160
+    END
+
+    IDD_TPS_UISTYLE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 293
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 192
+    END
+
+    CG_IDD_PROGRESS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 269
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 67
+    END
+
+    IDD_TREE_OPTIONS, DIALOG
+    BEGIN
+        LEFTMARGIN, 4
+        RIGHTMARGIN, 292
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 182
+    END
+
+    IDD_TCL_LOGIN, DIALOG
+    BEGIN
+        LEFTMARGIN, 10
+        RIGHTMARGIN, 197
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 158
+    END
+
+    IDD_TPS_WORKSPACE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 279
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 160
+    END
+
+    IDD_TPS_VCI, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 228
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 143
+    END
+
+    IDD_TPS_INTERP_DIRECT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 226
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 135
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDP_SOCKETS_INIT_FAILED "Windows sockets initialization failed."
+END
+
+STRINGTABLE 
+BEGIN
+    IDR_MAINFRAME           "BlueUI"
+    IDR_BLUEUITYPE          "\nBlueUI\nBlueUI\n\n\nBlueUI.Document\nBlueUI Document"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "BlueUI"
+    AFX_IDS_IDLEMESSAGE     "Ready"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_INDICATOR_EXT        "EXT"
+    ID_INDICATOR_CAPS       "CAP"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "SCRL"
+    ID_INDICATOR_OVR        "OVR"
+    ID_INDICATOR_REC        "REC"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FILE_NEW             "建立新文档\n新建"
+    ID_FILE_OPEN            "打开一个现有文档\n打开"
+    ID_FILE_CLOSE           "关闭活动文档\n关闭"
+    ID_FILE_SAVE            "保存活动文档\n保存"
+    ID_FILE_SAVE_AS         "将活动文档以一个新文件名保存\n另存为"
+    ID_FILE_PAGE_SETUP      "Change the printing options\nPage Setup"
+    ID_FILE_PRINT_SETUP     "改变打印机及打印选项\n打印设置"
+    ID_FILE_PRINT           "打印活动文档\n打印"
+    ID_FILE_PRINT_PREVIEW   "显示整页\n打印预览"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_APP_ABOUT            "显示程序信息，版本号和版权\n关于"
+    ID_APP_EXIT             "退出应用程序；提示保存文档\n退出"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FILE_MRU_FILE1       "打开此文档"
+    ID_FILE_MRU_FILE2       "Open this document"
+    ID_FILE_MRU_FILE3       "Open this document"
+    ID_FILE_MRU_FILE4       "Open this document"
+    ID_FILE_MRU_FILE5       "Open this document"
+    ID_FILE_MRU_FILE6       "Open this document"
+    ID_FILE_MRU_FILE7       "Open this document"
+    ID_FILE_MRU_FILE8       "Open this document"
+    ID_FILE_MRU_FILE9       "Open this document"
+    ID_FILE_MRU_FILE10      "Open this document"
+    ID_FILE_MRU_FILE11      "Open this document"
+    ID_FILE_MRU_FILE12      "Open this document"
+    ID_FILE_MRU_FILE13      "Open this document"
+    ID_FILE_MRU_FILE14      "Open this document"
+    ID_FILE_MRU_FILE15      "Open this document"
+    ID_FILE_MRU_FILE16      "Open this document"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_NEXT_PANE            "Switch to the next window pane\nNext Pane"
+    ID_PREV_PANE            "Switch back to the previous window pane\nPrevious Pane"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_WINDOW_NEW           "为活动文档打开另一个窗口\n新建窗口"
+    ID_WINDOW_ARRANGE       "将图标排列在窗口底部\n排列图标"
+    ID_WINDOW_CASCADE       "排列窗口成相互重叠\n层叠窗口"
+    ID_WINDOW_TILE_HORZ     "排列窗口成互不重叠\n平铺窗口"
+    ID_WINDOW_TILE_VERT     "Arrange windows as non-overlapping tiles\nTile Windows"
+    ID_WINDOW_SPLIT         "Split the active window into panes\nSplit"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_EDIT_CLEAR           "Erase the selection\nErase"
+    ID_EDIT_CLEAR_ALL       "Erase everything\nErase All"
+    ID_EDIT_COPY            "复制被选对象并将其置于剪贴板上\n复制"
+    ID_EDIT_CUT             "剪切被选对象并将其置于剪贴板上\n剪切"
+    ID_EDIT_FIND            "Find the specified text\nFind"
+    ID_EDIT_PASTE           "插入剪贴板内容\n粘贴"
+    ID_EDIT_REPEAT          "Repeat the last action\nRepeat"
+    ID_EDIT_REPLACE         "Replace specific text with different text\nReplace"
+    ID_EDIT_SELECT_ALL      "Select the entire document\nSelect All"
+    ID_EDIT_UNDO            "撤消最后一步操作\n撤消"
+    ID_EDIT_REDO            "重新执行上一次撤销的操作\n重新执行"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_TOOLBAR         "显示或隐藏工具栏\n显隐工具栏"
+    ID_VIEW_STATUS_BAR      "显示或隐藏状态栏\n显隐状态栏"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_SCSIZE          "Change the window size"
+    AFX_IDS_SCMOVE          "Change the window position"
+    AFX_IDS_SCMINIMIZE      "Reduce the window to an icon"
+    AFX_IDS_SCMAXIMIZE      "Enlarge the window to full size"
+    AFX_IDS_SCNEXTWINDOW    "Switch to the next document window"
+    AFX_IDS_SCPREVWINDOW    "Switch to the previous document window"
+    AFX_IDS_SCCLOSE         "Close the active window and prompts to save the documents"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_SCRESTORE       "Restore the window to normal size"
+    AFX_IDS_SCTASKLIST      "Activate Task List"
+    AFX_IDS_MDICHILD        "Activate this window"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_PREVIEW_CLOSE   "Close print preview mode\nCancel Preview"
+END
+
+STRINGTABLE 
+BEGIN
+    IDR_PANE_OPTIONS        "Options"
+    IDR_PANE_PROPERTIES     "属性"
+END
+
+STRINGTABLE 
+BEGIN
+    IDR_PANE_OUTPUT         "输出窗口\n输出窗口"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_PANEPROPERIES_CATEGORIZED "Categorized"
+    ID_PANEPROPERIES_ALPHABETIC "Alphabetical"
+    ID_VIEW_PROPERTIES      "显示属性窗口\n属性窗口"
+    ID_VIEW_OUTPUT          "输出窗口\n输出窗口"
+    IDS_MENUBAR             "主菜单"
+    IDS_STANDARD            "标准工具栏"
+    ID_OPTION               "系统设置\n系统设置"
+    ID_VCI_MANAGER          "组件管理\n组件管理"
+    IDS_TITLE_TREEPROPSHEET_SYSCFG "系统设置"
+    IDS_FONT_TREEPROPSHEET  "宋体"
+    IDS_TREEPROPSHEET_DATAVERIFYFAIL "数据校验失败!"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_TREEPROPSHEET_CTRL_OK "确定"
+    IDS_TREEPROPSHEET_CTRL_CANCEL "取消"
+    IDS_TREEPROPSHEET_CTRL_APPLY "应用"
+    IDS_TREEPROPSHEET_CTRL_HELP "帮助"
+    IDS_TPS_FONT_OUTPUT     "输出窗口字体"
+    IDS_TPS_FONT            "字体设置"
+    IDS_TPS_ABOUT_FONT      "设置平台字体和颜色..."
+    IDS_TPS_LANGUAGE        "语言设置"
+    IDS_TPS_ABOUT_LANGUAGE  "设置平台语言..."
+    IDS_TPS_ASSOCIATE       "文件关联"
+    ID_PROJECT_NEWFILE      "新建文件\n新建文件"
+    IDS_TPS_ABOUT_ASSOCIATE "设置文件关联..."
+    IDS_TPS_OWM             "界面插件"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_TPS_ABOUT_OWM       "关于界面插件..."
+    IDS_TPS_INTERP          "解释器"
+    IDS_TPS_ABOUT_INTERP    "关于解释器..."
+    IDS_TPS_VCI             "VCI组件"
+    ID_VIEW_LOG             "查看日志\n查看日志"
+    IDS_TPS_ABOUT_VCI       "关于VCI组件..."
+    IDS_TPS_UISTYLE         "界面风格"
+    IDS_TPS_ABOUT_UISTYLE   "关于界面风格..."
+    ID_HELP_TOPICS          "帮助主题\n帮助主题"
+    ID_HELP_REGISTERATE     "注册\n注册"
+    ID_HELP_UPGRADE         "自动升级\n自动升级"
+    ID_HELP_HOMEPAGE        "主页\n显示程序主页"
+    ID_HELP_BUGREPORT       "发送反馈意见\n发送反馈意见"
+    IDS_TPS_PLATFORM        "平台"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_TPS_ABOUT_PLATFORM  "关于平台 ..."
+    IDS_TPS_ASS_DOCNAME     "文档名"
+    IDS_TPS_ASS_DOCEXT      "文件后缀"
+    IDS_TPS_ASS_OWMID       "扩展模块ID"
+    IDS_TPS_ASS_ASSOCIATE   "关联"
+    ID_FILE_NEW_BLANK       "打开新窗口\n新窗口"
+    ID_REFRESH_GOTO_URL     "刷新页面\n刷新"
+    ID_WINDOW_CLOSE_ALL     "关闭所有窗口\n关闭所有窗口"
+    ID_TOGGLE_DOCK          "切换标签位置\n切换标签位置"
+    IDS_STOP_INTERP_FIRST   "有正在运行的窗口或解释器，请先停止其运行！"
+    ID_TOOLS_EXTEND         "工具管理\n工具管理"
+    IDS_TPS_WORKSPACE       "工作区设置"
+    IDS_TPS_ABOUT_WORKSPACE "设置工作空间..."
+    IDS_TPS_INTERP_DIRECT   "输出重定向"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_LOGIN_TITLE         "登录"
+    IDS_LOGIN_INFO          "请输入登录地址和用户"
+    IDS_TITLE_TREEOPTDLG    "设置"
+    IDS_INFO_TREEOPTDLG_MUSTINPUT "关键字段(红色标记的项目)不能为空\n请重新填写!"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_TITLE_TREEPROPSHEET_PROJECTCFG "工程设置"
+    IDS_TPS_ABOUT_INTERP_DIRECT "设置输出重定向参数..."
+    IDS_INFO_OUTPUT_SCRIPT  "解释器名：%s\n脚本：\n%s"
+    ID_HELP_DOWNLOAD        "下载软件和插件\n下载"
+    IDS_INFO_OUTPUT_SCRIPT_TITLE "单元脚本"
+    ID_PROJECT_NEW          "新建工程\n新建工程"
+    ID_PROJECT_OPEN         "打开工程\n打开工程"
+    ID_PROJECT_SAVE         "保存工程\n保存工程"
+    ID_PROJECT_CLOSE        "关闭工程\n关闭工程"
+    ID_PROJECT_BUILD        "编译工程\n编译工程"
+    ID_PROJECT_REBUILD      "重编译工程\n重编译工程"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_PROJECT_CLEAN        "清除编译信息\n清除编译信息"
+    ID_PROJECT_INFO         "显示工程信息\n工程信息"
+    ID_PROJECT_PROPERTY     "工程设置\n工程设置"
+    ID_PROJECT_RUN          "运行工程\n运行工程"
+    IDS_PROJECT_WORKING     "工程正在运行，请先停止工程！"
+    IDS_INFO_OPEN_PROJECT   "打开工程 %s\r\n"
+    IDS_INFO_NEW_PROJECT    "新建工程。\r\n"
+    IDS_INFO_SAVE_PROJECT   "保存工程。\r\n"
+    IDS_INFO_RUN_PROJECT    "运行工程。\r\n"
+    IDS_INFO_CLOSE_PROJECT  "关闭工程。\r\n"
+    IDS_INFO_BUILD_PROJECT  "编译工程。\r\n"
+    IDS_INFO_REBUILD_PROJECT "重编译工程。\r\n"
+    IDS_INFO_CLEAN_PROJECT  "清除工程编译信息。\r\n"
+    IDS_LOAD_LICENSE_FAILED "加载License失败！"
+    ID_FILE_LOADSESSION     "读取会话\n读取会话"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FILE_SAVESESSION     "保存会话\n保存会话"
+    ID_FILE_PRINT_PAGESETUP "打印页面设置\n打印页面设置"
+    IDS_TITLE_TREEPROPSHEET_PRINTPAGESETUP "打印页面设置"
+END
+
+#endif    // 中文(中华人民共和国) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\BlueUI.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#include "afxprint.rc"       // printing/print preview resources
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

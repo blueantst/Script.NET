@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This is config file for html template -->
+<templates id="default">
+	<Template name="Blue Fantasy Style" enable="true" version="1.0"></Template>
+</templates>

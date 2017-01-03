@@ -1,0 +1,236 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 中文(中华人民共和国) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 4, 2\r\n"
+    "#pragma code_page(936)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\DuiVisionDesigner.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.chs\\afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "080404b0"
+        BEGIN
+            VALUE "Author", "blueant"
+            VALUE "Comments", "DuiVision UI Designer"
+            VALUE "FileDescription", "VCI-DuiVisionDesigner"
+            VALUE "FileVersion", "1, 0, 0, 1"
+            VALUE "InternalName", "DuiVisionDesigner"
+            VALUE "OriginalFilename", "DuiVisionDesigner.DLL"
+            VALUE "ProductName", "DuiVisionDesigner"
+            VALUE "ProductVersion", "1, 0, 0, 1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x804, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_OWM                 ICON                    "res\\DuiVisionDesigner.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 216, 65
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "关于DuiVisionDesigner"
+FONT 9, "宋体", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,164,7,45,14
+    ICON            IDR_OWM,IDC_STATIC,7,7,20,20
+    LTEXT           "DuiVision UI Designer",IDC_STATIC,45,13,100,11
+    LTEXT           "版权所有 (C) 2013",IDC_STATIC,45,27,100,9
+    LTEXT           "作者：blueant",IDC_STATIC,45,42,100,9
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 209
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 58
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_OWM MENU 
+BEGIN
+    POPUP "设计(&U)"
+    BEGIN
+        MENUITEM "拷贝图片",                        32774
+        MENUITEM "删除\tDel",                     32775
+        MENUITEM SEPARATOR
+        MENUITEM "链接反转",                        32776
+        MENUITEM SEPARATOR
+        POPUP "缩放"
+        BEGIN
+            MENUITEM "25%",                         32777
+            MENUITEM "50%",                         32778
+            MENUITEM "100%",                        32779
+            MENUITEM "150%",                        32780
+            MENUITEM "200%",                        32781
+        END
+        POPUP "组操作"
+        BEGIN
+            MENUITEM "组合",                          32782
+            MENUITEM "取消组合",                        32783
+        END
+        POPUP "位置"
+        BEGIN
+            MENUITEM "置于顶层",                        104
+            MENUITEM "置于底层",                        105
+            MENUITEM "上移一层",                        106
+            MENUITEM "下移一层",                        107
+        END
+        MENUITEM "显示网格",                        32784
+        MENUITEM "对齐网格",                        32785
+        MENUITEM "显示工具箱",                       ID_VIEW_TOOLBOX
+        MENUITEM SEPARATOR
+        MENUITEM "导入...",                       32787
+        MENUITEM SEPARATOR
+        MENUITEM "属性...",                       32788
+        MENUITEM "关于:DuiVisionDesigner",        ID_OWM_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_OWM                 BITMAP                  "res\\toolbar.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_OWM TOOLBAR  16, 15
+BEGIN
+    BUTTON      ID_VIEW_OWM
+END
+
+#endif    // 中文(中华人民共和国) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE 4, 2
+#pragma code_page(936)
+#endif //_WIN32
+#include "res\DuiVisionDesigner.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.chs\afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

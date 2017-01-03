@@ -1,0 +1,194 @@
+// Created by Microsoft (R) C/C++ Compiler Version 12.00.9782.0 (5d659dc2).
+//
+// RegExp.tlh
+//
+// C++ source equivalent of Win32 type library RegExp.tlb
+// compiler-generated file created 03/26/07 at 22:16:03 - DO NOT EDIT!
+
+#pragma once
+#pragma pack(push, 8)
+
+#include <comdef.h>
+
+namespace VBScript_RegExp_10 {
+
+//
+// Forward references and typedefs
+//
+
+struct __declspec(uuid("3f4daca0-160d-11d2-a8e9-00104b365c9f"))
+/* dual interface */ IRegExp;
+struct __declspec(uuid("3f4daca1-160d-11d2-a8e9-00104b365c9f"))
+/* dual interface */ IMatch;
+struct __declspec(uuid("3f4daca2-160d-11d2-a8e9-00104b365c9f"))
+/* dual interface */ IMatchCollection;
+struct /* coclass */ RegExp;
+struct /* coclass */ Match;
+struct /* coclass */ MatchCollection;
+
+//
+// Smart pointer typedef declarations
+//
+
+_COM_SMARTPTR_TYPEDEF(IRegExp, __uuidof(IRegExp));
+_COM_SMARTPTR_TYPEDEF(IMatch, __uuidof(IMatch));
+_COM_SMARTPTR_TYPEDEF(IMatchCollection, __uuidof(IMatchCollection));
+
+//
+// Type library items
+//
+
+struct __declspec(uuid("3f4daca0-160d-11d2-a8e9-00104b365c9f"))
+IRegExp : IDispatch
+{
+    //
+    // Property data
+    //
+
+    __declspec(property(get=GetPattern,put=PutPattern))
+    _bstr_t Pattern;
+    __declspec(property(get=GetIgnoreCase,put=PutIgnoreCase))
+    VARIANT_BOOL IgnoreCase;
+    __declspec(property(get=GetGlobal,put=PutGlobal))
+    VARIANT_BOOL Global;
+
+    //
+    // Wrapper methods for error-handling
+    //
+
+    _bstr_t GetPattern ( );
+    void PutPattern (
+        _bstr_t pPattern );
+    VARIANT_BOOL GetIgnoreCase ( );
+    void PutIgnoreCase (
+        VARIANT_BOOL pIgnoreCase );
+    VARIANT_BOOL GetGlobal ( );
+    void PutGlobal (
+        VARIANT_BOOL pGlobal );
+    IDispatchPtr Execute (
+        _bstr_t sourceString );
+    VARIANT_BOOL Test (
+        _bstr_t sourceString );
+    _bstr_t Replace (
+        _bstr_t sourceString,
+        _bstr_t replaceString );
+
+    //
+    // Raw methods provided by interface
+    //
+
+    virtual HRESULT __stdcall get_Pattern (
+        BSTR * pPattern ) = 0;
+    virtual HRESULT __stdcall put_Pattern (
+        BSTR pPattern ) = 0;
+    virtual HRESULT __stdcall get_IgnoreCase (
+        VARIANT_BOOL * pIgnoreCase ) = 0;
+    virtual HRESULT __stdcall put_IgnoreCase (
+        VARIANT_BOOL pIgnoreCase ) = 0;
+    virtual HRESULT __stdcall get_Global (
+        VARIANT_BOOL * pGlobal ) = 0;
+    virtual HRESULT __stdcall put_Global (
+        VARIANT_BOOL pGlobal ) = 0;
+    virtual HRESULT __stdcall raw_Execute (
+        BSTR sourceString,
+        IDispatch * * ppMatches ) = 0;
+    virtual HRESULT __stdcall raw_Test (
+        BSTR sourceString,
+        VARIANT_BOOL * pMatch ) = 0;
+    virtual HRESULT __stdcall raw_Replace (
+        BSTR sourceString,
+        BSTR replaceString,
+        BSTR * pDestString ) = 0;
+};
+
+struct __declspec(uuid("3f4daca1-160d-11d2-a8e9-00104b365c9f"))
+IMatch : IDispatch
+{
+    //
+    // Property data
+    //
+
+    __declspec(property(get=GetValue))
+    _bstr_t Value;
+    __declspec(property(get=GetFirstIndex))
+    long FirstIndex;
+    __declspec(property(get=GetLength))
+    long Length;
+
+    //
+    // Wrapper methods for error-handling
+    //
+
+    _bstr_t GetValue ( );
+    long GetFirstIndex ( );
+    long GetLength ( );
+
+    //
+    // Raw methods provided by interface
+    //
+
+    virtual HRESULT __stdcall get_Value (
+        BSTR * pValue ) = 0;
+    virtual HRESULT __stdcall get_FirstIndex (
+        long * pFirstIndex ) = 0;
+    virtual HRESULT __stdcall get_Length (
+        long * pLength ) = 0;
+};
+
+struct __declspec(uuid("3f4daca2-160d-11d2-a8e9-00104b365c9f"))
+IMatchCollection : IDispatch
+{
+    //
+    // Property data
+    //
+
+    __declspec(property(get=GetCount))
+    long Count;
+    __declspec(property(get=GetItem))
+    IDispatchPtr Item[];
+    __declspec(property(get=Get_NewEnum))
+    IUnknownPtr _NewEnum;
+
+    //
+    // Wrapper methods for error-handling
+    //
+
+    IDispatchPtr GetItem (
+        long index );
+    long GetCount ( );
+    IUnknownPtr Get_NewEnum ( );
+
+    //
+    // Raw methods provided by interface
+    //
+
+    virtual HRESULT __stdcall get_Item (
+        long index,
+        IDispatch * * ppMatch ) = 0;
+    virtual HRESULT __stdcall get_Count (
+        long * pCount ) = 0;
+    virtual HRESULT __stdcall get__NewEnum (
+        IUnknown * * ppEnum ) = 0;
+};
+
+struct __declspec(uuid("3f4daca4-160d-11d2-a8e9-00104b365c9f"))
+RegExp;
+    // [ default ] interface IRegExp
+
+struct __declspec(uuid("3f4daca5-160d-11d2-a8e9-00104b365c9f"))
+Match;
+    // [ default ] interface IMatch
+
+struct __declspec(uuid("3f4daca6-160d-11d2-a8e9-00104b365c9f"))
+MatchCollection;
+    // [ default ] interface IMatchCollection
+
+//
+// Wrapper method implementations
+//
+
+#include "RegExp.tli"
+
+} // namespace VBScript_RegExp_10
+
+#pragma pack(pop)

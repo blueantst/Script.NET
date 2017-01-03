@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!-- Script.NET Preferences File - DO NOT EDIT -->
+<!-- This is config file for extern menu define of Script.NET.
+-->
+<exmenu id="default">
+	<exmenus Name="扩展菜单">
+		<menu Name="OwmEdit" ID="" Region="OWM" UnitID="" GroupID="0" ModeID="">
+			<Script Interp="Tcl" InterpName=""></Script>
+			<UpdateScript Interp="Tcl" InterpName=""></UpdateScript>
+		</menu>
+	</exmenus>
+</exmenu>

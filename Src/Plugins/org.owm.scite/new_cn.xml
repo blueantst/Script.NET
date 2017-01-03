@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="GB2312"?>
+<newfile id="default">
+	<NewFile>
+		<File Name="Tcl脚本" Type="tcl" Ext="tcl" Icon="image\icon\tcl.ico"
+				 Template="PLAT://\Template\File\new.tcl"
+				 Interp="org.interp.tcl"
+				 Script="PLAT://\conf\wizard\File\tcl.tcl">
+		</File>
+		<File Name="Python脚本" Type="python" Ext="py" Icon="image\icon\python.ico"
+				 Template="PLAT://\Template\File\new.py"
+				 Interp="org.interp.tcl"
+				 Script="PLAT://\conf\wizard\File\python.tcl">
+		</File>
+		<File Name="Perl脚本" Type="perl" Ext="pl" Icon="image\icon\perl.ico"
+				 Template="PLAT://\Template\File\new.pl"
+				 Interp="org.interp.tcl"
+				 Script="PLAT://\conf\wizard\File\perl.tcl">
+		</File>
+		<File Name="Ruby脚本" Type="ruby" Ext="rb" Icon="image\icon\ruby.ico"
+				 Template="PLAT://\Template\File\new.rb"
+				 Interp="org.interp.tcl"
+				 Script="PLAT://\conf\wizard\File\ruby.tcl">
+		</File>
+		<File Name="Lua脚本" Type="lua" Ext="lua" Icon="image\icon\lua.ico"
+				 Template="PLAT://\Template\File\new.lua"
+				 Interp="org.interp.tcl"
+				 Script="PLAT://\conf\wizard\File\lua.tcl">
+		</File>
+		<File Name="Php脚本" Type="php" Ext="php" Icon="image\icon\php.ico"
+				 Template="PLAT://\Template\File\new.php"
+				 Interp="org.interp.tcl"
+				 Script="PLAT://\conf\wizard\File\php.tcl">
+		</File>
+		<File Name="NSIS脚本" Type="nsis" Ext="nsi" Icon="image\icon\nsis.ico"
+				 Template="PLAT://\Template\File\new.nsi"
+				 Interp="org.interp.nsis"
+				 Script="PLAT://\conf\wizard\File\nsis.tcl">
+		</File>
+		<File Name="Cpp文件" Type="cpp" Ext="cpp" Icon="image\icon\cpp.ico"
+				 Template="PLAT://\Template\File\new.cpp"
+				 Interp="org.interp.tcl"
+				 Script="PLAT://\conf\wizard\File\cpp.tcl">
+		</File>
+		<File Name="Java文件" Type="java" Ext="java" Icon="image\icon\java.ico"
+				 Template="PLAT://\Template\File\new.java"
+				 Interp="org.interp.tcl"
+				 Script="PLAT://\conf\wizard\File\java.tcl">
+		</File>
+		<File Name="XML文件" Type="xml" Ext="xml" Icon="image\icon\xml.ico"
+				 Template="PLAT://\Template\File\new.xml"
+				 Interp="org.interp.tcl"
+				 Script="PLAT://\conf\wizard\File\xml.tcl">
+		</File>
+		<File Name="SVF文件" Type="svf" Ext="svf" Icon="image\icon\svf.ico"
+				 Template="PLAT://\Template\File\new.svf"
+				 Interp="org.interp.tcl"
+				 Script="PLAT://\conf\wizard\File\svf.tcl">
+		</File>
+	</NewFile>
+</newfile>

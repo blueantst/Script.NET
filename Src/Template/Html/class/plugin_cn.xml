@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!-- Script.NET Preferences File - DO NOT EDIT -->
+<!-- This is config file for html template of Script.NET. -->
+<templates id="default">
+	<Template name="经典风格" enable="true" version="1.0"></Template>
+</templates>

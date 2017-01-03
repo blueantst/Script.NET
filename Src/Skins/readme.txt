@@ -1,0 +1,1 @@
+Script.NET支持Xtreme的cjstyles皮肤文件以及windows的msstyles皮肤文件，可以将Xtreme目录下的皮肤文件拷贝到此目录下。
