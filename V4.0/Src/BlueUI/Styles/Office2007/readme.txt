@@ -1,4 +1,0 @@
-说明：请将XtremeToolkit Pro的Office2007资源文件拷贝到此目录下，
-Xtreme目录为：
-Xtreme ToolkitPro\Source\Styles\Office2007
-此目录下所有文件拷贝过来，否则可能导致编译失败或编译出的程序运行异常。

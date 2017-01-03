@@ -1,7 +1,0 @@
-; DuiVisionDesigner.def : Declares the module parameters for the DLL.
-
-LIBRARY      "DuiVisionDesigner"
-DESCRIPTION  'DuiVisionDesigner'
-
-EXPORTS
-    ; Explicit exports can go here

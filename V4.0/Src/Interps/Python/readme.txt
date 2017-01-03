@@ -1,4 +1,0 @@
-代码编译运行说明：
-1、Python解释器只能在Release环境下运行，如果用Debug版本运行，会导致程序无响应；
-2、Python解释器可以编译为支持Python2.7和2.5的版本，默认的代码是使用的Python2.7，如果要改为2.5版本，需要修改的内容包括stdafx.h中的PYTHON_HOME_PATH定义、工程设置中的C++和链接器的路径设置、Python目录下的conf.ini文件中的使用VC运行库版本的设置；
-3、Python目录下提交了Python2.7子目录，是Python2.7的编译需要的文件，如果运行的话，需要自行将Python2.7的DLLs、Lib等目录拷贝到这个目录，如果使用Python2.5进行编译，则需要自行建一个Python2.5的目录，然后将Python2.5的所有子目录拷贝过来，并将Python25.dll拷贝到bin目录下，将VC2005的msvcr71.dll拷贝到bin目录下。
