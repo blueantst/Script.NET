@@ -1,0 +1,1 @@
+﻿把DuiVision库的代码目录复制到此目录下面，这样才能编译Tcl解释器，DuiVision的lib文件需要放在DependLib\lib目录下面。
