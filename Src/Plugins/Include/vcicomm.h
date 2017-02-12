@@ -79,7 +79,8 @@ struct TInterfaceInfo
 	virtual int __stdcall UninstallHandler(DWORD nEventID, LPVOID lpHandler); \
 	virtual int __stdcall ProcessMessage(CVciMessage* pIn, CVciMessage* ppOut); \
 	virtual int __stdcall QueryCommandIsSupport(LPCSTR lpcsCmd);	\
-	virtual int __stdcall setIPlatUI(void* pIPlatUI);
+	virtual int __stdcall setIPlatUI(void* pIPlatUI);	\
+	virtual int __stdcall setPlatInterface(int nInterfaceType, void* pInterface);
 
 
 #define CONTROL_INTERFACE_IMPLEMENT(theClass) \
@@ -179,6 +180,11 @@ struct TInterfaceInfo
 	{ \
 		C##theClass *pThis = GET_CONTROL_INTERFACE_OBJECT(theClass); \
 		return pThis->setIPlatUI(pIPlatUI); \
+	}	\
+	STDMETHODIMP_(int) C##theClass::XVciControl::setPlatInterface(int nInterfaceType, void* pInterface) \
+	{ \
+		C##theClass *pThis = GET_CONTROL_INTERFACE_OBJECT(theClass); \
+		return pThis->setPlatInterface(nInterfaceType, pInterface); \
 	}	\
 
 
@@ -294,6 +300,13 @@ enum{
 	VCI_LANGUAGE_CHINESE,
 };
 
+// 平台接口定义
+enum{
+	VCI_INTERFACE_PLATUI = 0,	// IPlatUI接口
+	VCI_INTERFACE_DUIVISION,	// IDuiVision接口
+	VCI_INTERFACE_PROJECT,		// IProjectMgr接口
+};
+
 //
 // 定义VCI控制接口
 //
@@ -335,6 +348,8 @@ interface IVciControl : public IUnknown
 	virtual int __stdcall QueryCommandIsSupport(LPCSTR lpcsCmd) = 0;
 	// 设置平台接口
 	virtual int __stdcall setIPlatUI(void* pIPlatUI) = 0;
+	// 设置平台接口
+	virtual int __stdcall setPlatInterface(int nInterfaceType, void* pInterface) = 0;
 };
 
 //
@@ -354,6 +369,7 @@ public:
 		m_bDebug = FALSE;
 		m_nLastError = 0;
 		m_pIPlatUI = NULL;
+		m_pIDuiVision = NULL;
 	}
 	virtual ~CVisualComponent() {}
 
@@ -804,6 +820,7 @@ public:
 	}
 
 	void*	m_pIPlatUI;		// 平台界面接口
+	void*	m_pIDuiVision;	// 平台DuiVision接口
 	// 设置平台接口
 	virtual int __stdcall setIPlatUI(void* pIPlatUI)
 	{
@@ -814,6 +831,33 @@ public:
 	virtual void* __stdcall getIPlatUI()
 	{
 		return m_pIPlatUI;
+	}
+
+	// 设置平台接口(可以设置多种接口)
+	virtual int __stdcall setPlatInterface(int nInterfaceType, void* pInterface)
+	{
+		if(nInterfaceType == VCI_INTERFACE_PLATUI)
+		{
+			m_pIPlatUI = pInterface;
+		}else
+		if(nInterfaceType == VCI_INTERFACE_DUIVISION)
+		{
+			m_pIDuiVision = pInterface;
+		}
+		return 0;
+	}
+	// 获取平台接口(可以获取多种接口)
+	virtual void* __stdcall getPlatInterface(int nInterfaceType)
+	{
+		if(nInterfaceType == VCI_INTERFACE_PLATUI)
+		{
+			return m_pIPlatUI;
+		}else
+		if(nInterfaceType == VCI_INTERFACE_DUIVISION)
+		{
+			return m_pIDuiVision;
+		}
+		return NULL;
 	}
 };
 
