@@ -3,17 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TclInterp", "..\..\Interps\Tcl\TclInterp\TclInterp.vcproj", "{72E04A45-EFC2-4EDC-9579-1FA4EF18BF67}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LuaInterp", "..\..\Interps\Lua\LuaInterp\LuaInterp.vcproj", "{A424DE48-A6E9-4C64-B39D-23738A19891A}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lua5.1", "..\..\Interps\Lua\lua5.1\make.vc\lua5.1_dll.vcproj", "{FD76ED0B-5FF8-4990-B486-2933AFCBD9DB}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lua5.2", "..\..\Interps\Lua\lua5.2\make.vc\lua5.2_dll.vcproj", "{3CD8A4DF-779F-4FD5-80C9-3F36822560CA}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PythonInterp", "..\..\Interps\Python\PythonInterp\PythonInterp.vcproj", "{F94D785F-9603-4D08-86BD-18D0DAC4FA68}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RubyInterp", "..\..\Interps\Ruby\RubyInterp\RubyInterp.vcproj", "{5B762ECE-996D-4B36-A0F9-246A04A94613}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PerlInterp", "..\..\Interps\Perl\PerlInterp\PerlInterp.vcproj", "{D4FF1BFE-E0EF-47EE-B67C-F3C7603C2B53}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,24 +20,6 @@ Global
 		{72E04A45-EFC2-4EDC-9579-1FA4EF18BF67}.PDBRelease|Win32.Build.0 = PDBRelease|Win32
 		{72E04A45-EFC2-4EDC-9579-1FA4EF18BF67}.Release|Win32.ActiveCfg = Release|Win32
 		{72E04A45-EFC2-4EDC-9579-1FA4EF18BF67}.Release|Win32.Build.0 = Release|Win32
-		{A424DE48-A6E9-4C64-B39D-23738A19891A}.Debug|Win32.ActiveCfg = Debug|Win32
-		{A424DE48-A6E9-4C64-B39D-23738A19891A}.Debug|Win32.Build.0 = Debug|Win32
-		{A424DE48-A6E9-4C64-B39D-23738A19891A}.PDBRelease|Win32.ActiveCfg = PDBRelease|Win32
-		{A424DE48-A6E9-4C64-B39D-23738A19891A}.PDBRelease|Win32.Build.0 = PDBRelease|Win32
-		{A424DE48-A6E9-4C64-B39D-23738A19891A}.Release|Win32.ActiveCfg = Release|Win32
-		{A424DE48-A6E9-4C64-B39D-23738A19891A}.Release|Win32.Build.0 = Release|Win32
-		{FD76ED0B-5FF8-4990-B486-2933AFCBD9DB}.Debug|Win32.ActiveCfg = Debug|Win32
-		{FD76ED0B-5FF8-4990-B486-2933AFCBD9DB}.Debug|Win32.Build.0 = Debug|Win32
-		{FD76ED0B-5FF8-4990-B486-2933AFCBD9DB}.PDBRelease|Win32.ActiveCfg = Release|Win32
-		{FD76ED0B-5FF8-4990-B486-2933AFCBD9DB}.PDBRelease|Win32.Build.0 = Release|Win32
-		{FD76ED0B-5FF8-4990-B486-2933AFCBD9DB}.Release|Win32.ActiveCfg = Release|Win32
-		{FD76ED0B-5FF8-4990-B486-2933AFCBD9DB}.Release|Win32.Build.0 = Release|Win32
-		{3CD8A4DF-779F-4FD5-80C9-3F36822560CA}.Debug|Win32.ActiveCfg = Debug|Win32
-		{3CD8A4DF-779F-4FD5-80C9-3F36822560CA}.Debug|Win32.Build.0 = Debug|Win32
-		{3CD8A4DF-779F-4FD5-80C9-3F36822560CA}.PDBRelease|Win32.ActiveCfg = Release|Win32
-		{3CD8A4DF-779F-4FD5-80C9-3F36822560CA}.PDBRelease|Win32.Build.0 = Release|Win32
-		{3CD8A4DF-779F-4FD5-80C9-3F36822560CA}.Release|Win32.ActiveCfg = Release|Win32
-		{3CD8A4DF-779F-4FD5-80C9-3F36822560CA}.Release|Win32.Build.0 = Release|Win32
 		{F94D785F-9603-4D08-86BD-18D0DAC4FA68}.Debug|Win32.ActiveCfg = Debug|Win32
 		{F94D785F-9603-4D08-86BD-18D0DAC4FA68}.Debug|Win32.Build.0 = Debug|Win32
 		{F94D785F-9603-4D08-86BD-18D0DAC4FA68}.PDBRelease|Win32.ActiveCfg = PDBRelease|Win32
@@ -58,12 +32,6 @@ Global
 		{5B762ECE-996D-4B36-A0F9-246A04A94613}.PDBRelease|Win32.Build.0 = PDBRelease|Win32
 		{5B762ECE-996D-4B36-A0F9-246A04A94613}.Release|Win32.ActiveCfg = Release|Win32
 		{5B762ECE-996D-4B36-A0F9-246A04A94613}.Release|Win32.Build.0 = Release|Win32
-		{D4FF1BFE-E0EF-47EE-B67C-F3C7603C2B53}.Debug|Win32.ActiveCfg = Debug|Win32
-		{D4FF1BFE-E0EF-47EE-B67C-F3C7603C2B53}.Debug|Win32.Build.0 = Debug|Win32
-		{D4FF1BFE-E0EF-47EE-B67C-F3C7603C2B53}.PDBRelease|Win32.ActiveCfg = PDBRelease|Win32
-		{D4FF1BFE-E0EF-47EE-B67C-F3C7603C2B53}.PDBRelease|Win32.Build.0 = PDBRelease|Win32
-		{D4FF1BFE-E0EF-47EE-B67C-F3C7603C2B53}.Release|Win32.ActiveCfg = Release|Win32
-		{D4FF1BFE-E0EF-47EE-B67C-F3C7603C2B53}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
