@@ -302,9 +302,9 @@ enum{
 
 // 平台接口定义
 enum{
-	VCI_INTERFACE_PLATUI = 0,	// IPlatUI接口
-	VCI_INTERFACE_DUIVISION,	// IDuiVision接口
-	VCI_INTERFACE_PROJECT,		// IProjectMgr接口
+	PLAT_INTERFACE_PLATUI = 0,	// IPlatUI接口
+	PLAT_INTERFACE_DUIVISIONAPP,// IDuiVisionApp接口
+	PLAT_INTERFACE_PROJECT,		// IProjectMgr接口
 };
 
 //
@@ -836,11 +836,11 @@ public:
 	// 设置平台接口(可以设置多种接口)
 	virtual int __stdcall setPlatInterface(int nInterfaceType, void* pInterface)
 	{
-		if(nInterfaceType == VCI_INTERFACE_PLATUI)
+		if(nInterfaceType == PLAT_INTERFACE_PLATUI)
 		{
 			m_pIPlatUI = pInterface;
 		}else
-		if(nInterfaceType == VCI_INTERFACE_DUIVISION)
+		if(nInterfaceType == PLAT_INTERFACE_DUIVISIONAPP)
 		{
 			m_pIDuiVision = pInterface;
 		}
@@ -849,11 +849,11 @@ public:
 	// 获取平台接口(可以获取多种接口)
 	virtual void* __stdcall getPlatInterface(int nInterfaceType)
 	{
-		if(nInterfaceType == VCI_INTERFACE_PLATUI)
+		if(nInterfaceType == PLAT_INTERFACE_PLATUI)
 		{
 			return m_pIPlatUI;
 		}else
-		if(nInterfaceType == VCI_INTERFACE_DUIVISION)
+		if(nInterfaceType == PLAT_INTERFACE_DUIVISIONAPP)
 		{
 			return m_pIDuiVision;
 		}
