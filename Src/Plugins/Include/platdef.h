@@ -16,8 +16,10 @@
 #endif // _MSC_VER > 1000
 
 // 多语言定义
+#ifndef LANGUAGE_PAGE_ENGLISH
 #define LANGUAGE_PAGE_ENGLISH	1033
 #define LANGUAGE_PAGE_CHINESE	2052
+#endif
 
 // 语言类型
 enum {
@@ -39,37 +41,12 @@ enum{
 #define VCIID_COMMUNICATE		_T("org.vci.communicate")	// 通信组件
 #define VCIID_IPC				_T("org.vci.ipc")			// IPC组件
 #define VCIID_MESSAGEQUEUE		_T("org.vci.messagequeue")	// 消息队列组件
+#define VCIID_WORKSPACE			_T("org.owm.workspace")		// WorkSpace组件
+#define VCIID_GREP				_T("org.owm.grep")			// 查找组件
+#define VCIID_DUIVISION			_T("org.vci.duivision")		// DuiVision组件
 
 ////////////////////////////////////////////////////////////////////////////
-// User and role define
-
-// 用户定义
-class CUser : public CObject
-{
-public:
-	CUser& operator = (const CUser& other)
-	{
-		bLogined	= other.bLogined;
-		strUserID	= other.strUserID;
-		strUserName	= other.strUserName;
-		strPassword	= other.strPassword;
-		nUserRight	= other.nUserRight;
-		strUserDesc	= other.strUserDesc;
-		strLoginDomain= other.strLoginDomain;
-		return *this;
-	}
-
-public:
-	BOOL	bLogined;			// 是否登录
-	CString	strUserID;			// 用户ID
-	CString	strUserName;		// 用户名
-	CString	strPassword;		// 用户口令(MD5加密)
-	int		nUserRight;			// 用户权限
-	CString	strUserDesc;		// 用户描述
-	CString	strLoginDomain;		// 登录域
-};
-
-typedef CArray<CUser, CUser&> CUserArray;
+// User define
 
 // 定义用户权限
 enum
@@ -80,55 +57,6 @@ enum
 	USER_OPERATOR,		// 操作人员
 	USER_NONE,			// 空
 };
-
-// 定义用户组权限
-class CRolePerm : public CObject
-{
-public:
-	CRolePerm& operator = (const CRolePerm& other)
-	{
-		nCmdID		= other.nCmdID;
-		nCmdType	= other.nCmdType;
-		bSEnable	= other.bSEnable;
-		bAEnable	= other.bAEnable;
-		bDEnable	= other.bDEnable;
-		bOEnable	= other.bOEnable;
-		return *this;
-	};
-
-public:
-	int		nCmdID;		// 命令ID
-	int		nCmdType;	// 命令类型
-	BOOL	bSEnable;	// 超级用户权限
-	BOOL	bAEnable;	// 管理员权限
-	BOOL	bDEnable;	// 开发人员权限
-	BOOL	bOEnable;	// 操作人员权限
-};
-
-typedef CArray<CRolePerm, CRolePerm&> CRolePermArray;
-
-// 定义用户权限
-class CUserPerm : public CObject
-{
-public:
-	CUserPerm& operator = (const CUserPerm& other)
-	{
-		nCmdID		= other.nCmdID;
-		nCmdType	= other.nCmdType;
-		strUserID	= other.strUserID;
-		bEnable		= other.bEnable;
-		return *this;
-	};
-
-public:
-	int		nCmdID;		// 命令ID
-	int		nCmdType;	// 命令类型
-	CString	strUserID;	// 用户ID
-	BOOL	bEnable;	// 是否允许
-};
-
-typedef CArray<CUserPerm, CUserPerm&> CUserPermArray;
-
 
 ////////////////////////////////////////////////////////////////////////////
 // Log define
@@ -279,66 +207,6 @@ enum {
 	TOPTI_COLOR,		// 颜色
 };
 
-
-////////////////////////////////////////////////////////////////////////////
-// 通用登录信息结构 define
-
-struct TCommLoginInfo
-{
-	CString	strAddress;		// 登录地址
-	CString	strUserName;	// 用户名
-	CString	strPassword;	// 口令
-	CString	strDomain;		// 登录域
-	CString	strDomainList;	// 登录域列表
-	CString	strTitle;		// 标题
-	CString	strInfo;		// 提示信息
-	CString	strLAddress;	// 地址输入标签
-	CString	strLUserName;	// 用户输入标签
-	CString	strLPassword;	// 口令输入标签
-	CString	strLDomain;		// 域输入标签
-	CString	strCheck;		// 检查框文字
-	BOOL	bCheck;			// 检查框值
-	BOOL	bUseAddress;	// 使用地址字段
-	BOOL	bUseUserName;	// 使用用户名字段
-	BOOL	bUsePassword;	// 使用口令字段
-	BOOL	bUseDomain;		// 使用登录域字段
-	CString	varAddress;		// 登录地址TCL变量
-	CString	varUserName;	// 用户名TCL变量
-	CString	varPassword;	// 口令TCL变量
-	CString	varDomain;		// 登录域TCL变量
-	CString	varCheck;		// 检查框TCL变量
-	CString	strFocus;		// 输入焦点
-
-public:
-	TCommLoginInfo()
-	{
-		strAddress		= "";
-		strUserName		= "";
-		strPassword		= "";
-		strDomain		= "";
-		strDomainList	= "";
-		strTitle		= "";
-		strInfo			= "";
-		strLAddress		= "";
-		strLUserName	= "";
-		strLPassword	= "";
-		strLDomain		= "";
-		strCheck		= "";
-		bCheck			= FALSE;
-		bUseAddress		= FALSE;
-		bUseUserName	= FALSE;
-		bUsePassword	= FALSE;
-		bUseDomain		= FALSE;
-		varAddress		= "";
-		varUserName		= "";
-		varPassword		= "";
-		varDomain		= "";
-		varCheck		= "";
-		strFocus		= "";
-	};
-};
-
-
 ////////////////////////////////////////////////////////////////////////////
 // CExtMenuInfo define
 
@@ -419,7 +287,7 @@ typedef CArray<CExtMenuInfo, CExtMenuInfo&> CExtMenuInfoArray;
 ////////////////////////////////////////////////////////////////////////////
 // TTaskDialogInfo define
 
-class IInterp;
+interface IInterp;
 // 通用任务对话框信息结构
 struct TTaskDialogInfo
 {
