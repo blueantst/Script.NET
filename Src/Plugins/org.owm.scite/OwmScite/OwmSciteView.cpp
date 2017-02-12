@@ -3283,21 +3283,6 @@ void COwmSciteView::EvalScriptThread(int nRunMode)
 		AfxMessageBox(strTmp);
 		return;
 	}
-	// 获取License接口指针,并校验执行脚本的权限
-	/*ILicense* pILicense = (ILicense*)(theApp.m_pIPlatUI->GetObjectByInstanceName("###license"));
-	if(pILicense == NULL)
-	{
-		theApp.m_pIPlatUI->OutputSet(_WND_DEBUG, "COLOR=255,0,0;FONT=FixedSys;EFFECT=NOEFFECT");
-		theApp.m_pIPlatUI->Output(_WND_DEBUG, "License failed!\r\n");
-		return;
-	}
-	CString strExecuteInterp = theApp.GetExecuteInterp(getDocIdFromLangType(m_LangType));
-	if(pILicense->VerifyPluginLicense(strExecuteInterp, License::FUNC_ACTION_RUNFILE) != License::trOk)
-	{
-		theApp.m_pIPlatUI->OutputSet(_WND_DEBUG, "COLOR=255,0,0;FONT=FixedSys;EFFECT=NOEFFECT");
-		theApp.m_pIPlatUI->Output(_WND_DEBUG, "Interperter license failed!\r\n");
-		return;
-	}*/
 
 	_S_THREAD_SCRIPT* pThreadParam = new _S_THREAD_SCRIPT;
 	pThreadParam->pSciteView = this;

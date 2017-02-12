@@ -175,13 +175,9 @@ public:
 	afx_msg BOOL OnMouseWheel(UINT nFlags, short zDelta, CPoint pt);
 	afx_msg void OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
-<<<<<<< HEAD
-	virtual BOOL PreTranslateMessage(MSG* pMsg);
-=======
 	afx_msg void OnViewToolbox();
 	afx_msg void OnDuiControlCmd(UINT nID);
 	afx_msg void OnUpdateDuiControlCmd(CCmdUI* pCmdUI);
->>>>>>> 0229a0fe52a55c797e37b00865bf980195b8146a
 };
 
 #ifndef _DEBUG  // debug version in DuiVisionDesignerView.cpp

@@ -42,7 +42,6 @@
 #include "vcicomm.h"
 #include "owm.h"		// OWM公共头文件
 #include "IPlatUI.h"	// 平台功能接口
-//#include "ILicense.h"	// License接口
 #include "IInterp.h"	// 解释器接口
 #include "IOwmGrep.h"	// Grep Owm命令定义
 
