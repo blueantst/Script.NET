@@ -286,7 +286,6 @@ BOOL CBlueUIApp::InitInstance()
 
 	// …Ë÷√”Ô—‘
 	int nCurrentLanguage = LANGUAGE_PAGE_CHINESE;
-	#endif
 	if(LANGUAGE_PAGE_CHINESE == nCurrentLanguage)
 	{
 		SetLocale(MAKELANGID(LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED),

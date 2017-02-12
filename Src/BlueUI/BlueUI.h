@@ -42,7 +42,6 @@ public:
 	CDocument* OpenHtmlWindow(CString strUrl, BOOL bActivate = TRUE, BOOL bReplaceBlank = FALSE);
 	void	ProcessPath(CString& strPath, CString strPlugInId = "");
 	CString	ExecMenuScript(CString strMenuName);
-	BOOL	CommLoginDialog(void* p);	// 通用登录对话框
 	void	ShowPopupControl(TPopupControlInfo* pInfo);	// 显示Popup窗口
 	BOOL	RunPopupControlLink(CString strLink);
 	BOOL	GetPopupControlState();

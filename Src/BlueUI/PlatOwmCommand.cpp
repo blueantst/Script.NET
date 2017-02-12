@@ -519,11 +519,6 @@ int CBlueUIApp::CommandPlat(int nCmd, WPARAM wParam, LPARAM lParam)
 			return NULL;
 		}
 
-	case OC_LOGIN_DIALOG:	// 通用登录对话框
-		{
-			return theApp.CommLoginDialog((void*)wParam);
-		}
-
 	// 通用进度对话框操作
 	case OC_PROGDLG_CREATE:	// 创建通用进度对话框
 		{

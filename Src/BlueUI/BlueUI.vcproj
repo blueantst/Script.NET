@@ -1171,34 +1171,6 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="TclLoginDlg.cpp"
-				>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						PreprocessorDefinitions=""
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						PreprocessorDefinitions=""
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="PDBRelease|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						PreprocessorDefinitions=""
-					/>
-				</FileConfiguration>
-			</File>
-			<File
 				RelativePath="TextProgressCtrl.cpp"
 				>
 				<FileConfiguration
@@ -1725,10 +1697,6 @@
 			</File>
 			<File
 				RelativePath="TaskDialog.h"
-				>
-			</File>
-			<File
-				RelativePath="TclLoginDlg.h"
 				>
 			</File>
 			<File
