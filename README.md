@@ -19,7 +19,7 @@ Script.NET使用手册网址：[http://www.blueantstudio.net/scriptnet/ssdn/inde
 欢迎感兴趣的程序员参与Script.NET的优化完善，我们将会把所有做过贡献的人加入贡献者名单中。 
 贡献形式包括参与开发、问题和建议反馈、完善文档等。
 Script.NET 4.0编译和运行需要用到Xtreme Toolkit 13.0或以上的版本（可以从CSDN资源中搜索到，建议用比较新的15.3.1版本）。
-目前在github上已经开源了平台的所有代码和Tcl、Lua两种解释器的代码，其他解释器代码近期整理完后也会提交到github。
+目前在github上已经开源了平台的所有代码和Tcl等解释器的代码。
 
 Script.NET QQ群：325880743
 
@@ -29,7 +29,7 @@ Script.NET QQ群：325880743
 
 (The MIT License)
 
-Copyright (c) 2000-2014 blueant studio. and other contributors
+Copyright (c) 2000-2017 blueant studio. and other contributors
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
