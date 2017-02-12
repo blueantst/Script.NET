@@ -89,7 +89,6 @@ CString GetInterpRootPath();
 
 #include "IPlatUI.h"	// 平台功能接口
 #include "owm.h"
-#include "ILicense.h"
 
 #include "XMLDom.h"
 

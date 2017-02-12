@@ -7,6 +7,7 @@
 #include "TclPcom.h"
 #include "TclXml.h"
 #include "wait.h"
+#include "TclDuiVision.h"
 #include "resource.h"
 #include "TpsTclInterp.h"
 #include "TpsTclDebug.h"
@@ -62,6 +63,8 @@ DllMain(HINSTANCE hInstance, DWORD dwReason, LPVOID lpReserved)
 		CloseAllTclXmlFile();
 
 		DeleteAllWaitObject();
+
+		CloseAllDuiObject();
 
 		TRACE0("TCLINTERP.DLL Terminating!\n");
 		// Terminate the library before destructors are called

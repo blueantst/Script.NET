@@ -118,8 +118,6 @@ public:
 	void SetStackLevel(int nLevel) { m_nStackLevel = nLevel; }
 	int	 GetStackLevel() { return m_nStackLevel; }
 
-	ILicense* GetILicense() {return m_pILicense;}
-
 	int InitTclBaseInterp();
 	int PreScript();
 	BOOL CheckIsTkFile();
@@ -155,7 +153,6 @@ public:
 	int			m_nInterpID;	// 解释器ID(解释器唯一标识)
 	IPlatUI*	pIPlatUI;		// 平台界面接口
 	CString		m_strAppProcess;// 平台进程名
-	ILicense*	m_pILicense;	// License接口指针
 	DWORD		m_dwRunThreadId;// 脚本运行的线程ID
 	void*		m_TclNotifier;	// 
 	BOOL		m_nSupportTk;	// 是否支持TK(0:不支持,1:支持(自动判断),2:强制支持,不管系统设置情况)

@@ -3,6 +3,7 @@
 #include "TclPcom.h"
 #include "TclXml.h"
 #include "TclExCmd.h"
+#include "TclDuiVision.h"
 #include "resource.h"
 
 ////////////////////////////////////////////////////////////////////
@@ -1584,8 +1585,6 @@ CTclInterp::CTclInterp()
 	// 初始化基础Tcl解释器
 	InitTclBaseInterp();
 	g_TclInterpList.AddTail(this);
-
-	m_pILicense = NULL;
 }
 
 CTclInterp::~CTclInterp()
@@ -1596,6 +1595,9 @@ CTclInterp::~CTclInterp()
 
 	// 清空覆盖率分析哈希表
 	m_ProfileMap.RemoveAll();
+
+	// 关闭此解释器创建的所有DUI对象
+	CloseInterpAllDuiObject(pInterp);
 
 	try {
 	Tcl_DeleteInterp(pInterp);
@@ -1746,12 +1748,6 @@ int __stdcall CTclInterp::SetIPlatUI(LPVOID lpIPlatUI)
 		return FALSE;
 	}
 	strCmd.ReleaseBuffer();
-
-	// 获取License接口指针
-	if(getIPlatUI())
-	{
-		m_pILicense = (ILicense*)(((IPlatUI*)getIPlatUI())->GetObjectByInstanceName("###license"));
-	}
 
 	return 0;
 }
@@ -2137,6 +2133,9 @@ int CTclInterp::PreScript()
 
 	// 注册TclWorkTree命令
 	TclWorkTree_Init(pInterp);
+
+	// 注册TclDuiVision命令
+	TclDuiVision_Init(pInterp);
 
 	return TRUE;
 }
