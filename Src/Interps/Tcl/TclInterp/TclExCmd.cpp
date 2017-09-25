@@ -14,6 +14,7 @@
 #include "wait.h"
 #include "TclExCmd.h"
 #include "IProject.h"
+#include "IDuiVisionApp.h"
 
 #ifdef _DEBUG
 #undef THIS_FILE
@@ -27,148 +28,6 @@ static char THIS_FILE[]=__FILE__;
 //TCL函数定义宏
 #define TCL_CMDEF(fname) int fname (ClientData cd, Tcl_Interp *pInterp, int objc, Tcl_Obj *CONST objv[])
 #define TCL_CMD_PARAM    ClientData cd, Tcl_Interp *pInterp, int objc, Tcl_Obj *CONST objv[]
-
-/////////////////////////////////////////////////////////////////////////////
-// 扩展命令:License
-// GetESN		: 获取硬件ID
-// GenerateLID	: 获取License ID
-// ImportLicense: 导入License信息到注册表
-// GetLicense	: 获取License ID
-// VerifyLID	: 校验License ID
-// GetLicenseInfo: 获取某个功能项的License信息
-// GetCustomerInfo: 获取授权用户信息
-// GetOrderInfo: 获取订单信息
-/////////////////////////////////////////////////////////////////////////////
-int Tcl_Cmd_Plat_License(ClientData clientData, Tcl_Interp *interp, int objc, Tcl_Obj *CONST objv[])
-{
-	if(objc < 2)
-	{
-		Tcl_WrongNumArgs(interp, 1, objv, "option");
-		return TCL_ERROR;
-	}
-
-	CTclInterp* pTclInterp = GetTclInterp((LPVOID)interp);
-	if(pTclInterp == NULL)
-	{
-		Tcl_AppendResult(interp, "Get tcl interp pointer failed!", (char *)NULL);
-		return TCL_ERROR;
-	}
-
-	ILicense* pILicense = pTclInterp->GetILicense();
-	if(pILicense == NULL)
-	{
-		Tcl_AppendResult(interp, "Get license interface failed!", (char *)NULL);
-		return TCL_ERROR;
-	}
-
-	CString strOption = Tcl_GetString(objv[1]);
-
-	if(strOption == "GetESN")	// 获取硬件ID
-	{
-		CString strESN = "";
-		pILicense->GetESN(strESN);
-		Tcl_AppendResult(interp, strESN, (char *)NULL);
-	}else
-#ifdef _DEBUG
-	if(strOption == "GenerateLID")	// 获取License ID
-	{
-		if(objc < 4)
-		{
-			Tcl_WrongNumArgs(interp, 1, objv, "GenerateLID ESN MaskCode");
-			return TCL_ERROR;
-		}
-
-		CString strESN = Tcl_GetString(objv[2]);
-		CString strMaskCode = Tcl_GetString(objv[3]);
-		CString strLicenseID = "";
-		pILicense->GenerateLicenseID(strESN, strMaskCode, strLicenseID);
-		Tcl_AppendResult(interp, strLicenseID, (char *)NULL);
-	}else
-#endif
-	if(strOption == "ImportLicense")	// 导入License信息到注册表
-	{
-		if(objc < 3)
-		{
-			Tcl_WrongNumArgs(interp, 1, objv, "ImportLicense LID");
-			return TCL_ERROR;
-		}
-
-		CString strLicenseID = Tcl_GetString(objv[2]);
-		if(pILicense->ImportLicenseID(strLicenseID) != License::trOk)
-		{
-			Tcl_AppendResult(interp, "Import License ID failed!", (char *)NULL);
-			return TCL_ERROR;
-		}
-	}else
-	if(strOption == "GetLicense")	// 获取License ID
-	{
-		CString strLicenseID = "";
-		if(pILicense->GetLicenseID(strLicenseID) == License::trOk)
-		{
-			Tcl_AppendResult(interp, strLicenseID, (char *)NULL);
-		}
-	}else
-	if(strOption == "VerifyLID")	// 校验LicenseID
-	{
-		CString strMaskCode = Tcl_GetString(objv[2]);
-		if(pILicense->VerifyLicenseID(strMaskCode) != License::trOk)
-		{
-			Tcl_AppendResult(interp, "Verify License ID failed!", (char *)NULL);
-			return TCL_ERROR;
-		}
-		Tcl_AppendResult(interp, "1", (char *)NULL);
-	}else
-	if(strOption == "GetLicenseInfo")	// 获取某个功能项的License信息
-	{
-		if(objc < 3)
-		{
-			Tcl_WrongNumArgs(interp, 1, objv, "GetLicenseInfo Function");
-			return TCL_ERROR;
-		}
-
-		CString strFuncID = Tcl_GetString(objv[2]);
-		int nLicenseType;
-		CTime tUpdateLimit;
-		int nUserCount;
-		CTime tTrialTime;
-		if(pILicense->GetPluginLicenseInfo(strFuncID, nLicenseType, tUpdateLimit, nUserCount, tTrialTime) != License::trOk)
-		{
-			//Tcl_AppendResult(interp, "Not found license info of " + strFuncID + "!", (char *)NULL);
-			Tcl_AppendResult(interp, "Free", (char *)NULL);
-			return TCL_OK;
-		}
-		CString strTmp;
-		strTmp.Format("%d", nLicenseType);
-		Tcl_AppendElement(interp, strTmp);
-		strTmp.Format("%d", tUpdateLimit);
-		Tcl_AppendElement(interp, strTmp);
-		strTmp.Format("%d", nUserCount);
-		Tcl_AppendElement(interp, strTmp);
-		strTmp.Format("%d", tTrialTime);
-		Tcl_AppendElement(interp, strTmp);
-	}else
-	if(strOption == "GetCustomerInfo")	// 获取授权用户信息
-	{
-		CString strCustomerInfo = "";
-		if(pILicense->GetCustomerInfo(strCustomerInfo) == License::trOk)
-		{
-			Tcl_AppendResult(interp, strCustomerInfo, (char *)NULL);
-		}
-	}else
-	if(strOption == "GetOrderInfo")	// 获取订单信息
-	{
-		CString strOrderInfo = "";
-		if(pILicense->GetOrderInfo(strOrderInfo) == License::trOk)
-		{
-			Tcl_AppendResult(interp, strOrderInfo, (char *)NULL);
-		}
-	}else
-	{
-		return TCL_ERROR;
-	}
-
-	return TCL_OK;
-}
 
 /////////////////////////////////////////////////////////////////////////////
 // 扩展命令:信息提示对话框
@@ -1062,6 +921,110 @@ int Tcl_Cmd_Output(ClientData clientData, Tcl_Interp* interp, int argc, const ch
 		{
 			nOT = atoi(pIPlatUI->OutputGet(-1, strOption));
 			pIPlatUI->Output(nOT, ConvertUTFParam(argv[2]));
+		}
+	}
+
+	ConvertResultToUTF(interp);
+	return TCL_OK;
+}
+
+/////////////////////////////////////////////////////////////////////////////
+// 扩展命令:log
+// -level level ?–module module? info
+/////////////////////////////////////////////////////////////////////////////
+int Tcl_Cmd_Log(ClientData clientData, Tcl_Interp *interp, int objc, Tcl_Obj *CONST objv[])
+{
+	if(objc < 2)
+	{
+		Tcl_WrongNumArgs(interp, 1, objv, "operate ...");
+		return TCL_ERROR;
+	}
+
+	CTclInterp* pTclInterp = GetTclInterp((LPVOID)interp);
+	if(pTclInterp == NULL)
+	{
+		Tcl_AppendResult(interp, "Get tcl interp pointer failed!", (char *)NULL);
+		return TCL_ERROR;
+	}
+
+	IDuiVisionApp* pIDuiVisionApp = (IDuiVisionApp*)(pTclInterp->getPlatInterface(PLAT_INTERFACE_DUIVISIONAPP));
+	if(pIDuiVisionApp == NULL)
+	{
+		Tcl_AppendResult(interp, "Get duivisionapp interface fail!", (char *) NULL);
+		// 日志命令即使无法调用也不返回失败
+		return TCL_OK;
+	}
+
+	int nLevel = LOG_LEVEL_INFO;	// 默认日志级别
+	CString strModule = "";
+	CString strInfo = "";
+	for(int i = 1; i < objc; i++)
+	{
+		CString strParam = ConvertUTFParam(Tcl_GetString(objv[i]));
+		BOOL bInfo = FALSE;
+		if((strParam.GetLength() > 0) && (strParam[0] == _T('-')))
+		{
+			strParam.Delete(0, 1);
+			strParam.MakeUpper();
+		}else
+		{
+			bInfo = TRUE;
+		}
+
+		if(strParam == "LEVEL")	// 设置日志级别
+		{
+			if((objc - i) < 2)
+			{
+				Tcl_WrongNumArgs(interp, 1, objv, "wrong # args: lost level param");
+				return TCL_ERROR;
+			}
+			CString strLevel = ConvertUTFParam(Tcl_GetString(objv[i+1]));
+			if(strLevel == "DEBUG")
+			{
+				nLevel = LOG_LEVEL_DEBUG;
+			}else
+			if(strLevel == "INFO")
+			{
+				nLevel = LOG_LEVEL_INFO;
+			}else
+			if(strLevel == "ERROR")
+			{
+				nLevel = LOG_LEVEL_ERROR;
+			}else
+			if(strLevel == "CRITICAL")
+			{
+				nLevel = LOG_LEVEL_CRITICAL;
+			}
+			i++;
+		}else
+		if(strParam == "MODULE")	// 指定日志模块
+		{
+			if((objc - i) < 2)
+			{
+				Tcl_WrongNumArgs(interp, 1, objv, "wrong # args: lost module param");
+				return TCL_ERROR;
+			}
+			strModule = ConvertUTFParam(Tcl_GetString(objv[i+1]));
+			i++;
+		}else
+		if(bInfo)	// 不是-开头,表示是日志内容
+		{
+			strInfo = strParam;
+		}
+	}
+
+	// 调用平台的日志接口
+	if(strModule.IsEmpty())
+	{
+		if(pIDuiVisionApp)
+		{
+			pIDuiVisionApp->LogEvent(nLevel, strInfo);
+		}
+	}else
+	{
+		if(pIDuiVisionApp)
+		{
+			pIDuiVisionApp->LogEventModule(nLevel, strModule, strInfo);
 		}
 	}
 
@@ -2655,10 +2618,6 @@ int TclExCmd_Init(Tcl_Interp *interp)
 {
 	// 注册命令
 
-	// License命令
-	Tcl_CreateObjCommand(interp, "License", Tcl_Cmd_Plat_License, 
-			(ClientData)NULL, (Tcl_CmdDeleteProc*)NULL);
-
 	// 信息提示对话框
 	Tcl_CreateCommand(interp, "MessageBox", Tcl_Cmd_Plat_MessageBox, 
 			(ClientData)NULL, (Tcl_CmdDeleteProc*)NULL);
@@ -2681,6 +2640,10 @@ int TclExCmd_Init(Tcl_Interp *interp)
 
 	// 输出窗口操作
 	Tcl_CreateCommand(interp, "output", Tcl_Cmd_Output, 
+			(ClientData)NULL, (Tcl_CmdDeleteProc*)NULL);
+
+	// 日志操作
+	Tcl_CreateObjCommand(interp, "log", Tcl_Cmd_Log, 
 			(ClientData)NULL, (Tcl_CmdDeleteProc*)NULL);
 
 	// 状态行操作
